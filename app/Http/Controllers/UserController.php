@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
+use App\Models\Country;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,8 @@ class UserController extends Controller
         }
         $users = $users->orderBy('id', 'ASC')->get();
         $roles = Role::all();
-        return view('user.index', compact('users', 'roles'));
+        $countries = Country::all();
+        return view('user.index', compact('users', 'roles', 'countries'));
     }
 
     /**
@@ -64,6 +66,7 @@ class UserController extends Controller
         $employee->password = Hash::make($request->password);
         $employee->join_date = $request->join_date;
         $employee->passport_photo = $path ?? '';
+        $employee->countrie_id = $request->countrie_id;
         $employee->save();
         $employee->syncRoles($request->roles);
         return redirect()->back()->with('success', 'Employee is successfully created.');
@@ -120,6 +123,7 @@ class UserController extends Controller
         $employee->password = $request->password ? Hash::make($request->password) : $employee->password;
         $employee->join_date = $request->join_date;
         $employee->passport_photo = $path ?? $employee->passport_photo;
+        $employee->countrie_id = $request->countrie_id;
         $employee->update();
         $employee->syncRoles($request->roles);
         return redirect()->back()->with('success', 'Employee is successfully updated.');

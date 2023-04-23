@@ -20,7 +20,7 @@
 
         <ul class="sidebar-menu">
 
-            <li class="active">
+            <li class="{{ Route::is('home') ? 'active' : '' }}">
                 <a href="{{ route('home') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
@@ -31,14 +31,24 @@
                 </a>
             </li>
 
-
-            <li class="active">
+            <li class="{{ Route::is('users.index') ? 'active' : '' }}">
                 <a href="{{ route('users.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
                     </svg>
                     <span>
                         User Lists
+                    </span>
+                </a>
+            </li>
+
+            <li class="{{ Route::is('hospital.index') ? 'active' : '' }}">
+                <a href="{{ route('hospital.index') }}">
+                    <svg class="svg-icon">
+                        <use href="#icon-dashboard">
+                    </svg>
+                    <span>
+                        Hospital
                     </span>
                 </a>
             </li>

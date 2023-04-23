@@ -1,72 +1,109 @@
-@extends('layouts.main')
-@section('content')
-    <div class="row justify-content-center">
-        <div class="col-xl-6">
-            <div class="card mb-4">
-                <h5 class="card-header">Hospital</h5>
-                <div class="card-body">
+<div id="editModal_{{ $country->id }}" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header ng-scope ui-draggable-handle">
+                <button ng-click="closeSupplierEditModal();" type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h3 class="modal-title ng-binding" id="modal-title">
+                    <span class="fa fa-fw fa-pencil"></span>
+                    Edit Hospital
+                </h3>
+            </div>
+            <div class="modal-body ng-scope" id="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div bind-html-compile="rawHtml">
+                            <h4 class="sub-title ng-scope">
+                                Update
+                            </h4>
+                            <form autocomplete="off" action="{{ route('hospital.update', $country->id) }}"
+                                method="POST" id="create-form">
+                                @csrf
+                                @method('PUT')
 
-                    <form autocomplete="off" action="{{ route('hospital.update', $country->id) }}" method="POST"
-                        id="create-form">
-                        @csrf
-                        @method('PUT')
+                                <div class="form-group" style="padding: 15px;">
+                                    <label for="html5-text-input" class="col-md-3 control-label">
+                                        Hospital Name
+                                        <i class="required">*</i>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="text"
+                                            class="form-control @error('name') form-control-danger @enderror"
+                                            name="name" value="{{ $country->name ?? '' }}">
+                                        @error('name')
+                                            <div class="form-control-feedback" style="color: red;">
+                                                {{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Hospital Name
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control @error('name') form-control-danger @enderror"
-                                    name="name" value="{{ $country->name ?? '' }}">
-                                @error('name')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }} </div>
-                                @enderror
-                            </div>
+                                <div class="form-group" style="padding: 15px;">
+                                    <label for="html5-text-input" class="col-md-3 control-label">
+                                        Location
+                                        <i class="required">*</i>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="text"
+                                            class="form-control @error('location') form-control-danger @enderror"
+                                            name="location" value="{{ $country->location ?? '' }}">
+                                        @error('location')
+                                            <div class="form-control-feedback" style="color: red;">
+                                                {{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="padding: 15px;">
+                                    <label for="html5-text-input" class="col-md-3 control-label">
+                                        Phone
+                                        <i class="required">*</i>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="text"
+                                            class="form-control @error('phone') form-control-danger @enderror"
+                                            name="phone" value="{{ $country->phone ?? '' }}">
+                                        @error('phone')
+                                            <div class="form-control-feedback" style="color: red;">
+                                                {{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="padding: 15px;">
+                                    <label for="html5-text-input" class="col-md-3 control-label">
+                                        Remark
+                                        <i class="required">*</i>
+                                    </label>
+                                    <div class="col-md-7">
+                                        <textarea name="remark" id="" cols="50" rows="2"
+                                            class="form-control @error('remark') form-control-danger @enderror">{{ $country->remark ?? '' }}</textarea>
+                                        @error('remark')
+                                            <div class="form-control-feedback" style="color: red;">
+                                                {{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <br>
+                                <div class="form-group" style="padding: 15px;">
+                                    <label for="html5-search-input" class="col-md-3 control-label"></label>
+                                    <div class="col-md-9">
+                                        <button class="btn btn-info">
+                                            <span class="fa fa-fw fa-pencil"></span>
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Location
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control @error('location') form-control-danger @enderror"
-                                    name="location" value="{{ $country->location ?? '' }}">
-                                @error('location')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }} </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Phone
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control @error('phone') form-control-danger @enderror"
-                                    name="phone" value="{{ $country->phone ?? '' }}">
-                                @error('phone')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }} </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <label for="html5-search-input" class="col-md-3 col-form-label"></label>
-                            <div class="col-md-9">
-                                <button type="submit" class="btn btn-secondary">Save</button>
-                            </div>
-                        </div>
-                    </form>
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
+</div>
 @section('script')
     {!! JsValidator::formRequest('App\Http\Requests\UpdateHospital', '#create-form') !!}
 @endsection

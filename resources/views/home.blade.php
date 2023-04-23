@@ -1,31 +1,13 @@
 @extends('layouts.main')
 @section('content')
-    <!-- Content Header Start -->
     <section class="content-header">
         <h1>
-            Dashboard <small>
-                Store 01 </small>
+            Dashboard
         </h1>
     </section>
-    <!-- ContentH eader End -->
 
     <!-- Content Start -->
     <section class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box">
-                    <div class="box-body">
-                        <div class="alert alert-info mb-0">
-                            <p><span class="fa fa-fw fa-info-circle"></span> This is a demo version. Data will
-                                be reset in every 1 hour interval. <a
-                                    style="color: #b3ffe0;font-weight: bold;border: 1px solid #fff;padding: 5px 10px;text-decoration: none;text-transform: uppercase;"
-                                    href="https://1.envato.market/gbeVPO">Buy Now &rarr;</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="hidden-xs action-button-sm">
             <div id="action-button" class="row">
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" id="button_pos">
@@ -40,7 +22,8 @@
                                     </span>
                                 </h2>
                                 <div class="small small2">
-                                    POS </div>
+                                    POS
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -58,7 +41,8 @@
                                     </span>
                                 </h2>
                                 <div class="small small2">
-                                    Sell List </div>
+                                    Sell List
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -76,7 +60,8 @@
                                     </span>
                                 </h2>
                                 <div class="small small2">
-                                    Overview Report </div>
+                                    Overview Report
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -94,7 +79,8 @@
                                     </span>
                                 </h2>
                                 <div class="small small2">
-                                    Sell Report </div>
+                                    Sell Report
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -112,7 +98,8 @@
                                     </span>
                                 </h2>
                                 <div class="small small2">
-                                    Purchase Report </div>
+                                    Purchase Report
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -130,7 +117,8 @@
                                     </span>
                                 </h2>
                                 <div class="small small2">
-                                    Stock Alert </div>
+                                    Stock Alert
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -148,7 +136,8 @@
                                     </span>
                                 </h2>
                                 <div class="small small2">
-                                    Expired </div>
+                                    Expired
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -166,7 +155,8 @@
                                     </span>
                                 </h2>
                                 <div class="small small2">
-                                    Backup/Restore </div>
+                                    Backup/Restore
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -184,7 +174,8 @@
                                     </span>
                                 </h2>
                                 <div class="small small2">
-                                    Stores </div>
+                                    Stores
+                                </div>
                             </a>
                         </div>
                     </div>

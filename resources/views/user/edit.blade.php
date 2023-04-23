@@ -175,6 +175,23 @@
                                 </div>
 
                                 <div class="form-group" style="padding: 15px;">
+                                    <label for="select2Multiple" class="col-md-3 control-label">
+                                        Country
+                                        <i class="required">*</i>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" name="countrie_id" style="width: 100%">
+                                            @foreach ($countries as $countrie)
+                                                <option value="{{ $countrie->id }}"
+                                                    @if ($countrie->id == $value->countrie_id) selected @endif>
+                                                    {{ $countrie->title ?? '' }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="padding: 15px;">
                                     <label for="html5-search-input" class="col-md-3 control-label"></label>
                                     <div class="col-md-9">
                                         <button class="btn btn-info">

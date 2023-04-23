@@ -172,6 +172,22 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="select2Multiple" class="col-md-3 control-label">
+                            Country
+                            <i class="required">*</i>
+                        </label>
+                        <div class="col-md-7">
+                            <select class="form-control" name="countrie_id" style="width: 100%">
+                                @foreach ($countries as $countrie)
+                                    <option value="{{ $countrie->id }}">
+                                        {{ $countrie->title ?? '' }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <!-- General End -->
 

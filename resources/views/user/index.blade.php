@@ -57,6 +57,7 @@
                                         <th class="text-center text-white w-5">Address</th>
                                         <th class="text-center text-white w-5">Join Date</th>
                                         <th class="text-center text-white w-5">Gender</th>
+                                        <th class="text-center text-white w-5">Country</th>
                                         <th class="text-center text-white w-5">Action</th>
                                     </tr>
                                 </thead>
@@ -68,7 +69,7 @@
                                                 {{ $key + 1 }}
                                             </td>
 
-                                            <td style="text-align: center;" data-title="No">
+                                            <td style="text-align: center;" data-title="Photo">
                                                 @if ($value->passport_photo)
                                                     <img src="{{ Storage::url($value->passport_photo) }}" alt=""
                                                         style="width: 30px; height: 30px; background-position: center; background-size: contain, cover;">
@@ -107,6 +108,10 @@
                                                 {{ $value->gender ?? '' }}
                                             </td>
 
+                                            <td style="text-align: center;" data-title="Country">
+                                                {{ $value->country->title ?? '' }}
+                                            </td>
+
                                             <td class="text-center" data-title="Edit">
                                                 <button type="button" class="btn btn-sm btn-block btn-primary"
                                                     data-toggle="modal" data-target="#editModal_{{ $value->id }}">
@@ -129,6 +134,7 @@
                                         <th class="text-center text-white w-5">Address</th>
                                         <th class="text-center text-white w-5">Join Date</th>
                                         <th class="text-center text-white w-5">Gender</th>
+                                        <th class="text-center text-white w-5">Country</th>
                                         <th class="text-center text-white w-5">Action</th>
                                     </tr>
                                 </tfoot>

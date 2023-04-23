@@ -109,7 +109,7 @@ class HospitalController extends Controller
         $h->location = $request->location;
         $h->phone = $request->phone;
         $h->remark = $request->remark;
-        $h->submit_date = $request->submit_date;
+        $h->submit_date = $request->submit_date ?? $h->submit_date;
         $h->update();
         return redirect()->back()->with('success', 'Process is completed.');
     }
