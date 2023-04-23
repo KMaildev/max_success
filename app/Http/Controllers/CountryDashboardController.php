@@ -11,7 +11,8 @@ class CountryDashboardController extends Controller
     {
         // Country Configuration
         $country = Country::findOrFail($id);
-        session(['country_session' => $id, 'country_title' => $country->title]);
+        session(['country_id' => $id, 'country_title' => $country->title]);
+
         return view('country_dashboard.index');
     }
 }

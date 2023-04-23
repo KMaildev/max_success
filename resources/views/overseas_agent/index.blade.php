@@ -1,151 +1,179 @@
 @extends('layouts.based.base_main')
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-sm-12 col-lg-12">
-            <div class="card">
+    <section class="content-header">
+        <h1>
+            Foreign Agent
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ route('home') }}">
+                    <i class="fa fa-dashboard"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="active">
+                Foreign Agent
+            </li>
+        </ol>
+    </section>
 
-                <div class="card-body">
-                    <div class="card-title header-elements">
-                        <h5 class="m-0 me-2">
-                            Overseas Agent
-                        </h5>
-                        <div class="card-title-elements ms-auto">
-                            <div class="card-header-elements ms-auto">
-                                <form action="{{ route('overseas_agent.index') }}" method="GET" autocomplete="off">
-                                    <input type="text" class="form-control" placeholder="Search"
-                                        name="search">
-                                </form>
-                            </div>
+    <section class="content">
+        <div class="box box-info collapsed-box">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <span class="fa fa-fw fa-plus"></span>
+                    Add New Agent
+                </h3>
+                <button type="button" class="btn btn-box-tool add-new-btn" data-widget="collapse" data-collapse="true">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+            @include('overseas_agent.create')
+        </div>
 
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            Foreign Agent
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
 
-                            <a href="{{ route('overseas_agent_excel') }}" class="dt-button create-new btn btn-success">
-                                <span>
-                                    <i class="fa fa-download me-sm-2"></i>
-                                    <span class="d-none d-sm-inline-block">
-                                        Excel
-                                    </span>
-                                </span>
-                            </a>
+                            <table id="datatable" class="table table-bordered table-striped table-hover"
+                                data-hide-colums="">
+                                <thead>
+                                    <tr class="bg-gray">
+                                        <th class="text-center text-white" style="width: 1%;">
+                                            #
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Company Name
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Contact
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Type
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Phone
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Email
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Address
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Country
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Remark
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Edit
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($overseas_agencies as $key => $overseas_agency)
+                                        <tr>
+                                            <td data-title="No">
+                                                {{ $key + 1 }}
+                                            </td>
 
-                            <a href="{{ route('overseas_agent.create') }}"
-                                class="dt-button create-new btn btn-primary">
-                                <span>
-                                    <i class="bx bx-plus me-sm-2"></i>
-                                    <span class="d-none d-sm-inline-block">Create</span>
-                                </span>
-                            </a>
+                                            <td data-title="Company">
+                                                {{ $overseas_agency->company_name }}
+                                            </td>
 
+                                            <td data-title="Contact">
+                                                {{ $overseas_agency->contact }}
+                                            </td>
 
+                                            <td data-title="Type of Company">
+                                                {{ $overseas_agency->type_of_company }}
+                                            </td>
+
+                                            <td data-title="Phone">
+                                                <a href="tel:{{ $overseas_agency->company_phone }}">
+                                                    {{ $overseas_agency->company_phone }}
+                                                </a>
+                                            </td>
+
+                                            <td data-title="Email">
+                                                <a href="mailto:{{ $overseas_agency->company_email }}">
+                                                    {{ $overseas_agency->company_email }}
+                                                </a>
+                                            </td>
+
+                                            <td data-title="Address">
+                                                {{ $overseas_agency->company_address }}
+                                            </td>
+
+                                            <td data-title="Country">
+                                                {{ $overseas_agency->countries_table->title ?? '' }}
+                                            </td>
+
+                                            <td data-title="Remark">
+                                                {{ $overseas_agency->remark ?? '' }}
+                                            </td>
+
+                                            <td data-title="Edit">
+                                                <button type="button" class="btn btn-sm btn-block btn-primary"
+                                                    data-toggle="modal"
+                                                    data-target="#editModal_{{ $overseas_agency->id }}">
+                                                    <i class="fa fa-fw fa-pencil"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @include('overseas_agent.edit')
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr class="bg-gray">
+                                        <th class="text-center text-white" style="width: 1%;">
+                                            #
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Company Name
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Contact
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Type
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Phone
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Email
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Address
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Country
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Remark
+                                        </th>
+                                        <th class="text-center text-white  w-5">
+                                            Edit
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-                <div class="table-responsive text-nowrap rowheaders table-scroll" role="region"
-                    aria-labelledby="HeadersCol" tabindex="0">
-                    <table class="table table-bordered main-table">
-                        <thead>
-                            <tr class="tbbg">
-                                <th class="text-center text-white" style="width: 1%; background-color: #296166">#</th>
-                                <th class="text-center text-white" style="background-color: #296166;">
-                                    Company Name
-                                </th>
-                                <th class="text-center text-white" style="background-color: #296166;">
-                                    Contact
-                                </th>
-                                <th class="text-center text-white" style="background-color: #296166;">
-                                    Type
-                                </th>
-                                <th class="text-center text-white" style="background-color: #296166;">
-                                    Phone
-                                </th>
-                                <th class="text-center text-white" style="background-color: #296166;">
-                                    Email
-                                </th>
-                                <th class="text-center text-white" style="background-color: #296166;">
-                                    Address
-                                </th>
-                                <th class="text-center text-white" style="background-color: #296166;">
-                                    Country
-                                </th>
-                                <th class="text-center text-white" style="background-color: #296166;">
-                                    Remark
-                                </th>
-                                <th class="text-center text-white" style="background-color: #296166;">
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                            @foreach ($overseas_agencies as $key => $overseas_agency)
-                                <tr>
-                                    <td>
-                                        {{ $key + 1 }}
-                                    </td>
-
-                                    <td>
-                                        {{ $overseas_agency->company_name }}
-                                    </td>
-
-                                    <td>
-                                        {{ $overseas_agency->contact }}
-                                    </td>
-
-                                    <td>
-                                        {{ $overseas_agency->type_of_company }}
-                                    </td>
-
-                                    <td>
-                                        <a href="tel:{{ $overseas_agency->company_phone }}">
-                                            {{ $overseas_agency->company_phone }}
-                                        </a>
-                                    </td>
-
-                                    <td>
-                                        <a href="mailto:{{ $overseas_agency->company_email }}">
-                                            {{ $overseas_agency->company_email }}
-                                        </a>
-                                    </td>
-
-                                    <td>
-                                        {{ $overseas_agency->company_address }}
-                                    </td>
-
-                                    <td>
-                                        {{ $overseas_agency->countries_table->title ?? '' }}
-                                    </td>
-
-                                    <td>
-                                        {{ $overseas_agency->remark ?? '' }}
-                                    </td>
-
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Action
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item"
-                                                    href="{{ route('overseas_agent.edit', $overseas_agency->id) }}">Edit</a>
-
-                                                <form action="{{ route('overseas_agent.destroy', $overseas_agency->id) }}"
-                                                    method="POST" hidden>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" class="dropdown-item del_confirm"
-                                                        id="confirm-text" data-toggle="tooltip">Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
-    </div>
+
+    </section>
 @endsection
 @section('script')
 @endsection

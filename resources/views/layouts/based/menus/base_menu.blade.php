@@ -21,7 +21,7 @@
         <ul class="sidebar-menu">
 
             <li class="{{ Route::is('home') ? 'active' : '' }}">
-                <a href="{{ route('country_dashboard.show', session('country_session')) }}">
+                <a href="{{ route('country_dashboard.show', session('country_id') ?? 1) }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
                     </svg>
@@ -37,7 +37,7 @@
                         <use href="#icon-dashboard">
                     </svg>
                     <span>
-                        Overseas Agent
+                        Foreign Agent
                     </span>
                 </a>
             </li>

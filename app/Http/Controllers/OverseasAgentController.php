@@ -19,14 +19,11 @@ class OverseasAgentController extends Controller
      */
     public function index()
     {
-        $search = request('search');
-        $overseas_agencies = OverseasAgency::query()
-            ->where('company_name', 'LIKE', "%{$search}%")
-            ->orWhere('company_phone', 'LIKE', "%{$search}%")
-            ->orWhere('company_email', 'LIKE', "%{$search}%")
-            ->orWhere('company_address', 'LIKE', "%{$search}%")
-            ->orWhere('remark', 'LIKE', "%{$search}%")
-            ->get();
+        $overseas_agencies = OverseasAgency::query();
+        if (session('country_id')) {
+            $overseas_agencies = $overseas_agencies->where('countrie_id', session('country_id'));
+        }
+        $overseas_agencies = $overseas_agencies->get();
         return view('overseas_agent.index', compact('overseas_agencies'));
     }
 
