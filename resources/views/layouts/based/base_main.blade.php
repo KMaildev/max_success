@@ -1,7 +1,9 @@
 @include('layouts.includes.header')
 
 @include('layouts.includes.top')
-@include('layouts.includes.menu')
+
+
+@include('layouts.based.menus.base_menu')
 
 <div class="content-wrapper">
     @yield('content')

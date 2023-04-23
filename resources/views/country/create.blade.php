@@ -1,42 +1,71 @@
-@extends('layouts.main')
-@section('content')
-    <div class="row justify-content-center">
-        <div class="col-xl-6">
-            <div class="card mb-4">
-                <h5 class="card-header">Country</h5>
-                <div class="card-body">
+<form class="form-horizontal" action="{{ route('country.store') }}" method="POST" autocomplete="off" id="create-form"
+    role="form" enctype="multipart/form-data">
+    @csrf
+    <div class="box-body">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#general" data-toggle="tab" aria-expanded="false">
+                        Data Entry
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <!-- General Start -->
+                <div class="tab-pane active" id="general">
 
-                    <form autocomplete="off" action="{{ route('country.store') }}" method="POST" id="create-form">
-                        @csrf
-
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Country
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                    class="form-control @error('country_name') form-control-danger @enderror"
-                                    name="country_name">
-                                @error('country_name')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }} </div>
-                                @enderror
-                            </div>
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
+                            Country
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text"
+                                class="form-control @error('country_name') form-control-danger @enderror"
+                                name="country_name">
+                            @error('country_name')
+                                <div class="form-control-feedback" style="color: red;">
+                                    {{ $message }} </div>
+                            @enderror
                         </div>
+                    </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-search-input" class="col-md-3 col-form-label"></label>
-                            <div class="col-md-9">
-                                <button type="submit" class="btn btn-secondary">Save</button>
-                            </div>
+
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
+                            Country Flag / Photo
+                            <i class="required">*</i>
+                        </label>
+                        <div class="col-md-7">
+                            <input class="form-control @error('image') is-invalid @enderror" type="file"
+                                name="image" value="{{ old('image') }}" />
+                            @error('image')
+                                <div class="invalid-feedback"> {{ $message }} </div>
+                            @enderror
                         </div>
-                    </form>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"></label>
+                        <div class="col-sm-4">
+                            <button class="btn btn-info btn-block" id="create-product-submit" type="submit"
+                                name="create-product-submit">
+                                <span class="fa fa-fw fa-save"></span>
+                                Save
+                            </button>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="reset" class="btn btn-warning btn-block" id="reset" name="reset">
+                                <span class="fa fa-circle-o"></span>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
-@endsection
+</form>
 @section('script')
     {!! JsValidator::formRequest('App\Http\Requests\StoreCountry', '#create-form') !!}
 @endsection

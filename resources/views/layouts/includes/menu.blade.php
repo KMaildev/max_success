@@ -53,6 +53,17 @@
                 </a>
             </li>
 
+            <li class="{{ Route::is('country.index') ? 'active' : '' }}">
+                <a href="{{ route('country.index') }}">
+                    <svg class="svg-icon">
+                        <use href="#icon-dashboard">
+                    </svg>
+                    <span>
+                        Country
+                    </span>
+                </a>
+            </li>
+
             <li id="sidebar-bottom"></li>
         </ul>
     </section>

@@ -26,13 +26,17 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li>
-                        <a href="#" title="English">
-                            <img src="http://itsolution24.com/posv33/assets/itsolution24/img/flags/en.png"
-                                class="language-img">
-                            &nbsp;&nbsp;English
-                        </a>
-                    </li>
+                    @foreach ($country_lists as $country_list)
+                        <li>
+                            <a href="{{ route('country_dashboard.show', $country_list->id) }}"
+                                title="{{ $country->title ?? '' }}">
+                                <img src="{{ Storage::url($country_list->image) }}" class="language-img"
+                                    style="width: 20%">
+                                &nbsp;&nbsp;
+                                {{ $country_list->title ?? '' }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </li>
 

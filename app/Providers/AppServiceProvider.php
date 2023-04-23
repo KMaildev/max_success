@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Country;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
@@ -25,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+        $country_lists = Country::all();
+        view()->share('country_lists', $country_lists);
     }
 }

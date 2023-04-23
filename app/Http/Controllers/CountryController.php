@@ -41,8 +41,14 @@ class CountryController extends Controller
      */
     public function store(StoreCountry $request)
     {
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = $image->store('public/images');
+        }
+
         $country = new Country();
         $country->title = $request->country_name;
+        $country->image = $path ?? '';
         $country->save();
         return redirect()->back()->with('success', 'Process is completed.');
     }
@@ -79,8 +85,14 @@ class CountryController extends Controller
      */
     public function update(UpdateCountry $request, $id)
     {
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = $image->store('public/images');
+        }
+
         $country = Country::findOrFail($id);
         $country->title = $request->country_name;
+        $country->image = $path ?? $country->image;
         $country->update();
         return redirect()->back()->with('success', 'Process is completed.');
     }

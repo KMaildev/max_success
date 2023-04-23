@@ -25,6 +25,7 @@ class StoreCountry extends FormRequest
     {
         return [
             'country_name' => 'required',
+            'image' => 'required',
         ];
     }
 }

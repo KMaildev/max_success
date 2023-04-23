@@ -1,16 +1,15 @@
 <?php
 
-use App\Exports\HospitalExport;
 use App\Http\Controllers\AgentListController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\CountryDashboardController;
 use App\Http\Controllers\DemandController;
 use App\Http\Controllers\FileManagementController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\HospitalFileController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\InterviewLabourController;
-use App\Http\Controllers\InterviewWorkerController;
 use App\Http\Controllers\LabourDocsController;
 use App\Http\Controllers\LabourManagementController;
 use App\Http\Controllers\LabourPaymentController;
@@ -132,4 +131,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('hospital_file', HospitalFileController::class);
     Route::get('hospital_docs_management/{id}', [HospitalFileController::class, 'hospitalDocsManagement'])->name('hospital_docs_management');
+
+
+    Route::resource('country_dashboard', CountryDashboardController::class);
 });

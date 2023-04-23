@@ -10,176 +10,27 @@
     <section class="content">
         <div class="hidden-xs action-button-sm">
             <div id="action-button" class="row">
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" id="button_pos">
-                    <div class="panel panel-app">
-                        <div class="panel-body">
-                            <a class="panel-app-link" href="pos.php">
-                                <h2>
-                                    <span class="icon">
-                                        <svg class="svg-icon">
-                                            <use href="#icon-btn-pos">
-                                        </svg>
-                                    </span>
-                                </h2>
-                                <div class="small small2">
-                                    POS
-                                </div>
-                            </a>
+                @foreach ($countries as $key => $country)
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" id="button_pos">
+                        <div class="panel panel-app">
+                            <div class="panel-body">
+                                <a class="panel-app-link" href="{{ route('country_dashboard.show', $country->id) }}">
+                                    <h2>
+                                        <span class="icon">
+                                            @if ($country->image)
+                                                <img src="{{ Storage::url($country->image) }}" alt=""
+                                                    style="width: 30px; height: 30px; background-position: center; background-size: contain, cover;">
+                                            @endif
+                                        </span>
+                                    </h2>
+                                    <div class="small small2">
+                                        {{ $country->title ?? '' }}
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" id="button_invoice">
-                    <div class="panel panel-app">
-                        <div class="panel-body">
-                            <a class="panel-app-link" href="invoice.php">
-                                <h2>
-                                    <span class="icon">
-                                        <svg class="svg-icon">
-                                            <use href="#icon-btn-invoice">
-                                        </svg>
-                                    </span>
-                                </h2>
-                                <div class="small small2">
-                                    Sell List
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" id="button_overview_report">
-                    <div class="panel panel-app">
-                        <div class="panel-body">
-                            <a class="panel-app-link" href="report_overview.php">
-                                <h2>
-                                    <span class="icon">
-                                        <svg class="svg-icon">
-                                            <use href="#icon-btn-overview-report">
-                                        </svg>
-                                    </span>
-                                </h2>
-                                <div class="small small2">
-                                    Overview Report
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" id="button_sell">
-                    <div class="panel panel-app">
-                        <div class="panel-body">
-                            <a class="panel-app-link" href="report_sell_itemwise.php">
-                                <h2>
-                                    <span class="icon">
-                                        <svg class="svg-icon">
-                                            <use href="#icon-btn-sell-report">
-                                        </svg>
-                                    </span>
-                                </h2>
-                                <div class="small small2">
-                                    Sell Report
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" id="button_purchase_report">
-                    <div class="panel panel-app">
-                        <div class="panel-body">
-                            <a class="panel-app-link" href="report_purchase_itemwise.php">
-                                <h2>
-                                    <span class="icon">
-                                        <svg class="svg-icon">
-                                            <use href="#icon-btn-purchase-report">
-                                        </svg>
-                                    </span>
-                                </h2>
-                                <div class="small small2">
-                                    Purchase Report
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" id="button_stock_alert">
-                    <div class="panel panel-app">
-                        <div class="panel-body">
-                            <a class="panel-app-link" href="stock_alert.php">
-                                <h2>
-                                    <span class="icon">
-                                        <svg class="svg-icon">
-                                            <use href="#icon-btn-stock-alert">
-                                        </svg>
-                                    </span>
-                                </h2>
-                                <div class="small small2">
-                                    Stock Alert
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2 tour-item" id="button_expired_product">
-                    <div class="panel panel-app">
-                        <div class="panel-body">
-                            <a class="panel-app-link" href="expired.php">
-                                <h2>
-                                    <span class="icon">
-                                        <svg class="svg-icon">
-                                            <use href="#icon-btn-expired">
-                                        </svg>
-                                    </span>
-                                </h2>
-                                <div class="small small2">
-                                    Expired
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2 tour-item" id="button_backup_restore">
-                    <div class="panel panel-app">
-                        <div class="panel-body">
-                            <a class="panel-app-link" href="backup_restore.php">
-                                <h2>
-                                    <span class="icon">
-                                        <svg class="svg-icon">
-                                            <use href="#icon-btn-backup-restore">
-                                        </svg>
-                                    </span>
-                                </h2>
-                                <div class="small small2">
-                                    Backup/Restore
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2 tour-item" id="button_settings">
-                    <div class="panel panel-app">
-                        <div class="panel-body">
-                            <a class="panel-app-link" href="store.php">
-                                <h2>
-                                    <span class="icon">
-                                        <svg class="svg-icon">
-                                            <use href="#icon-btn-stores">
-                                        </svg>
-                                    </span>
-                                </h2>
-                                <div class="small small2">
-                                    Stores
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 
