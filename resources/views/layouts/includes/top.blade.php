@@ -1,74 +1,133 @@
-<nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
-    <div class="container-xxl">
+<header class="main-header">
 
-        <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
-            <a href="{{ route('home') }}" class="app-brand-link gap-2">
-                <span class="app-brand-text demo menu-text fw-bold">
-                    Agency Management
-                </span>
-            </a>
+    <a href="{{ route('home') }}" class="logo">
+        <span class="logo-mini">
+            <b title="Store 01">
+                A
+            </b>
+            1
+        </span>
+        <span class="logo-lg">
+            <b title="Store 01">
+                Agency
+            </b>
+        </span>
+    </a>
 
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
-                <i class="bx bx-x bx-sm align-middle"></i>
-            </a>
-        </div>
+    <nav class="navbar navbar-static-top" role="navigation">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">#</span>
+        </a>
+        <ul class="nav navbar-nav navbar-left">
 
-        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0  d-xl-none  ">
-            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
-            </a>
-        </div>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="en">
+                    <img src="http://itsolution24.com/posv33/assets/itsolution24/img/flags/en.png" alt="en">
+                </a>
 
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" title="English">
+                            <img src="http://itsolution24.com/posv33/assets/itsolution24/img/flags/en.png"
+                                class="language-img">
+                            &nbsp;&nbsp;English
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
-        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- User -->
-                <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                        <div class="avatar avatar-online">
-                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="rounded-circle">
-                        </div>
+            <li>
+                <a href="#" onClick="return false;" id="live_datetime"></a>
+            </li>
+
+        </ul>
+
+        <!-- navbar custome menu start -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li class="user user-menu sell-btn">
+                    <a href="pos.php" title="POS">
+                        <svg class="svg-icon">
+                            <use href="#icon-pos-green">
+                        </svg>
+                        <span class="text">
+                            POS
+                        </span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <div class="avatar avatar-online">
-                                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt
-                                                class="rounded-circle">
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <span class="fw-semibold d-block lh-1">
-                                            Welcome!
-                                        </span>
-                                        <small>
-                                            {{ auth()->user()->name ?? '' }}
-                                        </small>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <div class="dropdown-divider"></div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                   document.getElementById('logout-form').submit();">
-                                <i class="bx bx-power-off me-2"></i>
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
-                    </ul>
                 </li>
-                <!--/ User -->
+                <li class="user user-menu">
+                    <a href="report_cashbook.php" title="Cashbook Report">
+                        <svg class="svg-icon">
+                            <use href="#icon-register-green">
+                        </svg>
+                        <span class="text">
+                            CASHBOOK </span>
+                    </a>
+                </li>
+                <li class="user user-menu">
+                    <a href="invoice.php" title="Invoice">
+                        <svg class="svg-icon">
+                            <use href="#icon-invoice-green">
+                        </svg>
+                        <span class="text">
+                            INVOICE </span>
+                        &nbsp;<span class="label label-warning">0</span>
+                    </a>
+                </li>
+                <li id="user-preference" class="user user-menu sell-btn">
+                    <a href="user_preference.php?store_id=1" title="User Preference">
+                        <svg class="svg-icon">
+                            <use href="#icon-heart-green">
+                        </svg>
+                    </a>
+                </li>
+                <li class="user user-menu sell-btn">
+                    <a href="store_single.php" title="Settings">
+                        <svg class="svg-icon">
+                            <use href="#icon-settings-green">
+                        </svg>
+                    </a>
+                </li>
+                <li class="user user-menu">
+                    <a href="stock_alert.php" title="Stock Alert">
+                        <svg class="svg-icon">
+                            <use href="#icon-alert-green">
+                        </svg>
+                    </a>
+                </li>
+
+                <li class="user user-menu">
+                    <a ng-click="SupportDeskModal();" onClick="return false;" href="#" title="ITsolution24">
+                        <svg class="svg-icon">
+                            <use href="#icon-support-green">
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a id="togglingfullscreen" onClick="toggleFullScreenMode(); return false;" href="#"
+                        title="Fullscreen">
+                        <span class="fa fa-fw fa-expand"></span>
+                    </a>
+                </li>
+                <li id="scrolling-sidebar" class="user user-menu">
+                    <a href="#" title="Reports" data-toggle="scrolling-sidebar" data-width="350">
+                        <i class="fa fa-square"></i>
+                    </a>
+                </li>
+
+                <li class="user user-menu">
+                    <a id="logout" class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                                   document.getElementById('logout-form').submit();">
+                        <i class="fa fa-sign-out"></i>
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+
+                </li>
             </ul>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>

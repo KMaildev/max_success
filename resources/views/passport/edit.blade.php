@@ -87,59 +87,59 @@
                                                     ---
                                                 </option>
 
-                                                <option value="1" @if ($passport->nrc_code == '1') selected @endif>
+                                                <option value="1">
                                                     1/
                                                 </option>
 
-                                                <option value="2" @if ($passport->nrc_code == '2') selected @endif>
+                                                <option value="2">
                                                     2/
                                                 </option>
 
-                                                <option value="3" @if ($passport->nrc_code == '3') selected @endif>
+                                                <option value="3">
                                                     3/
                                                 </option>
 
-                                                <option value="4" @if ($passport->nrc_code == '4') selected @endif>
+                                                <option value="4">
                                                     4/
                                                 </option>
 
-                                                <option value="5" @if ($passport->nrc_code == '5') selected @endif>
+                                                <option value="5">
                                                     5/
                                                 </option>
 
-                                                <option value="6" @if ($passport->nrc_code == '6') selected @endif>
+                                                <option value="6">
                                                     6/
                                                 </option>
 
-                                                <option value="7" @if ($passport->nrc_code == '7') selected @endif>
+                                                <option value="7">
                                                     7/
                                                 </option>
 
-                                                <option value="8" @if ($passport->nrc_code == '8') selected @endif>
+                                                <option value="8">
                                                     8/
                                                 </option>
 
-                                                <option value="9" @if ($passport->nrc_code == '9') selected @endif>
+                                                <option value="9">
                                                     9/
                                                 </option>
 
-                                                <option value="10" @if ($passport->nrc_code == '10') selected @endif>
+                                                <option value="10">
                                                     10/
                                                 </option>
 
-                                                <option value="11" @if ($passport->nrc_code == '11') selected @endif>
+                                                <option value="11">
                                                     11/
                                                 </option>
 
-                                                <option value="12" @if ($passport->nrc_code == '12') selected @endif>
+                                                <option value="12">
                                                     12/
                                                 </option>
 
-                                                <option value="13" @if ($passport->nrc_code == '13') selected @endif>
+                                                <option value="13">
                                                     13/
                                                 </option>
 
-                                                <option value="14" @if ($passport->nrc_code == '14') selected @endif>
+                                                <option value="14">
                                                     14/
                                                 </option>
 
@@ -150,22 +150,22 @@
 
                                             <select name="nrcType" id="nrcType" class="form-control select2" required>
                                                 <option value="">--Select--</option>
-                                                <option value="(N)" @if ($passport->nrc_type == '(N)') selected @endif>
+                                                <option value="(N)">
                                                     (N)
                                                 </option>
-                                                <option value="(A)" @if ($passport->nrc_type == '(A)') selected @endif>
+                                                <option value="(A)">
                                                     (A)
                                                 </option>
-                                                <option value="(P)" @if ($passport->nrc_type == '(P)') selected @endif>
+                                                <option value="(P)">
                                                     (P)
                                                 </option>
-                                                <option value="(Y)" @if ($passport->nrc_type == '(Y)') selected @endif>
+                                                <option value="(Y)">
                                                     (Y)
                                                 </option>
-                                                <option value="(S)" @if ($passport->nrc_type == '(S)') selected @endif>
+                                                <option value="(S)">
                                                     (S)
                                                 </option>
-                                                <option value="(T)" @if ($passport->nrc_type == '(T)') selected @endif>
+                                                <option value="(T)">
                                                     (T)
                                                 </option>
                                             </select>
@@ -178,8 +178,7 @@
 
                                     <div id="nrcEntry" class="py-2">
                                         <input id="nrcNo" class="form-control @error('nrc') is-invalid @enderror"
-                                            type="text" name="nrc" value="{{ old('nrc') }}"
-                                            placeholder="Enter NRC No" />
+                                            type="text" name="nrc" value="{{ old('nrc') }}" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -824,7 +823,7 @@
                             </div>
 
 
-                            <div class="mb-3 row">
+                            <div class="mb-3 row" hidden>
                                 <label for="html5-text-input" class="col-md-3 col-form-label">
                                     စရံငွေ
                                 </label>
@@ -1106,7 +1105,7 @@
     </div>
 @endsection
 @section('script')
-    {!! JsValidator::formRequest('App\Http\Requests\StorePassport', '#create-form') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\UpdatePassport', '#create-form') !!}
 
     <script>
         var nrcFieldCodeNo = '{{ $passport->nrc_code }}';
@@ -1148,12 +1147,12 @@
                 success: function(data) {
                     // $('select[name="nrcName"]').empty();
                     $('select[name="nrcName"]').append(
-                        "<option>--Select--</option>"
+                        "<option value=''>--Select--</option>"
                     );
                     $.each(data, function(key, value) {
                         var n = value.name_en;
                         $('select[name="nrcName"]').append(
-                            '<option  value="' + value.name_en + '" selected="'+ nrc_name == n ? '' : '' +'">' +
+                            '<option  value="' + value.name_en + '">' +
                             value.name_en +
                             "</option>"
                         );
@@ -1184,5 +1183,101 @@
             document.getElementById("nrcNo").value = nrc;
         }
         setNrcField();
+
+
+
+
+
+
+        var Days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // index => month [0-11]
+        $(document).ready(function() {
+            var option = '<option value="">day</option>';
+            var selectedDay = "day";
+            for (var i = 1; i <= Days[0]; i++) { //add option days
+                option += '<option value="' + i + '">' + i + '</option>';
+            }
+            $('#day').append(option);
+            $('#day').val(selectedDay);
+
+            var option = '<option value="">month</option>';
+            var selectedMon = "month";
+            for (var i = 1; i <= 12; i++) {
+                option += '<option value="' + i + '">' + i + '</option>';
+            }
+            $('#month').append(option);
+            $('#month').val(selectedMon);
+
+            var option = '<option value="">month</option>';
+            var selectedMon = "month";
+            for (var i = 1; i <= 12; i++) {
+                option += '<option value="' + i + '">' + i + '</option>';
+            }
+            $('#month2').append(option);
+            $('#month2').val(selectedMon);
+
+            var d = new Date();
+            var option = '<option value="">year</option>';
+            selectedYear = "year";
+            for (var i = 1930; i <= d.getFullYear(); i++) { // years start i
+                option += '<option value="' + i + '">' + i + '</option>';
+            }
+            $('#year').append(option);
+            $('#year').val(selectedYear);
+        });
+
+        function isLeapYear(year) {
+            year = parseInt(year);
+            if (year % 4 != 0) {
+                return false;
+            } else if (year % 400 == 0) {
+                return true;
+            } else if (year % 100 == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function change_year(select) {
+            if (isLeapYear($(select).val())) {
+                Days[1] = 29;
+
+            } else {
+                Days[1] = 28;
+            }
+            if ($("#month").val() == 2) {
+                var day = $('#day');
+                var val = $(day).val();
+                $(day).empty();
+                var option = '<option value="day">day</option>';
+                for (var i = 1; i <= Days[1]; i++) { //add option days
+                    option += '<option value="' + i + '">' + i + '</option>';
+                }
+                $(day).append(option);
+                if (val > Days[month]) {
+                    val = 1;
+                }
+                $(day).val(val);
+            }
+        }
+
+        change_year(1995);
+
+        function change_month(select) {
+            var day = $('#day');
+            var val = $(day).val();
+            $(day).empty();
+            var option = '<option value="day">day</option>';
+            var month = parseInt($(select).val()) - 1;
+            for (var i = 1; i <= Days[month]; i++) { //add option days
+                option += '<option value="' + i + '">' + i + '</option>';
+            }
+            $(day).append(option);
+            if (val > Days[month]) {
+                val = 1;
+            }
+            $(day).val(val);
+
+        }
     </script>
 @endsection

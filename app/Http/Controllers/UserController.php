@@ -25,7 +25,8 @@ class UserController extends Controller
             $users->where('address', 'Like', '%' . request('search') . '%');
         }
         $users = $users->orderBy('id', 'ASC')->get();
-        return view('user.index', compact('users'));
+        $roles = Role::all();
+        return view('user.index', compact('users', 'roles'));
     }
 
     /**

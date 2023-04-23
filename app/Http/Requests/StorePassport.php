@@ -25,12 +25,8 @@ class StorePassport extends FormRequest
     {
         return [
             'name' => 'required',
-            // 'address' => 'required',
-            // 'phone' => 'required',
             'agent_list_id' => 'required',
-
             'deposit' => 'numeric',
-
             'nrcCode' => 'required',
             'nrcName' => 'required',
             'nrcType' => 'required',
