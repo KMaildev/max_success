@@ -81,9 +81,6 @@
                                         <th class="text-white w-5">
                                             Edit
                                         </th>
-                                        <th class="text-white w-5">
-                                            Detail
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -149,13 +146,6 @@
                                                     <i class="fa fa-fw fa-pencil"></i>
                                                 </button>
                                             </td>
-
-                                            <td data-title="Detail" style="text-align: center">
-                                                <a href="{{ route('agent_list.show', $agent_list->id) }}"
-                                                    class="btn btn-primary btn-sm">
-                                                    Detail
-                                                </a>
-                                            </td>
                                         </tr>
 
                                         @include('agent_list.edit')
@@ -199,9 +189,6 @@
                                         <th class="text-white w-5">
                                             Edit
                                         </th>
-                                        <th class="text-white w-5">
-                                            Detail
-                                        </th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -210,6 +197,5 @@
                 </div>
             </div>
         </div>
-
     </section>
 @endsection
