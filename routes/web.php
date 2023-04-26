@@ -119,6 +119,7 @@ Route::middleware('auth')->group(function () {
     Route::get('medical_test_export_excel', [MedicalTestController::class, 'medicalTestExportExcel'])->name('medical_test_export_excel');
 
     Route::resource('passport_datatable', PassportDatatableController::class);
+    Route::get('labour_lists', [PassportDatatableController::class, 'labourLists'])->name('labour_lists');
     Route::get('get_passport_datatable', [PassportDatatableController::class, 'index'])->name('get_passport_datatable');
     Route::get('get_medical_tests_pass_labour', [PassportDatatableController::class, 'medicalTestsPassLabour'])->name('get_medical_tests_pass_labour');
 
