@@ -28,7 +28,6 @@ class UpdateAgentList extends FormRequest
             'agent_code' => 'required|unique:agent_lists,agent_code,' . $id,
             'name' => 'required',
             'region_id' => 'required',
-            'township_id' => 'required',
 
             'photo' => 'mimes:png,jpg,jpeg|max:2048',
             'nrc_front' => 'mimes:png,jpg,jpeg|max:2048',

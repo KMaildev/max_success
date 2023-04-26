@@ -33,7 +33,6 @@ class StoreAgentList extends FormRequest
             'nrc_front' => 'mimes:png,jpg,jpeg|max:2048',
             'nrc_back' => 'mimes:png,jpg,jpeg|max:2048',
 
-
             'nrcCode' => 'required',
             'nrcName' => 'required',
             'nrcType' => 'required',

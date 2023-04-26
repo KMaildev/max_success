@@ -18,6 +18,7 @@
     $(document).ready(function() {
         $('#datatable').DataTable({
             fixedHeader: true,
+            ordering: true,
             dom: 'Blfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
@@ -31,7 +32,9 @@
     });
 
     $(document).ready(function() {
-        $('.select2').select2();
+        $('.select2').select2({
+            theme: "classic",
+        });
     });
 </script>
 

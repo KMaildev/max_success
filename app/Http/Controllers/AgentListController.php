@@ -30,7 +30,9 @@ class AgentListController extends Controller
             ->withCount('passport_table')
             ->get();
         // return $agent_lists;
-        return view('agent_list.index', compact('agent_lists'));
+
+        $regions = Region::all();
+        return view('agent_list.index', compact('agent_lists', 'regions'));
     }
 
     /**
@@ -72,12 +74,12 @@ class AgentListController extends Controller
         $countTotal = AgentList::count();
         $count_no = sprintf('%04d', $countTotal + 1);
 
-        $oversea->agent_code = sprintf('NGW-SA-' . $count_no);
+        $oversea->agent_code = sprintf('MS-' . $count_no);
         $oversea->name = $request->name;
         $oversea->phone = $request->phone;
         $oversea->email = $request->email;
         $oversea->address = $request->address;
-        
+
         $oversea->region_id = $request->region_id;
         $oversea->township_id = $request->township_id;
         $oversea->remark = $request->remark;
@@ -172,7 +174,7 @@ class AgentListController extends Controller
         $agent_list->agent_code = $request->agent_code;
         $agent_list->nrc = $request->nrc;
         $agent_list->region_id = $request->region_id;
-        $agent_list->township_id = $request->township_id;
+        $agent_list->township_id = $request->township_id ?? $agent_list->township_id;
         $agent_list->remark = $request->remark;
         $agent_list->add_user_id = auth()->user()->id ?? 0;
         $agent_list->join_date = $request->join_date;

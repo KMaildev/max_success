@@ -22,6 +22,10 @@
         .invalid-feedback {
             color: red !important;
         }
+
+        .w-5 {
+            text-align: center !important;
+        }
     </style>
 </head>
 

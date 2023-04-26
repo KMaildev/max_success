@@ -28,6 +28,7 @@
                     <i class="fa fa-plus"></i>
                 </button>
             </div>
+            @include('agent_list.create')
         </div>
 
         <div class="row">
@@ -40,48 +41,47 @@
                     </div>
                     <div class="box-body">
                         <div class="table-responsive">
-
                             <table id="datatable" class="table table-bordered table-striped table-hover"
                                 data-hide-colums="">
                                 <thead>
                                     <tr class="bg-gray">
-                                        <th class="text-center text-white w-5" style="width: 1%;">
+                                        <th class="text-white w-5" style="width: 1%;">
                                             #
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Photo
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Agent Code
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Name
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             NRC
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Phone
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Email
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Region
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Township
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Address
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Worker
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Edit
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Detail
                                         </th>
                                     </tr>
@@ -136,68 +136,70 @@
                                                 {{ $agent_list->address }}
                                             </td>
 
-                                            <td data-title="Total Worker">
+                                            <td data-title="Total Worker" style="text-align: center">
                                                 <a href="{{ route('passport.index', ['agent_list_id' => $agent_list->id]) }}"
                                                     class="btn btn-primary btn-sm">
                                                     Total: {{ $agent_list->passport_table_count ?? 0 }}
                                                 </a>
                                             </td>
 
-                                            <td data-title="Edit">
-                                                <a href="{{ route('agent_list.edit', $agent_list->id) }}"
-                                                    class="btn btn-primary btn-sm">
-                                                    Edit
-                                                </a>
+                                            <td data-title="Edit" style="text-align: center">
+                                                <button type="button" class="btn btn-sm btn-block btn-primary"
+                                                    data-toggle="modal" data-target="#editModal_{{ $agent_list->id }}">
+                                                    <i class="fa fa-fw fa-pencil"></i>
+                                                </button>
                                             </td>
 
-                                            <td data-title="Detail">
+                                            <td data-title="Detail" style="text-align: center">
                                                 <a href="{{ route('agent_list.show', $agent_list->id) }}"
                                                     class="btn btn-primary btn-sm">
                                                     Detail
                                                 </a>
                                             </td>
                                         </tr>
+
+                                        @include('agent_list.edit')
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr class="bg-gray">
-                                        <th class="text-center text-white w-5" style="width: 1%;">
+                                        <th class="text-white w-5" style="width: 1%;">
                                             #
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Photo
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Agent Code
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Name
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             NRC
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Phone
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Email
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Region
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Township
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Address
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Worker
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Edit
                                         </th>
-                                        <th class="text-center text-white w-5">
+                                        <th class="text-white w-5">
                                             Detail
                                         </th>
                                     </tr>
