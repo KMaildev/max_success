@@ -133,14 +133,14 @@
                                     <label for="html5-text-input" class="col-md-3 control-label">Remark</label>
                                     <div class="col-md-9">
                                         <textarea class="form-control @error('remark') is-invalid @enderror" name="remark" id="" cols="20"
-                                            rows="5">{{ $overseas_agency->remark ?? '' }}</textarea>
+                                            rows="2">{{ $overseas_agency->remark ?? '' }}</textarea>
                                         @error('remark')
                                             <div class="invalid-feedback"> {{ $message }} </div>
                                         @enderror
                                     </div>
                                 </div>
 
-
+                                <br>
                                 <div class="form-group" style="padding: 15px;">
                                     <label for="html5-search-input" class="col-md-3 control-label"></label>
                                     <div class="col-md-9">
