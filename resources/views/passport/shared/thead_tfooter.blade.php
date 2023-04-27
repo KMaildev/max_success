@@ -8,12 +8,12 @@
     }
 </style>
 <thead>
-    <tr>
+    <tr class="bg-gray">
         <th class="text-white" style="width: 1%;">
             #
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Agent Name
         </th>
 
@@ -33,7 +33,7 @@
             Father's Name
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Mother Name
         </th>
 
@@ -73,51 +73,51 @@
             Height
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Marital Status
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Nation Religion
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Phone
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Family Phone
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             OWIC
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             OWIC Date
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Submit Date
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Interview
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Contract Date
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Sending Date
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Remark
         </th>
 
-        <th class="text-wite">
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
             Action
         </th>
     </tr>

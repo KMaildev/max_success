@@ -4,6 +4,9 @@
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+{{-- DateTimePicker  --}}
+<script src="{{ asset('assets/datetime/jquery.datetimepicker.js') }}"></script>
+
 {{-- Datatable  --}}
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
@@ -14,7 +17,11 @@
 <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
 
+{{-- DateTimePicker  --}}
+<script src="{{ asset('assets/js/custom.js') }}"></script>
+
 @yield('script')
+
 <script>
     $(document).ready(function() {
         $('#datatable').DataTable({

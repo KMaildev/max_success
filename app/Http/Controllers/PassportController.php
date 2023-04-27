@@ -21,45 +21,8 @@ class PassportController extends Controller
     public function index(Request $request)
     {
         $agent_lists = AgentList::all();
-
-        $total_passports = Passport::where('reject_status', NULL)
-            ->count();
-
-        $total_male_passports = Passport::where('reject_status', NULL)
-            ->where('gender', 'male')
-            ->count();
-
-        $passports = Passport::where('reject_status', NULL)
-            ->paginate(100);
-
-        if (request('search')) {
-            $passports = Passport::where('reject_status', NULL)
-                ->where(function ($query) {
-                    $query->where('name', 'Like', '%' . request('search') . '%');
-                    $query->orWhere('father_name', 'Like', '%' . request('search') . '%');
-                    $query->orWhere('nrc', 'Like', '%' . request('search') . '%');
-                    $query->orWhere('date_of_birth', 'Like', '%' . request('search') . '%');
-                    $query->orWhere('passport', 'Like', '%' . request('search') . '%');
-                    $query->orWhere('address', 'Like', '%' . request('search') . '%');
-                    $query->orWhere('remark', 'Like', '%' . request('search') . '%');
-                    $query->orWhere('phone', 'Like', '%' . request('search') . '%');
-                })->paginate(100);
-        }
-
-        if (request('agent_list_id')) {
-            $passports = Passport::where('reject_status', NULL)
-                ->where(function ($query) {
-                    $query->where('agent_list_id', request('agent_list_id'));
-                })->paginate(100);
-        }
-
-        if (request('from_date') && request('to_date')) {
-            $passports = Passport::where('reject_status', NULL)
-                ->whereBetween('join_date', [request('from_date'), request('to_date')])
-                ->paginate(100);
-        }
-
-        return view('passport.index', compact('agent_lists', 'passports', 'total_passports'));
+        $countries = Country::all();
+        return view('passport.index', compact('agent_lists', 'countries'));
     }
 
     public function create()
@@ -91,12 +54,10 @@ class PassportController extends Controller
 
         $countTotal = Passport::count();
         $count_no = sprintf('%06d', $countTotal + 1);
-        $Passport->labour_code = sprintf('NGW-LB-' . $count_no);
+        $Passport->labour_code = sprintf('MS-LB-' . $count_no);
 
         $Passport->name = $request->name;
         $Passport->father_name = $request->father_name;
-
-
         $Passport->passport = $request->passport;
         $Passport->passport_date = $request->passport_date;
         $Passport->place_of_passport = $request->place_of_passport;
@@ -116,13 +77,13 @@ class PassportController extends Controller
         $Passport->go_reason = $request->go_reason;
         $Passport->entry_date = $request->entry_date;
         $Passport->nation_religion = $request->nation_religion;
-        $Passport->region_state = $request->region_state;
+        // $Passport->region_state = $request->region_state;
 
         $Passport->age = $request->age;
         $Passport->passport_expiry_date = $request->passport_expiry_date;
         $Passport->qualification = $request->qualification;
         $Passport->weight = $request->weight . '(lb)';
-        $Passport->height = $request->height . '(kg)';
+        $Passport->height = $request->height . '(cm)';
         $Passport->tatto = $request->tatto;
         $Passport->smoking = $request->smoking;
         $Passport->alcohol = $request->alcohol;
@@ -140,9 +101,9 @@ class PassportController extends Controller
         $Passport->identification_card = $request->identification_card;
         $Passport->issue_date_of_id_card = $request->issue_date_of_id_card;
         $Passport->son = $request->son;
-        $Passport->son_age = $request->son_age;
+        // $Passport->son_age = $request->son_age;
         $Passport->daughter = $request->daughter;
-        $Passport->daughter_age = $request->daughter_age;
+        // $Passport->daughter_age = $request->daughter_age;
         $Passport->address_line_one = $request->address_line_one;
         $Passport->phone_family = $request->phone_family;
         $Passport->name_of_heir = $request->name_of_heir;
@@ -151,7 +112,7 @@ class PassportController extends Controller
         $Passport->passport_cost = $request->passport_cost;
         $Passport->car_charges = $request->car_charges;
         $Passport->passport_register_status = $request->passport_register_status;
-        $Passport->leader = $request->leader;
+        // $Passport->leader = $request->leader;
         $Passport->user_id = auth()->user()->id;
 
         $Passport->nrc_code = $request->nrcCode;
@@ -160,10 +121,11 @@ class PassportController extends Controller
         $Passport->nrc_number = $request->nrcFieldCode;
         $Passport->nrc = $request->nrc;
 
-        $Passport->dob_year = $request->year;
-        $Passport->dob_month = $request->month;
-        $Passport->dob_day = $request->day;
-        $Passport->date_of_birth = $request->year . '.' . $request->month . '.' . $request->day;
+        // $Passport->dob_year = $request->year;
+        // $Passport->dob_month = $request->month;
+        // $Passport->dob_day = $request->day;
+
+        $Passport->date_of_birth =  $request->date_of_birth;
 
         $Passport->save();
         $passport_id = $Passport->id;
@@ -254,13 +216,13 @@ class PassportController extends Controller
         $Passport->go_reason = $request->go_reason;
         $Passport->entry_date = $request->entry_date;
         $Passport->nation_religion = $request->nation_religion;
-        $Passport->region_state = $request->region_state;
+        // $Passport->region_state = $request->region_state;
 
         $Passport->age = $request->age;
         $Passport->passport_expiry_date = $request->passport_expiry_date;
         $Passport->qualification = $request->qualification;
         $Passport->weight = $request->weight . '(lb)';
-        $Passport->height = $request->height . '(kg)';
+        $Passport->height = $request->height . '(cm)';
         $Passport->tatto = $request->tatto;
         $Passport->smoking = $request->smoking;
         $Passport->alcohol = $request->alcohol;
@@ -298,11 +260,12 @@ class PassportController extends Controller
         $Passport->nrc_number = $request->nrcFieldCode ?? $Passport->nrc_number;
         $Passport->nrc = $request->nrc;
 
-        $Passport->dob_year = $request->year ?? $Passport->dob_year;
-        $Passport->dob_month = $request->month ?? $Passport->dob_month;
-        $Passport->dob_day = $request->day ?? $Passport->dob_day;
-        $dob = $Passport->dob_year . '.' . $Passport->dob_month . '.' . $Passport->dob_day;
-        $Passport->date_of_birth = $dob;
+        // $Passport->dob_year = $request->year ?? $Passport->dob_year;
+        // $Passport->dob_month = $request->month ?? $Passport->dob_month;
+        // $Passport->dob_day = $request->day ?? $Passport->dob_day;
+        // $dob = $Passport->dob_year . '.' . $Passport->dob_month . '.' . $Passport->dob_day;
+
+        $Passport->date_of_birth = $request->date_of_birth;
 
         $Passport->update();
         return redirect()->back()->with('success', 'Updated successfully.');

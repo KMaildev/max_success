@@ -22,12 +22,13 @@
             <div class="box-header with-border">
                 <h3 class="box-title">
                     <span class="fa fa-fw fa-plus"></span>
-                    Add New Agent
+                    Add New Labour
                 </h3>
                 <button type="button" class="btn btn-box-tool add-new-btn" data-widget="collapse" data-collapse="true">
                     <i class="fa fa-plus"></i>
                 </button>
             </div>
+            @include('passport.create')
         </div>
 
         <div class="row">
@@ -51,7 +52,6 @@
     </section>
 @endsection
 @section('script')
-    {!! JsValidator::formRequest('App\Http\Requests\StoreMedicalTest', '#create-form') !!}
     <script>
         $(function() {
             var table = $('#labour_lists').DataTable({
