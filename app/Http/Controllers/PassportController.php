@@ -68,17 +68,13 @@ class PassportController extends Controller
         $Passport->remark = $request->remark;
         $Passport->agent_list_id = $request->agent_list_id;
         $Passport->join_date = date("Y-m-d");
-
         $Passport->owic = $request->owic ?? '';
         $Passport->owic_date = $request->owic_date ?? '';
-
         $Passport->mother_name = $request->mother_name;
         $Passport->go_date = $request->go_date;
         $Passport->go_reason = $request->go_reason;
         $Passport->entry_date = $request->entry_date;
         $Passport->nation_religion = $request->nation_religion;
-        // $Passport->region_state = $request->region_state;
-
         $Passport->age = $request->age;
         $Passport->passport_expiry_date = $request->passport_expiry_date;
         $Passport->qualification = $request->qualification;
@@ -101,63 +97,21 @@ class PassportController extends Controller
         $Passport->identification_card = $request->identification_card;
         $Passport->issue_date_of_id_card = $request->issue_date_of_id_card;
         $Passport->son = $request->son;
-        // $Passport->son_age = $request->son_age;
         $Passport->daughter = $request->daughter;
-        // $Passport->daughter_age = $request->daughter_age;
         $Passport->address_line_one = $request->address_line_one;
         $Passport->phone_family = $request->phone_family;
         $Passport->name_of_heir = $request->name_of_heir;
         $Passport->relative = $request->relative;
         $Passport->nrc_of_heir = $request->nrc_of_heir;
-        $Passport->passport_cost = $request->passport_cost;
-        $Passport->car_charges = $request->car_charges;
         $Passport->passport_register_status = $request->passport_register_status;
-        // $Passport->leader = $request->leader;
         $Passport->user_id = auth()->user()->id;
-
         $Passport->nrc_code = $request->nrcCode;
         $Passport->nrc_name = $request->nrcName;
         $Passport->nrc_type = $request->nrcType;
         $Passport->nrc_number = $request->nrcFieldCode;
         $Passport->nrc = $request->nrc;
-
-        // $Passport->dob_year = $request->year;
-        // $Passport->dob_month = $request->month;
-        // $Passport->dob_day = $request->day;
-
         $Passport->date_of_birth =  $request->date_of_birth;
-
         $Passport->save();
-        $passport_id = $Passport->id;
-        if ($request->has('deposit')) {
-            $passport_payment = new PassportPayment();
-            $passport_payment->deposit = $request->deposit;
-            $passport_payment->deposit_date = date('Y-m-d');
-            $passport_payment->passport_id = $passport_id;
-            $passport_payment->user_id = auth()->user()->id;
-            $passport_payment->save();
-
-            $passport_payment_id = $passport_payment->id;
-
-            if ($request->hasFile('deposit_vouchers')) {
-                foreach ($request->file('deposit_vouchers') as $key => $file) {
-                    $path = $file->store('public/deposit_vouchers');
-                    $deposit_file_name = $file->getClientOriginalName();
-
-                    $insert[$key]['deposit_file_path'] = $path;
-                    $insert[$key]['deposit_file_name'] = $deposit_file_name;
-
-                    $insert[$key]['passport_payment_id'] = $passport_payment_id;
-                    $insert[$key]['passport_id'] = $passport_id;
-                    $insert[$key]['user_id'] = auth()->user()->id;
-                    $insert[$key]['created_at'] =  date('Y-m-d H:i:s');
-                    $insert[$key]['updated_at'] =  date('Y-m-d H:i:s');
-                }
-                PassportPaymentFile::insert($insert);
-            }
-        }
-
-
         return redirect()->back()->with('success', 'Created successfully.');
     }
 
@@ -352,5 +306,17 @@ class PassportController extends Controller
     {
         $passport = Passport::findOrFail($id);
         return json_encode($passport);
+    }
+
+    public function passportEditFormAjax($id)
+    {
+        $passport = Passport::findOrFail($id);
+        $agent_lists = AgentList::all();
+        $countries = Country::all();
+
+        return response()->json([
+            'html' => view('passport.shared.edit_form', compact('passport', 'agent_lists', 'countries'))
+                ->render()
+        ]);
     }
 }

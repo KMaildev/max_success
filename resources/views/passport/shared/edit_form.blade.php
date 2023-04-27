@@ -1,5 +1,5 @@
-<form class="form-horizontal" action="{{ route('passport.store') }}" method="POST" autocomplete="off" id="create-form"
-    role="form" enctype="multipart/form-data">
+<form class="form-horizontal" action="{{ route('passport.update', $passport->id) }}" method="POST" autocomplete="off"
+    id="create-form" role="form" enctype="multipart/form-data">
     @csrf
 
     <div class="form-group">
@@ -8,7 +8,7 @@
         </label>
         <div class="col-md-8">
             <input class="form-control @error('name') is-invalid @enderror" type="text" name="name"
-                value="{{ old('name') }}" placeholder="Name" />
+                value="{{ $passport->name ?? '' }}" placeholder="Name" />
             @error('name')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -36,11 +36,13 @@
         </label>
         <div class="col-md-8">
             <div class="custom-control custom-radio">
-                <input type="radio" id="male" value="male" name="gender" class="form-check-input" checked>
+                <input type="radio" id="male" value="male" name="gender" class="form-check-input"
+                    @if ($passport->gender == 'male') checked @endif>
                 <label class="form-check-label" for="male">Male</label>
             </div>
             <div class="custom-control custom-radio">
-                <input type="radio" id="female" value="female" name="gender" class="form-check-input">
+                <input type="radio" id="female" value="female" name="gender" class="form-check-input"
+                    @if ($passport->gender == 'female') checked @endif>
                 <label class="form-check-label" for="female">Female</label>
             </div>
         </div>
@@ -194,7 +196,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="father_name" placeholder="Father Name"
-                value="{{ old('father_name') }}">
+                value="{{ $passport->father_name ?? '' }}">
             @error('father_name')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -208,7 +210,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="mother_name" placeholder="Mother Name"
-                value="{{ old('mother_name') }}">
+                value="{{ $passport->mother_name ?? '' }}">
             @error('mother_name')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -224,7 +226,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="qualification" placeholder="QUALIFICATION"
-                value="{{ old('qualification') }}">
+                value="{{ $passport->qualification ?? '' }}">
             @error('qualification')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -931,7 +933,6 @@
         </div>
     </div>
 </form>
-
 
 {!! JsValidator::formRequest('App\Http\Requests\StorePassport', '#create-form') !!}
 <script>

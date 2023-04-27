@@ -50,6 +50,8 @@
             </div>
         </div>
     </section>
+
+    @include('passport.edit')
 @endsection
 @section('script')
     <script>
@@ -177,18 +179,18 @@
                     },
                     // Interview
                     {
-                        data: 'action',
-                        name: 'action',
+                        data: 'edit',
+                        name: 'edit',
                     },
                     // Contract Date	
                     {
-                        data: 'action',
-                        name: 'action',
+                        data: 'edit',
+                        name: 'edit',
                     },
                     // Sending Date	
                     {
-                        data: 'action',
-                        name: 'action',
+                        data: 'edit',
+                        name: 'edit',
                     },
                     // Remark
                     {
@@ -196,8 +198,8 @@
                         name: 'remark',
                     },
                     {
-                        data: 'action',
-                        name: 'action',
+                        data: 'edit',
+                        name: 'edit',
                     },
                 ],
             });
@@ -216,6 +218,20 @@
                         .search(this.value)
                         .draw();
                 });
+            });
+        });
+
+        var passport_id;
+        $('body').on('click', '#editPassport', function(e) {
+            e.preventDefault();
+            passport_id = $(this).data('id');
+            $('#editPassportModel').modal('show');
+            $.ajax({
+                url: `passport_edit_form_ajax/${passport_id}`,
+                method: 'GET',
+                success: function(result) {
+                    $('#showEditForm').html(result.html);
+                }
             });
         });
     </script>

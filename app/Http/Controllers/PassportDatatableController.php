@@ -37,21 +37,21 @@ class PassportDatatableController extends Controller
                 $query->where('gender', $keyword);
             })
 
-            ->addColumn('action', function ($each) {
-                $actions =
+            ->addColumn('edit', function ($each) {
+                $edit =
                     '
-                        <button class="btn btn-info btn-xs" type="button" 
-                            id="addToMedicalTest"
+                        <button type="button" class="btn btn-sm btn-block btn-primary"
+                            id="editPassport"
                             data-id="' . $each->id . '"
-                        >
-                            Choose
+                            >
+                            <i class="fa fa-fw fa-pencil"></i>
                         </button>
                     ';
-                return $actions;
+                return $edit;
             })
 
             ->addIndexColumn()
-            ->rawColumns(['agent_name', 'action'])
+            ->rawColumns(['agent_name', 'edit'])
             ->make(true);
     }
 

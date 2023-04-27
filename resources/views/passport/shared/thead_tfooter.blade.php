@@ -118,7 +118,7 @@
         </th>
 
         <th class="text-wite" style="width: 10px !important; text-align: center;">
-            Action
+            Edit
         </th>
     </tr>
 </thead>
@@ -233,7 +233,7 @@
         </th>
 
         <th>
-            <input class="form-control" type="text" style="width: 150px;" data-colum="27" placeholder="Search">
+            <input class="form-control" type="hidden" style="width: 150px;" data-colum="27" placeholder="Search">
         </th>
     </tr>
 </tfoot>

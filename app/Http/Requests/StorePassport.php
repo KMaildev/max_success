@@ -26,7 +26,6 @@ class StorePassport extends FormRequest
         return [
             'name' => 'required',
             'agent_list_id' => 'required',
-            'deposit' => 'numeric',
             'nrcCode' => 'required',
             'nrcName' => 'required',
             'nrcType' => 'required',

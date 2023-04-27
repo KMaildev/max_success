@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('passport', PassportController::class);
     Route::get('find_passport_ajax/{id}', [PassportController::class, 'findPassportAjax'])->name('find_passport_ajax');
+    Route::get('passport_edit_form_ajax/{id}', [PassportController::class, 'passportEditFormAjax'])->name('passport_edit_form_ajax');
     Route::post('/passport_import', [PassportController::class, 'passportImport'])->name('passport_import');
 
     Route::get('/reject_passport/{id}', [PassportController::class, 'rejectPassport'])->name('reject_passport');
