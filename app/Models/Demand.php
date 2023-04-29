@@ -34,4 +34,9 @@ class Demand extends Model
     {
         return $this->hasMany(Sending::class, 'demand_id', 'id');
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'countrie_id', 'id');
+    }
 }

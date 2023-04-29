@@ -18,6 +18,7 @@ class DemandController extends Controller
     {
         $overseas_agencies = OverseasAgency::all();
         $offices = Office::all();
+        $countryies = Country::all();
 
         $demands = Demand::where('demand_status', 'new_demand')
             ->paginate(100);
@@ -41,7 +42,8 @@ class DemandController extends Controller
                 ->paginate(100);
         }
 
-        return view('demand.index', compact('demands', 'overseas_agencies', 'offices'));
+        
+        return view('demand.index', compact('demands', 'overseas_agencies', 'offices', 'countryies'));
     }
 
     public function create()

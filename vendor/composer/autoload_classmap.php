@@ -27,6 +27,7 @@ return array(
     'App\\Http\\Controllers\\ContractController' => $baseDir . '/app/Http/Controllers/ContractController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\CountryController' => $baseDir . '/app/Http/Controllers/CountryController.php',
+    'App\\Http\\Controllers\\CountryDashboardController' => $baseDir . '/app/Http/Controllers/CountryDashboardController.php',
     'App\\Http\\Controllers\\DemandController' => $baseDir . '/app/Http/Controllers/DemandController.php',
     'App\\Http\\Controllers\\FileManagementController' => $baseDir . '/app/Http/Controllers/FileManagementController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',

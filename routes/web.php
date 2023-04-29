@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('users', UserController::class);
     Route::resource('country', CountryController::class);
+    Route::get('find_by_country_id/{id}', [CountryController::class, 'findByCountryId'])->name('find_by_country_id');
+
 
     Route::resource('agent_list', AgentListController::class);
     Route::get('agent_list_excel', [AgentListController::class, 'agentListExportExcel'])->name('agent_list_excel');

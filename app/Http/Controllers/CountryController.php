@@ -48,6 +48,7 @@ class CountryController extends Controller
 
         $country = new Country();
         $country->title = $request->country_name;
+        $country->currency_format = $request->currency_format;
         $country->image = $path ?? '';
         $country->save();
         return redirect()->back()->with('success', 'Process is completed.');
@@ -92,6 +93,7 @@ class CountryController extends Controller
 
         $country = Country::findOrFail($id);
         $country->title = $request->country_name;
+        $country->currency_format = $request->currency_format;
         $country->image = $path ?? $country->image;
         $country->update();
         return redirect()->back()->with('success', 'Process is completed.');
@@ -108,5 +110,11 @@ class CountryController extends Controller
         $country = Country::findOrFail($id);
         $country->delete();
         return redirect()->back()->with('success', 'Process is completed.');
+    }
+
+    public function findByCountryId($id)
+    {
+        $country = Country::findOrFail($id);
+        return json_encode($country);
     }
 }

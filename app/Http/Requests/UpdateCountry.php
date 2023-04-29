@@ -25,7 +25,7 @@ class UpdateCountry extends FormRequest
     {
         return [
             'country_name' => 'required',
-            'image' => 'required',
+            'currency_format' => 'required',
         ];
     }
 }

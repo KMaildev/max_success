@@ -634,6 +634,7 @@ class ComposerStaticInit255bff90faa8e45e478e27bc880e200a
         'App\\Http\\Controllers\\ContractController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContractController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CountryController' => __DIR__ . '/../..' . '/app/Http/Controllers/CountryController.php',
+        'App\\Http\\Controllers\\CountryDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/CountryDashboardController.php',
         'App\\Http\\Controllers\\DemandController' => __DIR__ . '/../..' . '/app/Http/Controllers/DemandController.php',
         'App\\Http\\Controllers\\FileManagementController' => __DIR__ . '/../..' . '/app/Http/Controllers/FileManagementController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',

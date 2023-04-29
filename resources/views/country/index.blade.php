@@ -47,6 +47,7 @@
                                     <tr class="bg-gray">
                                         <th class="text-center text-white w-5" style="width: 1%;">#</th>
                                         <th class="text-center text-white w-5" style="width: 10%;">Country</th>
+                                        <th class="text-center text-white w-5" style="width: 10%;">Currency</th>
                                         <th class="text-center text-white w-5" style="width: 10%;">Photo</th>
                                         <th class="text-center text-white w-5" style="width: 5%;">Action</th>
                                     </tr>
@@ -60,6 +61,10 @@
 
                                             <td class="text-center" data-title="Country">
                                                 {{ $country->title ?? '' }}
+                                            </td>
+
+                                            <td class="text-center" data-title="Currency">
+                                                {{ $country->currency_format ?? '' }}
                                             </td>
 
                                             <td class="text-center" data-title="Photo">
