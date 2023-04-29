@@ -716,7 +716,7 @@
             <select name="selected_country" id="" class="form-control">
                 <option value="">--Country--</option>
                 @foreach ($countries as $country)
-                    <option value="{{ $country->title ?? '' }}">
+                    <option value="{{ $country->id }}">
                         {{ $country->title ?? '' }}
                     </option>
                 @endforeach

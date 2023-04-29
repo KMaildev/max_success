@@ -12,12 +12,23 @@ class PassportDatatableController extends Controller
 
     public function labourLists(Request $request)
     {
-        $data = Passport::with('agent_list_table')
+        $data = Passport::with('agent_list_table', 'country_table')
             ->where('reject_status', NULL)
             ->orderBy('id', 'DESC');
 
         return DataTables::of($data)
             ->addIndexColumn()
+
+            ->editColumn('country', function ($each) {
+                return  $each->country_table ? $each->country_table->title : '-';
+            })
+
+            ->filterColumn('country', function ($query, $keyword) {
+                $query->whereHas('country_table', function ($q1) use ($keyword) {
+                    $q1->where('title', 'like', '%' . $keyword . '%');
+                });
+            })
+
 
             ->editColumn('agent_name', function ($each) {
                 return  $each->agent_list_table ? $each->agent_list_table->name : '-';
@@ -51,7 +62,7 @@ class PassportDatatableController extends Controller
             })
 
             ->addIndexColumn()
-            ->rawColumns(['agent_name', 'edit'])
+            ->rawColumns(['agent_name', 'country', 'edit'])
             ->make(true);
     }
 

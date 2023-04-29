@@ -110,4 +110,9 @@ class Passport extends Model
     {
         return $this->belongsTo(InterviewLabour::class, 'id', 'passport_id')->latest();
     }
+
+    public function country_table()
+    {
+        return $this->belongsTo(Country::class, 'selected_country', 'id');
+    }
 }

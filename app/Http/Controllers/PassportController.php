@@ -132,7 +132,6 @@ class PassportController extends Controller
     public function update(UpdatePassport $request, $id)
     {
 
-
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $photo_path = $photo->store('public/labour');
@@ -161,22 +160,18 @@ class PassportController extends Controller
         $Passport->remark = $request->remark;
         $Passport->agent_list_id = $request->agent_list_id;
         $Passport->join_date = date("Y-m-d");
-
         $Passport->owic = $request->owic ?? '';
         $Passport->owic_date = $request->owic_date ?? '';
-
         $Passport->mother_name = $request->mother_name;
         $Passport->go_date = $request->go_date;
         $Passport->go_reason = $request->go_reason;
         $Passport->entry_date = $request->entry_date;
         $Passport->nation_religion = $request->nation_religion;
-        // $Passport->region_state = $request->region_state;
-
         $Passport->age = $request->age;
         $Passport->passport_expiry_date = $request->passport_expiry_date;
         $Passport->qualification = $request->qualification;
-        $Passport->weight = $request->weight . '(lb)';
-        $Passport->height = $request->height . '(cm)';
+        $Passport->weight = $request->weight;
+        $Passport->height = $request->height;
         $Passport->tatto = $request->tatto;
         $Passport->smoking = $request->smoking;
         $Passport->alcohol = $request->alcohol;
@@ -194,35 +189,22 @@ class PassportController extends Controller
         $Passport->identification_card = $request->identification_card;
         $Passport->issue_date_of_id_card = $request->issue_date_of_id_card;
         $Passport->son = $request->son;
-        $Passport->son_age = $request->son_age;
         $Passport->daughter = $request->daughter;
-        $Passport->daughter_age = $request->daughter_age;
         $Passport->address_line_one = $request->address_line_one;
         $Passport->phone_family = $request->phone_family;
         $Passport->name_of_heir = $request->name_of_heir;
         $Passport->relative = $request->relative;
         $Passport->nrc_of_heir = $request->nrc_of_heir;
-        $Passport->passport_cost = $request->passport_cost;
-        $Passport->car_charges = $request->car_charges;
         $Passport->passport_register_status = $request->passport_register_status;
-        $Passport->leader = $request->leader;
         $Passport->user_id = auth()->user()->id;
-
-        $Passport->nrc_code = $request->nrcCode ?? $Passport->nrc_code;
-        $Passport->nrc_name = $request->nrcName ?? $Passport->nrc_name;
-        $Passport->nrc_type = $request->nrcType ?? $Passport->nrc_type;
-        $Passport->nrc_number = $request->nrcFieldCode ?? $Passport->nrc_number;
+        $Passport->nrc_code = $request->nrcCode;
+        $Passport->nrc_name = $request->nrcName;
+        $Passport->nrc_type = $request->nrcType;
+        $Passport->nrc_number = $request->nrcFieldCode;
         $Passport->nrc = $request->nrc;
-
-        // $Passport->dob_year = $request->year ?? $Passport->dob_year;
-        // $Passport->dob_month = $request->month ?? $Passport->dob_month;
-        // $Passport->dob_day = $request->day ?? $Passport->dob_day;
-        // $dob = $Passport->dob_year . '.' . $Passport->dob_month . '.' . $Passport->dob_day;
-
-        $Passport->date_of_birth = $request->date_of_birth;
-
+        $Passport->date_of_birth =  $request->date_of_birth;
         $Passport->update();
-        return redirect()->back()->with('success', 'Updated successfully.');
+        return redirect()->back()->with('success', 'Created successfully.');
     }
 
     public function destroy($id)

@@ -1,6 +1,7 @@
 <form class="form-horizontal" action="{{ route('passport.update', $passport->id) }}" method="POST" autocomplete="off"
     id="create-form" role="form" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
 
     <div class="form-group">
         <label for="html5-text-input" class="col-md-3 control-label">
@@ -23,7 +24,7 @@
         </label>
         <div class="col-md-8">
             <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photo"
-                value="{{ old('photo') }}" />
+                value="{{ $passport->photo ?? '' }}" />
             @error('photo')
                 <div class="invalid-feedback"> {{ $message }} </div>
             @enderror
@@ -157,7 +158,7 @@
         </div>
 
         <input id="nrcNo" class="form-control @error('nrc') is-invalid @enderror" type="hidden" name="nrc"
-            value="{{ old('nrc') }}" placeholder="Enter NRC No" />
+            value="{{ $passport->nrc ?? '' }}" placeholder="Enter NRC No" />
 
     </div>
 
@@ -168,7 +169,7 @@
         </label>
         <div class="col-md-8">
             <input class="form-control @error('nrc_front') is-invalid @enderror" type="file" name="nrc_front"
-                value="{{ old('nrc_front') }}" />
+                value="{{ $passport->nrc_front ?? '' }}" />
             @error('nrc_front')
                 <div class="invalid-feedback"> {{ $message }} </div>
             @enderror
@@ -182,7 +183,7 @@
         </label>
         <div class="col-md-8">
             <input class="form-control @error('nrc_back') is-invalid @enderror" type="file" name="nrc_back"
-                value="{{ old('nrc_back') }}" />
+                value="{{ $passport->nrc_back ?? '' }}" />
             @error('nrc_back')
                 <div class="invalid-feedback"> {{ $message }} </div>
             @enderror
@@ -242,7 +243,8 @@
         </label>
 
         <div class="col-md-8">
-            <input type="text" class="form-control dob" name="date_of_birth" value="{{ old('date_of_birth') }}">
+            <input type="text" class="form-control dob" name="date_of_birth"
+                value="{{ $passport->date_of_birth ?? '' }}">
 
             @error('date_of_birth')
                 <div class="form-control-feedback">
@@ -259,7 +261,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="address" placeholder="Address"
-                value="{{ old('address') }}">
+                value="{{ $passport->address ?? '' }}">
             @error('address')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -275,7 +277,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="address_line_one"
-                value="{{ old('address_line_one') }}">
+                value="{{ $passport->address_line_one ?? '' }}">
             @error('address_line_one')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -291,7 +293,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="passport" placeholder="Passport"
-                value="{{ old('passport') }}">
+                value="{{ $passport->passport ?? '' }}">
             @error('passport')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -306,7 +308,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="date_picker form-control" name="passport_date"
-                placeholder="Date of Passport" value="{{ old('passport_date') }}">
+                placeholder="Date of Passport" value="{{ $passport->passport_date ?? '' }}">
             @error('passport_date')
                 <div class="form-control-feedback"> {{ $message }}
                 </div>
@@ -321,7 +323,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="date_picker form-control" name="passport_expiry_date"
-                placeholder="Passport Expiry Date" value="{{ old('passport_expiry_date') }}">
+                placeholder="Passport Expiry Date" value="{{ $passport->passport_expiry_date ?? '' }}">
             @error('passport_expiry_date')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -337,7 +339,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="place_of_passport" placeholder="Place of Passport"
-                value="{{ old('place_of_passport') }}">
+                value="{{ $passport->passport_expiry_date ?? '' }}">
             @error('place_of_passport')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -354,7 +356,7 @@
         </label>
         <div class="col-md-8">
             <input class="form-control @error('age') is-invalid @enderror" type="text" name="age"
-                value="{{ old('age') }}" placeholder="Age" />
+                value="{{ $passport->age ?? '' }}" placeholder="Age" />
             @error('age')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -370,7 +372,7 @@
         </label>
         <div class="col-md-3">
             <div class="input-group">
-                <input type="text" class="form-control" name="weight" value="{{ old('weight') }}">
+                <input type="text" class="form-control" name="weight" value="{{ $passport->weight ?? '' }}">
                 <span class="input-group-addon" id="basic-addon2">
                     (LB)
                 </span>
@@ -388,7 +390,7 @@
         </label>
         <div class="col-md-3">
             <div class="input-group">
-                <input type="text" class="form-control" name="height" value="{{ old('height') }}">
+                <input type="text" class="form-control" name="height" value="{{ $passport->height ?? '' }}">
                 <span class="input-group-addon" id="basic-addon2">
                     (CM)
                 </span>
@@ -408,10 +410,10 @@
         </label>
         <div class="col-md-8">
             <select name="tatto" class="form-control">
-                <option value="No">
+                <option value="No" @if ($passport->tatto == 'No') checked @endif>
                     No
                 </option>
-                <option value="Yes">
+                <option value="Yes" @if ($passport->tatto == 'Yes') checked @endif>
                     Yes
                 </option>
             </select>
@@ -430,10 +432,10 @@
         </label>
         <div class="col-md-8">
             <select name="smoking" class="form-control">
-                <option value="No">
+                <option value="No" @if ($passport->smoking == 'No') checked @endif>
                     No
                 </option>
-                <option value="Yes">
+                <option value="Yes" @if ($passport->smoking == 'Yes') checked @endif>
                     Yes
                 </option>
             </select>
@@ -452,10 +454,10 @@
         </label>
         <div class="col-md-8">
             <select name="alcohol" class="form-control">
-                <option value="No">
+                <option value="No" @if ($passport->alcohol == 'No') checked @endif>
                     No
                 </option>
-                <option value="Yes">
+                <option value="Yes" @if ($passport->alcohol == 'Yes') checked @endif>
                     Yes
                 </option>
             </select>
@@ -475,16 +477,16 @@
         </label>
         <div class="col-md-8">
             <select name="marital_status" class="form-control">
-                <option value="Single">
+                <option value="Single" @if ($passport->marital_status == 'Single') checked @endif>
                     Single
                 </option>
-                <option value="Married">
+                <option value="Married" @if ($passport->marital_status == 'Married') checked @endif>
                     Married
                 </option>
-                <option value="Divorced">
+                <option value="Divorced" @if ($passport->marital_status == 'Divorced') checked @endif>
                     Divorced
                 </option>
-                <option value="Widowed">
+                <option value="Widowed" @if ($passport->marital_status == 'Widowed') checked @endif>
                     Widowed
                 </option>
             </select>
@@ -504,10 +506,10 @@
         </label>
         <div class="col-md-3">
             <select name="son" class="form-control">
-                <option value="No">
+                <option value="No" @if ($passport->son == 'No') checked @endif>
                     No
                 </option>
-                <option value="Yes">
+                <option value="Yes" @if ($passport->son == 'Yes') checked @endif>
                     Yes
                 </option>
             </select>
@@ -526,10 +528,10 @@
         </label>
         <div class="col-md-3">
             <select name="daughter" class="form-control">
-                <option value="No">
+                <option value="No" @if ($passport->daughter == 'No') checked @endif>
                     No
                 </option>
-                <option value="Yes">
+                <option value="Yes" @if ($passport->daughter == 'Yes') checked @endif>
                     Yes
                 </option>
             </select>
@@ -550,7 +552,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="nation_religion" placeholder="Nation / Religion"
-                value="{{ old('nation_religion') }}">
+                value="{{ $passport->nation_religion ?? '' }}">
             @error('nation_religion')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -566,7 +568,8 @@
             (ထင်ရှားသော အမှတ်အသား)
         </label>
         <div class="col-md-8">
-            <input type="text" class="form-control" name="prominent_sign" value="{{ old('prominent_sign') }}">
+            <input type="text" class="form-control" name="prominent_sign"
+                value="{{ $passport->prominent_sign ?? '' }}">
             @error('prominent_sign')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -581,7 +584,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="working_experience"
-                value="{{ old('working_experience') }}">
+                value="{{ $passport->working_experience ?? '' }}">
             @error('working_experience')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -589,8 +592,6 @@
             @enderror
         </div>
     </div>
-
-
 
 
 
@@ -603,7 +604,7 @@
                 <span class="input-group-addon" id="basic-addon2">
                     (+959)
                 </span>
-                <input type="text" class="form-control" name="phone" value="{{ old('phone') }}">
+                <input type="text" class="form-control" name="phone" value="{{ $passport->phone ?? '' }}">
             </div>
             @error('phone')
                 <div class="form-control-feedback">
@@ -623,7 +624,8 @@
                 <span class="input-group-addon" id="basic-addon2">
                     (+959)
                 </span>
-                <input type="text" class="form-control" name="phone_family" value="{{ old('phone_family') }}">
+                <input type="text" class="form-control" name="phone_family"
+                    value="{{ $passport->phone_family ?? '' }}">
             </div>
             @error('phone_family')
                 <div class="form-control-feedback">
@@ -639,7 +641,8 @@
             အမွေစားအမွေခံ အမည်
         </label>
         <div class="col-md-8">
-            <input type="text" class="form-control" name="name_of_heir" value="{{ old('name_of_heir') }}">
+            <input type="text" class="form-control" name="name_of_heir"
+                value="{{ $passport->name_of_heir ?? '' }}">
             @error('name_of_heir')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -654,7 +657,7 @@
             တော်စပ်ပုံ
         </label>
         <div class="col-md-8">
-            <input type="text" class="form-control" name="relative" value="{{ old('relative') }}">
+            <input type="text" class="form-control" name="relative" value="{{ $passport->relative ?? '' }}">
             @error('relative')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -669,7 +672,8 @@
             အမွေစားအမွေခံ၏ မှတ်ပုံတင်နံပါတ်
         </label>
         <div class="col-md-8">
-            <input type="text" class="form-control" name="nrc_of_heir" value="{{ old('nrc_of_heir') }}">
+            <input type="text" class="form-control" name="nrc_of_heir"
+                value="{{ $passport->nrc_of_heir ?? '' }}">
             @error('nrc_of_heir')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -685,7 +689,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="passport_register_status"
-                value="{{ old('passport_register_status') }}">
+                value="{{ $passport->passport_register_status ?? '' }}">
             @error('passport_register_status')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -700,7 +704,8 @@
             သွားရောက်လိုသည့်နေ့ရက်
         </label>
         <div class="col-md-8">
-            <input type="text" class="form-control" name="go_date" placeholder="Date (သို့) အမြန်သွားလိုသည်">
+            <input type="text" class="form-control" name="go_date" placeholder="Date (သို့) အမြန်သွားလိုသည်"
+                value="{{ $passport->go_date ?? '' }}">
             @error('go_date')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -718,7 +723,7 @@
             <select name="selected_country" id="" class="form-control">
                 <option value="">--Country--</option>
                 @foreach ($countries as $country)
-                    <option value="{{ $country->title ?? '' }}">
+                    <option value="{{ $country->id ?? '' }}" @if ($country->id == $passport->selected_country) selected @endif>
                         {{ $country->title ?? '' }}
                     </option>
                 @endforeach
@@ -739,7 +744,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control" name="go_reason" placeholder="For Job"
-                value="အလုပ်လုပ်ကိုင်ရန်">
+                value="{{ $passport->go_reason ?? '' }}">
             @error('go_reason')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -764,7 +769,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control @error('labour_card_no') form-control-danger @enderror"
-                name="labour_card_no" value="{{ old('labour_card_no') }}" placeholder="Labour Card No">
+                name="labour_card_no" value="{{ $passport->labour_card_no ?? '' }}" placeholder="Labour Card No">
             @error('labour_card_no')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -781,7 +786,7 @@
         <div class="col-md-8">
             <input type="text"
                 class="date_picker form-control @error('issue_of_labour_date') form-control-danger @enderror"
-                name="issue_of_labour_date" value="{{ old('issue_of_labour_date') }}"
+                name="issue_of_labour_date" value="{{ $passport->issue_of_labour_date ?? '' }}"
                 placeholder="Issue of Labour Date">
             @error('issue_of_labour_date')
                 <div class="form-control-feedback">
@@ -805,7 +810,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control @error('owic') form-control-danger @enderror" name="owic"
-                value="{{ old('owic') }}" placeholder="OWIC">
+                value="{{ $passport->owic ?? '' }}" placeholder="OWIC">
             @error('owic')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -820,7 +825,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="date_picker form-control @error('owic_date') form-control-danger @enderror"
-                name="owic_date" value="{{ old('owic_date') }}" placeholder="OWIC Date">
+                name="owic_date" value="{{ $passport->owic_date ?? '' }}" placeholder="OWIC Date">
             @error('owic_date')
                 <div class="form-control-feedback"> {{ $message }} </div>
             @enderror
@@ -841,7 +846,7 @@
         </label>
         <div class="col-md-8">
             <input type="text" class="form-control @error('identification_card') form-control-danger @enderror"
-                name="identification_card" value="{{ old('identification_card') }}">
+                name="identification_card" value="{{ $passport->identification_card ?? '' }}">
             @error('identification_card')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -857,7 +862,7 @@
         <div class="col-md-8">
             <input type="text"
                 class="date_picker form-control @error('issue_date_of_id_card') form-control-danger @enderror"
-                name="issue_date_of_id_card" value="{{ old('issue_date_of_id_card') }}">
+                name="issue_date_of_id_card" value="{{ $passport->issue_date_of_id_card ?? '' }}">
             @error('issue_date_of_id_card')
                 <div class="form-control-feedback"> {{ $message }} </div>
             @enderror
@@ -870,7 +875,8 @@
             Submit Date
         </label>
         <div class="col-md-8">
-            <input type="text" class="form-control date_picker" name="entry_date" value="{{ date('Y-m-d') }}">
+            <input type="text" class="form-control date_picker" name="entry_date"
+                value="{{ $passport->entry_date ?? '' }}">
             @error('entry_date')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -887,7 +893,7 @@
             <select class="form-control form-select select2" name="agent_list_id" style="width: 100%">
                 <option value="">--Select Agent--</option>
                 @foreach ($agent_lists as $agent_list)
-                    <option value="{{ $agent_list->id }}">
+                    <option value="{{ $agent_list->id }}" @if ($agent_list->id == $passport->agent_list_id) selected @endif>
                         {{ $agent_list->name ?? '' }}
                     </option>
                 @endforeach
@@ -906,7 +912,7 @@
             Remark
         </label>
         <div class="col-md-8">
-            <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ old('remark') }}</textarea>
+            <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ $passport->remark ?? '' }}</textarea>
             @error('remark')
                 <div class="form-control-feedback">
                     {{ $message }}
@@ -925,16 +931,10 @@
                 Save
             </button>
         </div>
-        <div class="col-sm-2">
-            <button type="reset" class="btn btn-warning btn-block" id="reset" name="reset">
-                <span class="fa fa-circle-o"></span>
-                Reset
-            </button>
-        </div>
     </div>
 </form>
 
-{!! JsValidator::formRequest('App\Http\Requests\StorePassport', '#create-form') !!}
+{!! JsValidator::formRequest('App\Http\Requests\UpdatePassport', '#create-form') !!}
 <script>
     $('select[id="regionId"]').on("change", function() {
         var region_id = $(this).val();

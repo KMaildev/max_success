@@ -17,6 +17,10 @@
             Agent Name
         </th>
 
+        <th class="text-wite" style="width: 10px !important; text-align: center;">
+            Country
+        </th>
+
         <th class="text-white" style="width: 10px !important; text-align: center;">
             Name
         </th>
@@ -230,6 +234,10 @@
 
         <th>
             <input class="form-control" type="text" style="width: 150px;" data-colum="26" placeholder="Search">
+        </th>
+
+        <th>
+            <input class="form-control" type="hidden" style="width: 150px;" data-colum="27" placeholder="Search">
         </th>
 
         <th>

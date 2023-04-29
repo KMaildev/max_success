@@ -91,6 +91,10 @@
                         name: 'agent_name',
                     },
                     {
+                        data: 'country',
+                        name: 'country',
+                    },
+                    {
                         data: 'name',
                         name: 'name',
                     },
