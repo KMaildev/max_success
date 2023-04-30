@@ -283,15 +283,14 @@
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
-                        console.log(data.currency_format);
                         document.getElementById('Currency').innerHTML = data.currency_format;
+                        document.getElementById('EditCurrency').innerHTML = data.currency_format;
                     },
                     error: function() {
                         document.getElementById('Currency').innerHTML = 'Currency';
+                        document.getElementById('EditCurrency').innerHTML = 'Currency';
                     }
                 });
-
-
 
             }
         });

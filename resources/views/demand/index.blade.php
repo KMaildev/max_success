@@ -74,6 +74,18 @@
                                         </th>
 
                                         <th class="text-white w-5">
+                                            Cabinet Date
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Issue Date
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Issue Number Date
+                                        </th>
+
+                                        <th class="text-white w-5">
                                             Male
                                         </th>
 
@@ -102,7 +114,7 @@
                                         </th>
 
                                         <th class="text-white w-5">
-                                            Action
+                                            Edit
                                         </th>
                                     </tr>
                                 </thead>
@@ -138,6 +150,18 @@
                                                 {{ $demand->demand_date }}
                                             </td>
 
+                                            <td data-title="Cabinet Date">
+                                                {{ $demand->cabinet_date }}
+                                            </td>
+
+                                            <td data-title="Issue Date">
+                                                {{ $demand->issue_date }}
+                                            </td>
+
+                                            <td data-title="Demand Number">
+                                                {{ $demand->issue_number }}
+                                            </td>
+
                                             <td data-title="Male">
                                                 @php
                                                     $demand_male = $demand->male ?? 0;
@@ -166,35 +190,14 @@
                                             <td></td>
                                             <td></td>
 
-                                            <td style="text-align: center;">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        Action
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('demand.edit', $demand->id) }}">
-                                                            Edit
-                                                        </a>
-
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('file_upload_view_demand', $demand->id) }}">
-                                                            Files
-                                                        </a>
-
-                                                        <form action="{{ route('demand.destroy', $demand->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="button" class="dropdown-item del_confirm"
-                                                                id="confirm-text" data-toggle="tooltip">Delete</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
+                                            <td data-title="Edit">
+                                                <button type="button" class="btn btn-sm btn-block btn-primary"
+                                                    data-toggle="modal" data-target="#editModal_{{ $demand->id }}">
+                                                    <i class="fa fa-fw fa-pencil"></i>
+                                                </button>
                                             </td>
                                         </tr>
+                                        @include('demand.edit')
                                     @endforeach
                                 </tbody>
                                 <tfoot>
@@ -228,6 +231,18 @@
                                         </th>
 
                                         <th class="text-white w-5">
+                                            Cabinet Date
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Issue Date
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Issue Number Date
+                                        </th>
+
+                                        <th class="text-white w-5">
                                             Male
                                         </th>
 
@@ -256,7 +271,7 @@
                                         </th>
 
                                         <th class="text-white w-5">
-                                            Action
+                                            Edit
                                         </th>
                                     </tr>
                                 </tfoot>
@@ -267,4 +282,7 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+<script></script>
 @endsection
