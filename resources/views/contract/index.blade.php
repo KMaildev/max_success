@@ -73,99 +73,62 @@
                                             Sending
                                         </th>
                                         <th class="text-white w-5">
-                                            Action
+                                            Edit
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($contracts as $key => $contract)
                                         <tr>
-                                            <td>
+                                            <td data-title="No">
                                                 {{ $key + 1 }}
                                             </td>
 
-                                            <td>
+                                            <td data-title="Name">
                                                 {{ $contract->demands_table->office_table->name ?? '' }}
                                             </td>
 
-                                            <td>
+                                            <td data-title="Overseas Company">
                                                 {{ $contract->demands_table->overseas_agencies_table->company_name ?? '' }}
                                             </td>
 
-                                            <td style="text-align: right; font-weight: bold">
+                                            <td data-title="Male" style="tfont-weight: bold">
                                                 {{ number_format($contract->contract_male) }}
                                             </td>
 
-                                            <td style="text-align: right; font-weight: bold">
+                                            <td data-title="Female" style="tfont-weight: bold">
                                                 {{ number_format($contract->contract_female) }}
                                             </td>
 
-                                            <td style="text-align: right; font-weight: bold">
+                                            <td data-title="Contract Total" style="tfont-weight: bold">
                                                 {{ number_format($contract->contract_male + $contract->contract_female) }}
                                             </td>
 
-                                            <td style="text-align: center; font-weight: bold">
+                                            <td data-title="Contract Date" style="font-weight: bold">
                                                 {{ $contract->contract_date }}
                                             </td>
 
-                                            <td style="text-align: center; font-weight: bold">
+                                            <td data-title="Remark" style="font-weight: bold">
                                                 {{ $contract->remark ?? '' }}
                                             </td>
 
-                                            <td style="text-align: center; font-weight: bold">
+                                            <td data-title="Sending Status" style="font-weight: bold">
                                                 @if ($contract->sending_table)
                                                     <span class="badge bg-success">
                                                         Sending
                                                     </span>
                                                 @else
-                                                    <span class="badge bg-danger">
+                                                    <span class="badge bg-danger" style="background-color: red;">
                                                         Pending
                                                     </span>
                                                 @endif
                                             </td>
 
-                                            <td style="text-align: center;">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
-                                                        data-bs-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        Action
-                                                    </button>
-                                                    <div class="dropdown-menu">
-
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('labour_create_view', $contract->id) }}">
-                                                            Contract Labours
-                                                        </a>
-
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('file_upload_view_contract', $contract->id) }}">
-                                                            Files
-                                                        </a>
-
-                                                        @if ($contract->sending_table)
-                                                        @else
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('sending_create', $contract->id) }}">
-                                                                Sending
-                                                            </a>
-                                                        @endif
-
-
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('contract.edit', $contract->id) }}">
-                                                            Edit
-                                                        </a>
-
-                                                        <form action="{{ route('contract.destroy', $contract->id) }}"
-                                                            method="POST" hidden>
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="button" class="dropdown-item del_confirm"
-                                                                id="confirm-text" data-toggle="tooltip">Delete</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
+                                            <td data-title="Edit" style="text-align: center">
+                                                <button onclick="editContract({{ $contract->id }})" type="button"
+                                                    class="btn btn-sm btn-block btn-primary">
+                                                    <i class="fa fa-fw fa-pencil"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -211,6 +174,50 @@
             </div>
         </div>
     </section>
+    @include('contract.edit')
 @endsection
+
 @section('script')
+    {!! JsValidator::formRequest('App\Http\Requests\StoreContracts', '#create-form') !!}
+    <script>
+        $('select[id="demandId"]').on("change", function() {
+            var demand_id = $(this).val();
+            if (demand_id) {
+                $.ajax({
+                    url: `/demand_ajax/${demand_id}`,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        document.getElementById("Male").value = data.male;
+                        document.getElementById("Female").value = data.female;
+                        document.getElementById("Total").value = +data.male + +data.female;
+                        document.getElementById("DemandDate").value = data.demand_date;
+                        document.getElementById("CabinetDate").value = data.cabinet_date;
+                        document.getElementById("IssueDate").value = data.issue_date;
+                        document.getElementById("IssueNumber").value = data.issue_number;
+                    },
+                });
+            }
+        });
+
+        function MaleFemaleTotalCalc() {
+            var male = document.getElementById("male").value;
+            var female = document.getElementById("female").value;
+            var total = parseInt(female) + parseInt(male);
+            document.getElementById('total').value = total;
+        }
+        MaleFemaleTotalCalc();
+
+
+        function editContract(contractId) {
+            $('#editContractModel').modal('show');
+            $.ajax({
+                url: `contract_edit_form_ajax/${contractId}`,
+                method: 'GET',
+                success: function(result) {
+                    $('#showEditForm').html(result.html);
+                }
+            });
+        }
+    </script>
 @endsection

@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('contract', ContractController::class);
+    Route::get('contract_edit_form_ajax/{id}', [ContractController::class, 'contractEditFormAjax'])->name('contract_edit_form_ajax');
     Route::get('contract_export_excel', [ContractController::class, 'contractExportExcel'])->name('contract_export_excel');
 
     Route::resource('labour_management', LabourManagementController::class);

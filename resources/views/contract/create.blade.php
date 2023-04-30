@@ -204,35 +204,4 @@
         </div>
     </div>
 </form>
-@section('script')
-    {!! JsValidator::formRequest('App\Http\Requests\StoreContracts', '#create-form') !!}
-    <script>
-        $('select[id="demandId"]').on("change", function() {
-            var demand_id = $(this).val();
-            if (demand_id) {
-                $.ajax({
-                    url: `/demand_ajax/${demand_id}`,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        document.getElementById("Male").value = data.male;
-                        document.getElementById("Female").value = data.female;
-                        document.getElementById("Total").value = +data.male + +data.female;
-                        document.getElementById("DemandDate").value = data.demand_date;
-                        document.getElementById("CabinetDate").value = data.cabinet_date;
-                        document.getElementById("IssueDate").value = data.issue_date;
-                        document.getElementById("IssueNumber").value = data.issue_number;
-                    },
-                });
-            }
-        });
 
-        function MaleFemaleTotalCalc() {
-            var male = document.getElementById("male").value;
-            var female = document.getElementById("female").value;
-            var total = parseInt(female) + parseInt(male);
-            document.getElementById('total').value = total;
-        }
-        MaleFemaleTotalCalc();
-    </script>
-@endsection

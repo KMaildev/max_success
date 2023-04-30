@@ -98,4 +98,15 @@ class ContractController extends Controller
     {
         return Excel::download(new ContractExport(), 'excel_' . date("Y-m-d H:i:s") . '.xlsx');
     }
+
+    public function contractEditFormAjax($id){
+
+        $contract = Contract::findOrFail($id);
+        $demands = Demand::all();
+
+        return response()->json([
+            'html' => view('contract.shared.edit_form', compact('contract', 'demands'))
+                ->render()
+        ]);
+    }
 }
