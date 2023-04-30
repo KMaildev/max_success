@@ -19,6 +19,7 @@ class ContractController extends Controller
     {
         $offices = Office::all();
         $overseas_agencies = OverseasAgency::all();
+        $demands = Demand::all();
 
         $contracts = Contract::paginate(100);
         if (request('office_id')) {
@@ -42,7 +43,7 @@ class ContractController extends Controller
                 ->paginate(100);
         }
 
-        return view('contract.index', compact('contracts', 'offices', 'overseas_agencies'));
+        return view('contract.index', compact('demands', 'contracts', 'offices', 'overseas_agencies'));
     }
 
     public function create()
