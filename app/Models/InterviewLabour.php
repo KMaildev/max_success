@@ -17,6 +17,8 @@ class InterviewLabour extends Model
         'user_id',
         'created_at',
         'updated_at',
+        'passport',
+        'overseas_agencie_id',
     ];
 
     public function passport_table()

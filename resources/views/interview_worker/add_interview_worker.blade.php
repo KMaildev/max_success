@@ -49,12 +49,12 @@
 
 
                         <div class="col-md-8" style="padding-top: 30px;">
-                            <form action="{{ route('interview_labour.store') }}" method="post" autocomplete="off"
+                            <form action="{{ route('interview_labour_import') }}" method="post" autocomplete="off"
                                 enctype="multipart/form-data" id="create-form">
                                 @csrf
                                 <input type="hidden" required value="{{ $interview->demand_id }}" name="demand_id">
                                 <input type="hidden" required value="{{ $interview->id }}" name="interview_id">
-                                <input type="hidden" required value="{{ $interview->overseas_agencie_id }}"
+                                <input type="hidden" required value="{{ $interview->demands_table->overseas_agencie_id }}"
                                     name="overseas_agencie_id">
 
                                 <div class="input-group">

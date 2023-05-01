@@ -133,6 +133,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('interview_labour', InterviewLabourController::class);
     Route::get('add_interview_worker/{id}', [InterviewLabourController::class, 'addInterviewWorker'])->name('add_interview_worker');
+    Route::post('interview_labour_import', [InterviewLabourController::class, 'interviewLabourImport'])->name('interview_labour_import');
 
 
     Route::resource('hospital_file', HospitalFileController::class);
