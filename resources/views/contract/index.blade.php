@@ -70,6 +70,9 @@
                                             Contract Remark
                                         </th>
                                         <th class="text-white w-5">
+                                            Contract Labour
+                                        </th>
+                                        <th class="text-white w-5">
                                             Sending
                                         </th>
                                         <th class="text-white w-5">
@@ -112,15 +115,25 @@
                                                 {{ $contract->remark ?? '' }}
                                             </td>
 
+                                            <td data-title="Manage Labours" style="font-weight: bold">
+                                                <a href="{{ route('labour_create_view', $contract->id) }}">
+                                                    Manage Labour
+                                                </a>
+                                            </td>
+
                                             <td data-title="Sending Status" style="font-weight: bold">
                                                 @if ($contract->sending_table)
-                                                    <span class="badge bg-success">
-                                                        Sending
+                                                    <span class="badge bg-success"
+                                                        style="color: white; background-color: green;">
+                                                        <i class="fa fa-check-double"></i>
+                                                        Done
                                                     </span>
                                                 @else
-                                                    <span class="badge bg-danger" style="background-color: red;">
+                                                    <a style="color: red;"
+                                                        href="{{ route('sending_create', $contract->id) }}">
+                                                        <i class="fa fa-x"></i>
                                                         Pending
-                                                    </span>
+                                                    </a>
                                                 @endif
                                             </td>
 
@@ -160,10 +173,13 @@
                                             Contract Remark
                                         </th>
                                         <th class="text-white w-5">
+                                            Contract Labour
+                                        </th>
+                                        <th class="text-white w-5">
                                             Sending
                                         </th>
                                         <th class="text-white w-5">
-                                            Action
+                                            Edit
                                         </th>
                                     </tr>
                                 </tfoot>

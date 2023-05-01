@@ -1,261 +1,302 @@
-@extends('layouts.main')
+@extends('layouts.based.base_main')
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-xl-8">
-            <div class="card mb-4">
-                <h5 class="card-header">
-                    Create New Sending
-                </h5>
-                <div class="card-body">
+    <section class="content-header">
+        <h1>
+            Create New Sending
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ route('home') }}">
+                    <i class="fa fa-dashboard"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="active">
+                Create New Sending
+            </li>
+        </ol>
+    </section>
 
-                    <form action="{{ route('sending.store') }}" method="POST" autocomplete="off" id="create-form" role="form"
-                        enctype="multipart/form-data">
-                        @csrf
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            Contacts
+                        </h3>
+                    </div>
+                    <div class="box-body">
 
-                        <input type="hidden" value="{{ $contract->demand_id }}" name="demand_id">
-                        <input type="hidden" value="{{ $contract->id }}" name="contract_id">
-                        <h6>
-                            1. Demand Information
-                        </h6>
-                        <hr>
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Oversea Company Name
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control"
-                                    value="{{ $contract->demands_table->overseas_agencies_table->company_name ?? '' }}"
-                                    readonly>
+                        <form action="{{ route('sending.store') }}" method="POST" autocomplete="off" id="create-form"
+                            role="form" enctype="multipart/form-data">
+                            @csrf
+
+                            <input type="hidden" value="{{ $contract->demand_id }}" name="demand_id">
+                            <input type="hidden" value="{{ $contract->id }}" name="contract_id">
+
+                            <br>
+                            <h6 style="font-size: 17px;">
+                                1. Demand Information
+                            </h6>
+                            <hr>
+
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Oversea Company Name
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control"
+                                        value="{{ $contract->demands_table->overseas_agencies_table->company_name ?? '' }}"
+                                        readonly>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Demand Date
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="DemandDate" readonly>
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Demand Date
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="DemandDate" readonly>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Cabinet Date
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="CabinetDate" readonly>
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Cabinet Date
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="CabinetDate" readonly>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Issue Date
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="IssueDate" readonly>
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Issue Date
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="IssueDate" readonly>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Issue Number
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="IssueNumber" readonly>
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Issue Number
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="IssueNumber" readonly>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Male
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="Male" readonly>
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Male
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="Male" readonly>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Female
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="Female" readonly>
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Female
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="Female" readonly>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Total
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="Total" readonly>
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Total
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="Total" readonly>
+                                </div>
                             </div>
-                        </div>
 
+                            <br>
+                            <h6 style="font-size: 17px;">
+                                2. Contract Information
+                            </h6>
+                            <hr>
 
-                        <h6>
-                            2. Contract Information
-                        </h6>
-                        <hr>
-
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Contract Date
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                    class="form-control @error('contract_date') form-control-danger @enderror"
-                                    name="contract_date" value="{{ $contract->contract_date ?? '' }}" readonly>
-                                @error('contract_date')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Contract Date
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                        class="form-control @error('contract_date') form-control-danger @enderror"
+                                        name="contract_date" value="{{ $contract->contract_date ?? '' }}" readonly>
+                                    @error('contract_date')
+                                        <div class="form-control-feedback" style="color: red;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Contract Male
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                    class="form-control @error('contract_male') form-control-danger @enderror"
-                                    name="contract_male" value="{{ $contract->contract_male ?? 0 }}" readonly>
-                                @error('contract_male')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }} </div>
-                                @enderror
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Contract Male
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                        class="form-control @error('contract_male') form-control-danger @enderror"
+                                        name="contract_male" value="{{ $contract->contract_male ?? 0 }}" readonly>
+                                    @error('contract_male')
+                                        <div class="form-control-feedback" style="color: red;">
+                                            {{ $message }} </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Contract Male
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                    class="form-control @error('contract_female') form-control-danger @enderror"
-                                    name="contract_female" value="{{ $contract->contract_female ?? 0 }}" readonly>
-                                @error('contract_female')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }} </div>
-                                @enderror
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Contract Male
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                        class="form-control @error('contract_female') form-control-danger @enderror"
+                                        name="contract_female" value="{{ $contract->contract_female ?? 0 }}" readonly>
+                                    @error('contract_female')
+                                        <div class="form-control-feedback" style="color: red;">
+                                            {{ $message }} </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Contract Total
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" readonly
-                                    value="{{ $contract->contract_male + $contract->contract_female }}">
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Contract Total
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" readonly
+                                        value="{{ $contract->contract_male + $contract->contract_female }}">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Remark
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control @error('remark') form-control-danger @enderror"
-                                    name="remark" value="{{ $contract->remark ?? '' }}" readonly>
-                                @error('remark')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }} </div>
-                                @enderror
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Remark
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                        class="form-control @error('remark') form-control-danger @enderror" name="remark"
+                                        value="{{ $contract->remark ?? '' }}" readonly>
+                                    @error('remark')
+                                        <div class="form-control-feedback" style="color: red;">
+                                            {{ $message }} </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
 
+                            <br>
+                            <h6 style="font-size: 17px;">
+                                3. Sending Information
+                            </h6>
+                            <span style="color: red;">
+                                Fill your sending (Departure) information
+                            </span>
+                            <hr>
 
-                        <h6>
-                            3. Sending Information
-                        </h6>
-                        <hr>
-
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Sending Date
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                    class="date_picker form-control @error('sending_date') form-control-danger @enderror"
-                                    name="sending_date" value="{{ old('sending_date') }}">
-                                @error('sending_date')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Sending Date
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                        class="date_picker form-control @error('sending_date') form-control-danger @enderror"
+                                        name="sending_date" value="{{ old('sending_date') }}">
+                                    @error('sending_date')
+                                        <div class="form-control-feedback" style="color: red;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Sending Male
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                    class="form-control @error('sending_male') form-control-danger @enderror"
-                                    name="sending_male" oninput="MaleFemaleTotalCalc()" id="male" value="0">
-                                @error('sending_male')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }} </div>
-                                @enderror
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Sending Male
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                        class="form-control @error('sending_male') form-control-danger @enderror"
+                                        name="sending_male" oninput="MaleFemaleTotalCalc()" id="male"
+                                        value="0">
+                                    @error('sending_male')
+                                        <div class="form-control-feedback" style="color: red;">
+                                            {{ $message }} </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Sending Male
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text"
-                                    class="form-control @error('sending_female') form-control-danger @enderror"
-                                    name="sending_female" oninput="MaleFemaleTotalCalc()" id="female" value="0">
-                                @error('sending_female')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }} </div>
-                                @enderror
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Sending Male
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                        class="form-control @error('sending_female') form-control-danger @enderror"
+                                        name="sending_female" oninput="MaleFemaleTotalCalc()" id="female"
+                                        value="0">
+                                    @error('sending_female')
+                                        <div class="form-control-feedback" style="color: red;">
+                                            {{ $message }} </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Sending Total
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="total" readonly>
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Sending Total
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="total" readonly>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">
-                                Remark
-                            </label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control @error('remark') form-control-danger @enderror"
-                                    name="remark" value="{{ old('remark') }}">
-                                @error('remark')
-                                    <div class="form-control-feedback" style="color: red;">
-                                        {{ $message }} </div>
-                                @enderror
+                            <div class="form-group" style="padding: 15px;">
+                                <label for="html5-text-input" class="col-md-3 control-label">
+                                    Remark
+                                </label>
+                                <div class="col-md-7">
+                                    <input type="text"
+                                        class="form-control @error('remark') form-control-danger @enderror" name="remark"
+                                        value="{{ old('remark') }}">
+                                    @error('remark')
+                                        <div class="form-control-feedback" style="color: red;">
+                                            {{ $message }} </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-search-input" class="col-md-3 col-form-label"></label>
-                            <div class="col-md-9">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                            <div class="form-group" style="padding: 15px;">
+                                <label class="col-sm-3 control-label"></label>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-info btn-block" id="create-product-submit" type="submit"
+                                        name="create-product-submit">
+                                        <span class="fa fa-fw fa-save"></span>
+                                        Save
+                                    </button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="reset" class="btn btn-warning btn-block" id="reset" name="reset">
+                                        <span class="fa fa-circle-o"></span>
+                                        Reset
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
 @section('script')
     {!! JsValidator::formRequest('App\Http\Requests\StoreSending', '#create-form') !!}
