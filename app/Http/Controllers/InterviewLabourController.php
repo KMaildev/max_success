@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class InterviewLabourController extends Controller
 {
+    
     public function addInterviewWorker($id)
     {
         $interview = Interview::findOrFail($id);
