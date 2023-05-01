@@ -43,6 +43,10 @@
         .select2-selection__arrow {
             height: 34px !important;
         }
+
+        .select2{
+            width: 100% !important;
+        }
     </style>
 </head>
 

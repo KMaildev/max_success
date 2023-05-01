@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
     Route::get('get_medical_tests_pass_labour', [PassportDatatableController::class, 'medicalTestsPassLabour'])->name('get_medical_tests_pass_labour');
 
     Route::resource('interview', InterviewController::class);
+    Route::get('interview_edit_form_ajax/{id}', [InterviewController::class, 'interviewEditFormAjax'])->name('interview_edit_form_ajax');
     Route::get('interview_export_excel', [InterviewController::class, 'interviewExportExcel'])->name('interview_export_excel');
 
     Route::resource('interview_labour', InterviewLabourController::class);

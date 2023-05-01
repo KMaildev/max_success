@@ -18,6 +18,7 @@ class InterviewController extends Controller
     {
         $overseas_agencies = OverseasAgency::all();
         $interviews = Interview::paginate(100);
+        $demands = Demand::all();
 
         if (request('overseas_agencie_id')) {
             $overseas_agencie_id = request('overseas_agencie_id');
@@ -33,7 +34,7 @@ class InterviewController extends Controller
                 ->paginate(100);
         }
 
-        return view('interview.index', compact('overseas_agencies', 'interviews'));
+        return view('interview.index', compact('overseas_agencies', 'interviews', 'demands'));
     }
 
 
@@ -88,5 +89,15 @@ class InterviewController extends Controller
     public function interviewExportExcel(Request $request)
     {
         return Excel::download(new InterviewExport(), 'excel_' . date("Y-m-d H:i:s") . '.xlsx');
+    }
+
+    public function interviewEditFormAjax($id){
+        $interview = Interview::findOrFail($id);
+        $demands = Demand::all();
+
+        return response()->json([
+            'html' => view('interview.shared.edit_form', compact('interview', 'demands'))
+                ->render()
+        ]);
     }
 }

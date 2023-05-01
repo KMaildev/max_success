@@ -131,7 +131,6 @@
                                                 @else
                                                     <a style="color: red;"
                                                         href="{{ route('sending_create', $contract->id) }}">
-                                                        <i class="fa fa-x"></i>
                                                         Pending
                                                     </a>
                                                 @endif
