@@ -61,7 +61,7 @@
                                     <span class="text-success">
                                         Import Excel File (Interview Labour)
                                     </span>
-                                    <input type="file" class="form-control" name="file">
+                                    <input type="file" class="form-control" name="file" accept=".xlsx">
                                 </div>
 
                                 <br>
@@ -78,4 +78,5 @@
     </section>
 @endsection
 @section('script')
+    {!! JsValidator::formRequest('App\Http\Requests\interviewLabourImport', '#create-form') !!}
 @endsection

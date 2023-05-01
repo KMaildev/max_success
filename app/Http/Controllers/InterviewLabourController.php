@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use App\Imports\InterviewLabourImport;
 use Maatwebsite\Excel\Facades\Excel;
 
+use App\Http\Requests\interviewLabourImport as InterviewLabourValidation;
+
+
 class InterviewLabourController extends Controller
 {
     
@@ -54,12 +57,12 @@ class InterviewLabourController extends Controller
     }
 
 
-    public function interviewLabourImport(Request $request)
+    public function interviewLabourImport(InterviewLabourValidation $request)
     {
         $demand_id = $request->demand_id;
         $interview_id = $request->interview_id;
         $overseas_agencie_id = $request->overseas_agencie_id;
         Excel::import(new InterviewLabourImport($demand_id, $interview_id, $overseas_agencie_id), request()->file('file'));
-        // return redirect()->back()->with('success', 'Your processing has been completed.');
+        return redirect()->back()->with('success', 'Your processing has been completed.');
     }
 }

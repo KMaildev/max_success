@@ -8,6 +8,8 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
+use App\Models\Passport;
+
 
 class InterviewLabourImport implements ToCollection, WithHeadingRow
 {
@@ -26,22 +28,25 @@ class InterviewLabourImport implements ToCollection, WithHeadingRow
 
    
         foreach ($rows as $row) {
-            var_dump($row);
-            // var_dump($row['passport']);
-            // $passport = Passport::where('passport', $row['passport'])->first();
-            // $passport_id = $passport->id;
-            // var_dump($passport_id);
-            // InterviewLabour::create([
-            //     'demand_id' => $this->demand_id,
-            //     'interview_id' => $this->interview_id,
-            //     'overseas_agencie_id' => $this->overseas_agencie_id,
-                
-            //     'passport_id'    => strval($passport_id),
-            //     'passport'    => strval($row['passport'] ?? ''),
+            $passport = Passport::where('passport', $row['passport'])->first();
+            if ($passport) {
+                $passport_id = $passport->id;
+                $agent_list_id = $passport->agent_list_id;
+                InterviewLabour::create([
+                    'demand_id' => $this->demand_id,
+                    'interview_id' => $this->interview_id,
+                    'overseas_agencie_id' => $this->overseas_agencie_id,
+                    
+                    'passport_id'    => $passport_id,
+                    'agent_list_id'    => $agent_list_id,
+                    'passport'    => strval($row['passport'] ?? ''),
+                    'user_id'    => auth()->user()->id,
 
-            //     'created_at'    => now(),
-            //     'updated_at'    => now(),
-            // ]);
+                    'created_at'    => now(),
+                    'updated_at'    => now(),
+                ]);
+            }
+
         }
     }
 }
