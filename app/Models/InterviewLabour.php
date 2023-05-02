@@ -35,4 +35,9 @@ class InterviewLabour extends Model
     {
         return $this->belongsTo(Interview::class, 'interview_id', 'id');
     }
+
+    public function overseas_agency_table()
+    {
+        return $this->belongsTo(OverseasAgency::class, 'overseas_agencie_id', 'id');
+    }
 }
