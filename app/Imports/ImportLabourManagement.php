@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
+use App\Models\Passport;
 
 class ImportLabourManagement implements ToCollection, WithHeadingRow
 {
@@ -26,25 +27,22 @@ class ImportLabourManagement implements ToCollection, WithHeadingRow
         ])->validate();
 
         foreach ($rows as $row) {
-            LabourManagement::create([
-                'demand_id' => $this->demand_id,
-                'contract_id' => $this->contract_id,
-                'overseas_agencies_id' => $this->overseas_agencies_id,
+            $passport = Passport::where('passport', $row['passport'])->first();
+            if ($passport) {
+                $passport_id = $passport->id;
 
-                'name' => strval($row['name'] ?? ''),
-                'father_name'    => strval($row['father_name'] ?? ''),
-                'nrc'    => strval($row['nrc'] ?? ''),
-                'date_of_birth'    => strval($row['date_of_birth'] ?? ''),
-                'passport'    => strval($row['passport'] ?? ''),
-                'passport_date'    => strval($row['passport_date'] ?? ''),
-                'phone'    => strval($row['phone'] ?? ''),
-                'address'    => strval($row['address'] ?? ''),
-                'gender'    => strval($row['gender'] ?? ''),
-                'place_of_passport'    => strval($row['place_of_passport'] ?? ''),
-                'remark'    => strval($row['remark'] ?? ''),
-                'owic'    => strval($row['owic'] ?? ''),
-                'owic_date'    => strval($row['owic_date'] ?? ''),
-            ]);
+                LabourManagement::create([
+                    'demand_id' => $this->demand_id,
+                    'contract_id' => $this->contract_id,
+                    'overseas_agencies_id' => $this->overseas_agencies_id,
+    
+                    'name' => strval($row['name'] ?? ''),
+                    'passport_id'    => $passport_id,
+                    'passport'    => strval($row['passport'] ?? ''),
+                    'remark'    => strval($row['remark'] ?? ''),
+                ]);
+            }
+           
         }
     }
 }

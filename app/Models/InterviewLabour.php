@@ -40,4 +40,14 @@ class InterviewLabour extends Model
     {
         return $this->belongsTo(OverseasAgency::class, 'overseas_agencie_id', 'id');
     }
+
+    public function demands_table()
+    {
+        return $this->belongsTo(Demand::class, 'demand_id', 'id');
+    }
+
+    public function contact_table()
+    {
+        return $this->belongsTo(Contract::class, 'demand_id', 'demand_id');
+    }
 }
