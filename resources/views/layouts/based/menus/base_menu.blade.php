@@ -37,7 +37,7 @@
                         <use href="#icon-dashboard">
                     </svg>
                     <span>
-                        Foreign Agent
+                        Overseas Company
                     </span>
                 </a>
             </li>

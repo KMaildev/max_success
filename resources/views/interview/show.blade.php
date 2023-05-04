@@ -59,10 +59,6 @@
                                             </th>
 
                                             <th class="text-white w-5">
-                                                Photo
-                                            </th>
-
-                                            <th class="text-white w-5">
                                                 Name
                                             </th>
 
@@ -180,14 +176,6 @@
                                             <tr>
                                                 <td class="text-center">
                                                     {{ $key + 1 }}
-                                                </td>
-
-                                                <td style="text-align: center;">
-                                                    @if ($interview_labour->passport_table->photo)
-                                                        <img src="{{ Storage::url($interview_labour->passport_table->photo) }}"
-                                                            alt=""
-                                                            style="width: 50px; height: 50px; background-position: center; background-size: cover;">
-                                                    @endif
                                                 </td>
 
                                                 <td class="text-center">

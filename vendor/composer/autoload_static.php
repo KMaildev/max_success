@@ -695,6 +695,7 @@ class ComposerStaticInit255bff90faa8e45e478e27bc880e200a
         'App\\Http\\Requests\\UpdateRole' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateRole.php',
         'App\\Http\\Requests\\UpdateSending' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateSending.php',
         'App\\Http\\Requests\\UpdateUser' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateUser.php',
+        'App\\Http\\Requests\\interviewLabourImport' => __DIR__ . '/../..' . '/app/Http/Requests/interviewLabourImport.php',
         'App\\Http\\Requests\\passportImport' => __DIR__ . '/../..' . '/app/Http/Requests/passportImport.php',
         'App\\Imports\\ImportLabourManagement' => __DIR__ . '/../..' . '/app/Imports/ImportLabourManagement.php',
         'App\\Imports\\InterviewLabourImport' => __DIR__ . '/../..' . '/app/Imports/InterviewLabourImport.php',

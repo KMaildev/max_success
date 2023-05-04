@@ -40,41 +40,88 @@
                         </h3>
                     </div>
                     <div class="box-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive text-nowrap">
 
                             <table id="datatable" class="table table-bordered table-striped table-hover"
                                 data-hide-colums="">
                                 <thead>
                                     <tr class="bg-gray">
-                                        <th class="text-center text-white" style="width: 1%;">
+                                        <td colspan="7" class="w-5" style="color: white !important; background-color: #a7aaaf;">
+                                            Company Information
+                                        </td>
+
+                                        <td colspan="5" class="w-5" style="color: white !important; background-color: #a7aaaf;">
+                                            Agent Information
+                                        </td>
+
+                                        <td colspan="3" class="w-5" style="color: white !important; background-color: #a7aaaf;">
+                                            General
+                                        </td>
+                                    </tr>
+
+                                    <tr class="bg-gray">
+
+                                        {{-- Agent Header  --}}
+
+                                        <th class="text-white w-5">
                                             #
                                         </th>
-                                        <th class="text-center text-white  w-5">
+
+                                        <th class="text-white w-5">
                                             Company Name
                                         </th>
-                                        <th class="text-center text-white  w-5">
+
+                                        <th class="text-white w-5">
                                             Contact
                                         </th>
-                                        <th class="text-center text-white  w-5">
+
+                                        <th class="text-white w-5">
                                             Type
                                         </th>
-                                        <th class="text-center text-white  w-5">
+
+                                        <th class="text-white w-5">
                                             Phone
                                         </th>
-                                        <th class="text-center text-white  w-5">
+
+                                        <th class="text-white w-5">
                                             Email
                                         </th>
-                                        <th class="text-center text-white  w-5">
+
+                                        <th class="text-white w-5">
                                             Address
                                         </th>
-                                        <th class="text-center text-white  w-5">
+
+                                        {{-- Agent Header  --}}
+                                        <th class="text-white w-5">
+                                            Agent Company Name
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Agent Contact Person
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Agent Phone
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Agent Email
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Agent Address
+                                        </th>
+
+                                        <th class="text-white w-5">
                                             Country
                                         </th>
-                                        <th class="text-center text-white  w-5">
+
+                                        <th class="text-white w-5">
                                             Remark
                                         </th>
-                                        <th class="text-center text-white  w-5">
-                                            Edit
+
+                                        <th class="text-white w-5">
+                                            Action
                                         </th>
                                     </tr>
                                 </thead>
@@ -113,6 +160,27 @@
                                                 {{ $overseas_agency->company_address }}
                                             </td>
 
+                                            {{-- Agent  --}}
+                                            <td data-title="Agent Company">
+                                                {{ $overseas_agency->agent_company_name }}
+                                            </td>
+
+                                            <td data-title="Agent Contact Person">
+                                                {{ $overseas_agency->agent_contact_person }}
+                                            </td>
+
+                                            <td data-title="Agent Phone">
+                                                {{ $overseas_agency->agent_phone }}
+                                            </td>
+
+                                            <td data-title="Agent Email">
+                                                {{ $overseas_agency->agent_email }}
+                                            </td>
+
+                                            <td data-title="Agent Address">
+                                                {{ $overseas_agency->agent_address }}
+                                            </td>
+
                                             <td data-title="Country">
                                                 {{ $overseas_agency->countries_table->title ?? '' }}
                                             </td>
@@ -132,40 +200,6 @@
                                         @include('overseas_agent.edit')
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr class="bg-gray">
-                                        <th class="text-center text-white" style="width: 1%;">
-                                            #
-                                        </th>
-                                        <th class="text-center text-white  w-5">
-                                            Company Name
-                                        </th>
-                                        <th class="text-center text-white  w-5">
-                                            Contact
-                                        </th>
-                                        <th class="text-center text-white  w-5">
-                                            Type
-                                        </th>
-                                        <th class="text-center text-white  w-5">
-                                            Phone
-                                        </th>
-                                        <th class="text-center text-white  w-5">
-                                            Email
-                                        </th>
-                                        <th class="text-center text-white  w-5">
-                                            Address
-                                        </th>
-                                        <th class="text-center text-white  w-5">
-                                            Country
-                                        </th>
-                                        <th class="text-center text-white  w-5">
-                                            Remark
-                                        </th>
-                                        <th class="text-center text-white  w-5">
-                                            Edit
-                                        </th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

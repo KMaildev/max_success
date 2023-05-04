@@ -47,7 +47,6 @@
                         </div>
 
 
-
                         <div class="col-md-8" style="padding-top: 30px;">
                             <form action="{{ route('interview_labour_import') }}" method="post" autocomplete="off"
                                 enctype="multipart/form-data" id="create-form">

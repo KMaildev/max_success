@@ -14,6 +14,11 @@
                 <!-- General Start -->
                 <div class="tab-pane active" id="general">
 
+                    <p style="font-weight: bold;">
+                        Overseas Company Information
+                    </p>
+                    <hr>
+
                     <div class="form-group">
                         <label for="html5-text-input" class="col-md-3 control-label">
                             Company Name
@@ -81,7 +86,6 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         <label for="html5-text-input" class="col-md-3 control-label">Address</label>
                         <div class="col-md-7">
@@ -92,6 +96,95 @@
                             @enderror
                         </div>
                     </div>
+
+
+
+                    <p style="font-weight: bold;">
+                        Overseas Agent Information
+                    </p>
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
+                            Agent Company Name
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text"
+                                class="form-control @error('agent_company_name') form-control-danger @enderror"
+                                name="agent_company_name" value="{{ old('agent_company_name') }}">
+                            @error('agent_company_name')
+                                <div class="form-control-feedback" style="color: red;">
+                                    {{ $message }} </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
+                            Agent Contact Person 
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text"
+                                class="form-control @error('agent_contact_person') form-control-danger @enderror"
+                                name="agent_contact_person" value="{{ old('agent_contact_person') }}">
+                            @error('agent_contact_person')
+                                <div class="form-control-feedback" style="color: red;">
+                                    {{ $message }} </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
+                            Agent Phone
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text"
+                                class="form-control @error('agent_phone') form-control-danger @enderror"
+                                name="agent_phone" value="{{ old('agent_phone') }}">
+                            @error('agent_phone')
+                                <div class="form-control-feedback" style="color: red;">
+                                    {{ $message }} </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
+                            Agent Email
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text"
+                                class="form-control @error('agent_email') form-control-danger @enderror"
+                                name="agent_email" value="{{ old('agent_email') }}">
+                            @error('agent_email')
+                                <div class="form-control-feedback" style="color: red;">
+                                    {{ $message }} </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
+                            Agent Address
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text"
+                                class="form-control @error('agent_address') form-control-danger @enderror"
+                                name="agent_address" value="{{ old('agent_address') }}">
+                            @error('agent_address')
+                                <div class="form-control-feedback" style="color: red;">
+                                    {{ $message }} </div>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    <p style="font-weight: bold;">
+                        General
+                    </p>
+                    <hr>
+
 
                     <div class="form-group">
                         <label for="html5-text-input" class="col-md-3 control-label">

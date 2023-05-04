@@ -88,6 +88,7 @@ return array(
     'App\\Http\\Requests\\UpdateRole' => $baseDir . '/app/Http/Requests/UpdateRole.php',
     'App\\Http\\Requests\\UpdateSending' => $baseDir . '/app/Http/Requests/UpdateSending.php',
     'App\\Http\\Requests\\UpdateUser' => $baseDir . '/app/Http/Requests/UpdateUser.php',
+    'App\\Http\\Requests\\interviewLabourImport' => $baseDir . '/app/Http/Requests/interviewLabourImport.php',
     'App\\Http\\Requests\\passportImport' => $baseDir . '/app/Http/Requests/passportImport.php',
     'App\\Imports\\ImportLabourManagement' => $baseDir . '/app/Imports/ImportLabourManagement.php',
     'App\\Imports\\InterviewLabourImport' => $baseDir . '/app/Imports/InterviewLabourImport.php',
