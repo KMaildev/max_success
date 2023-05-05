@@ -38,17 +38,6 @@
                         <use href="#icon-dashboard">
                     </svg>
                     <span>
-                        Chart of Accounts
-                    </span>
-                </a>
-            </li>
-
-            <li class="{{ Route::is('accounting_dashboard.index') ? 'active' : '' }}">
-                <a href="{{ route('accounting_dashboard.index') }}">
-                    <svg class="svg-icon">
-                        <use href="#icon-dashboard">
-                    </svg>
-                    <span>
                         Labour Invoice
                     </span>
                 </a>
@@ -76,6 +65,48 @@
                 </a>
             </li>
 
+
+            <li class="treeview">
+                <a href="bank_transactions.php?type=report">
+                    <svg class="svg-icon">
+                        <use href="#icon-bank"></use>
+                    </svg>
+                    <span>
+                        COA Configuration
+                    </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+
+                    <li class="">
+                        <a href="{{ route('accountclassification.index') }}">
+                            <svg class="svg-icon">
+                                <use href="#icon-plus"></use>
+                            </svg>
+                            Account Classification
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="#">
+                            <svg class="svg-icon">
+                                <use href="#icon-plus"></use>
+                            </svg>
+                            Account Type
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="#">
+                            <svg class="svg-icon">
+                                <use href="#icon-plus"></use>
+                            </svg>
+                            Chart Of Accounts
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
 
             <li class="treeview">
                 <a href="bank_transactions.php?type=report">

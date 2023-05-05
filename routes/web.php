@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Accounting\AccountClassificationController;
 use App\Http\Controllers\Accounting\AccountingDashboardController;
+use App\Http\Controllers\Accounting\AccountTypeController;
 use App\Http\Controllers\AgentListController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\CountryController;
@@ -147,4 +149,10 @@ Route::middleware('auth')->group(function () {
     // Accounting
     Route::resource('accounting_dashboard', AccountingDashboardController::class);
 
+    Route::resource('accountclassification', AccountClassificationController::class);
+    Route::get('classificationdependent/ajax/{id}', array('as' => 'classificationdependent.ajax', 'uses' => 'Accounting\AccountClassificationController@dependentAjax'));
+
+
+    Route::resource('accounttype', AccountTypeController::class);
+    Route::get('accounttypedependent/ajax/{id}', array('as' => 'accounttypedependent.ajax', 'uses' => 'Accounting\AccountTypeController@dependentAjax'));
 });
