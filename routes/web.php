@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Accounting\AccountingDashboardController;
 use App\Http\Controllers\AgentListController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\CountryController;
@@ -139,6 +140,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('hospital_file', HospitalFileController::class);
     Route::get('hospital_docs_management/{id}', [HospitalFileController::class, 'hospitalDocsManagement'])->name('hospital_docs_management');
 
-
     Route::resource('country_dashboard', CountryDashboardController::class);
+
+
+
+    // Accounting
+    Route::resource('accounting_dashboard', AccountingDashboardController::class);
+
 });

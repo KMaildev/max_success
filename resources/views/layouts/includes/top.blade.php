@@ -49,23 +49,14 @@
         <!-- navbar custome menu start -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <li class="user user-menu sell-btn">
-                    <a href="pos.php" title="POS">
-                        <svg class="svg-icon">
-                            <use href="#icon-pos-green">
-                        </svg>
-                        <span class="text">
-                            POS
-                        </span>
-                    </a>
-                </li>
                 <li class="user user-menu">
                     <a href="report_cashbook.php" title="Cashbook Report">
                         <svg class="svg-icon">
                             <use href="#icon-register-green">
                         </svg>
                         <span class="text">
-                            CASHBOOK </span>
+                            CASHBOOK 
+                        </span>
                     </a>
                 </li>
                 <li class="user user-menu">
@@ -74,7 +65,8 @@
                             <use href="#icon-invoice-green">
                         </svg>
                         <span class="text">
-                            INVOICE </span>
+                            INVOICE 
+                        </span>
                         &nbsp;<span class="label label-warning">0</span>
                     </a>
                 </li>
