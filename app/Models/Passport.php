@@ -115,4 +115,9 @@ class Passport extends Model
     {
         return $this->belongsTo(Country::class, 'selected_country', 'id');
     }
+
+    public function labour_management_passport_id()
+    {
+        return $this->belongsTo(LabourManagement::class, 'id', 'passport_id');
+    }
 }
