@@ -723,7 +723,7 @@
             <select name="selected_country" id="" class="form-control">
                 <option value="">--Country--</option>
                 @foreach ($countries as $country)
-                    <option value="{{ $country->id ?? '' }}" @if ($country->id == $passport->selected_country) selected @endif>
+                    <option value="{{ $country->title ?? '' }}" @if ($country->title == $passport->selected_country) selected @endif>
                         {{ $country->title ?? '' }}
                     </option>
                 @endforeach

@@ -91,8 +91,8 @@
                         name: 'agent_name',
                     },
                     {
-                        data: 'country',
-                        name: 'country',
+                        data: 'selected_country',
+                        name: 'selected_country',
                     },
                     {
                         data: 'name',

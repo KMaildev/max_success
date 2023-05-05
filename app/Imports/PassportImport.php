@@ -26,7 +26,7 @@ class PassportImport implements ToCollection, WithHeadingRow
                 'father_name'  => strval($row['father_name'] ?? null),
                 'qualification'  => strval($row['qualification'] ?? null),
                 'date_of_birth'  => strval($row['date_of_birth'] ?? null),
-                'address'  => strval($row['address_in_myanmar'] ?? null),
+                'address'  => strval($row['address'] ?? null),
                 'passport'  => strval($row['passport_no'] ?? null),
                 'passport_date'  => strval($row['date_of_passport'] ?? null),
                 'place_of_passport'  => strval($row['place_of_passport'] ?? null),
@@ -71,6 +71,7 @@ class PassportImport implements ToCollection, WithHeadingRow
                 'go_reason'  => strval($row['reason'] ?? null),
                 'nation_religion'  => strval($row['nation_religion'] ?? null),
                 'region_state'  => strval($row['region_state'] ?? null),
+                'selected_country'  => strval($row['country'] ?? null),
 
                 'created_at'  => now(),
                 'updated_at'  => now(),
@@ -84,48 +85,4 @@ class PassportImport implements ToCollection, WithHeadingRow
             ]);
         }
     }
-
-    /**
-     * @param array $row
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
-    // public function model(array $row)
-    // {
-    //     Validator::make($row->toArray(), [
-    //         '*.name' => 'required',
-    //     ])->validate();
-
-    //     return new Passport([
-    //         'name'  => strval($row['name']),
-    //         'father_name'  => strval($row['father_name']),
-    //         'mother_name'  => strval($row['mother_name']),
-    //         'nrc'  => strval($row['nrc']),
-    //         'date_of_birth'  => strval($row['date_of_birth']),
-    //         'passport'  => strval($row['passport_no']),
-    //         'passport_date'  => strval($row['date_of_passport']),
-    //         'local_agent_name'  => strval($row['agent_name']),
-    //         'phone'  => strval($row['phone_no']),
-    //         'address'  => strval($row['address']),
-    //         'gender'  => strval($row['gender']),
-    //         'remark'  => strval($row['remark']),
-    //         'owic'  => strval($row['owic']),
-    //         'owic_date'  => strval($row['owic_date']),
-    //         'place_of_passport'  => strval($row['place_of_passport']),
-    //         'go_date'  => strval($row['go_date']),
-    //         'go_reason'  => strval($row['reason']),
-    //         'nation_religion'  => strval($row['nation_religion']),
-    //         'region_state'  => strval($row['region_state']),
-
-    //         'created_at'  => now(),
-    //         'updated_at'  => now(),
-    //         'join_date'  => date("Y-m-d"),
-    //         'entry_date'  => date("Y-m-d"),
-
-    //         'agent_list_id'  => null,
-    //         'reject_status'  => null,
-    //         'reject_date'  => null,
-    //         'reject_reason'  => null,
-    //     ]);
-    // }
 }

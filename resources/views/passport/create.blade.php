@@ -8,7 +8,7 @@
             </li>
 
             <li>
-                <a href="#general" data-toggle="tab" aria-expanded="false">
+                <a href="#importExcel" data-toggle="tab" aria-expanded="false">
                     Import Excel
                 </a>
             </li>
@@ -17,6 +17,10 @@
             <!-- General Start Single entry -->
             <div class="tab-pane active" id="general">
                 @include('passport.shared.create_form')
+            </div>
+
+            <div class="tab-pane" id="importExcel">
+                @include('passport.shared.excel_import_form')
             </div>
         </div>
     </div>
