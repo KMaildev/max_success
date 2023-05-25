@@ -150,7 +150,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('accounting_dashboard', AccountingDashboardController::class);
 
     Route::resource('accountclassification', AccountClassificationController::class);
-    Route::get('classificationdependent/ajax/{id}', array('as' => 'classificationdependent.ajax', 'uses' => 'Accounting\AccountClassificationController@dependentAjax'));
+    Route::get('classificationdependent/ajax/{id}', [AccountClassificationController::class, 'dependentAjax']);
 
 
     Route::resource('accounttype', AccountTypeController::class);

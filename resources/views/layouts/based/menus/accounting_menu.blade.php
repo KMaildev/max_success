@@ -66,115 +66,88 @@
             </li>
 
 
-            <li class="treeview">
-                <a href="bank_transactions.php?type=report">
+
+            <li class="">
+                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
                     <svg class="svg-icon">
-                        <use href="#icon-bank"></use>
+                        <use href="#icon-plus"></use>
                     </svg>
-                    <span>
-                        COA Configuration
-                    </span>
-                    <i class="fa fa-angle-left pull-right"></i>
+                    Tax Report
                 </a>
-                <ul class="treeview-menu" style="display: none;">
-
-                    <li class="">
-                        <a href="{{ route('accountclassification.index') }}">
-                            <svg class="svg-icon">
-                                <use href="#icon-plus"></use>
-                            </svg>
-                            Account Classification
-                        </a>
-                    </li>
-
-                    <li class="">
-                        <a href="#">
-                            <svg class="svg-icon">
-                                <use href="#icon-plus"></use>
-                            </svg>
-                            Account Type
-                        </a>
-                    </li>
-
-                    <li class="">
-                        <a href="#">
-                            <svg class="svg-icon">
-                                <use href="#icon-plus"></use>
-                            </svg>
-                            Chart Of Accounts
-                        </a>
-                    </li>
-
-                </ul>
+            </li>
+    
+            <li class="">
+                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    Balance Sheet
+                </a>
+            </li>
+    
+            <li class="">
+                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    Aged Receivable
+                </a>
+            </li>
+    
+            <li class="">
+                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    Aged Payable
+                </a>
+            </li>
+    
+            <li class="">
+                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    General Ledger
+                </a>
+            </li>
+    
+            <li class="">
+                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    Bank & Cash
+                </a>
             </li>
 
-            <li class="treeview">
-                <a href="bank_transactions.php?type=report">
+
+            <li class="{{ Route::is('accountclassification.index') ? 'active' : '' }}">
+                <a href="{{ route('accountclassification.index') }}">
                     <svg class="svg-icon">
-                        <use href="#icon-bank"></use>
+                        <use href="#icon-plus"></use>
                     </svg>
-                    <span>
-                        Reports
-                    </span>
-                    <i class="fa fa-angle-left pull-right"></i>
+                    Account Classification
                 </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li class="">
-                        <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
-                            <svg class="svg-icon">
-                                <use href="#icon-plus"></use>
-                            </svg>
-                            Tax Report
-                        </a>
-                    </li>
-
-                    <li class="">
-                        <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
-                            <svg class="svg-icon">
-                                <use href="#icon-plus"></use>
-                            </svg>
-                            Balance Sheet
-                        </a>
-                    </li>
-
-                    <li class="">
-                        <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
-                            <svg class="svg-icon">
-                                <use href="#icon-plus"></use>
-                            </svg>
-                            Aged Receivable
-                        </a>
-                    </li>
-
-                    <li class="">
-                        <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
-                            <svg class="svg-icon">
-                                <use href="#icon-plus"></use>
-                            </svg>
-                            Aged Payable
-                        </a>
-                    </li>
-
-                    <li class="">
-                        <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
-                            <svg class="svg-icon">
-                                <use href="#icon-plus"></use>
-                            </svg>
-                            General Ledger
-                        </a>
-                    </li>
-
-                    <li class="">
-                        <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
-                            <svg class="svg-icon">
-                                <use href="#icon-plus"></use>
-                            </svg>
-                            Bank & Cash
-                        </a>
-                    </li>
-                </ul>
             </li>
-
+    
+            <li class="{{ Route::is('accounttype.index') ? 'active' : '' }}">
+                <a href="{{ route('accounttype.index') }}">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    Account Type
+                </a>
+            </li>
+    
+            <li class="">
+                <a href="#">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    Chart Of Accounts
+                </a>
+            </li>
 
             <li id="sidebar-bottom"></li>
         </ul>

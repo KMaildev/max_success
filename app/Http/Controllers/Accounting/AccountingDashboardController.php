@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class AccountingDashboardController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('accounting.dashboard.index');
     }
 }

@@ -14,10 +14,12 @@
                 <div id="invoice-count" class="small-box bg-green">
                     <div class="inner">
                         <h4>
-                            <i>TOTAL INVOICE</i> <span class="total-invoice">0</span>
+                            <i>TOTAL LABOUR</i> 
+                            <span class="total-invoice">0</span>
                         </h4>
                         <h4>
-                            <i>TOTAL INVOICE TODAY</i> <span class="total-invoice">0</span>
+                            <i>TOTAL LABOUR TODAY</i> 
+                            <span class="total-invoice">0</span>
                         </h4>
                     </div>
                     <div class="icon">
@@ -29,14 +31,17 @@
                     </a>
                 </div>
             </div>
+
             <div class="col-md-3 col-xs-6">
                 <div id="customer-count" class="small-box bg-red">
                     <div class="inner">
                         <h4>
-                            <i>TOTAL CUSTOMER</i> <span class="total-customer">2</span>
+                            <i>TOTAL DEMAND</i> 
+                            <span class="total-customer">2</span>
                         </h4>
                         <h4>
-                            <i>TOTAL CUSTOMER TODAY</i> <span class="total-customer">0</span>
+                            <i>TOTAL DEMAND TODAY</i> 
+                            <span class="total-customer">0</span>
                         </h4>
                     </div>
                     <div class="icon">
@@ -48,14 +53,17 @@
                     </a>
                 </div>
             </div>
+
             <div class="col-md-3 col-xs-6">
                 <div id="supplier-count" class="small-box bg-purple">
                     <div class="inner">
                         <h4>
-                            <i>TOTAL SUPPLIER</i> <span class="total-suppier">1</span>
+                            <i>TOTAL CONTRACT</i> 
+                            <span class="total-suppier">1</span>
                         </h4>
                         <h4>
-                            <i>TOTAL SUPPLIER TODAY</i> <span class="total-suppier">0</span>
+                            <i>TOTAL CONTRACT TODAY</i> 
+                            <span class="total-suppier">0</span>
                         </h4>
                     </div>
                     <div class="icon">
@@ -67,14 +75,15 @@
                     </a>
                 </div>
             </div>
+
             <div class="col-md-3 col-xs-6">
                 <div id="product-count" class="small-box bg-yellow">
                     <div class="inner">
                         <h4>
-                            <i>TOTAL PRODUCT</i> <span class="total-product">2</span>
+                            <i>TOTAL SENDING</i> <span class="total-product">2</span>
                         </h4>
                         <h4>
-                            <i>TOTAL PRODUCT TODAY</i> <span class="total-product">0</span>
+                            <i>TOTAL SENDING TODAY</i> <span class="total-product">0</span>
                         </h4>
                     </div>
                     <div class="icon">
