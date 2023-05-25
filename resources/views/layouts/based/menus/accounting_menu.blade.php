@@ -140,8 +140,8 @@
                 </a>
             </li>
     
-            <li class="">
-                <a href="#">
+            <li class="{{ Route::is('chartofaccount.index') ? 'active' : '' }}">
+                <a href="{{ route('chartofaccount.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-plus"></use>
                     </svg>

@@ -6,12 +6,12 @@
                 <div class="box box-success">
                     <div class="box-header">
                         <h3 class="box-title">
-                            Account Type
+                            Chart Of Accounts
                         </h3>
 
                         <div class="box-tools pull-right">
                             <div class="btn-group">
-                                <a type="button" class="btn btn-primary" href="{{ route('accounttype.create') }}">
+                                <a type="button" class="btn btn-primary" href="{{ route('chartofaccount.create') }}">
                                     <span class="fa fa-add"></span>
                                     Add New Account
                                 </a>
@@ -25,39 +25,50 @@
                                 <thead class="tbbg">
                                     <tr class="bg-gray">
                                         <th class="text-white w-5" style="width: 1%;">#</th>
-                                        <th class="text-white w-5">Number</th>
-                                        <th class="text-white w-5">Description</th>
-                                        <th class="text-white w-5">Account Type</th>
-                                        <th class="text-white w-5">Financial Statement</th>
-                                        <th class="text-white w-5">Actions</th>
+                                        <th class="text-white w-5">
+                                            COA Account Number
+                                        </th>
+                                        <th class="text-white w-5">
+                                            Description
+                                        </th>
+                                        <th class="text-white w-5">
+                                            Account Type
+                                        </th>
+                                        <th class="text-white w-5">
+                                            Financial Statement
+                                        </th>
+                                        <th class="text-white w-5">
+                                            Actions
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($account_types as $account_type)
+                                    @foreach ($chartof_accounts as $key => $chartof_account)
                                         <tr>
                                             <td style="text-align: center;">
-                                                {{ ++$i }}
+                                                {{ $key + 1 }}
                                             </td>
 
                                             <td style="text-align: center;">
-                                                {{ $account_type->number }}
+                                                {{ $chartof_account->coa_number }}
+                                            </td>
+
+
+                                            <td style="text-align: center;">
+                                                {{ $chartof_account->description }}
                                             </td>
 
                                             <td style="text-align: center;">
-                                                {{ $account_type->description }}
+                                                {{ $chartof_account->account_classifications_table->name ?? '' }}
                                             </td>
-
+                                          
                                             <td style="text-align: center;">
-                                                {{ $account_type->account_classifications->name ?? '' }}
-                                            </td>
-
-                                            <td style="text-align: center;">
-                                                {{ $account_type->financial_statement }}
+                                                {{ $chartof_account->account_type_table->financial_statement ?? '' }}
                                             </td>
 
                                             <td style="text-align: center;">
                                                 <a class="btn btn-sm  btn-primary"
-                                                    href="{{ route('accounttype.edit', $account_type->id) }}">
+                                                    href="{{ route('chartofaccount.edit', $chartof_account->id) }}">
                                                     <i class="fa fa-fw fa-pencil"></i>
                                                     Edit
                                                 </a>
@@ -67,7 +78,6 @@
                                 </tbody>
 
                                 <caption class="ms-1">
-                                    {!! $account_types->links() !!}
                                 </caption>
                             </table>
                         </div>
@@ -77,5 +87,6 @@
         </div>
     </section>
 @endsection
+
 @section('script')
 @endsection

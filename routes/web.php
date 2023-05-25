@@ -3,6 +3,7 @@
 use App\Http\Controllers\Accounting\AccountClassificationController;
 use App\Http\Controllers\Accounting\AccountingDashboardController;
 use App\Http\Controllers\Accounting\AccountTypeController;
+use App\Http\Controllers\Accounting\ChartofAccountController;
 use App\Http\Controllers\AgentListController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\CountryController;
@@ -152,7 +153,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('accountclassification', AccountClassificationController::class);
     Route::get('classificationdependent/ajax/{id}', [AccountClassificationController::class, 'dependentAjax']);
 
-
     Route::resource('accounttype', AccountTypeController::class);
-    Route::get('accounttypedependent/ajax/{id}', array('as' => 'accounttypedependent.ajax', 'uses' => 'Accounting\AccountTypeController@dependentAjax'));
+    Route::get('accounttypedependent/ajax/{id}', [AccountTypeController::class, 'dependentAjax']);
+
+    Route::resource('chartofaccount', ChartofAccountController::class);
+    Route::get('chartofaccountdependent/ajax/{id}', [ChartofAccountController::class, 'dependentAjax']);
 });

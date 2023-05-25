@@ -2,7 +2,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Account Type
+            Chart Of Account
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -12,7 +12,7 @@
                 </a>
             </li>
             <li class="active">
-                Account Type
+                Chart Of Account
             </li>
         </ol>
     </section>
@@ -24,23 +24,24 @@
                     <div class="box-body">
                         <div class="col-md-8">
 
-                            <form action="{{ route('accounttype.store') }}" method="POST" autocomplete="off"
-                                id="create-form" role="form">
+                            <form action="{{ route('chartofaccount.update', $coa->id) }}" method="POST" autocomplete="off"
+                                id="my-form" role="form">
                                 @csrf
+                                @method('PUT')
 
                                 <div class="form-group" style="padding: 17px;">
-                                    <label for="html5-text-input" class="col-md-3 control-label">
-                                        Account Name
+                                    <label for="html5-text-input" class="col-md-3 col-form-label">
+                                        Account Type
                                     </label>
-                                    
                                     <div class="col-md-9">
                                         <select id="defaultSelect"
                                             class="form-select form-select select2 @error('account_type') is-invalid @enderror"
                                             name="account_type">
                                             <option value="">--Please Select Account Type--</option>
-                                            @foreach ($account_classifications as $account_classification)
-                                                <option value="{{ $account_classification->id }}">
-                                                    {{ $account_classification->name }}
+                                            @foreach ($account_types as $account_type)
+                                                <option value="{{ $account_type->id }}"
+                                                    @if ($account_type->id == $coa->account_type_id) selected @endif>
+                                                    {{ $account_type->description }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -50,20 +51,33 @@
                                     </div>
                                 </div>
 
+
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 col-form-label">
-                                        Account Number
+                                        Account Type Code
                                     </label>
                                     <div class="col-md-9">
-                                        <div class="input-group">
-                                            <span class="input-group-addon ac_number" id="ac_number"></span>
 
-                                            <input type="hidden" id="ac_number_hidden" name="account_number">
+                                        <input id="account_code"
+                                            class="form-control @error('account_code') is-invalid @enderror" type="text"
+                                            readonly />
 
-                                            <input type="text"
-                                                class="form-control @error('account_number') is-invalid @enderror"
-                                                oninput="getValue();" id="account_number" />
-                                        </div>
+                                        @error('account_code')
+                                            <div class="invalid-feedback"> {{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 col-form-label">
+                                        COA Account Number
+                                    </label>
+                                    <div class="col-md-9">
+
+                                        <input type="text"
+                                            class="form-control @error('account_number') is-invalid @enderror"
+                                            name="account_number" value="{{ $coa->coa_number }}" />
 
                                         @error('account_number')
                                             <div class="invalid-feedback"> {{ $message }} </div>
@@ -71,33 +85,13 @@
                                     </div>
                                 </div>
 
+
                                 <div class="form-group" style="padding: 17px;">
-                                    <label for="html5-text-input" class="col-md-3 col-form-label">
-                                        Description
-                                    </label>
+                                    <label for="html5-text-input" class="col-md-3 col-form-label">Description</label>
                                     <div class="col-md-9">
                                         <input class="form-control @error('description') is-invalid @enderror"
-                                            type="text" name="description" value="{{ old('description') }}" />
+                                            type="text" name="description" value="{{ $coa->description }}" />
                                         @error('description')
-                                            <div class="invalid-feedback"> {{ $message }} </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group" style="padding: 17px;">
-                                    <label for="html5-text-input" class="col-md-3 col-form-label">
-                                        Financial Statement
-                                    </label>
-                                    <div class="col-md-9">
-                                        <select id="defaultSelect"
-                                            class="form-select form-select select2 @error('financial_statement') is-invalid @enderror"
-                                            name="financial_statement">
-                                            <option value="">--Please Select Financial Statement--</option>
-                                            <option value="BalanceSheet">Balance Sheet</option>
-                                            <option value="IncomeStatement">Income Statement</option>
-                                        </select>
-                                        @error('financial_statement')
                                             <div class="invalid-feedback"> {{ $message }} </div>
                                         @enderror
                                     </div>
@@ -123,40 +117,35 @@
     </section>
 @endsection
 
-{!! JsValidator::formRequest('App\Http\Requests\StoreAccountClassification', '#create-form') !!}
-
 @section('script')
     <script type="text/javascript">
-        var ac_number_hidden = document.getElementById("ac_number_hidden");
-        var account_number = document.getElementById("account_number");
-
         $(document).ready(function() {
             $('select[name="account_type"]').on('change', function() {
-                var classificationID = $(this).val();
-                if (classificationID) {
+                var account_type_id = $(this).val();
+                if (account_type_id) {
                     $.ajax({
-                        url: '/classificationdependent/ajax/' + classificationID,
+                        url: '/accounttypedependent/ajax/' + account_type_id,
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
-                            let text = data.ac_code
-                            let acnumber = text.charAt(0);
-                            document.getElementById("ac_number").innerHTML = acnumber + '-';
-
-                            account_number.value = '';
-                            ac_number_hidden.value = '';
+                            document.getElementById("account_code").value = data.number;
                         }
                     });
                 }
-
             });
         });
 
-        function getValue() {
-            var ac_number = document.querySelector(".ac_number").innerHTML;
-            var account_number = document.getElementById("account_number").value;
-            var classify_acnumber = ac_number + account_number;
-            ac_number_hidden.value = classify_acnumber;
+        function autoCallAjax() {
+            var classificationID = {{ $coa->account_type_id }};
+            $.ajax({
+                url: '/accounttypedependent/ajax/' + classificationID,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    document.getElementById("account_code").value = data.number;
+                }
+            });
         }
+        autoCallAjax();
     </script>
 @endsection

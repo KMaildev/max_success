@@ -5,7 +5,7 @@
 
 @include('layouts.based.menus.accounting_menu')
 
-<div class="content-wrapper">
+<div class="content-wrapper" style="min-height: 95vh !important">
     @yield('content')
 </div>
 
