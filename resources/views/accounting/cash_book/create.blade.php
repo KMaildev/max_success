@@ -1,119 +1,108 @@
-<form class="form-horizontal" action="{{ route('country.store') }}" method="POST" autocomplete="off" id="create-form"
-    role="form" enctype="multipart/form-data">
-    @csrf
-    <div class="box-body">
-        <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="#general" data-toggle="tab" aria-expanded="false">
-                        Data Entry
-                    </a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <!-- General Start -->
-                <div class="tab-pane active" id="general">
+<tr>
+    <td>
+        <input type="hidden">
+    </td>
 
-                    <div class="form-group">
-                        <label for="html5-text-input" class="col-md-3 control-label">
-                            Date
-                            <i class="required">*</i>
-                        </label>
+    <td>
+        <input type="text" class="form-control date_picker" style="width: 120px" name="cash_book_date" id="cashBookDate">
+    </td>
 
-                        <div class="col-md-8">
-                            <input type="text" class="form-control dob" name="entry_date"
-                                value="{{ old('entry_date') }}">
+    <td>
+        <input readonly type="text" class="form-control" style="width: 120px" id="Day">
+    </td>
 
-                            @error('entry_date')
-                                <div class="form-control-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
+    <td>
+        <input readonly type="text" class="form-control" style="width: 120px" id="Month">
+    </td>
+
+    <td>
+        <input readonly type="text" class="form-control" style="width: 120px" id="Year">
+    </td>
+
+    <td>
+        <input type="text" class="form-control" style="width: 120px" name="reference" value="{{ old('Reference') }}">
+    </td>
+
+    <td>
+        <input type="text" class="form-control" style="width: 120px" name="description"
+            value="{{ old('description') }}">
+    </td>
+
+    <td>
+        <input type="text" class="form-control" style="width: 120px" name="income" value="{{ old('income') }}">
+    </td>
+
+    <td>
+        <input type="text" class="form-control" style="width: 120px" name="expense" value="{{ old('expense') }}">
+    </td>
+
+    <td>
+        <input type="text" class="form-control" style="width: 120px" name="tax" value="{{ old('tax') }}">
+    </td>
+
+    <td>
+        <select name="chartof_account_id" class="form-select form-select select2" required style="width: 100%;">
+            @foreach ($chartof_accounts as $chartof_account)
+                <option value="{{ $chartof_account->id }}">
+                    {{ $chartof_account->coa_number }}
+                </option>
+            @endforeach
+        </select>
+    </td>
+
+    <td>
+        <input class="form-control" type="text" style="width: 120px" readonly id="coa_description" />
+    </td>
+
+    <td>
+        <select name="bank_cash_id" class="form-select form-select select2" required style="width: 100%;">
+            @foreach ($chartof_accounts as $chartof_account)
+                @if ($chartof_account->id == 1)
+                    <option value="{{ $chartof_account->id }}">
+                        {{ $chartof_account->coa_number }}
+                    </option>
+                @endif
+
+                @if ($chartof_account->id == 2)
+                    <option value="{{ $chartof_account->id }}">
+                        {{ $chartof_account->coa_number }}
+                    </option>
+                @endif
+            @endforeach
+        </select>
+    </td>
+
+    <td>
+        <button type="submit" class="btn btn-block btn-primary">
+            <i class="fa fa-fw fa-pencil"></i>
+        </button>
+    </td>
+</tr>
+
+<script>
+    document.getElementById("cashBookDate").addEventListener("blur", getCashBookDate)
+
+    function getCashBookDate(e) {
+        var dateArr = e.srcElement.value.split('-');
+        if (dateArr.length > 1) {
+            document.getElementById("Month").value = dateArr[1];
+            document.getElementById("Year").value = dateArr[0];
+            document.getElementById("Day").value = dateArr[2];
+        }
+    }
 
 
-                    <div class="form-group">
-                        <label for="html5-text-input" class="col-md-3 control-label">
-                            Reference no
-                            <i class="required">*</i>
-                        </label>
-
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="reference"
-                                value="{{ old('reference') }}">
-
-                            @error('reference')
-                                <div class="form-control-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="html5-text-input" class="col-md-3 control-label">
-                            Descripton
-                        </label>
-
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="description"
-                                value="{{ old('description') }}">
-
-                            @error('description')
-                                <div class="form-control-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="html5-text-input" class="col-md-3 control-label">
-                            Chart Of Accounts
-                            <i class="required">*</i>
-                        </label>
-                        <div class="col-md-4">
-                            <select name="chartof_account_id" class="form-select form-select select2" required
-                                style="width: 100%;">
-                                @foreach ($chartof_accounts as $chartof_account)
-                                    <option value="{{ $chartof_account->id }}">
-                                        {{ $chartof_account->coa_number }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-md-4">
-                            <input class="form-control @error('coa_description') is-invalid @enderror" type="text"
-                                name="coa_description" />
-                        </div>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label"></label>
-                        <div class="col-sm-4">
-                            <button class="btn btn-info btn-block" id="create-product-submit" type="submit"
-                                name="create-product-submit">
-                                <span class="fa fa-fw fa-save"></span>
-                                Save
-                            </button>
-                        </div>
-                        <div class="col-sm-3">
-                            <button type="reset" class="btn btn-warning btn-block" id="reset" name="reset">
-                                <span class="fa fa-circle-o"></span>
-                                Reset
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-@section('script')
-    {!! JsValidator::formRequest('App\Http\Requests\StoreCountry', '#create-form') !!}
-@endsection
+    $('select[name="chartof_account_id"]').on('change', function() {
+        var chartof_account_id = $(this).val();
+        if (chartof_account_id) {
+            $.ajax({
+                url: '/chartofaccountdependent/ajax/' + chartof_account_id,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    document.getElementById("coa_description").value = data.description;
+                }
+            });
+        }
+    });
+</script>

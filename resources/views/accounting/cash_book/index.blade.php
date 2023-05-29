@@ -28,7 +28,6 @@
                     <i class="fa fa-plus"></i>
                 </button>
             </div>
-            @include('accounting.cash_book.create')
         </div>
 
         <div class="row">
@@ -40,20 +39,70 @@
                         </h3>
                     </div>
                     <div class="box-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive text-nowrap">
                             <table id="datatable" class="table table-bordered table-striped table-hover"
                                 data-hide-colums="">
                                 <thead>
                                     <tr class="bg-gray">
-                                        <th class="text-center text-white w-5" style="width: 1%;">#</th>
-                                        <th class="text-center text-white w-5" style="width: 10%;">Country</th>
-                                        <th class="text-center text-white w-5" style="width: 10%;">Currency</th>
-                                        <th class="text-center text-white w-5" style="width: 10%;">Photo</th>
-                                        <th class="text-center text-white w-5" style="width: 5%;">Action</th>
+                                        <th class="text-center text-white w-5" style="width: 1%;">
+                                            #
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Date
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Day
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Month
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Year
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Reference no
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Description
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Income
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Expenses
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Tax
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Chart of Account
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Account Header
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Bank & Cash
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Actions
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
+                                    @include('accounting.cash_book.create')
                                 </tbody>
                             </table>
                         </div>
