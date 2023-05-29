@@ -1,4 +1,4 @@
-<div id="editModal_{{ $country->id }}" class="modal fade" role="dialog">
+<div id="editCountryModel" class="modal fade" role="dialog">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header ng-scope ui-draggable-handle">
@@ -18,85 +18,7 @@
                             <h4 class="sub-title ng-scope">
                                 Update
                             </h4>
-                            <form autocomplete="off" action="{{ route('country.update', $country->id) }}" method="POST"
-                                id="create-form" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-
-                                <div class="form-group" style="padding: 15px;">
-                                    <label for="html5-text-input" class="col-md-3 control-label">
-                                        Country
-                                        <i class="required">*</i>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text"
-                                            class="form-control @error('country_name') form-control-danger @enderror"
-                                            name="country_name" value="{{ $country->title }}">
-                                        @error('country_name')
-                                            <div class="form-control-feedback" style="color: red;">
-                                                {{ $message }} </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group" style="padding: 15px;">
-                                    <label for="html5-text-input" class="col-md-3 control-label">
-                                        Currency Format
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text"
-                                            class="form-control @error('currency_format') form-control-danger @enderror"
-                                            name="currency_format" list="currency_formats"
-                                            value="{{ $country->currency_format }}">
-                                        <small style="font-weight: bold;">
-                                            You can enter custom currency format. it will be use in demand section.
-                                        </small>
-                                        <datalist id="currency_formats">
-                                            <option value="Dollar">
-                                            <option value="SGD">
-                                            <option value="MMK">
-                                            <option value="Yen">
-                                            <option value="Thai Baht">
-                                            <option value="Ringgit">
-                                            <option value="Rupees">
-                                            <option value="AED">
-                                            <option value="Yuan">
-                                            <option value="Other">
-                                        </datalist>
-                                        @error('currency_format')
-                                            <div class="form-control-feedback" style="color: red;">
-                                                {{ $message }} </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <br>
-                                <div class="form-group" style="padding: 15px;">
-                                    <label for="html5-text-input" class="col-md-3 control-label">
-                                        Photo
-                                        <i class="required">*</i>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="file"
-                                            class="form-control @error('image') form-control-danger @enderror"
-                                            name="image">
-                                        @error('image')
-                                            <div class="form-control-feedback" style="color: red;">
-                                                {{ $message }} </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group" style="padding: 15px;">
-                                    <label for="html5-search-input" class="col-md-3 control-label"></label>
-                                    <div class="col-md-9">
-                                        <button class="btn btn-info">
-                                            <span class="fa fa-fw fa-pencil"></span>
-                                            Update
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                            <div id="showEditForm"></div>
                         </div>
                     </div>
                 </div>
@@ -104,6 +26,3 @@
         </div>
     </div>
 </div>
-@section('script')
-    {!! JsValidator::formRequest('App\Http\Requests\UpdateCountry', '#create-form') !!}
-@endsection

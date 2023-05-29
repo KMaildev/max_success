@@ -26,6 +26,10 @@ class UpdateCountry extends FormRequest
         return [
             'country_name' => 'required',
             'currency_format' => 'required',
+            'standard_cost' => 'required|numeric',
+            'standard_cost_mmk' => 'required|numeric',
+            'exchange_rate' => 'required|numeric',
+            'total_amount_mmk' => 'required|numeric',
         ];
     }
 }

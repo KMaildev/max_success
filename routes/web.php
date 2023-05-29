@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('country', CountryController::class);
     Route::get('find_by_country_id/{id}', [CountryController::class, 'findByCountryId'])->name('find_by_country_id');
+    Route::get('country_edit/{id}', [CountryController::class, 'edit'])->name('country_edit');
+
 
 
     Route::resource('agent_list', AgentListController::class);

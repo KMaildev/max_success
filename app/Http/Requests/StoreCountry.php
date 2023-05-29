@@ -27,6 +27,10 @@ class StoreCountry extends FormRequest
             'country_name' => 'required',
             'currency_format' => 'required',
             'image' => 'required',
+            'standard_cost' => 'required|numeric',
+            'standard_cost_mmk' => 'required|numeric',
+            'exchange_rate' => 'required|numeric',
+            'total_amount_mmk' => 'required|numeric',
         ];
     }
 }

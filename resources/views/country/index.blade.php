@@ -48,7 +48,9 @@
                                         <th class="text-center text-white w-5" style="width: 1%;">#</th>
                                         <th class="text-center text-white w-5" style="width: 10%;">Country</th>
                                         <th class="text-center text-white w-5" style="width: 10%;">Currency</th>
-                                        <th class="text-center text-white w-5" style="width: 10%;">Photo</th>
+                                        <th class="text-center text-white w-5" style="width: 10%;">GOV Standard Cost</th>
+                                        <th class="text-center text-white w-5" style="width: 10%;">Exchange Rate</th>
+                                        <th class="text-center text-white w-5" style="width: 10%;">MMK Amount</th>
                                         <th class="text-center text-white w-5" style="width: 5%;">Action</th>
                                     </tr>
                                 </thead>
@@ -59,28 +61,38 @@
                                                 {{ $key + 1 }}
                                             </td>
 
-                                            <td class="text-center" data-title="Country">
+                                            <td data-title="Country">
+                                                @if ($country->image)
+                                                    <img src="{{ Storage::url($country->image) }}" alt=""
+                                                        style="width: 30px; height: 30px; background-position: center; background-size: contain, cover;">
+                                                @endif
                                                 {{ $country->title ?? '' }}
                                             </td>
+
 
                                             <td class="text-center" data-title="Currency">
                                                 {{ $country->currency_format ?? '' }}
                                             </td>
 
-                                            <td class="text-center" data-title="Photo">
-                                                @if ($country->image)
-                                                    <img src="{{ Storage::url($country->image) }}" alt=""
-                                                        style="width: 30px; height: 30px; background-position: center; background-size: contain, cover;">
-                                                @endif
+                                            <td class="text-center" data-title="GOV Standard Cost">
+                                                {{ number_format($country->standard_cost, 2) }}
+                                            </td>
+
+                                            <td class="text-center" data-title="Exchange Rate">
+                                                {{ number_format($country->exchange_rate, 2) }}
+                                            </td>
+
+                                            <td class="text-center" data-title="Amount MMK">
+                                                {{ number_format($country->total_amount_mmk, 2) }}
                                             </td>
 
                                             <td class="text-center" data-title="Edit">
                                                 <button type="button" class="btn btn-sm btn-block btn-primary"
-                                                    data-toggle="modal" data-target="#editModal_{{ $country->id }}">
+                                                    onclick="editCountry({{ $country->id }})">
                                                     <i class="fa fa-fw fa-pencil"></i>
                                                 </button>
                                             </td>
-                                            @include('country.edit')
+
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -91,8 +103,21 @@
             </div>
         </div>
 
+        @include('country.edit')
+
     </section>
 @endsection
 
-@section('script')
-@endsection
+
+<script>
+    function editCountry(country_id) {
+        $.ajax({
+            url: `country_edit/${country_id}`,
+            method: 'GET',
+            success: function(result) {
+                $('#editCountryModel').modal('show');
+                $('#showEditForm').html(result.html);
+            }
+        });
+    }
+</script>

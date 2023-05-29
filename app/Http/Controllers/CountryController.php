@@ -49,6 +49,12 @@ class CountryController extends Controller
         $country = new Country();
         $country->title = $request->country_name;
         $country->currency_format = $request->currency_format;
+
+        $country->standard_cost = $request->standard_cost;
+        $country->standard_cost_mmk = $request->standard_cost_mmk;
+        $country->exchange_rate = $request->exchange_rate;
+        $country->total_amount_mmk = $request->total_amount_mmk;
+
         $country->image = $path ?? '';
         $country->save();
         return redirect()->back()->with('success', 'Process is completed.');
@@ -74,7 +80,13 @@ class CountryController extends Controller
     public function edit($id)
     {
         $country = Country::findOrFail($id);
-        return view('country.edit', compact('country'));
+        return response()->json([
+            'html' => view('country.edit_form', compact('country'))
+                ->render()
+        ]);
+
+        // $country = Country::findOrFail($id);
+        // return view('country.edit', compact('country'));
     }
 
     /**
@@ -95,6 +107,12 @@ class CountryController extends Controller
         $country->title = $request->country_name;
         $country->currency_format = $request->currency_format;
         $country->image = $path ?? $country->image;
+
+        $country->standard_cost = $request->standard_cost;
+        $country->standard_cost_mmk = $request->standard_cost_mmk;
+        $country->exchange_rate = $request->exchange_rate;
+        $country->total_amount_mmk = $request->total_amount_mmk;
+
         $country->update();
         return redirect()->back()->with('success', 'Process is completed.');
     }
@@ -116,5 +134,15 @@ class CountryController extends Controller
     {
         $country = Country::findOrFail($id);
         return json_encode($country);
+    }
+
+
+    public function countryEditFormAjax($id)
+    {
+        $country = Country::findOrFail($id);
+        return response()->json([
+            'html' => view('passport.shared.edit_form', compact('country'))
+                ->render()
+        ]);
     }
 }

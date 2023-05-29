@@ -66,7 +66,7 @@
                         </label>
                         <div class="col-md-3">
                             <input type="text" class="form-control" name="standard_cost"
-                                value="{{ old('standard_cost') }}">
+                                value="{{ old('standard_cost') }}" oninput="calcExchangeRage()" id="standard_cost">
                             @error('standard_cost')
                                 <div class="form-control-feedback">
                                     {{ $message }}
@@ -80,7 +80,7 @@
                         </label>
                         <div class="col-md-3">
                             <input type="text" class="form-control" name="standard_cost_mmk"
-                                value="{{ old('standard_cost_mmk') }}">
+                                value="{{ old('standard_cost_mmk') }}" oninput="calcMMK()" id="standard_cost_mmk">
                             @error('standard_cost_mmk')
                                 <div class="form-control-feedback">
                                     {{ $message }}
@@ -90,7 +90,6 @@
                     </div>
 
 
-
                     <div class="form-group">
                         <label for="html5-text-input" class="col-md-3 control-label">
                             Exchange Rate
@@ -98,7 +97,7 @@
                         <div class="col-md-7">
                             <input type="text"
                                 class="form-control @error('exchange_rate') form-control-danger @enderror"
-                                name="exchange_rate">
+                                name="exchange_rate" oninput="calcExchangeRage()" id="exchange_rate">
                             @error('exchange_rate')
                                 <div class="form-control-feedback" style="color: red;">
                                     {{ $message }} </div>
@@ -112,9 +111,10 @@
                             MMK
                         </label>
                         <div class="col-md-7">
-                            <input type="text" class="form-control @error('total_mmk') form-control-danger @enderror"
-                                name="total_mmk">
-                            @error('total_mmk')
+                            <input type="text"
+                                class="form-control @error('total_amount_mmk') form-control-danger @enderror"
+                                name="total_amount_mmk" id="total_amount_mmk" readonly>
+                            @error('total_amount_mmk')
                                 <div class="form-control-feedback" style="color: red;">
                                     {{ $message }} </div>
                             @enderror
@@ -159,4 +159,21 @@
 </form>
 @section('script')
     {!! JsValidator::formRequest('App\Http\Requests\StoreCountry', '#create-form') !!}
+    <script>
+        function calcExchangeRage() {
+            const standard_cost = document.getElementById("standard_cost").value;
+            const exchange_rate = document.getElementById("exchange_rate").value;
+            const total_amount = standard_cost * exchange_rate;
+            document.getElementById("total_amount_mmk").value = total_amount;
+            document.getElementById("standard_cost_mmk").value = 0;
+        }
+
+        function calcMMK() {
+            const standard_cost_mmk = document.getElementById("standard_cost_mmk").value;
+            document.getElementById("total_amount_mmk").value = standard_cost_mmk;
+
+            document.getElementById("standard_cost").value = 0;
+            document.getElementById("exchange_rate").value = 0;
+        }
+    </script>
 @endsection
