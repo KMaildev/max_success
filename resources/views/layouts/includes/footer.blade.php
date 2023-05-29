@@ -20,6 +20,10 @@
 {{-- DateTimePicker  --}}
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 
+<script src="{{ asset('assets/sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ asset('assets/toastr/toastr.js') }}"></script>
+<script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
+
 @yield('script')
 
 <script>

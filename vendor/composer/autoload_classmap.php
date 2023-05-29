@@ -107,6 +107,7 @@ return array(
     'App\\Models\\AccountClassification' => $baseDir . '/app/Models/AccountClassification.php',
     'App\\Models\\AccountType' => $baseDir . '/app/Models/AccountType.php',
     'App\\Models\\AgentList' => $baseDir . '/app/Models/AgentList.php',
+    'App\\Models\\CashBook' => $baseDir . '/app/Models/CashBook.php',
     'App\\Models\\ChartofAccount' => $baseDir . '/app/Models/ChartofAccount.php',
     'App\\Models\\Contract' => $baseDir . '/app/Models/Contract.php',
     'App\\Models\\Country' => $baseDir . '/app/Models/Country.php',

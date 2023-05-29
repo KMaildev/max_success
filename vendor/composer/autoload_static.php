@@ -714,6 +714,7 @@ class ComposerStaticInit255bff90faa8e45e478e27bc880e200a
         'App\\Models\\AccountClassification' => __DIR__ . '/../..' . '/app/Models/AccountClassification.php',
         'App\\Models\\AccountType' => __DIR__ . '/../..' . '/app/Models/AccountType.php',
         'App\\Models\\AgentList' => __DIR__ . '/../..' . '/app/Models/AgentList.php',
+        'App\\Models\\CashBook' => __DIR__ . '/../..' . '/app/Models/CashBook.php',
         'App\\Models\\ChartofAccount' => __DIR__ . '/../..' . '/app/Models/ChartofAccount.php',
         'App\\Models\\Contract' => __DIR__ . '/../..' . '/app/Models/Contract.php',
         'App\\Models\\Country' => __DIR__ . '/../..' . '/app/Models/Country.php',

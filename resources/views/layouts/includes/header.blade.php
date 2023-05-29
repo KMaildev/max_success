@@ -21,6 +21,9 @@
 
     {{-- DateTimeCss --}}
     <link rel="stylesheet" href="{{ asset('assets/datetime/jquery.datetimepicker.css') }}">
+
+
+    <link rel="stylesheet" href="{{ asset('assets/toastr/toastr.css') }}" />
     <style>
         .invalid-feedback {
             color: red !important;
