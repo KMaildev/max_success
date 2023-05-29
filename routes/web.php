@@ -5,6 +5,7 @@ use App\Http\Controllers\Accounting\AccountingDashboardController;
 use App\Http\Controllers\Accounting\AccountTypeController;
 use App\Http\Controllers\Accounting\ChartofAccountController;
 use App\Http\Controllers\AgentListController;
+use App\Http\Controllers\CashBookController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CountryDashboardController;
@@ -158,4 +159,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('chartofaccount', ChartofAccountController::class);
     Route::get('chartofaccountdependent/ajax/{id}', [ChartofAccountController::class, 'dependentAjax']);
+
+    Route::resource('cashbook', CashBookController::class);
+
 });

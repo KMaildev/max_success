@@ -32,8 +32,8 @@
             </li>
 
 
-            <li class="{{ Route::is('accounting_dashboard.index') ? 'active' : '' }}">
-                <a href="{{ route('accounting_dashboard.index') }}">
+            <li class="{{ Route::is('labour_payment.index') ? 'active' : '' }}">
+                <a href="{{ route('labour_payment.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
                     </svg>
@@ -43,7 +43,7 @@
                 </a>
             </li>
 
-            <li class="{{ Route::is('accounting_dashboard.index') ? 'active' : '' }}">
+            <li class="">
                 <a href="{{ route('accounting_dashboard.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
@@ -54,8 +54,9 @@
                 </a>
             </li>
 
-            <li class="{{ Route::is('accounting_dashboard.index') ? 'active' : '' }}">
-                <a href="{{ route('accounting_dashboard.index') }}">
+
+            <li class="{{ Route::is('cashbook.index') ? 'active' : '' }}">
+                <a href="{{ route('cashbook.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
                     </svg>
@@ -66,7 +67,6 @@
             </li>
 
 
-
             <li class="">
                 <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
                     <svg class="svg-icon">
@@ -75,7 +75,7 @@
                     Tax Report
                 </a>
             </li>
-    
+
             <li class="">
                 <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
                     <svg class="svg-icon">
@@ -84,7 +84,7 @@
                     Balance Sheet
                 </a>
             </li>
-    
+
             <li class="">
                 <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
                     <svg class="svg-icon">
@@ -93,7 +93,7 @@
                     Aged Receivable
                 </a>
             </li>
-    
+
             <li class="">
                 <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
                     <svg class="svg-icon">
@@ -102,7 +102,7 @@
                     Aged Payable
                 </a>
             </li>
-    
+
             <li class="">
                 <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
                     <svg class="svg-icon">
@@ -111,7 +111,7 @@
                     General Ledger
                 </a>
             </li>
-    
+
             <li class="">
                 <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
                     <svg class="svg-icon">
@@ -130,7 +130,7 @@
                     Account Classification
                 </a>
             </li>
-    
+
             <li class="{{ Route::is('accounttype.index') ? 'active' : '' }}">
                 <a href="{{ route('accounttype.index') }}">
                     <svg class="svg-icon">
@@ -139,7 +139,7 @@
                     Account Type
                 </a>
             </li>
-    
+
             <li class="{{ Route::is('chartofaccount.index') ? 'active' : '' }}">
                 <a href="{{ route('chartofaccount.index') }}">
                     <svg class="svg-icon">

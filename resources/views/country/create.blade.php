@@ -62,6 +62,67 @@
 
                     <div class="form-group">
                         <label for="html5-text-input" class="col-md-3 control-label">
+                            GOV Standard Cost
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" name="standard_cost"
+                                value="{{ old('standard_cost') }}">
+                            @error('standard_cost')
+                                <div class="form-control-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+                        <label for="html5-text-input" class="col-md-1 control-label" style="text-align: right;">
+                            MMK
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" name="standard_cost_mmk"
+                                value="{{ old('standard_cost_mmk') }}">
+                            @error('standard_cost_mmk')
+                                <div class="form-control-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
+                            Exchange Rate
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text"
+                                class="form-control @error('exchange_rate') form-control-danger @enderror"
+                                name="exchange_rate">
+                            @error('exchange_rate')
+                                <div class="form-control-feedback" style="color: red;">
+                                    {{ $message }} </div>
+                            @enderror
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
+                            MMK
+                        </label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control @error('total_mmk') form-control-danger @enderror"
+                                name="total_mmk">
+                            @error('total_mmk')
+                                <div class="form-control-feedback" style="color: red;">
+                                    {{ $message }} </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
                             Country Flag / Photo
                             <i class="required">*</i>
                         </label>

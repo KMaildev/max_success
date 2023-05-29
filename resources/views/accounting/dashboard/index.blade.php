@@ -28,7 +28,7 @@
                     </a>
                 </div>
             </div>
-            
+
             <div class="col-md-3 col-xs-6">
                 <div id="customer-count" class="small-box bg-red">
                     <div class="inner">

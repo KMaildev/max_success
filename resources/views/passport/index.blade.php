@@ -62,7 +62,7 @@
                 serverSide: true,
                 ordering: false,
                 fixedHeader: true,
-                scrollY: 500,
+                scrollY: 400,
                 scrollX: true,
                 language: {
                     "processing": "<img src='/loading.gif' style='width:50px'/><p class='my-3'>... Loading ...</p>",
