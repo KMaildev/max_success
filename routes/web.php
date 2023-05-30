@@ -163,5 +163,6 @@ Route::middleware('auth')->group(function () {
     Route::get('chartofaccountdependent/ajax/{id}', [ChartofAccountController::class, 'dependentAjax']);
 
     Route::resource('cashbook', CashBookController::class);
+    Route::get('cashbook_datatable', [CashBookController::class, 'cashbook_datatable'])->name('cashbook_datatable');
 
 });

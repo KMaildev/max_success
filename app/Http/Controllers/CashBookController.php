@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCashBook;
 use App\Models\CashBook;
 use App\Models\ChartofAccount;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class CashBookController extends Controller
 {
@@ -32,12 +33,38 @@ class CashBookController extends Controller
         $cash_book->bank_cash_id = $request->bank_cash_id;
         $cash_book->user_id = auth()->user()->id;
         $cash_book->save();
-        
+
         return response()->json(
             [
                 'message' => 'Cashbook created successfully.',
                 'status' => 200,
             ]
         );
+    }
+
+
+    public function cashbook_datatable(Request $request)
+    {
+        $data = CashBook::orderBy('id', 'DESC');
+
+        return DataTables::of($data)
+            ->addIndexColumn()
+
+            ->addColumn('edit', function ($each) {
+                $edit =
+                    '
+                        <button type="button" class="btn btn-sm btn-block btn-primary"
+                            id="editPassport"
+                            data-id="' . $each->id . '"
+                            >
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </button>
+                    ';
+                return $edit;
+            })
+
+            ->addIndexColumn()
+            ->rawColumns(['edit'])
+            ->make(true);
     }
 }
