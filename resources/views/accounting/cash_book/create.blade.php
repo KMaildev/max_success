@@ -79,9 +79,10 @@
         </select>
     </td>
 
-    <td>
+    <td colspan="2">
         <button type="button" onclick="saveCashBook()" class="btn btn-block btn-primary">
-            <i class="fa fa-fw fa-pencil"></i>
+            <i class="fa fa-save fa-pencil"></i>
         </button>
     </td>
+    
 </form>

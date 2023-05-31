@@ -45,10 +45,23 @@ class CashBookController extends Controller
 
     public function cashbook_datatable(Request $request)
     {
-        $data = CashBook::orderBy('id', 'DESC');
+        $data = CashBook::with('chart_of_account', 'bank_cash')
+            ->orderBy('id', 'DESC');
 
         return DataTables::of($data)
             ->addIndexColumn()
+
+            ->editColumn('chart_of_account', function ($each) {
+                return  $each->chart_of_account ? $each->chart_of_account->coa_number : $each->chart_of_account->coa_number;
+            })
+
+            ->editColumn('account_header', function ($each) {
+                return  $each->chart_of_account ? $each->chart_of_account->description : $each->chart_of_account->description;
+            })
+
+            ->editColumn('bank_cash', function ($each) {
+                return  $each->bank_cash ? $each->bank_cash->coa_number : $each->bank_cash->coa_number;
+            })
 
             ->addColumn('edit', function ($each) {
                 $edit =
@@ -63,8 +76,21 @@ class CashBookController extends Controller
                 return $edit;
             })
 
+            ->addColumn('delete', function ($each) {
+                $delete =
+                    '
+                        <button type="button" class="btn btn-sm btn-block btn-danger"
+                            id="deleteCashBook"
+                            data-id="' . $each->id . '"
+                            >
+                            <i class="fa fa-x fa-pencil"></i>
+                        </button>
+                    ';
+                return $delete;
+            })
+
             ->addIndexColumn()
-            ->rawColumns(['edit'])
+            ->rawColumns(['chart_of_account', 'account_header', 'bank_cash', 'edit', 'delete'])
             ->make(true);
     }
 
@@ -102,6 +128,19 @@ class CashBookController extends Controller
         return response()->json(
             [
                 'message' => 'Cashbook created successfully.',
+                'status' => 200,
+            ]
+        );
+    }
+
+    public function destroy(Request $request)
+    {
+        $id = $request->cash_book_id;
+        $cash_book = CashBook::findOrFail($id);
+        $cash_book->delete();
+        return response()->json(
+            [
+                'message' => 'Cashbook deleted successfully.',
                 'status' => 200,
             ]
         );

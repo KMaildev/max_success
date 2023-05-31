@@ -18,18 +18,6 @@
     </section>
 
     <section class="content">
-        <div class="box box-info collapsed-box">
-            <div class="box-header with-border">
-                <h3 class="box-title">
-                    <span class="fa fa-fw fa-plus"></span>
-                    Add New CashBook
-                </h3>
-                <button type="button" class="btn btn-box-tool add-new-btn" data-widget="collapse" data-collapse="true">
-                    <i class="fa fa-plus"></i>
-                </button>
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-success">
@@ -97,7 +85,11 @@
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
-                                            Actions
+                                            Edit
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Delete
                                         </th>
                                     </tr>
 
@@ -139,8 +131,8 @@
                 ],
 
                 lengthMenu: [
-                    [3, 50, 100, 200, 300, 400, -1],
-                    [3, 50, 100, 200, 300, 400, "All"]
+                    [20, 50, 100, 200, 300, 400, -1],
+                    [20, 50, 100, 200, 300, 400, "All"]
                 ],
 
                 ajax: {
@@ -198,23 +190,28 @@
                     },
 
                     {
-                        data: 'chartof_account_id',
-                        name: 'chartof_account_id',
+                        data: 'chart_of_account',
+                        name: 'chart_of_account',
                     },
 
                     {
-                        data: 'chartof_account_id',
-                        name: 'chartof_account_id',
+                        data: 'account_header',
+                        name: 'account_header',
                     },
 
                     {
-                        data: 'bank_cash_id',
-                        name: 'bank_cash_id',
+                        data: 'bank_cash',
+                        name: 'bank_cash',
                     },
 
                     {
                         data: 'edit',
                         name: 'edit',
+                    },
+
+                    {
+                        data: 'delete',
+                        name: 'delete',
                     },
 
                 ],
@@ -334,7 +331,7 @@
         }
 
 
-        // Edit 
+        // Edit  CashBook
         $('body').on('click', '#editCashBook', function(e) {
             e.preventDefault();
             var cash_book_id = $(this).data('id');
@@ -424,6 +421,36 @@
 
         }
 
+
+        //Delete CashBook
+        $('body').on('click', '#deleteCashBook', function(e) {
+            e.preventDefault();
+            var cash_book_id = $(this).data('id');
+            swal({
+                    title: "Delete Account",
+                    text: "Are you sure you want to delete this account?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "{{ route('cashbook_delete') }}",
+                            method: 'POST',
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                "cash_book_id": cash_book_id,
+                            },
+                            success: function(result) {
+                                toastr.remove()
+                                toastr.success("Your processing has been completed.");
+                                reloadDatatable();
+                            }
+                        });
+                    }
+                });
+        });
 
         function reloadDatatable() {
             $('#cash_books').DataTable().ajax.reload();
