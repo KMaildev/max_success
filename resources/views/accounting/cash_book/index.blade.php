@@ -35,7 +35,7 @@
                 <div class="box box-success">
                     <div class="box-header">
                         <h3 class="box-title">
-                            Country List
+                            CashBook
                         </h3>
                     </div>
                     <div class="box-body">
@@ -100,7 +100,11 @@
                                             Actions
                                         </th>
                                     </tr>
-                                    @include('accounting.cash_book.create')
+
+                                    <tr>
+                                        @include('accounting.cash_book.create')
+                                    </tr>
+
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -110,19 +114,20 @@
                 </div>
             </div>
         </div>
+        @include('accounting.cash_book.edit')
     </section>
 @endsection
 
 @section('script')
     <script>
-        $(function() {
+        $(document).ready(function() {
             var table = $('#cash_books').DataTable({
                 orderCellsTop: true,
                 processing: true,
                 serverSide: true,
                 ordering: false,
                 fixedHeader: true,
-                scrollY: 200,
+                scrollY: 500,
                 scrollX: true,
                 language: {
                     "processing": "<img src='/loading.gif' style='width:50px'/><p class='my-3'>... Loading ...</p>",
@@ -134,8 +139,8 @@
                 ],
 
                 lengthMenu: [
-                    [20, 50, 100, 200, 300, 400, -1],
-                    [20, 50, 100, 200, 300, 400, "All"]
+                    [3, 50, 100, 200, 300, 400, -1],
+                    [3, 50, 100, 200, 300, 400, "All"]
                 ],
 
                 ajax: {
@@ -216,25 +221,7 @@
             });
         });
 
-        // $(document).ready(function() {
-        //     $('#cash_books thead th').each(function() {
-        //         var title = $('#cash_books thead th').eq($(this).index()).text();
-        //     });
-        //     var table = $('#cash_books').DataTable();
-
-        //     table.columns().eq(0).each(function(colIdx) {
-        //         $('input', table.column(colIdx).footer()).on('change', function() {
-        //             table
-        //                 .column(colIdx)
-        //                 .search(this.value)
-        //                 .draw();
-        //         });
-        //     });
-        // });
-    </script>
-
-
-    <script>
+        // Create CashBook 
         document.getElementById("cashBookDate").addEventListener("blur", getCashBookDate)
 
         function getCashBookDate(e) {
@@ -260,77 +247,49 @@
             }
         });
 
-        $(function() {
-            $('#createAccountForm').on('submit', function(e) {
-                e.preventDefault();
-                let cash_book_date = document.getElementsByName("cash_book_date")[0].value;
-                let day = document.getElementsByName("day")[0].value;
-                let month = document.getElementsByName("month")[0].value;
-                let year = document.getElementsByName("year")[0].value;
-                let reference = document.getElementsByName("reference")[0].value;
-                let description = document.getElementsByName("description")[0].value;
-                let income = document.getElementsByName("income")[0].value;
-                let expense = document.getElementsByName("expense")[0].value;
-                let tax = document.getElementsByName("tax")[0].value;
-                let chartof_account_id = document.getElementsByName("chartof_account_id")[0].value;
-                let bank_cash_id = document.getElementsByName("bank_cash_id")[0].value;
+        function saveCashBook() {
+            var cash_book_date = document.getElementsByName("cash_book_date")[0].value;
+            var day = document.getElementsByName("day")[0].value;
+            var month = document.getElementsByName("month")[0].value;
+            var year = document.getElementsByName("year")[0].value;
+            var reference = document.getElementsByName("reference")[0].value;
+            var description = document.getElementsByName("description")[0].value;
+            var income = document.getElementsByName("income")[0].value;
+            var expense = document.getElementsByName("expense")[0].value;
+            var tax = document.getElementsByName("tax")[0].value;
+            var chartof_account_id = document.getElementsByName("chartof_account_id")[0].value;
+            var bank_cash_id = document.getElementsByName("bank_cash_id")[0].value;
 
-                $.ajax({
-                    url: "{{ route('cashbook.store') }}",
-                    type: 'POST',
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "cash_book_date": cash_book_date,
-                        "day": day,
-                        "month": month,
-                        "year": year,
-                        "reference": reference,
-                        "description": description,
-                        "income": income,
-                        "expense": expense,
-                        "tax": tax,
-                        "chartof_account_id": chartof_account_id,
-                        "bank_cash_id": bank_cash_id,
-                    },
-                    success: function(response) {
-                        document.getElementsByName("cash_book_date")[0].value = '';
-                        document.getElementsByName("day")[0].value = '';
-                        document.getElementsByName("month")[0].value = '';
-                        document.getElementsByName("year")[0].value = '';
-                        document.getElementsByName("reference")[0].value = '';
-                        document.getElementsByName("description")[0].value = '';
-                        document.getElementsByName("income")[0].value = '';
-                        document.getElementsByName("expense")[0].value = '';
-                        document.getElementsByName("tax")[0].value = '';
-                        document.getElementsByName(
-                            "chartof_account_id")[0].value = '';
-                        document.getElementsByName("bank_cash_id")[0].value = '';
+            if (cash_book_date === '' || cash_book_date === null) {
+                toastr.remove()
+                toastr.error("Cashbook is required");
+                return false;
+            } else if (reference === '' || reference === null) {
+                toastr.remove()
+                toastr.error("Reference no is required");
+                return false;
+            } else if (income === '' || income === null || isNaN(income)) {
+                toastr.remove()
+                toastr.error("Income Numeric value only.");
+                return false;
+            } else if (expense === '' || expense === null || isNaN(expense)) {
+                toastr.remove()
+                toastr.error("Expense Numeric value only.");
+                return false;
+            } else if (tax === '' || tax === null || isNaN(tax)) {
+                toastr.remove()
+                toastr.error("Expense Numeric value only.");
+                return false;
+            } else if (chartof_account_id === '' || chartof_account_id === null) {
+                toastr.remove()
+                toastr.error("Chart of Account is required");
+                return false;
+            } else if (bank_cash_id === '' || bank_cash_id === null) {
+                toastr.remove()
+                toastr.error("Bank & Cash	 is required");
+                return false;
+            }
 
-
-                        toastr.remove()
-                        toastr.success("Your processing has been completed.");
-                    },
-                    error: function(xhr) {
-                        console.log(xhr.responseText)
-                        toastr.remove()
-                        toastr.error("Error occurred.");
-                    }
-                });
-            });
-        });
-
-        function save() {
-            let cash_book_date = document.getElementsByName("cash_book_date")[0].value;
-            let day = document.getElementsByName("day")[0].value;
-            let month = document.getElementsByName("month")[0].value;
-            let year = document.getElementsByName("year")[0].value;
-            let reference = document.getElementsByName("reference")[0].value;
-            let description = document.getElementsByName("description")[0].value;
-            let income = document.getElementsByName("income")[0].value;
-            let expense = document.getElementsByName("expense")[0].value;
-            let tax = document.getElementsByName("tax")[0].value;
-            let chartof_account_id = document.getElementsByName("chartof_account_id")[0].value;
-            let bank_cash_id = document.getElementsByName("bank_cash_id")[0].value;
             $.ajax({
                 url: "{{ route('cashbook.store') }}",
                 type: 'POST',
@@ -362,7 +321,7 @@
                         "chartof_account_id")[0].value = '';
                     document.getElementsByName("bank_cash_id")[0].value = '';
 
-
+                    reloadDatatable();
                     toastr.remove()
                     toastr.success("Your processing has been completed.");
                 },
@@ -372,6 +331,102 @@
                     toastr.error("Error occurred.");
                 }
             });
+        }
+
+
+        // Edit 
+        $('body').on('click', '#editCashBook', function(e) {
+            e.preventDefault();
+            var cash_book_id = $(this).data('id');
+            $.ajax({
+                url: `cashbook_edit/${cash_book_id}`,
+                method: 'GET',
+                success: function(result) {
+                    $('#editCashBookModel').modal('show');
+                    $('#showEditForm').html(result.html);
+                }
+            });
+        });
+
+        function updateCashBook() {
+            var cash_book_date = document.getElementsByName("cash_book_date_edit")[0].value;
+            var day = document.getElementsByName("day_edit")[0].value;
+            var month = document.getElementsByName("month_edit")[0].value;
+            var year = document.getElementsByName("year_edit")[0].value;
+            var reference = document.getElementsByName("reference_edit")[0].value;
+            var description = document.getElementsByName("description_edit")[0].value;
+            var income = document.getElementsByName("income_edit")[0].value;
+            var expense = document.getElementsByName("expense_edit")[0].value;
+            var tax = document.getElementsByName("tax_edit")[0].value;
+            var chartof_account_id = document.getElementsByName("chartof_account_id_edit")[0].value;
+            var bank_cash_id = document.getElementsByName("bank_cash_id_edit")[0].value;
+            var cash_book_id = document.getElementsByName("cash_book_id")[0].value;
+
+            if (cash_book_date === '' || cash_book_date === null) {
+                toastr.remove()
+                toastr.error("Cashbook is required");
+                return false;
+            } else if (reference === '' || reference === null) {
+                toastr.remove()
+                toastr.error("Reference no is required");
+                return false;
+            } else if (income === '' || income === null || isNaN(income)) {
+                toastr.remove()
+                toastr.error("Income Numeric value only.");
+                return false;
+            } else if (expense === '' || expense === null || isNaN(expense)) {
+                toastr.remove()
+                toastr.error("Expense Numeric value only.");
+                return false;
+            } else if (tax === '' || tax === null || isNaN(tax)) {
+                toastr.remove()
+                toastr.error("Expense Numeric value only.");
+                return false;
+            } else if (chartof_account_id === '' || chartof_account_id === null) {
+                toastr.remove()
+                toastr.error("Chart of Account is required");
+                return false;
+            } else if (bank_cash_id === '' || bank_cash_id === null) {
+                toastr.remove()
+                toastr.error("Bank & Cash	 is required");
+                return false;
+            }
+
+            $.ajax({
+                url: "{{ route('cashbook_update') }}",
+                type: 'POST',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "cash_book_date": cash_book_date,
+                    "day": day,
+                    "month": month,
+                    "year": year,
+                    "reference": reference,
+                    "description": description,
+                    "income": income,
+                    "expense": expense,
+                    "tax": tax,
+                    "chartof_account_id": chartof_account_id,
+                    "bank_cash_id": bank_cash_id,
+                    "cash_book_id": cash_book_id,
+                },
+                success: function(response) {
+                    reloadDatatable();
+                    toastr.remove()
+                    toastr.success("Your processing has been completed.");
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText)
+                    toastr.remove()
+                    toastr.error("Error occurred.");
+                }
+            });
+
+        }
+
+
+        function reloadDatatable() {
+            $('#cash_books').DataTable().ajax.reload();
         }
     </script>
 @endsection

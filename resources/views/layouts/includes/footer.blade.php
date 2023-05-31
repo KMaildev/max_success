@@ -47,6 +47,11 @@
         $('.select2').select2({
             theme: "classic",
         });
+
+
+        $('.select3').select2({
+            theme: "classic",
+        });
     });
 </script>
 

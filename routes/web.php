@@ -164,5 +164,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('cashbook', CashBookController::class);
     Route::get('cashbook_datatable', [CashBookController::class, 'cashbook_datatable'])->name('cashbook_datatable');
+    Route::get('cashbook_edit/{id}', [CashBookController::class, 'edit'])->name('cashbook_edit');
+    Route::post('cashbook_update', [CashBookController::class, 'update'])->name('cashbook_update');
 
 });
