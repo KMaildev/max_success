@@ -111,6 +111,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('labour_payment', LabourPaymentController::class);
     Route::get('labour_payment_files/{id}', [LabourPaymentController::class, 'labourPaymentFiles'])->name('labour_payment_files');
     Route::post('labour_payment_file_upload', [LabourPaymentController::class, 'labourPaymentFileUpload'])->name('labour_payment_file_upload');
+    Route::get('get_labour_payment_datatable', [LabourPaymentController::class, 'labourPaymentDatatable'])->name('get_labour_payment_datatable');
+
 
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
@@ -167,5 +169,4 @@ Route::middleware('auth')->group(function () {
     Route::get('cashbook_edit/{id}', [CashBookController::class, 'edit'])->name('cashbook_edit');
     Route::post('cashbook_update', [CashBookController::class, 'update'])->name('cashbook_update');
     Route::post('cashbook_delete', [CashBookController::class, 'destroy'])->name('cashbook_delete');
-
 });

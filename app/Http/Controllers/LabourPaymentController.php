@@ -7,6 +7,7 @@ use App\Models\Passport;
 use App\Models\PassportPayment;
 use App\Models\PassportPaymentFile;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class LabourPaymentController extends Controller
 {
@@ -17,27 +18,7 @@ class LabourPaymentController extends Controller
      */
     public function index()
     {
-        $payments = PassportPayment::paginate(100);
-
-        if (request('from_date') && request('to_date')) {
-            $payments = PassportPayment::whereBetween('deposit_date', [request('from_date'), request('to_date')])
-                ->paginate(100);
-        }
-
-        if (request('search')) {
-            $payments = PassportPayment::whereHas('passport_table', function ($query) {
-                $query->where('name', 'Like', '%' . request('search') . '%');
-                $query->orWhere('father_name', 'Like', '%' . request('search') . '%');
-                $query->orWhere('nrc', 'Like', '%' . request('search') . '%');
-                $query->orWhere('date_of_birth', 'Like', '%' . request('search') . '%');
-                $query->orWhere('passport', 'Like', '%' . request('search') . '%');
-                $query->orWhere('address', 'Like', '%' . request('search') . '%');
-                $query->orWhere('remark', 'Like', '%' . request('search') . '%');
-                $query->orWhere('phone', 'Like', '%' . request('search') . '%');
-            })->get();
-        }
-
-        return view('labour_payment.index', compact('payments'));
+        return view('labour_payment.index');
     }
 
     /**
@@ -135,5 +116,53 @@ class LabourPaymentController extends Controller
         $passport = PassportPaymentFile::findOrFail($id);
         $passport->delete();
         return redirect()->back()->with('success', 'Deleted successfully.');
+    }
+
+
+    public function labourPaymentDatatable(Request $request)
+    {
+        $data = PassportPayment::with('passport_table')
+            ->orderBy('id', 'DESC');
+
+        return DataTables::of($data)
+
+            ->addIndexColumn()
+
+            ->editColumn('name', function ($each) {
+                return  $each->passport_table ? $each->passport_table->name : $each->name;
+            })
+
+            ->editColumn('nrc', function ($each) {
+                return  $each->passport_table ? $each->passport_table->nrc : $each->nrc;
+            })
+
+            ->editColumn('passport', function ($each) {
+                return  $each->passport_table ? $each->passport_table->passport : $each->passport;
+            })
+
+            ->editColumn('gender', function ($each) {
+                return  $each->passport_table ? $each->passport_table->gender : $each->gender;
+            })
+
+            ->editColumn('address', function ($each) {
+                return  $each->passport_table ? $each->passport_table->address : $each->address;
+            })
+
+            ->addColumn('edit', function ($each) {
+                $edit =
+                    '
+                    <button type="button" class="btn btn-sm btn-block btn-primary"
+                        id="editPassport"
+                        data-id="' . $each->id . '"
+                        >
+                        <i class="fa fa-fw fa-pencil"></i>
+                    </button>
+                ';
+                return $edit;
+            })
+
+            ->addIndexColumn()
+            ->rawColumns(['name', 'nrc', 'passport', 'gender', 'edit'])
+            ->make(true);
     }
 }
