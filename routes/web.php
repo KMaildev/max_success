@@ -109,6 +109,8 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('labour_payment', LabourPaymentController::class);
+    Route::get('labour_payment_show/{id}', [LabourPaymentController::class, 'show'])->name('labour_payment_show');
+
     Route::get('labour_payment_files/{id}', [LabourPaymentController::class, 'labourPaymentFiles'])->name('labour_payment_files');
     Route::post('labour_payment_file_upload', [LabourPaymentController::class, 'labourPaymentFileUpload'])->name('labour_payment_file_upload');
     Route::get('get_labour_payment_datatable', [LabourPaymentController::class, 'labourPaymentDatatable'])->name('get_labour_payment_datatable');

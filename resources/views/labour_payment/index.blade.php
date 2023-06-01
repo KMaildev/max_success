@@ -1,5 +1,15 @@
 @extends('layouts.based.accounting_main')
 @section('content')
+    <style>
+        .dataTables_filter {
+            display: none;
+        }
+
+        tfoot {
+            display: table-header-group !important;
+        }
+    </style>
+
     <section class="content-header">
         <h1>
             Labour Payment
@@ -39,10 +49,9 @@
 
                     <div class="box-body">
                         <div class="table-responsive">
-                            <table id="labour_payments" class="table table-bordered table-striped table-hover"
-                                data-hide-colums="">
+                            <table id="labour_payments" class="table table-bordered table-striped table-hover">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-gray">
                                         <th class="text-center text-white w-5" style="width: 1%;">
                                             #
                                         </th>
@@ -70,9 +79,53 @@
                                         <th class="text-center text-white w-5" style="width: 10%;">
                                             Total Amount
                                         </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Actions
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>
+                                            <input class="form-control" type="hidden" data-colum="0">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="text" style="width: 150px;" data-colum="1"
+                                                placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="text" style="width: 150px;" data-colum="2"
+                                                placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="text" style="width: 150px;" data-colum="3"
+                                                placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="text" style="width: 150px;" data-colum="4"
+                                                placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="text" style="width: 150px;" data-colum="5"
+                                                placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input type="hidden" style="width: 150px;" data-colum="6">
+                                        </th>
+
+                                        <th>
+                                            <input type="hidden" style="width: 150px;" data-colum="7">
+                                        </th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -90,7 +143,7 @@
                 serverSide: true,
                 ordering: false,
                 fixedHeader: true,
-                scrollY: 500,
+                scrollY: 400,
                 scrollX: true,
                 language: {
                     "processing": "<img src='/loading.gif' style='width:50px'/><p class='my-3'>... Loading ...</p>",
@@ -118,33 +171,60 @@
                     {
                         data: 'name',
                         name: 'name',
+                        class: 'text-center'
                     },
 
                     {
                         data: 'nrc',
                         name: 'nrc',
+                        class: 'text-center'
                     },
 
                     {
                         data: 'passport',
                         name: 'passport',
+                        class: 'text-center'
                     },
 
                     {
                         data: 'gender',
                         name: 'gender',
+                        class: 'text-center'
                     },
 
                     {
                         data: 'address',
                         name: 'address',
+                        class: 'text-center'
                     },
 
                     {
-                        data: 'deposit',
-                        name: 'deposit',
+                        data: 'total_deposit',
+                        name: 'total_deposit',
+                        class: 'text-center'
+                    },
+
+                    {
+                        data: 'history',
+                        name: 'history',
                     },
                 ],
+            });
+        });
+
+        $(document).ready(function() {
+            $('#labour_payments thead th').each(function() {
+                var title = $('#labour_payments thead th').eq($(this).index()).text();
+            });
+            var table = $('#labour_payments').DataTable();
+
+            table.columns().eq(0).each(function(colIdx) {
+                $('input', table.column(colIdx).footer()).on('change', function() {
+                    table
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+                });
             });
         });
     </script>

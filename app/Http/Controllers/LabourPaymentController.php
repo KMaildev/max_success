@@ -7,6 +7,7 @@ use App\Models\Passport;
 use App\Models\PassportPayment;
 use App\Models\PassportPaymentFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class LabourPaymentController extends Controller
@@ -121,7 +122,9 @@ class LabourPaymentController extends Controller
 
     public function labourPaymentDatatable(Request $request)
     {
-        $data = PassportPayment::with('passport_table')
+
+        $data = PassportPayment::groupBy('passport_id')
+            ->selectRaw('*, sum(deposit) as total_deposit')
             ->orderBy('id', 'DESC');
 
         return DataTables::of($data)
@@ -132,37 +135,75 @@ class LabourPaymentController extends Controller
                 return  $each->passport_table ? $each->passport_table->name : $each->name;
             })
 
+            ->filterColumn('name', function ($query, $keyword) {
+                $query->whereHas('passport_table', function ($q1) use ($keyword) {
+                    $q1->where('name', 'like', '%' . $keyword . '%');
+                });
+            })
+
             ->editColumn('nrc', function ($each) {
                 return  $each->passport_table ? $each->passport_table->nrc : $each->nrc;
+            })
+
+            ->filterColumn('nrc', function ($query, $keyword) {
+                $query->whereHas('passport_table', function ($q1) use ($keyword) {
+                    $q1->where('nrc', 'like', '%' . $keyword . '%');
+                });
             })
 
             ->editColumn('passport', function ($each) {
                 return  $each->passport_table ? $each->passport_table->passport : $each->passport;
             })
 
+            ->filterColumn('passport', function ($query, $keyword) {
+                $query->whereHas('passport_table', function ($q1) use ($keyword) {
+                    $q1->where('passport', 'like', '%' . $keyword . '%');
+                });
+            })
+
             ->editColumn('gender', function ($each) {
                 return  $each->passport_table ? $each->passport_table->gender : $each->gender;
+            })
+
+            ->filterColumn('gender', function ($query, $keyword) {
+                $query->whereHas('passport_table', function ($q1) use ($keyword) {
+                    $q1->where('gender', 'like', '%' . $keyword . '%');
+                });
             })
 
             ->editColumn('address', function ($each) {
                 return  $each->passport_table ? $each->passport_table->address : $each->address;
             })
 
-            ->addColumn('edit', function ($each) {
-                $edit =
+            ->filterColumn('address', function ($query, $keyword) {
+                $query->whereHas('passport_table', function ($q1) use ($keyword) {
+                    $q1->where('address', 'like', '%' . $keyword . '%');
+                });
+            })
+
+            ->editColumn('total_deposit', function ($each) {
+                return  number_format($each->total_deposit, 2);
+            })
+
+            ->addColumn('history', function ($each) {
+                $payment_detail = route('labour_payment_show', ['id' => $each->passport_id]);
+                $history =
                     '
-                    <button type="button" class="btn btn-sm btn-block btn-primary"
-                        id="editPassport"
-                        data-id="' . $each->id . '"
-                        >
-                        <i class="fa fa-fw fa-pencil"></i>
-                    </button>
+                    <a href="' . $payment_detail . '" class="btn btn-sm btn-block btn-primary">
+                        History
+                    </a>
                 ';
-                return $edit;
+                return $history;
             })
 
             ->addIndexColumn()
-            ->rawColumns(['name', 'nrc', 'passport', 'gender', 'edit'])
+            ->rawColumns(['name', 'nrc', 'passport', 'gender', 'total_deposit', 'history'])
             ->make(true);
+    }
+
+    public function show($id)
+    {
+        $payments = PassportPayment::where('passport_id', $id)->get();
+        return view('labour_payment.show', compact('payments'));
     }
 }
