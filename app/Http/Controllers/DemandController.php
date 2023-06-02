@@ -42,7 +42,7 @@ class DemandController extends Controller
                 ->paginate(100);
         }
 
-        
+
         return view('demand.index', compact('demands', 'overseas_agencies', 'offices', 'countryies'));
     }
 
@@ -127,5 +127,14 @@ class DemandController extends Controller
     public function demandExportExcel(Request $request)
     {
         return Excel::download(new DemandExport(), 'excel_' . date("Y-m-d H:i:s") . '.xlsx');
+    }
+
+
+    public function getDemandByOverseasAgencyId($id)
+    {
+        $demands = Demand::with('overseas_agencies_table')
+            ->where('overseas_agencie_id', $id)
+            ->get();
+        return json_encode($demands);
     }
 }

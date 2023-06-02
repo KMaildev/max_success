@@ -55,10 +55,7 @@
                                         <th class="text-center text-white w-5" style="width: 10%">
                                             Total
                                         </th>
-
-                                        <th class="text-center text-white w-5" style="width: 10%">
-                                            Action
-                                        </th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,10 +94,6 @@
 
                                             <td style="text-align: right">
                                                 {{ number_format($payment->deposit, 2) }}
-                                            </td>
-
-                                            <td>
-
                                             </td>
                                         </tr>
                                     @endforeach

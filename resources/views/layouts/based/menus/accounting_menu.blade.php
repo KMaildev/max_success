@@ -43,8 +43,8 @@
                 </a>
             </li>
 
-            <li class="">
-                <a href="{{ route('accounting_dashboard.index') }}">
+            <li class="{{ Route::is('demand_invoice.index') ? 'active' : '' }}">
+                <a href="{{ route('demand_invoice.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
                     </svg>

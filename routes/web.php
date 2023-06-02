@@ -4,6 +4,7 @@ use App\Http\Controllers\Accounting\AccountClassificationController;
 use App\Http\Controllers\Accounting\AccountingDashboardController;
 use App\Http\Controllers\Accounting\AccountTypeController;
 use App\Http\Controllers\Accounting\ChartofAccountController;
+use App\Http\Controllers\Accounting\DemandInvoiceController;
 use App\Http\Controllers\AgentListController;
 use App\Http\Controllers\CashBookController;
 use App\Http\Controllers\ContractController;
@@ -72,6 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('demand', DemandController::class);
     Route::get('demand_ajax/{id}', [DemandController::class, 'demandAjax'])->name('demand_ajax');
     Route::get('demand_export_excel', [DemandController::class, 'demandExportExcel'])->name('demand_export_excel');
+    Route::get('demand_by_overseas_agency_id/{id}', [DemandController::class, 'getDemandByOverseasAgencyId'])->name('demand_by_overseas_agency_id');
 
 
     Route::resource('contract', ContractController::class);
@@ -171,4 +173,7 @@ Route::middleware('auth')->group(function () {
     Route::get('cashbook_edit/{id}', [CashBookController::class, 'edit'])->name('cashbook_edit');
     Route::post('cashbook_update', [CashBookController::class, 'update'])->name('cashbook_update');
     Route::post('cashbook_delete', [CashBookController::class, 'destroy'])->name('cashbook_delete');
+
+    Route::resource('demand_invoice', DemandInvoiceController::class);
+
 });
