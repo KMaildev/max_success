@@ -22,19 +22,25 @@
             <div class="col-xs-12">
                 <div class="box box-success">
                     <div class="box-body">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
 
-                            <form action="{{ route('labour_payment.store') }}" method="POST" autocomplete="off"
+                            <form action="{{ route('demand_invoice.store') }}" method="POST" autocomplete="off"
                                 id="create-form" role="form" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
-                                        Payment Date
+                                        Submit Date
                                     </label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control date_picker" name="deposit_date"
-                                            value="{{ old('deposit_date') }}">
+                                        <input type="text" class="form-control date_picker" name="submit_date"
+                                            value="{{ old('submit_date') }}">
+
+                                        @error('submit_date')
+                                            <div class="form-control-feedback" style="color: red;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -55,11 +61,6 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                        @error('overseas_agencie_id')
-                                            <div class="form-control-feedback" style="color: red;">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
                                     </div>
                                 </div>
 
@@ -70,7 +71,7 @@
                                     </label>
                                     <div class="col-md-9">
                                         <select onchange="getDemandById(this.value)" id="demand_id"
-                                            class="form-control form-select select2">
+                                            class="form-control form-select select2" name="demand_id">
                                             <option value="">Select an option</option>
                                         </select>
                                     </div>
@@ -81,7 +82,7 @@
                                         Job
                                     </label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" id="Job">
+                                        <input type="text" class="form-control" id="Job" readonly>
                                     </div>
                                 </div>
 
@@ -90,7 +91,16 @@
                                         Salary
                                     </label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" id="Salary">
+                                        <input type="text" class="form-control" id="Salary" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 control-labe">
+                                        Country
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="Country" readonly>
                                     </div>
                                 </div>
 
@@ -140,7 +150,7 @@
                                                 Amount
                                             </span>
                                             <input type="text" class="form-control" id="Amount"
-                                                oninput="CalcBalance()">
+                                                oninput="CalcBalance()" value="0" name="amount">
                                         </div>
                                     </div>
 
@@ -149,7 +159,8 @@
                                             <span class="input-group-addon" id="basic-addon2">
                                                 Labour
                                             </span>
-                                            <input type="text" class="form-control" id="TotalLabour">
+                                            <input type="text" class="form-control" id="TotalLabour"
+                                                name="total_labour">
                                         </div>
                                     </div>
 
@@ -163,6 +174,16 @@
                                     </div>
                                 </div>
 
+
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 control-labe">
+                                        Remark
+                                    </label>
+                                    <div class="col-md-9">
+                                        <textarea name="remark" id="" cols="10" rows="5" class="form-control"></textarea>
+                                        <br>
+                                    </div>
+                                </div>
 
                                 <div class="form-group" style="padding: 17px;">
                                     <label class="col-sm-3 control-label"></label>
@@ -183,7 +204,7 @@
     </section>
 @endsection
 @section('script')
-    {!! JsValidator::formRequest('App\Http\Requests\StoreLabourPayment', '#create-form') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\StoreDemandInvoice', '#create-form') !!}
     <script>
         function getDemand(overseas_agencie_id) {
             $.ajax({
@@ -197,19 +218,19 @@
 
                     if (response.length > 0) {
                         // Add options to the select element
-                        select.append($('<option disabled selected>').text('--Select Demand Number--'));
+                        select.append($('<option selected value="">').text('--Select Demand Number--'));
                         $.each(response, function(index, option) {
                             var company_name = option.demand_number;
                             select.append($('<option>').val(option.id).text(company_name));
                         });
                     } else {
-                        select.append($('<option disabled selected>').text('Data not found'));
+                        select.append($('<option selected value="">').text('Data not found'));
                     }
                 },
                 error: function(xhr, status, error) {
                     var select = $('#demand_id');
                     select.empty(); // Clear existing options
-                    select.append($('<option disabled selected>').text('Error fetching data'));
+                    select.append($('<option selected> value=""').text('Error fetching data'));
                 }
             });
         }
@@ -226,6 +247,9 @@
                     document.getElementById('Female').value = data.female;
                     document.getElementById('Total').value = +data.male + +data.female;
                     document.getElementById('TotalLabour').value = +data.male + +data.female;
+                    document.getElementById('Country').value = data.country.title;
+
+                    CalcBalance();
                 },
                 error: function() {
 

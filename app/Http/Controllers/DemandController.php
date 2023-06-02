@@ -119,7 +119,8 @@ class DemandController extends Controller
 
     public function demandAjax($id)
     {
-        $demand = Demand::findOrFail($id);
+        $demand = Demand::with('country')
+            ->findOrFail($id);
         return json_encode($demand);
     }
 
