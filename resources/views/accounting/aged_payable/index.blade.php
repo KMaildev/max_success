@@ -6,7 +6,7 @@
                 <div class="box box-success">
                     <div class="box-header">
                         <h3 class="box-title">
-                            Aged Receivable
+                            Aged Payable
                         </h3>
                     </div>
 
@@ -16,31 +16,18 @@
                                 <thead class="tbbg">
                                     <tr class="bg-gray">
                                         <th class="text-white w-5" style="width: 1%;">#</th>
-
                                         <th class="text-white w-5">
-                                            Name
+                                            Company Name
                                         </th>
-
                                         <th class="text-white w-5">
-                                            Passport
+                                            Total Payable Amount
                                         </th>
-
-                                        <th class="text-white w-5">
-                                            Country
-                                        </th>
-
-                                        <th class="text-white w-5">
-                                            Total Receivable Amount
-                                        </th>
-
                                         <th class="text-white w-5">
                                             Total Paid Amount
                                         </th>
-
                                         <th class="text-white w-5">
                                             Total Remaining Amount
                                         </th>
-
                                         <th class="text-white w-5">
                                             Actions
                                         </th>
@@ -51,65 +38,56 @@
                                         $all_pay_amount = [];
                                         $all_remaining_amount = [];
                                     @endphp
-                                    @foreach ($passports as $key => $passport)
+                                    @foreach ($demand_invoices as $key => $demand_invoice)
                                         <tr>
-                                            <td class="text-center">
+                                            <td>
                                                 {{ $key + 1 }}
                                             </td>
 
-                                            <td class="text-center">
-                                                {{ $passport->name ?? '' }}
-                                            </td>
-
-                                            <td class="text-center">
-                                                {{ $passport->passport ?? '' }}
-                                            </td>
-
-                                            <td class="text-center">
-                                                {{ $passport->selected_country ?? '' }}
+                                            <td>
+                                                {{ $demand_invoice->overseas_agencies->company_name ?? '' }}
                                             </td>
 
                                             <td style="text-align: right">
                                                 @php
-                                                    $total_receivable = $passport->total_amount_mmk ?? 0;
-                                                    echo number_format($total_receivable, 2);
+                                                    $total_amount = $demand_invoice->total_amount ?? 0;
+                                                    echo number_format($total_amount, 2);
                                                 @endphp
                                             </td>
 
                                             <td style="text-align: right">
                                                 @php
-                                                    $total_pay_amount = $passport->passport_payments_table->sum('deposit');
+                                                    $total_pay_amount = $demand_invoice->cash_books->sum('expense');
                                                     echo number_format($total_pay_amount, 2);
                                                     $all_pay_amount[] = $total_pay_amount;
                                                 @endphp
                                             </td>
 
+                                            {{-- Remaining Amount --}}
                                             <td style="text-align: right">
                                                 @php
-                                                    $remaining_amount = $total_receivable - $total_pay_amount;
+                                                    $remaining_amount = $total_amount - $total_pay_amount;
                                                     echo number_format($remaining_amount, 2);
                                                     $all_remaining_amount[] = $remaining_amount;
                                                 @endphp
                                             </td>
-
+                                            
                                             <td class="text-center">
-                                                <a href="{{ route('labour_payment.show', $passport->id) }}"
-                                                    class="btn btn-sm btn-block btn-primary">
+                                                <a href="">
                                                     Detail
                                                 </a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
-
                                 <tr>
-                                    <td colspan="4">
+                                    <td colspan="2">
                                         Total
                                     </td>
 
                                     <td style="text-align: right">
                                         @php
-                                            $all_total_amount = $passport->sum('total_amount_mmk');
+                                            $all_total_amount = $demand_invoices->sum('total_amount');
                                             echo number_format($all_total_amount, 2);
                                         @endphp
                                     </td>
@@ -128,7 +106,6 @@
                                         @endphp
                                     </td>
                                 </tr>
-
                             </table>
                         </div>
                     </div>
