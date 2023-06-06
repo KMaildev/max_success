@@ -85,8 +85,8 @@
                 </a>
             </li>
 
-            <li class="">
-                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
+            <li class="{{ Route::is('aged_receivable.index') ? 'active' : '' }}">
+                <a href="{{ route('aged_receivable.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-plus"></use>
                     </svg>

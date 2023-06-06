@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCashBook;
 use App\Models\CashBook;
 use App\Models\ChartofAccount;
+use App\Models\DemandInvoice;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -13,7 +14,8 @@ class CashBookController extends Controller
     public function index()
     {
         $chartof_accounts = ChartofAccount::all();
-        return view('accounting.cash_book.index', compact('chartof_accounts'));
+        $demand_invoices = DemandInvoice::all();
+        return view('accounting.cash_book.index', compact('chartof_accounts', 'demand_invoices'));
     }
 
 
@@ -31,7 +33,8 @@ class CashBookController extends Controller
         $cash_book->tax = $request->tax;
         $cash_book->chartof_account_id = $request->chartof_account_id;
         $cash_book->bank_cash_id = $request->bank_cash_id;
-        $cash_book->user_id = auth()->user()->id;
+        $cash_book->bank_cash_id = $request->bank_cash_id;
+        $cash_book->demand_invoice_id = $request->demand_invoice_id ?? NULL;
         $cash_book->save();
 
         return response()->json(
@@ -45,7 +48,7 @@ class CashBookController extends Controller
 
     public function cashbook_datatable(Request $request)
     {
-        $data = CashBook::with('chart_of_account', 'bank_cash')
+        $data = CashBook::with('chart_of_account', 'bank_cash', 'demand_invoice')
             ->orderBy('id', 'DESC');
 
         return DataTables::of($data)
@@ -61,6 +64,10 @@ class CashBookController extends Controller
 
             ->editColumn('bank_cash', function ($each) {
                 return  $each->bank_cash ? $each->bank_cash->coa_number : $each->bank_cash->coa_number;
+            })
+
+            ->editColumn('demand_invoice', function ($each) {
+                return  $each->demand_invoice ? $each->demand_invoice->invoice_no : '';
             })
 
             ->addColumn('edit', function ($each) {
@@ -90,7 +97,7 @@ class CashBookController extends Controller
             })
 
             ->addIndexColumn()
-            ->rawColumns(['chart_of_account', 'account_header', 'bank_cash', 'edit', 'delete'])
+            ->rawColumns(['chart_of_account', 'account_header', 'bank_cash', 'demand_invoice', 'edit', 'delete'])
             ->make(true);
     }
 
@@ -99,9 +106,10 @@ class CashBookController extends Controller
     {
         $cash_book = CashBook::findOrFail($id);
         $chartof_accounts = ChartofAccount::all();
+        $demand_invoices = DemandInvoice::all();
 
         return response()->json([
-            'html' => view('accounting.cash_book.edit_form', compact('cash_book', 'chartof_accounts'))
+            'html' => view('accounting.cash_book.edit_form', compact('cash_book', 'chartof_accounts', 'demand_invoices'))
                 ->render()
         ]);
     }
@@ -123,6 +131,7 @@ class CashBookController extends Controller
         $cash_book->chartof_account_id = $request->chartof_account_id;
         $cash_book->bank_cash_id = $request->bank_cash_id;
         $cash_book->user_id = auth()->user()->id;
+        $cash_book->demand_invoice_id = $request->demand_invoice_id ?? NULL;
         $cash_book->update();
 
         return response()->json(

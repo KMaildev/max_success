@@ -149,12 +149,6 @@ class DemandInvoiceController extends Controller
                                     Edit
                                 </a>
                             </li>
-
-                            <li>
-                                <a href="' . $show_route . '">
-                                    Detail
-                                </a>
-                            </li>
                         </ul>
                     </div>
                     ';

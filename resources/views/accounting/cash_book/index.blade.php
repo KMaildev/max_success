@@ -57,6 +57,10 @@
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
+                                            Demand Invoice
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
                                             Description
                                         </th>
 
@@ -119,7 +123,7 @@
                 serverSide: true,
                 ordering: false,
                 fixedHeader: true,
-                scrollY: 500,
+                scrollY: 350,
                 scrollX: true,
                 language: {
                     "processing": "<img src='/loading.gif' style='width:50px'/><p class='my-3'>... Loading ...</p>",
@@ -167,6 +171,11 @@
                     {
                         data: 'reference',
                         name: 'reference',
+                    },
+
+                    {
+                        data: 'demand_invoice',
+                        name: 'demand_invoice',
                     },
 
                     {
@@ -256,6 +265,8 @@
             var tax = document.getElementsByName("tax")[0].value;
             var chartof_account_id = document.getElementsByName("chartof_account_id")[0].value;
             var bank_cash_id = document.getElementsByName("bank_cash_id")[0].value;
+            var demand_invoice_id = document.getElementsByName("demand_invoice_id")[0].value;
+
 
             if (cash_book_date === '' || cash_book_date === null) {
                 toastr.remove()
@@ -303,6 +314,7 @@
                     "tax": tax,
                     "chartof_account_id": chartof_account_id,
                     "bank_cash_id": bank_cash_id,
+                    "demand_invoice_id": demand_invoice_id,
                 },
                 success: function(response) {
                     document.getElementsByName("cash_book_date")[0].value = '';
@@ -317,6 +329,7 @@
                     document.getElementsByName(
                         "chartof_account_id")[0].value = '';
                     document.getElementsByName("bank_cash_id")[0].value = '';
+                    document.getElementsByName("demand_invoice_id")[0].value = '';
 
                     reloadDatatable();
                     toastr.remove()
@@ -358,6 +371,7 @@
             var chartof_account_id = document.getElementsByName("chartof_account_id_edit")[0].value;
             var bank_cash_id = document.getElementsByName("bank_cash_id_edit")[0].value;
             var cash_book_id = document.getElementsByName("cash_book_id")[0].value;
+            var demand_invoice_id = document.getElementsByName("demand_invoice_id_edit")[0].value;
 
             if (cash_book_date === '' || cash_book_date === null) {
                 toastr.remove()
@@ -406,6 +420,7 @@
                     "chartof_account_id": chartof_account_id,
                     "bank_cash_id": bank_cash_id,
                     "cash_book_id": cash_book_id,
+                    "demand_invoice_id": demand_invoice_id,
                 },
                 success: function(response) {
                     reloadDatatable();

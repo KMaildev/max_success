@@ -20,6 +20,7 @@ return array(
     'App\\Http\\Controllers\\Accounting\\AccountClassificationController' => $baseDir . '/app/Http/Controllers/Accounting/AccountClassificationController.php',
     'App\\Http\\Controllers\\Accounting\\AccountTypeController' => $baseDir . '/app/Http/Controllers/Accounting/AccountTypeController.php',
     'App\\Http\\Controllers\\Accounting\\AccountingDashboardController' => $baseDir . '/app/Http/Controllers/Accounting/AccountingDashboardController.php',
+    'App\\Http\\Controllers\\Accounting\\AgedReceivableController' => $baseDir . '/app/Http/Controllers/Accounting/AgedReceivableController.php',
     'App\\Http\\Controllers\\Accounting\\ChartofAccountController' => $baseDir . '/app/Http/Controllers/Accounting/ChartofAccountController.php',
     'App\\Http\\Controllers\\Accounting\\DemandInvoiceController' => $baseDir . '/app/Http/Controllers/Accounting/DemandInvoiceController.php',
     'App\\Http\\Controllers\\AgentListController' => $baseDir . '/app/Http/Controllers/AgentListController.php',

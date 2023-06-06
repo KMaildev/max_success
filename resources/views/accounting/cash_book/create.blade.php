@@ -5,8 +5,8 @@
     </td>
 
     <td>
-        <input type="text" class="form-control date_picker" style="width: 120px" name="cash_book_date"
-            id="cashBookDate">
+        <input type="text" class="form-control date_picker" style="width: 120px" name="cash_book_date" id="cashBookDate"
+            autocomplete="off">
     </td>
 
     <td>
@@ -22,27 +22,45 @@
     </td>
 
     <td>
-        <input type="text" class="form-control" style="width: 120px" name="reference">
+        <input type="text" class="form-control" style="width: 120px" name="reference" autocomplete="off">
     </td>
 
     <td>
-        <input type="text" class="form-control" style="width: 120px" name="description">
+        <select name="demand_invoice_id" class="form-select form-select select2" style="width: 100%;"
+            autocomplete="off">
+            <option value="">
+                -- Demand Invoice --
+            </option>
+            @foreach ($demand_invoices as $demand_invoice)
+                <option value="{{ $demand_invoice->id }}">
+                    {{ $demand_invoice->invoice_no }}
+                </option>
+            @endforeach
+        </select>
     </td>
 
     <td>
-        <input type="text" class="form-control" style="width: 120px" name="income" value="0">
+        <input type="text" class="form-control" style="width: 120px" name="description" autocomplete="off">
     </td>
 
     <td>
-        <input type="text" class="form-control" style="width: 120px" name="expense" value="0">
+        <input type="text" class="form-control" style="width: 120px" name="income" value="0"
+            autocomplete="off">
     </td>
 
     <td>
-        <input type="text" class="form-control" style="width: 120px" name="tax" value="0">
+        <input type="text" class="form-control" style="width: 120px" name="expense" value="0"
+            autocomplete="off">
     </td>
 
     <td>
-        <select name="chartof_account_id" class="form-select form-select select2" style="width: 100%;">
+        <input type="text" class="form-control" style="width: 120px" name="tax" value="0"
+            autocomplete="off">
+    </td>
+
+    <td>
+        <select name="chartof_account_id" class="form-select form-select select2" style="width: 100%;"
+            autocomplete="off">
             <option value="">
                 -- Chart of Account--
             </option>
@@ -55,7 +73,8 @@
     </td>
 
     <td>
-        <input class="form-control" type="text" style="width: 120px" readonly id="coa_description" />
+        <input class="form-control" type="text" style="width: 120px" readonly id="coa_description"
+            autocomplete="off" />
     </td>
 
     <td>
@@ -84,5 +103,5 @@
             <i class="fa fa-save fa-pencil"></i>
         </button>
     </td>
-    
+
 </form>

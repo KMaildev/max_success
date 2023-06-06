@@ -3,6 +3,7 @@
 use App\Http\Controllers\Accounting\AccountClassificationController;
 use App\Http\Controllers\Accounting\AccountingDashboardController;
 use App\Http\Controllers\Accounting\AccountTypeController;
+use App\Http\Controllers\Accounting\AgedReceivableController;
 use App\Http\Controllers\Accounting\ChartofAccountController;
 use App\Http\Controllers\Accounting\DemandInvoiceController;
 use App\Http\Controllers\AgentListController;
@@ -177,4 +178,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('demand_invoice', DemandInvoiceController::class);
     Route::get('demand_invoice_datatable', [DemandInvoiceController::class, 'demand_invoice_datatable'])->name('demand_invoice_datatable');
 
+    Route::resource('aged_receivable', AgedReceivableController::class);
 });

@@ -25,8 +25,8 @@ class UpdatePassport extends FormRequest
     {
         return [
             'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
+            // 'address' => 'required',
+            // 'phone' => 'required',
             'selected_country' => 'required',
         ];
     }

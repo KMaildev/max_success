@@ -18,4 +18,9 @@ class CashBook extends Model
     {
         return $this->belongsTo(ChartofAccount::class, 'bank_cash_id', 'id');
     }
+
+    public function demand_invoice()
+    {
+        return $this->belongsTo(DemandInvoice::class, 'demand_invoice_id', 'id');
+    }
 }

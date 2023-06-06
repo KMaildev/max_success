@@ -627,6 +627,7 @@ class ComposerStaticInit255bff90faa8e45e478e27bc880e200a
         'App\\Http\\Controllers\\Accounting\\AccountClassificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Accounting/AccountClassificationController.php',
         'App\\Http\\Controllers\\Accounting\\AccountTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Accounting/AccountTypeController.php',
         'App\\Http\\Controllers\\Accounting\\AccountingDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Accounting/AccountingDashboardController.php',
+        'App\\Http\\Controllers\\Accounting\\AgedReceivableController' => __DIR__ . '/../..' . '/app/Http/Controllers/Accounting/AgedReceivableController.php',
         'App\\Http\\Controllers\\Accounting\\ChartofAccountController' => __DIR__ . '/../..' . '/app/Http/Controllers/Accounting/ChartofAccountController.php',
         'App\\Http\\Controllers\\Accounting\\DemandInvoiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Accounting/DemandInvoiceController.php',
         'App\\Http\\Controllers\\AgentListController' => __DIR__ . '/../..' . '/app/Http/Controllers/AgentListController.php',

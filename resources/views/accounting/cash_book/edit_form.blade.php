@@ -77,6 +77,27 @@
 
     <div class="form-group" style="padding: 15px;">
         <label for="html5-text-input" class="col-md-3 control-label">
+            Demand Invoice
+        </label>
+        <div class="col-md-8">
+            <select name="demand_invoice_id_edit" class="form-select form-control form-select" style="width: 100%;"
+                autocomplete="off">
+                <option value="">
+                    -- Demand Invoice --
+                </option>
+                @foreach ($demand_invoices as $demand_invoice)
+                    <option value="{{ $demand_invoice->id }}" @if ($demand_invoice->id == $cash_book->demand_invoice_id) selected @endif>
+                        {{ $demand_invoice->invoice_no }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="form-group" style="padding: 15px;">
+        <label for="html5-text-input" class="col-md-3 control-label">
             Description
         </label>
         <div class="col-md-8">
