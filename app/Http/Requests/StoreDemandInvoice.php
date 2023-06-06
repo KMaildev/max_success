@@ -27,7 +27,7 @@ class StoreDemandInvoice extends FormRequest
             'submit_date' => 'required',
             'overseas_agencie_id' => 'required',
             'demand_id' => 'required',
-            'amount' => 'numeric',
+            'amount' => 'numeric|min:0|not_in:0',
             'total_labour' => 'numeric',
         ];
     }

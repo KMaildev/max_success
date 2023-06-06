@@ -48,8 +48,8 @@
                     </div>
 
                     <div class="box-body">
-                        <div class="table-responsive">
-                            <table id="labour_payments" class="table table-bordered table-striped table-hover">
+                        <div class="table-responsive text-nowrap">
+                            <table id="demand_invoice" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr class="bg-gray">
                                         <th class="text-center text-white w-5" style="width: 1%;">
@@ -57,72 +57,92 @@
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
-                                            Name
+                                            Company Name
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
-                                            NRC
+                                            Demand Number
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
-                                            Passport
+                                            Issue Number
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
-                                            Gender
+                                            Male
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
-                                            Address
+                                            Female
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
-                                            Total Amount
+                                            Total
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
+                                            Amount
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Balance
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Remark
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 20%;">
                                             Actions
                                         </th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
                                 <tfoot>
                                     <tr>
                                         <th>
-                                            <input class="form-control" type="hidden" data-colum="0">
+                                            <input type="hidden" data-colum="0">
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="text" style="width: 150px;" data-colum="1"
-                                                placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="1" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="text" style="width: 150px;" data-colum="2"
-                                                placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="2" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="text" style="width: 150px;" data-colum="3"
-                                                placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="3" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="text" style="width: 150px;" data-colum="4"
-                                                placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="4" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="text" style="width: 150px;" data-colum="5"
-                                                placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="5" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input type="hidden" style="width: 150px;" data-colum="6">
+                                            <input class="form-control" type="text" data-colum="6" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input type="hidden" style="width: 150px;" data-colum="7">
+                                            <input class="form-control" type="text" data-colum="7" placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="hidden" data-colum="8" placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="text" data-colum="9" placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="hidden" data-colum="10" placeholder="Search">
                                         </th>
                                     </tr>
                                 </tfoot>
@@ -137,13 +157,13 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            var table = $('#labour_payments').DataTable({
+            var table = $('#demand_invoice').DataTable({
                 orderCellsTop: true,
                 processing: true,
                 serverSide: true,
                 ordering: false,
                 fixedHeader: true,
-                scrollY: 400,
+                scrollY: 350,
                 scrollX: true,
                 language: {
                     "processing": "<img src='/loading.gif' style='width:50px'/><p class='my-3'>... Loading ...</p>",
@@ -160,7 +180,7 @@
                 ],
 
                 ajax: {
-                    url: "{{ route('get_labour_payment_datatable') }}",
+                    url: "{{ route('demand_invoice_datatable') }}",
                 },
 
                 columns: [{
@@ -169,54 +189,73 @@
                     },
 
                     {
-                        data: 'name',
-                        name: 'name',
+                        data: 'company_name',
+                        name: 'company_name',
                         class: 'text-center'
                     },
 
                     {
-                        data: 'nrc',
-                        name: 'nrc',
+                        data: 'demand_number',
+                        name: 'demand_number',
                         class: 'text-center'
                     },
 
                     {
-                        data: 'passport',
-                        name: 'passport',
+                        data: 'issue_number',
+                        name: 'issue_number',
                         class: 'text-center'
                     },
 
                     {
-                        data: 'gender',
-                        name: 'gender',
+                        data: 'male',
+                        name: 'male',
                         class: 'text-center'
                     },
 
                     {
-                        data: 'address',
-                        name: 'address',
+                        data: 'female',
+                        name: 'female',
                         class: 'text-center'
                     },
 
                     {
-                        data: 'total_deposit',
-                        name: 'total_deposit',
+                        data: 'total_labour',
+                        name: 'total_labour',
                         class: 'text-center'
                     },
 
                     {
-                        data: 'history',
-                        name: 'history',
+                        data: 'amount',
+                        name: 'amount',
+                        class: 'text-center'
+                    },
+
+                    {
+                        data: 'balance',
+                        name: 'balance',
+                        class: 'text-center'
+                    },
+
+                    {
+                        data: 'remark',
+                        name: 'remark',
+                        class: 'text-center'
+                    },
+
+                    {
+                        data: 'action',
+                        name: 'action',
+                        class: 'text-center'
                     },
                 ],
             });
         });
 
         $(document).ready(function() {
-            $('#labour_payments thead th').each(function() {
-                var title = $('#labour_payments thead th').eq($(this).index()).text();
+            $('#demand_invoice thead th').each(function() {
+                var title = $('#demand_invoice thead th').eq($(this).index()).text();
             });
-            var table = $('#labour_payments').DataTable();
+            var table = $('#demand_invoice').DataTable();
 
             table.columns().eq(0).each(function(colIdx) {
                 $('input', table.column(colIdx).footer()).on('change', function() {

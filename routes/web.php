@@ -175,5 +175,6 @@ Route::middleware('auth')->group(function () {
     Route::post('cashbook_delete', [CashBookController::class, 'destroy'])->name('cashbook_delete');
 
     Route::resource('demand_invoice', DemandInvoiceController::class);
+    Route::get('demand_invoice_datatable', [DemandInvoiceController::class, 'demand_invoice_datatable'])->name('demand_invoice_datatable');
 
 });

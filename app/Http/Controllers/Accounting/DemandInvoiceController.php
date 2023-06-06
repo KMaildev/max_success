@@ -8,6 +8,7 @@ use App\Models\Demand;
 use App\Models\DemandInvoice;
 use App\Models\OverseasAgency;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class DemandInvoiceController extends Controller
 {
@@ -35,5 +36,130 @@ class DemandInvoiceController extends Controller
         $demand_invoices->save();
 
         return redirect()->back()->with('success', 'Your processing has been completed.');
+    }
+
+    public function edit($id)
+    {
+        $overseas_agencies = OverseasAgency::all();
+        $demand_invoice = DemandInvoice::findOrFail($id);
+        return view('accounting.demand_invoice.edit', compact('overseas_agencies', 'demand_invoice'));
+    }
+
+
+    public function update(StoreDemandInvoice $request, $id)
+    {
+        $demand_invoices = DemandInvoice::findOrFail($id);
+        $demand_invoices->submit_date = $request->submit_date;
+        $demand_invoices->overseas_agencie_id = $request->overseas_agencie_id;
+        $demand_invoices->demand_id = $request->demand_id;
+        $demand_invoices->amount = $request->amount;
+        $demand_invoices->total_labour = $request->total_labour;
+        $demand_invoices->remark = $request->remark;
+        $demand_invoices->user_id = auth()->user()->id;
+        $demand_invoices->save();
+
+        return redirect()->back()->with('success', 'Your processing has been completed.');
+    }
+
+    public function demand_invoice_datatable(Request $request)
+    {
+        $data = DemandInvoice::with('demand', 'overseas_agencies')
+            ->orderBy('id', 'DESC');
+
+        return DataTables::of($data)
+            ->addIndexColumn()
+
+            ->editColumn('company_name', function ($each) {
+                if ($each->overseas_agencies->company_name) {
+                    return  $each->overseas_agencies ? $each->overseas_agencies->company_name : $each->overseas_agencies->company_name;
+                } else {
+                    return  $each->overseas_agencies ? $each->overseas_agencies->agent_company_name : $each->overseas_agencies->agent_company_name;
+                }
+            })
+
+            ->filterColumn('company_name', function ($query, $keyword) {
+                $query->whereHas('overseas_agencies', function ($q1) use ($keyword) {
+                    $q1->where('company_name', 'like', '%' . $keyword . '%');
+                    $q1->orWhere('agent_company_name', 'like', '%' . $keyword . '%');
+                });
+            })
+
+            ->editColumn('demand_number', function ($each) {
+                return  $each->demand ? $each->demand->demand_number : $each->demand->demand_number;
+            })
+
+            ->filterColumn('demand_number', function ($query, $keyword) {
+                $query->whereHas('demand', function ($q1) use ($keyword) {
+                    $q1->where('demand_number', 'like', '%' . $keyword . '%');
+                });
+            })
+
+            ->editColumn('issue_number', function ($each) {
+                return  $each->demand ? $each->demand->issue_number : $each->demand->issue_number;
+            })
+
+            ->filterColumn('issue_number', function ($query, $keyword) {
+                $query->whereHas('demand', function ($q1) use ($keyword) {
+                    $q1->where('issue_number', 'like', '%' . $keyword . '%');
+                });
+            })
+
+            ->editColumn('male', function ($each) {
+                return  $each->demand ? $each->demand->male : $each->demand->male;
+            })
+
+            ->filterColumn('male', function ($query, $keyword) {
+                $query->whereHas('demand', function ($q1) use ($keyword) {
+                    $q1->where('male',  $keyword);
+                });
+            })
+
+            ->editColumn('female', function ($each) {
+                return  $each->demand ? $each->demand->female : $each->demand->female;
+            })
+
+            ->filterColumn('female', function ($query, $keyword) {
+                $query->whereHas('demand', function ($q1) use ($keyword) {
+                    $q1->where('female',  $keyword);
+                });
+            })
+
+            ->editColumn('balance', function ($each) {
+                $total_labour =  $each->total_labour ?? 0;
+                $total_amount = $each->amount;
+                $balance = $total_labour * $total_amount;
+                return number_format($balance, 2);
+            })
+
+            ->addColumn('action', function ($each) {
+                $edit_route = route('demand_invoice.edit', 1);
+                $show_route = route('demand_invoice.show', 1);
+                $action =
+                    '
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="' . $edit_route . '">
+                                    Edit
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="' . $show_route . '">
+                                    Detail
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    ';
+                return $action;
+            })
+
+            ->addIndexColumn()
+            ->rawColumns(['company_name', 'demand_number', 'issue_number', 'male', 'female', 'balance', 'action'])
+            ->make(true);
     }
 }
