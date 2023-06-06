@@ -30,6 +30,7 @@ class StorePassport extends FormRequest
             'nrcName' => 'required',
             'nrcType' => 'required',
             'nrcFieldCode' => 'required',
+            'selected_country' => 'required',
         ];
     }
 }

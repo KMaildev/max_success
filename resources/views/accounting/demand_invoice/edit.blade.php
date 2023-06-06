@@ -27,6 +27,24 @@
                             <form action="{{ route('demand_invoice.update', $demand_invoice->id) }}" method="POST"
                                 autocomplete="off" id="create-form" role="form" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
+
+
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 control-labe">
+                                        Invoice No
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="invoice_no"
+                                            value="{{ $demand_invoice->invoice_no }}">
+
+                                        @error('invoice_no')
+                                            <div class="form-control-feedback" style="color: red;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
 
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
@@ -214,16 +232,21 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
                     var select = $('#demand_id');
                     select.empty(); // Clear existing options
 
                     if (response.length > 0) {
                         // Add options to the select element
                         select.append($('<option selected value="">').text('--Select Demand Number--'));
-                        $.each(response, function(index, option) {
-                            var company_name = option.demand_number;
-                            select.append($('<option>').val(option.id).text(company_name));
+                        $.each(response, function(index, data) {
+                            var company_name = data.demand_number;
+                            var demand_id = {{ $demand_invoice->demand_id }};
+                            // select.append($('<option >').val(option.id).text(company_name));
+                            var option = $('<option>').val(data.id).text(company_name);
+                            if (demand_id == data.id) {
+                                option.attr('selected', 'selected');
+                            }
+                            select.append(option);
                         });
                     } else {
                         select.append($('<option selected value="">').text('Data not found'));
@@ -252,7 +275,6 @@
                     document.getElementById('Total').value = +data.male + +data.female;
                     document.getElementById('TotalLabour').value = +data.male + +data.female;
                     document.getElementById('Country').value = data.country.title;
-
                     CalcBalance();
                 },
                 error: function() {

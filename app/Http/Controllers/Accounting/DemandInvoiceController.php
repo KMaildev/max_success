@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Accounting;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDemandInvoice;
+use App\Http\Requests\UpdateDemandInvoice;
 use App\Models\Demand;
 use App\Models\DemandInvoice;
 use App\Models\OverseasAgency;
@@ -26,6 +27,7 @@ class DemandInvoiceController extends Controller
     public function store(StoreDemandInvoice $request)
     {
         $demand_invoices = new DemandInvoice();
+        $demand_invoices->invoice_no = $request->invoice_no;
         $demand_invoices->submit_date = $request->submit_date;
         $demand_invoices->overseas_agencie_id = $request->overseas_agencie_id;
         $demand_invoices->demand_id = $request->demand_id;
@@ -46,9 +48,10 @@ class DemandInvoiceController extends Controller
     }
 
 
-    public function update(StoreDemandInvoice $request, $id)
+    public function update(UpdateDemandInvoice $request, $id)
     {
         $demand_invoices = DemandInvoice::findOrFail($id);
+        $demand_invoices->invoice_no = $request->invoice_no;
         $demand_invoices->submit_date = $request->submit_date;
         $demand_invoices->overseas_agencie_id = $request->overseas_agencie_id;
         $demand_invoices->demand_id = $request->demand_id;

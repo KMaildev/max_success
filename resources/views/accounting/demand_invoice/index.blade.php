@@ -57,6 +57,10 @@
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
+                                            Invoice No
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
                                             Company Name
                                         </th>
 
@@ -95,7 +99,7 @@
                                         <th class="text-center text-white w-5" style="width: 20%;">
                                             Actions
                                         </th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -139,6 +143,10 @@
 
                                         <th>
                                             <input class="form-control" type="text" data-colum="9" placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="text" data-colum="10" placeholder="Search">
                                         </th>
 
                                         <th>
@@ -187,6 +195,13 @@
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                     },
+
+                    {
+                        data: 'invoice_no',
+                        name: 'invoice_no',
+                        class: 'text-center'
+                    },
+
 
                     {
                         data: 'company_name',

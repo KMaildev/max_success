@@ -34,7 +34,6 @@ class PassportController extends Controller
 
     public function store(StorePassport $request)
     {
-
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $photo_path = $photo->store('public/labour');
@@ -86,7 +85,8 @@ class PassportController extends Controller
         $Passport->marital_status = $request->marital_status;
         $Passport->prominent_sign = $request->prominent_sign;
         $Passport->working_experience = $request->working_experience;
-        $Passport->selected_country = $request->selected_country;
+
+
         $Passport->labour_card_no = $request->labour_card_no;
         $Passport->issue_of_labour_date = $request->issue_of_labour_date;
 
@@ -111,6 +111,10 @@ class PassportController extends Controller
         $Passport->nrc_number = $request->nrcFieldCode;
         $Passport->nrc = $request->nrc;
         $Passport->date_of_birth =  $request->date_of_birth;
+
+        $Passport->selected_country = $request->selected_country;
+        $country = Country::where('title', $request->selected_country)->first();
+        $Passport->total_amount_mmk = $country->total_amount_mmk ?? 0;
         $Passport->save();
         return redirect()->back()->with('success', 'Created successfully.');
     }
@@ -178,7 +182,6 @@ class PassportController extends Controller
         $Passport->marital_status = $request->marital_status;
         $Passport->prominent_sign = $request->prominent_sign;
         $Passport->working_experience = $request->working_experience;
-        $Passport->selected_country = $request->selected_country;
         $Passport->labour_card_no = $request->labour_card_no;
         $Passport->issue_of_labour_date = $request->issue_of_labour_date;
 
@@ -203,6 +206,11 @@ class PassportController extends Controller
         $Passport->nrc_number = $request->nrcFieldCode;
         $Passport->nrc = $request->nrc;
         $Passport->date_of_birth =  $request->date_of_birth;
+
+        $Passport->selected_country = $request->selected_country;
+        $country = Country::where('title', $request->selected_country)->first();
+        $Passport->total_amount_mmk = $country->total_amount_mmk ?? 0;
+
         $Passport->update();
         return redirect()->back()->with('success', 'Created successfully.');
     }

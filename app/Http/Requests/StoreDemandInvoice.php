@@ -24,6 +24,7 @@ class StoreDemandInvoice extends FormRequest
     public function rules()
     {
         return [
+            'invoice_no' => 'required|unique:demand_invoices,invoice_no',
             'submit_date' => 'required',
             'overseas_agencie_id' => 'required',
             'demand_id' => 'required',

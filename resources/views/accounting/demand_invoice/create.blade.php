@@ -30,6 +30,22 @@
 
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
+                                        Invoice No
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="invoice_no"
+                                            value="{{ old('invoice_no') }}">
+
+                                        @error('invoice_no')
+                                            <div class="form-control-feedback" style="color: red;">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 control-labe">
                                         Submit Date
                                     </label>
                                     <div class="col-md-9">

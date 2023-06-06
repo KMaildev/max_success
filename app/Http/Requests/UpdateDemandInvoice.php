@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePassport extends FormRequest
+class UpdateDemandInvoice extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,15 @@ class UpdatePassport extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('demand_invoice');
+
         return [
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'selected_country' => 'required',
+            'invoice_no' => 'required|unique:demand_invoices,invoice_no,' . $id,
+            'submit_date' => 'required',
+            'overseas_agencie_id' => 'required',
+            'demand_id' => 'required',
+            'amount' => 'numeric|min:0|not_in:0',
+            'total_labour' => 'numeric',
         ];
     }
 }
