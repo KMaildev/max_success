@@ -61,6 +61,14 @@
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
+                                            Agent Company Name
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Company Name
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
                                             Description
                                         </th>
 
@@ -176,6 +184,16 @@
                     {
                         data: 'demand_invoice',
                         name: 'demand_invoice',
+                    },
+
+                    {
+                        data: 'agent_company_name',
+                        name: 'agent_company_name',
+                    },
+
+                    {
+                        data: 'company_name',
+                        name: 'company_name',
                     },
 
                     {

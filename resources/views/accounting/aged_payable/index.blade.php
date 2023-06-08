@@ -71,9 +71,10 @@
                                                     $all_remaining_amount[] = $remaining_amount;
                                                 @endphp
                                             </td>
-                                            
+
                                             <td class="text-center">
-                                                <a href="">
+                                                <a href="{{ route('oversea_company_report.show', $demand_invoice->overseas_agencie_id) }}"
+                                                    class="btn btn-sm btn-block btn-primary">
                                                     Detail
                                                 </a>
                                             </td>

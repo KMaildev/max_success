@@ -83,7 +83,6 @@ class DemandInvoiceController extends Controller
                 });
             })
 
-
             ->editColumn('company_name', function ($each) {
                 return  $each->overseas_agencies ? $each->overseas_agencies->company_name : '';
             })

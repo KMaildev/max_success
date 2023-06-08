@@ -31,6 +31,7 @@
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Invoice No
+                                        <i class="required">*</i>
                                     </label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="invoice_no"
@@ -47,6 +48,7 @@
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Submit Date
+                                        <i class="required">*</i>
                                     </label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control date_picker" name="submit_date"
@@ -64,12 +66,13 @@
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Foreign Company/Job Offered Company
+                                        <i class="required">*</i>
                                     </label>
                                     <div class="col-md-9">
                                         <select onchange="getDemand(this.value)" class="form-control form-select select2"
                                             name="overseas_agencie_id" id="OverseasAgencyId">
                                             <option value="">
-                                                --Company--
+                                                --Select an option--
                                             </option>
                                             @foreach ($overseas_agencies as $overseas_agencie)
                                                 <option value="{{ $overseas_agencie->id }}">
@@ -92,6 +95,7 @@
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Select Demand
+                                        <i class="required">*</i>
                                     </label>
                                     <div class="col-md-9">
                                         <select onchange="getDemandById(this.value)" id="demand_id"
@@ -139,7 +143,7 @@
                                             <span class="input-group-addon" id="basic-addon2">
                                                 Male
                                             </span>
-                                            <input type="text" class="form-control" id="Male">
+                                            <input type="text" class="form-control" id="Male" readonly>
                                         </div>
                                     </div>
 
@@ -148,7 +152,7 @@
                                             <span class="input-group-addon" id="basic-addon2">
                                                 Female
                                             </span>
-                                            <input type="text" class="form-control" id="Female">
+                                            <input type="text" class="form-control" id="Female" readonly>
                                         </div>
                                     </div>
 
@@ -157,7 +161,7 @@
                                             <span class="input-group-addon" id="basic-addon2">
                                                 Total
                                             </span>
-                                            <input type="text" class="form-control" id="Total">
+                                            <input type="text" class="form-control" id="Total" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -166,6 +170,7 @@
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-label">
                                         Payment
+                                        <i class="required">*</i>
                                     </label>
 
                                     <div class="col-md-3">
@@ -184,7 +189,7 @@
                                                 Labour
                                             </span>
                                             <input type="text" class="form-control" id="TotalLabour"
-                                                name="total_labour">
+                                                name="total_labour" readonly>
                                         </div>
                                     </div>
 
@@ -208,6 +213,7 @@
                                         <br>
                                     </div>
                                 </div>
+                                <br>
 
                                 <div class="form-group" style="padding: 17px;">
                                     <label class="col-sm-3 control-label"></label>
@@ -296,7 +302,6 @@
 
                     }
                 });
-
             }
         });
 

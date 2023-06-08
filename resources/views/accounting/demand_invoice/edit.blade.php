@@ -65,13 +65,13 @@
 
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
-                                        Company
+                                        Foreign Company/Job Offered Company
                                     </label>
                                     <div class="col-md-9">
                                         <select onchange="getDemand(this.value)" class="form-control form-select select2"
                                             name="overseas_agencie_id" id="OverseasAgencyId">
                                             <option value="">
-                                                --Company--
+                                                --Select an option--
                                             </option>
                                             @foreach ($overseas_agencies as $overseas_agencie)
                                                 <option value="{{ $overseas_agencie->id }}"
@@ -80,6 +80,15 @@
                                                 </option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 control-label">
+                                        Overseas Agent
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="OverseasAgent" readonly>
                                     </div>
                                 </div>
 
@@ -134,7 +143,7 @@
                                             <span class="input-group-addon" id="basic-addon2">
                                                 Male
                                             </span>
-                                            <input type="text" class="form-control" id="Male">
+                                            <input type="text" class="form-control" id="Male" readonly>
                                         </div>
                                     </div>
 
@@ -143,7 +152,7 @@
                                             <span class="input-group-addon" id="basic-addon2">
                                                 Female
                                             </span>
-                                            <input type="text" class="form-control" id="Female">
+                                            <input type="text" class="form-control" id="Female" readonly>
                                         </div>
                                     </div>
 
@@ -152,7 +161,7 @@
                                             <span class="input-group-addon" id="basic-addon2">
                                                 Total
                                             </span>
-                                            <input type="text" class="form-control" id="Total">
+                                            <input type="text" class="form-control" id="Total" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +189,7 @@
                                                 Labour
                                             </span>
                                             <input type="text" class="form-control" id="TotalLabour"
-                                                name="total_labour">
+                                                name="total_labour" readonly>
                                         </div>
                                     </div>
 
@@ -213,6 +222,13 @@
                                             <span class="fa fa-fw fa-save"></span>
                                             Save
                                         </button>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <a href="{{ route('demand_invoice.index') }}" class="btn btn-success btn-block">
+                                            <span class="fa fa-fw fa-arrow-left"></span>
+                                            Cancel
+                                        </a>
                                     </div>
                                 </div>
                             </form>
@@ -284,6 +300,40 @@
         }
 
         getDemandById({{ $demand_invoice->demand_id }});
+
+        $('select[name="overseas_agencie_id"]').on("change", function() {
+            var overseas_agencie_id = $(this).val();
+            if (overseas_agencie_id) {
+                $.ajax({
+                    url: `/overseas_agent_by_id/${overseas_agencie_id}`,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        document.getElementById('OverseasAgent').value = data.agent_company_name;
+                    },
+                    error: function() {
+
+                    }
+                });
+            }
+        });
+
+        function OverseasAgentCall(overseas_agencie_id) {
+            if (overseas_agencie_id) {
+                $.ajax({
+                    url: `/overseas_agent_by_id/${overseas_agencie_id}`,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        document.getElementById('OverseasAgent').value = data.agent_company_name;
+                    },
+                    error: function() {
+
+                    }
+                });
+            }
+        }
+        OverseasAgentCall({{ $demand_invoice->overseas_agencie_id }});
 
         function CalcBalance() {
             var amount = document.getElementById('Amount').value;

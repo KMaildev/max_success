@@ -39,6 +39,11 @@
         </select>
     </td>
 
+    <td></td>
+
+    <td></td>
+
+
     <td>
         <input type="text" class="form-control" style="width: 120px" name="description" autocomplete="off">
     </td>

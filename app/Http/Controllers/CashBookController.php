@@ -70,6 +70,15 @@ class CashBookController extends Controller
                 return  $each->demand_invoice ? $each->demand_invoice->invoice_no : '';
             })
 
+            ->editColumn('agent_company_name', function ($each) {
+                return  $each->demand_invoice ? $each->demand_invoice->overseas_agencies->agent_company_name : '';
+            })
+
+            ->editColumn('company_name', function ($each) {
+                return  $each->demand_invoice ? $each->demand_invoice->overseas_agencies->company_name : '';
+            })
+
+
             ->addColumn('edit', function ($each) {
                 $edit =
                     '
@@ -97,7 +106,7 @@ class CashBookController extends Controller
             })
 
             ->addIndexColumn()
-            ->rawColumns(['chart_of_account', 'account_header', 'bank_cash', 'demand_invoice', 'edit', 'delete'])
+            ->rawColumns(['chart_of_account', 'account_header', 'bank_cash', 'demand_invoice', 'agent_company_name', 'company_name', 'edit', 'delete'])
             ->make(true);
     }
 
