@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('overseas_agent', OverseasAgentController::class);
     Route::get('overseas_agent_ajax/{id}', [OverseasAgentController::class, 'dependentAjax'])->name('overseas_agent_ajax');
     Route::get('overseas_agent_excel', [OverseasAgentController::class, 'overseasAgentExportExcel'])->name('overseas_agent_excel');
+    Route::get('overseas_agent_by_id/{id}', [OverseasAgentController::class, 'findOverseaAgentAjax'])->name('overseas_agent_by_id');
 
     Route::resource('passport', PassportController::class);
     Route::get('find_passport_ajax/{id}', [PassportController::class, 'findPassportAjax'])->name('find_passport_ajax');

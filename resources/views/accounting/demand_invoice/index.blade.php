@@ -61,6 +61,10 @@
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
+                                            Agent Company Name
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
                                             Company Name
                                         </th>
 
@@ -150,7 +154,11 @@
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="hidden" data-colum="10" placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="11" placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="hidden" data-colum="12" placeholder="Search">
                                         </th>
                                     </tr>
                                 </tfoot>
@@ -202,6 +210,11 @@
                         class: 'text-center'
                     },
 
+                    {
+                        data: 'agent_company_name',
+                        name: 'agent_company_name',
+                        class: 'text-center'
+                    },
 
                     {
                         data: 'company_name',

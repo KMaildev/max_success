@@ -24,7 +24,7 @@ class StoreOverseaAgency extends FormRequest
     public function rules()
     {
         return [
-            // 'company_name' => 'required',
+            'company_name' => 'required',
             'countrie_id' => 'required',
         ];
     }

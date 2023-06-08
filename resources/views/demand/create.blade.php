@@ -61,7 +61,7 @@
 
                     <div class="form-group">
                         <label for="html5-text-input" class="col-md-3 control-label">
-                            Overseas Company/Agent
+                            Foreign Company/Job Offered Company
                         </label>
                         <div class="col-md-8">
                             <select class="select2 form-control form-select" name="overseas_agencie_id"
@@ -76,9 +76,20 @@
                     </div>
 
 
+
                     <div class="form-group">
                         <label for="html5-text-input" class="col-md-3 control-label">
-                            Job
+                            Overseas Agent
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="OverseasAgent" readonly>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="html5-text-input" class="col-md-3 control-label">
+                            Jobs
                         </label>
                         <div class="col-md-8">
                             <input type="text" class="form-control @error('job') form-control-danger @enderror"
@@ -270,13 +281,12 @@
                         $.each(data, function(key, value) {
                             $('select[name="overseas_agencie_id"]').append(
                                 '<option value="' + value.id + '">' +
-                                value.company_name +
+                                value.agent_company_name +
                                 "</option>"
                             );
                         });
                     },
                 });
-
 
                 $.ajax({
                     url: `/find_by_country_id/${countrie_id}`,
@@ -294,6 +304,29 @@
 
             }
         });
+
+
+
+
+        $('select[name="overseas_agencie_id"]').on("change", function() {
+            var overseas_agencie_id = $(this).val();
+            if (overseas_agencie_id) {
+                $.ajax({
+                    url: `/overseas_agent_by_id/${overseas_agencie_id}`,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        document.getElementById('OverseasAgent').value = data.agent_company_name;
+                    },
+                    error: function() {
+
+                    }
+                });
+
+            }
+        });
+
+
 
         function MaleFemaleTotalCalc() {
             var male = document.getElementById("male").value;

@@ -63,7 +63,7 @@
 
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
-                                        Company
+                                        Foreign Company/Job Offered Company
                                     </label>
                                     <div class="col-md-9">
                                         <select onchange="getDemand(this.value)" class="form-control form-select select2"
@@ -80,6 +80,14 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 control-label">
+                                        Overseas Agent
+                                    </label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="OverseasAgent" readonly>
+                                    </div>
+                                </div>
 
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
@@ -272,6 +280,25 @@
                 }
             });
         }
+
+
+        $('select[name="overseas_agencie_id"]').on("change", function() {
+            var overseas_agencie_id = $(this).val();
+            if (overseas_agencie_id) {
+                $.ajax({
+                    url: `/overseas_agent_by_id/${overseas_agencie_id}`,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        document.getElementById('OverseasAgent').value = data.agent_company_name;
+                    },
+                    error: function() {
+
+                    }
+                });
+
+            }
+        });
 
         function CalcBalance() {
             var amount = document.getElementById('Amount').value;

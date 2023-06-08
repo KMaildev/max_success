@@ -72,20 +72,28 @@ class DemandInvoiceController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
 
+
+            ->editColumn('agent_company_name', function ($each) {
+                return  $each->overseas_agencies ? $each->overseas_agencies->agent_company_name : '';
+            })
+
+            ->filterColumn('agent_company_name', function ($query, $keyword) {
+                $query->whereHas('overseas_agencies', function ($q1) use ($keyword) {
+                    $q1->where('agent_company_name', 'like', '%' . $keyword . '%');
+                });
+            })
+
+
             ->editColumn('company_name', function ($each) {
-                if ($each->overseas_agencies->company_name) {
-                    return  $each->overseas_agencies ? $each->overseas_agencies->company_name : $each->overseas_agencies->company_name;
-                } else {
-                    return  $each->overseas_agencies ? $each->overseas_agencies->agent_company_name : $each->overseas_agencies->agent_company_name;
-                }
+                return  $each->overseas_agencies ? $each->overseas_agencies->company_name : '';
             })
 
             ->filterColumn('company_name', function ($query, $keyword) {
                 $query->whereHas('overseas_agencies', function ($q1) use ($keyword) {
                     $q1->where('company_name', 'like', '%' . $keyword . '%');
-                    $q1->orWhere('agent_company_name', 'like', '%' . $keyword . '%');
                 });
             })
+
 
             ->editColumn('demand_number', function ($each) {
                 return  $each->demand ? $each->demand->demand_number : $each->demand->demand_number;
@@ -156,7 +164,7 @@ class DemandInvoiceController extends Controller
             })
 
             ->addIndexColumn()
-            ->rawColumns(['company_name', 'demand_number', 'issue_number', 'male', 'female', 'balance', 'action'])
+            ->rawColumns(['agent_company_name', 'company_name', 'demand_number', 'issue_number', 'male', 'female', 'balance', 'action'])
             ->make(true);
     }
 }
