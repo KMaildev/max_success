@@ -191,8 +191,6 @@
                                                 {{ $overseas_agency->company_address }}
                                             </td>
 
-                                            
-
                                             <td data-title="Country">
                                                 {{ $overseas_agency->countries_table->title ?? '' }}
                                             </td>

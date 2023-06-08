@@ -39,4 +39,9 @@ class Demand extends Model
     {
         return $this->belongsTo(Country::class, 'countrie_id', 'id');
     }
+
+    public function demand_invoices()
+    {
+        return $this->hasMany(DemandInvoice::class, 'demand_id', 'id');
+    }
 }

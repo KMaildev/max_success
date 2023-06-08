@@ -281,7 +281,7 @@
                         $.each(data, function(key, value) {
                             $('select[name="overseas_agencie_id"]').append(
                                 '<option value="' + value.id + '">' +
-                                value.agent_company_name +
+                                value.company_name +
                                 "</option>"
                             );
                         });
