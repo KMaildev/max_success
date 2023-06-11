@@ -332,7 +332,6 @@
                                                     <table class="table table-bordered table-sm">
                                                         <thead>
                                                             <tr class="bg-gray">
-
                                                                 <th class="text-center" style="width: 100px">
                                                                     #
                                                                 </th>
@@ -343,6 +342,10 @@
 
                                                                 <th class="text-center" style="width: 100px">
                                                                     Invoice Date
+                                                                </th>
+
+                                                                <th class="text-center" style="width: 100px">
+                                                                    Remark
                                                                 </th>
 
                                                                 <th class="text-center" style="width: 100px">
@@ -364,13 +367,12 @@
                                                                 <th class="text-center" style="width: 100px">
                                                                     Balance
                                                                 </th>
-
-                                                                <th class="text-center" style="width: 100px">
-                                                                    Remark
-                                                                </th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            @php
+                                                                $invoice_balance = [];
+                                                            @endphp
                                                             @foreach ($demand->demand_invoices as $key => $demand_invoice)
                                                                 <tr>
                                                                     <td class="text-center">
@@ -383,6 +385,10 @@
 
                                                                     <td class="text-center">
                                                                         {{ $demand_invoice->submit_date ?? '' }}
+                                                                    </td>
+
+                                                                    <td class="text-center">
+                                                                        {{ $demand_invoice->remark ?? '' }}
                                                                     </td>
 
                                                                     <td class="text-center">
@@ -409,23 +415,32 @@
                                                                     <td class="text-center">
                                                                         @php
                                                                             $amount = $demand_invoice->amount ?? 0;
-                                                                            echo $amount;
+                                                                            echo number_format($amount, 2);
                                                                         @endphp
                                                                     </td>
 
                                                                     <td class="text-center">
                                                                         @php
                                                                             $balance = $total_labour * $amount;
-                                                                            echo $balance;
+                                                                            echo number_format($balance, 2);
+                                                                            $invoice_balance[] = $balance;
                                                                         @endphp
-                                                                    </td>
-
-                                                                    <td class="text-center">
-                                                                        {{ $demand_invoice->remark ?? '' }}
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
+                                                        <tr>
+                                                            <td colspan="8">
+                                                                Total Invoice Amount
+                                                            </td>
+
+                                                            <td class="text-center">
+                                                                @php
+                                                                    $invoice_balance = array_sum($invoice_balance);
+                                                                    echo number_format($invoice_balance, 2);
+                                                                @endphp
+                                                            </td>
+                                                        </tr>
                                                     </table>
 
                                                     <table class="table sub-table  table-bordered table-sm">
@@ -449,14 +464,6 @@
                                                                 </th>
 
                                                                 <th class="text-center" style="width: 100px">
-                                                                    Amount
-                                                                </th>
-
-                                                                <th class="text-center" style="width: 100px">
-                                                                    Tax
-                                                                </th>
-
-                                                                <th class="text-center" style="width: 100px">
                                                                     Chart of Account
                                                                 </th>
 
@@ -467,9 +474,21 @@
                                                                 <th class="text-center" style="width: 100px">
                                                                     Bank & Cash
                                                                 </th>
+
+                                                                <th class="text-center" style="width: 100px">
+                                                                    Tax
+                                                                </th>
+
+                                                                <th class="text-center" style="width: 100px">
+                                                                    Amount
+                                                                </th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            @php
+                                                                $total_cash_book_tax = [];
+                                                                $total_cash_book_expense = [];
+                                                            @endphp
                                                             @foreach ($demand->demand_invoices as $key => $demand_invoice)
                                                                 @foreach ($demand_invoice->cash_books as $key => $cash_book)
                                                                     <tr>
@@ -490,14 +509,6 @@
                                                                         </td>
 
                                                                         <td class="text-center">
-                                                                            {{ $cash_book->expense ?? '' }}
-                                                                        </td>
-
-                                                                        <td class="text-center">
-                                                                            {{ $cash_book->tax ?? '' }}
-                                                                        </td>
-
-                                                                        <td class="text-center">
                                                                             {{ $cash_book->chart_of_account->coa_number ?? '' }}
                                                                         </td>
 
@@ -508,10 +519,58 @@
                                                                         <td class="text-center">
                                                                             {{ $cash_book->bank_cash->coa_number ?? '' }}
                                                                         </td>
+
+                                                                        <td class="text-center">
+                                                                            @php
+                                                                                $cash_book_tax = $cash_book->tax ?? 0;
+                                                                                echo number_format($cash_book_tax, 2);
+                                                                                $total_cash_book_tax[] = $cash_book_tax;
+                                                                            @endphp
+                                                                        </td>
+
+                                                                        <td class="text-center">
+                                                                            @php
+                                                                                $cash_book_expense = $cash_book->expense ?? 0;
+                                                                                echo number_format($cash_book_expense, 2);
+                                                                                $total_cash_book_expense[] = $cash_book_expense;
+                                                                            @endphp
+                                                                        </td>
                                                                     </tr>
                                                                 @endforeach
                                                             @endforeach
                                                         </tbody>
+                                                        <tr>
+                                                            <td colspan="7">
+                                                                Total Paid Amount
+                                                            </td>
+
+                                                            <td class="text-center">
+                                                                @php
+                                                                    $total_cash_book_tax = array_sum($total_cash_book_tax);
+                                                                    echo number_format($total_cash_book_tax, 2);
+                                                                @endphp
+                                                            </td>
+
+                                                            <td class="text-center">
+                                                                @php
+                                                                    $total_cash_book_expense = array_sum($total_cash_book_expense);
+                                                                    echo number_format($total_cash_book_expense, 2);
+                                                                @endphp
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr style="background-color: #00A65A; color: white;">
+                                                            <td colspan="8">
+                                                                Total Remaining Amount
+                                                            </td>
+
+                                                            <td class="text-center">
+                                                                @php
+                                                                    $total_remaining = $invoice_balance - $total_cash_book_expense;
+                                                                    echo number_format($total_remaining, 2);
+                                                                @endphp
+                                                            </td>
+                                                        </tr>
                                                     </table>
                                                 </div>
                                             </td>
