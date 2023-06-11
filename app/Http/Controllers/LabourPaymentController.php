@@ -172,7 +172,7 @@ class LabourPaymentController extends Controller
             })
 
             ->editColumn('address', function ($each) {
-                return  $each->passport_table ? $each->passport_table->address : $each->address;
+                return  $each->passport_table ? $each->passport_table->address : '';
             })
 
             ->filterColumn('address', function ($query, $keyword) {
@@ -180,6 +180,17 @@ class LabourPaymentController extends Controller
                     $q1->where('address', 'like', '%' . $keyword . '%');
                 });
             })
+
+            ->editColumn('country', function ($each) {
+                return  $each->passport_table ? $each->passport_table->selected_country : '';
+            })
+
+            ->filterColumn('country', function ($query, $keyword) {
+                $query->whereHas('passport_table', function ($q1) use ($keyword) {
+                    $q1->where('selected_country', 'like', '%' . $keyword . '%');
+                });
+            })
+
 
             ->editColumn('total_deposit', function ($each) {
                 return  number_format($each->total_deposit, 2);
@@ -197,7 +208,7 @@ class LabourPaymentController extends Controller
             })
 
             ->addIndexColumn()
-            ->rawColumns(['name', 'nrc', 'passport', 'gender', 'total_deposit', 'history'])
+            ->rawColumns(['name', 'nrc', 'passport', 'gender', 'country', 'total_deposit', 'history'])
             ->make(true);
     }
 

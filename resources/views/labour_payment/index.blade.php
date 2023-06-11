@@ -77,7 +77,11 @@
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
-                                            Total Amount
+                                            Country
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 20%;">
+                                            Total Paid Amount
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
@@ -93,36 +97,35 @@
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="text" style="width: 150px;" data-colum="1"
-                                                placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="1" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="text" style="width: 150px;" data-colum="2"
-                                                placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="2" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="text" style="width: 150px;" data-colum="3"
-                                                placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="3" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="text" style="width: 150px;" data-colum="4"
-                                                placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="4" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input class="form-control" type="text" style="width: 150px;" data-colum="5"
-                                                placeholder="Search">
+                                            <input class="form-control" type="text" data-colum="5" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input type="hidden" style="width: 150px;" data-colum="6">
+                                            <input type="text" class="form-control" data-colum="6" placeholder="Search">
                                         </th>
 
                                         <th>
-                                            <input type="hidden" style="width: 150px;" data-colum="7">
+                                            <input type="hidden" data-colum="7">
+                                        </th>
+
+                                        <th>
+                                            <input type="hidden" data-colum="8">
                                         </th>
                                     </tr>
                                 </tfoot>
@@ -195,6 +198,12 @@
                     {
                         data: 'address',
                         name: 'address',
+                        class: 'text-center'
+                    },
+
+                    {
+                        data: 'country',
+                        name: 'country',
                         class: 'text-center'
                     },
 

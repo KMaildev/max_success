@@ -5,6 +5,7 @@ use App\Http\Controllers\Accounting\AccountingDashboardController;
 use App\Http\Controllers\Accounting\AccountTypeController;
 use App\Http\Controllers\Accounting\AgedPayableController;
 use App\Http\Controllers\Accounting\AgedReceivableController;
+use App\Http\Controllers\Accounting\BalanceSheetController;
 use App\Http\Controllers\Accounting\ChartofAccountController;
 use App\Http\Controllers\Accounting\DemandInvoiceController;
 use App\Http\Controllers\Accounting\OverseaCompanyReportController;
@@ -185,4 +186,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('aged_payable', AgedPayableController::class);
 
     Route::resource('oversea_company_report', OverseaCompanyReportController::class);
+
+    Route::resource('balace_sheet', BalanceSheetController::class);
+
 });

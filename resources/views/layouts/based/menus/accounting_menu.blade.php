@@ -76,8 +76,8 @@
                 </a>
             </li>
 
-            <li class="">
-                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
+            <li class="{{ Route::is('balace_sheet.index') ? 'active' : '' }}">
+                <a href="{{ route('balace_sheet.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-plus"></use>
                     </svg>
