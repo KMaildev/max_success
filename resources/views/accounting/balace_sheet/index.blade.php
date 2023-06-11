@@ -8,8 +8,91 @@
                         <h3 class="box-title">
                             Balance Sheet
                         </h3>
+
+
+
+
+                        <div class="box-tools pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                    <span class="fa fa-fw fa-filter"></span>
+                                    Filters <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu ps ps--theme_default" role="menu">
+
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            This Week
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            Last Week
+                                        </a>
+                                    </li>
+
+                                    <hr class="dropdown-divider">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            This Month
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            Last Month
+                                        </a>
+                                    </li>
+
+                                    <hr class="dropdown-divider">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            Current Year
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            Last Year
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <a href="" class="btn btn-danger">
+                                <i class="fa fa-file-pdf"></i>
+                                PDF
+                            </a>
+
+                            <a href="" class="btn btn-success">
+                                <i class="fa fa-file-excel"></i>
+                                Excel
+                            </a>
+
+
+
+                        </div>
                     </div>
 
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="Male">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="Female">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="box-body">
                         <div class="table-responsive text-nowrap">
                             <table class="table table-bordered table-sm">
@@ -270,7 +353,6 @@
                                             @endphp
                                         </td>
                                     </tr>
-
 
                                     <tr>
                                         <td colspan="3">
