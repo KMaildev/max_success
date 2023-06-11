@@ -66,12 +66,12 @@ class DemandInvoiceController extends Controller
 
     public function demand_invoice_datatable(Request $request)
     {
-        $data = DemandInvoice::with('demand', 'overseas_agencies')
+        $data = DemandInvoice::with('demand', 'overseas_agencies', 'cash_books')
             ->orderBy('id', 'DESC');
 
         return DataTables::of($data)
-            ->addIndexColumn()
 
+            ->addIndexColumn()
 
             ->editColumn('agent_company_name', function ($each) {
                 return  $each->overseas_agencies ? $each->overseas_agencies->agent_company_name : '';
@@ -92,7 +92,6 @@ class DemandInvoiceController extends Controller
                     $q1->where('company_name', 'like', '%' . $keyword . '%');
                 });
             })
-
 
             ->editColumn('demand_number', function ($each) {
                 return  $each->demand ? $each->demand->demand_number : $each->demand->demand_number;
@@ -136,14 +135,35 @@ class DemandInvoiceController extends Controller
 
             ->editColumn('balance', function ($each) {
                 $total_labour =  $each->total_labour ?? 0;
-                $total_amount = $each->amount;
+                $total_amount = $each->amount ?? 0;
                 $balance = $total_labour * $total_amount;
                 return number_format($balance, 2);
             })
 
+            ->editColumn('status', function ($each) {
+                $total_labour =  $each->total_labour ?? 0;
+                $total_amount = $each->amount ?? 0;
+                $balance = $total_labour * $total_amount;
+
+
+                $expense = [];
+                foreach ($each->cash_books as $key => $value) {
+                    $expense[] = $value->expense;
+                }
+                $total_exp = array_sum($expense);
+
+                if ($total_exp == 0) {
+                    return '<span class="badge bg-red">Nothing to Pay</span>';
+                } elseif ($balance == $total_exp) {
+                    return '<span class="badge bg-green">Paid</span>';
+                } else {
+                    return '<span class="badge bg-blue">Partial</span>';
+                }
+            })
+
             ->addColumn('action', function ($each) {
                 $edit_route = route('demand_invoice.edit', 1);
-                $show_route = route('demand_invoice.show', 1);
+                $oversea_company_report = route('oversea_company_report.show', $each->overseas_agencie_id);
                 $action =
                     '
                     <div class="btn-group">
@@ -156,6 +176,12 @@ class DemandInvoiceController extends Controller
                                     Edit
                                 </a>
                             </li>
+
+                            <li>
+                                <a href="' . $oversea_company_report . '" target="_blank">
+                                    Detail
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     ';
@@ -163,7 +189,7 @@ class DemandInvoiceController extends Controller
             })
 
             ->addIndexColumn()
-            ->rawColumns(['agent_company_name', 'company_name', 'demand_number', 'issue_number', 'male', 'female', 'balance', 'action'])
+            ->rawColumns(['agent_company_name', 'company_name', 'demand_number', 'issue_number', 'male', 'female', 'balance', 'status', 'action'])
             ->make(true);
     }
 }

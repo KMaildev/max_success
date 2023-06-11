@@ -100,6 +100,10 @@
                                             Remark
                                         </th>
 
+                                        <th class="text-center text-white w-5" style="width: 10%;">
+                                            Status
+                                        </th>
+
                                         <th class="text-center text-white w-5" style="width: 20%;">
                                             Actions
                                         </th>
@@ -159,6 +163,10 @@
 
                                         <th>
                                             <input class="form-control" type="hidden" data-colum="12" placeholder="Search">
+                                        </th>
+
+                                        <th>
+                                            <input class="form-control" type="hidden" data-colum="13" placeholder="Search">
                                         </th>
                                     </tr>
                                 </tfoot>
@@ -267,6 +275,12 @@
                     {
                         data: 'remark',
                         name: 'remark',
+                        class: 'text-center'
+                    },
+
+                    {
+                        data: 'status',
+                        name: 'status',
                         class: 'text-center'
                     },
 
