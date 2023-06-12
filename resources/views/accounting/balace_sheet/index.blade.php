@@ -9,12 +9,22 @@
                             Balance Sheet
                         </h3>
 
-
-
-
                         <div class="box-tools pull-right">
+
+                            <div class="btn-group" style="max-width: 240px;">
+                                <form action="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control date_picker" style="width: 100px;">
+                                        <input type="text" class="form-control date_picker" style="width: 100px;">
+                                        <button class="input-group-addon no-print" style="width: 40px; height: 34px;">
+                                            <i class="fa fa-search" id="addIcon" style="font-size: 1.2em;"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
                             <div class="btn-group">
-                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                <button type="button" class="btn btn-info dropdown-toggle btn-lg" data-toggle="dropdown"
                                     aria-expanded="false">
                                     <span class="sr-only">Toggle Dropdown</span>
                                     <span class="fa fa-fw fa-filter"></span>
@@ -61,13 +71,12 @@
                                 </ul>
                             </div>
 
-
-                            <a href="" class="btn btn-danger">
+                            <a href="#" class="btn btn-danger btn-lg">
                                 <i class="fa fa-file-pdf"></i>
                                 PDF
                             </a>
 
-                            <a href="" class="btn btn-success">
+                            <a href="#" class="btn btn-success btn-lg">
                                 <i class="fa fa-file-excel"></i>
                                 Excel
                             </a>
@@ -78,21 +87,7 @@
                     </div>
 
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="Male">
-                                </div>
-                            </div>
 
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="Female">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="box-body">
                         <div class="table-responsive text-nowrap">
                             <table class="table table-bordered table-sm">
