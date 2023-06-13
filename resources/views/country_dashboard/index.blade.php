@@ -14,18 +14,26 @@
                 <div id="invoice-count" class="small-box bg-green">
                     <div class="inner">
                         <h4>
-                            <i>TOTAL LABOUR</i> 
-                            <span class="total-invoice">0</span>
+                            <i>TOTAL LABOUR</i>
+                            <span class="total-invoice">
+                                {{ number_format($total_passport) }}
+                            </span>
                         </h4>
                         <h4>
-                            <i>TOTAL LABOUR TODAY</i> 
-                            <span class="total-invoice">0</span>
+                            <i>
+                                Total Male + Female
+                            </i>
+                            <span class="total-invoice" style="padding-top: 4px;">
+                                M: {{ $total_passport_male }}
+                                +
+                                F: {{ $total_passport_female }}
+                            </span>
                         </h4>
                     </div>
                     <div class="icon">
                         <i class="fa fa-pencil"></i>
                     </div>
-                    <a href="invoice.php" class="small-box-footer">
+                    <a href="{{ route('passport.index') }}" class="small-box-footer">
                         Details
                         <i class="fa fa-arrow-circle-right"></i>
                     </a>
@@ -36,18 +44,28 @@
                 <div id="customer-count" class="small-box bg-red">
                     <div class="inner">
                         <h4>
-                            <i>TOTAL DEMAND</i> 
-                            <span class="total-customer">2</span>
+                            <i>TOTAL DEMAND</i>
+                            <span class="total-customer">
+                                {{ $total_demand ?? 0 }}
+                            </span>
                         </h4>
                         <h4>
-                            <i>TOTAL DEMAND TODAY</i> 
-                            <span class="total-customer">0</span>
+                            <i>
+                                Total Male + Female
+                            </i>
+                            <span class="total-customer">
+                                M:
+                                {{ $demand_male ?? 0 }}
+                                +
+                                F:
+                                {{ $demand_female ?? 0 }}
+                            </span>
                         </h4>
                     </div>
                     <div class="icon">
                         <i class="fa fa-users"></i>
                     </div>
-                    <a href="customer.php" class="small-box-footer">
+                    <a href="{{ route('demand.index') }}" class="small-box-footer">
                         Details
                         <i class="fa fa-arrow-circle-right"></i>
                     </a>
@@ -58,18 +76,28 @@
                 <div id="supplier-count" class="small-box bg-purple">
                     <div class="inner">
                         <h4>
-                            <i>TOTAL CONTRACT</i> 
-                            <span class="total-suppier">1</span>
+                            <i>TOTAL CONTRACT</i>
+                            <span class="total-suppier">
+                                {{ $contract_total ?? 0 }}
+                            </span>
                         </h4>
                         <h4>
-                            <i>TOTAL CONTRACT TODAY</i> 
-                            <span class="total-suppier">0</span>
+                            <i>
+                                Total Male + Female
+                            </i>
+                            <span class="total-suppier">
+                                M:
+                                {{ $contract_male ?? 0 }}
+                                +
+                                F:
+                                {{ $contract_female ?? 0 }}
+                            </span>
                         </h4>
                     </div>
                     <div class="icon">
                         <i class="fa fa-fw fa-shopping-cart"></i>
                     </div>
-                    <a href="supplier.php" class="small-box-footer">
+                    <a href="{{ route('contract.index') }}" class="small-box-footer">
                         Details
                         <i class="fa fa-arrow-circle-right"></i>
                     </a>
@@ -80,16 +108,28 @@
                 <div id="product-count" class="small-box bg-yellow">
                     <div class="inner">
                         <h4>
-                            <i>TOTAL SENDING</i> <span class="total-product">2</span>
+                            <i>TOTAL SENDING</i>
+                            <span class="total-product">
+                                {{ $sending_total ?? 0 }}
+                            </span>
                         </h4>
                         <h4>
-                            <i>TOTAL SENDING TODAY</i> <span class="total-product">0</span>
+                            <i>
+                                Total Male + Female
+                            </i>
+                            <span class="total-product">
+                                M:
+                                {{ $sending_male ?? 0 }}
+                                +
+                                F:
+                                {{ $sending_female ?? 0 }}
+                            </span>
                         </h4>
                     </div>
                     <div class="icon">
                         <i class="fa fa-star"></i>
                     </div>
-                    <a href="product.php" class="small-box-footer">
+                    <a href="{{ route('sending.index') }}" class="small-box-footer">
                         Details
                         <i class="fa fa-arrow-circle-right"></i>
                     </a>

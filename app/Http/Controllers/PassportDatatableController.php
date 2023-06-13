@@ -12,7 +12,7 @@ class PassportDatatableController extends Controller
 
     public function labourLists(Request $request)
     {
-        $data = Passport::with('agent_list_table')
+        $data = Passport::with('agent_list_table', 'interview_labours_status', 'labour_management_passport_id')
             ->where('reject_status', NULL)
             ->orderBy('id', 'DESC');
 
@@ -39,8 +39,47 @@ class PassportDatatableController extends Controller
 
 
             ->editColumn('interview', function ($each) {
-                return  $each->agent_list_table ? $each->agent_list_table->name : $each->local_agent_name;
+                if ($each->interview_labours_status) {
+                    return  $each->interview_labours_status->interviews_table ? $each->interview_labours_status->interviews_table->interview_date : '';
+                }
             })
+
+            ->filterColumn('interview', function ($query, $keyword) {
+                $query->whereHas('interview_labours_status', function ($q1) use ($keyword) {
+                    $q1->whereHas('interviews_table', function ($q1) use ($keyword) {
+                        $q1->where('interview_date', 'like', '%' . $keyword . '%');
+                    });
+                });
+            })
+
+            ->editColumn('contract_date', function ($each) {
+                if ($each->labour_management_passport_id) {
+                    return  $each->labour_management_passport_id->contract_table ? $each->labour_management_passport_id->contract_table->contract_date : '';
+                }
+            })
+
+            ->filterColumn('contract_date', function ($query, $keyword) {
+                $query->whereHas('labour_management_passport_id', function ($q1) use ($keyword) {
+                    $q1->whereHas('contract_table', function ($q1) use ($keyword) {
+                        $q1->where('contract_date', 'like', '%' . $keyword . '%');
+                    });
+                });
+            })
+
+            ->editColumn('sending_date', function ($each) {
+                if ($each->labour_management_passport_id) {
+                    return  $each->labour_management_passport_id->sending_table ? $each->labour_management_passport_id->sending_table->sending_date : '';
+                }
+            })
+
+            ->filterColumn('sending_date', function ($query, $keyword) {
+                $query->whereHas('labour_management_passport_id', function ($q1) use ($keyword) {
+                    $q1->whereHas('sending_table', function ($q1) use ($keyword) {
+                        $q1->where('sending_date', 'like', '%' . $keyword . '%');
+                    });
+                });
+            })
+
 
             ->addColumn('edit', function ($each) {
                 $edit =
@@ -56,7 +95,7 @@ class PassportDatatableController extends Controller
             })
 
             ->addIndexColumn()
-            ->rawColumns(['agent_name', 'country', 'edit'])
+            ->rawColumns(['edit'])
             ->make(true);
     }
 

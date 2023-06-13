@@ -188,13 +188,13 @@
                     },
                     // Contract Date	
                     {
-                        data: 'edit',
-                        name: 'edit',
+                        data: 'contract_date',
+                        name: 'contract_date',
                     },
                     // Sending Date	
                     {
-                        data: 'edit',
-                        name: 'edit',
+                        data: 'sending_date',
+                        name: 'sending_date',
                     },
                     // Remark
                     {
