@@ -60,6 +60,69 @@ class CountryDashboardController extends Controller
         })->sum('sending_female');
 
 
-        return view('country_dashboard.index', compact('total_passport', 'total_passport_male', 'total_passport_female', 'total_demand', 'demand_male', 'demand_female', 'contract_total', 'contract_male', 'contract_female', 'sending_total', 'sending_male', 'sending_female'));
+
+        // Chart 
+        // Passport Data Chart
+        $months = [date('F', strtotime("-5 month"))];
+        $yearMonths = [
+            [
+                'year' => date('Y'),
+                'month' => date('m', strtotime("-5 month")),
+            ]
+        ];
+        for ($i = -4; $i <= 0; $i++) {
+            $months[] = date('F', strtotime("+$i month"));
+            $yearMonths[] = [
+                'year' => date('Y', strtotime("+$i month")),
+                'month' => date('m', strtotime("+$i month")),
+            ];
+        }
+        $passportData = [];
+        foreach ($yearMonths as $key => $ym) {
+            $passportData[] =  Passport::whereYear('created_at', $ym['year'])->whereMonth('created_at', $ym['month'])->count();
+        }
+        // Passport Data Chart
+
+
+        // Passport Country Chart
+        $countries = Country::all();
+        $passportCountryData = [];
+        $country = [];
+        foreach ($countries as $key => $value) {
+            $country[] = $value->title;
+            $passportCountryData[] = Passport::where('selected_country', $value->title)->count();
+        }
+
+
+
+
+        // Gender Report 
+        $genders = ['male', 'female'];
+        $maleFemaleReport = [];
+        foreach ($genders as $key => $value) {
+            $maleFemaleReport[] = Passport::where('gender', $value)->count();
+        }
+
+
+        return view('country_dashboard.index', compact(
+            'total_passport',
+            'total_passport_male',
+            'total_passport_female',
+            'total_demand',
+            'demand_male',
+            'demand_female',
+            'contract_total',
+            'contract_male',
+            'contract_female',
+            'sending_total',
+            'sending_male',
+            'sending_female',
+            'months',
+            'passportData',
+            'country',
+            'passportCountryData',
+            'genders',
+            'maleFemaleReport',
+        ));
     }
 }

@@ -24,6 +24,9 @@
 <script src="{{ asset('assets/toastr/toastr.js') }}"></script>
 <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 @yield('script')
 
 <script>
