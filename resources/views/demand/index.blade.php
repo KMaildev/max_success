@@ -82,7 +82,11 @@
                                         </th>
 
                                         <th class="text-white w-5">
-                                            Issue Number Date
+                                            Issue Number
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Demand Number
                                         </th>
 
                                         <th class="text-white w-5">
@@ -158,8 +162,12 @@
                                                 {{ $demand->issue_date }}
                                             </td>
 
-                                            <td data-title="Demand Number">
+                                            <td data-title="Issue Number">
                                                 {{ $demand->issue_number }}
+                                            </td>
+
+                                            <td data-title="Demand Number">
+                                                {{ $demand->demand_number }}
                                             </td>
 
                                             <td data-title="Male">
@@ -239,7 +247,11 @@
                                         </th>
 
                                         <th class="text-white w-5">
-                                            Issue Number Date
+                                            Issue Number
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Demand Number
                                         </th>
 
                                         <th class="text-white w-5">

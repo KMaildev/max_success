@@ -31,17 +31,6 @@
                 </a>
             </li>
 
-            <li class="{{ Route::is('overseas_agent.index') ? 'active' : '' }}">
-                <a href="{{ route('overseas_agent.index') }}">
-                    <svg class="svg-icon">
-                        <use href="#icon-dashboard">
-                    </svg>
-                    <span>
-                        Overseas Company
-                    </span>
-                </a>
-            </li>
-
             <li class="{{ Route::is('agent_list.index') ? 'active' : '' }}">
                 <a href="{{ route('agent_list.index') }}">
                     <svg class="svg-icon">
@@ -52,6 +41,18 @@
                     </span>
                 </a>
             </li>
+
+            <li class="{{ Route::is('overseas_agent.index') ? 'active' : '' }}">
+                <a href="{{ route('overseas_agent.index') }}">
+                    <svg class="svg-icon">
+                        <use href="#icon-dashboard">
+                    </svg>
+                    <span>
+                        Overseas Company
+                    </span>
+                </a>
+            </li>
+            
 
             <li class="{{ Route::is('passport.index') ? 'active' : '' }}">
                 <a href="{{ route('passport.index') }}">

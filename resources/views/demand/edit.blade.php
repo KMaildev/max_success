@@ -210,7 +210,7 @@
                                     </label>
                                     <div class="col-md-9">
                                         <input type="text"
-                                            class="date_picker form-control @error('issue_number') form-control-danger @enderror"
+                                            class="form-control @error('issue_number') form-control-danger @enderror"
                                             name="issue_number" placeholder="Issue Number"
                                             value="{{ $demand->issue_number ?? '' }}">
                                         @error('issue_number')
@@ -256,4 +256,3 @@
         </div>
     </div>
 </div>
-

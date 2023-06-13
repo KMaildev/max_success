@@ -135,7 +135,7 @@
                         </label>
                         <div class="col-md-7">
                             <input type="text"
-                                class="form-control dob @error('interview_date') form-control-danger @enderror"
+                                class="form-control date_picker @error('interview_date') form-control-danger @enderror"
                                 name="interview_date">
                             @error('interview_date')
                                 <div class="form-control-feedback" style="color: red;">

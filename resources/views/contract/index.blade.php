@@ -51,9 +51,15 @@
                                         <th class="text-white w-5">
                                             Name
                                         </th>
+
                                         <th class="text-white w-5">
-                                            Oversea Company
+                                            Company
                                         </th>
+
+                                        <th class="text-white w-5">
+                                            Job
+                                        </th>
+
                                         <th class="text-white w-5">
                                             Male
                                         </th>
@@ -93,6 +99,10 @@
 
                                             <td data-title="Overseas Company">
                                                 {{ $contract->demands_table->overseas_agencies_table->company_name ?? '' }}
+                                            </td>
+
+                                            <td data-title="Job">
+                                                {{ $contract->demands_table->job ?? '' }}
                                             </td>
 
                                             <td data-title="Male" style="tfont-weight: bold">
@@ -154,8 +164,13 @@
                                             Name
                                         </th>
                                         <th class="text-white w-5">
-                                            Oversea Company
+                                            Company
                                         </th>
+
+                                        <th class="text-white w-5">
+                                            Job
+                                        </th>
+
                                         <th class="text-white w-5">
                                             Male
                                         </th>

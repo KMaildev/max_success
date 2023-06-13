@@ -58,7 +58,11 @@
                                         </th>
 
                                         <th class="text-white w-5">
-                                            Oversea Company
+                                            Company
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Job
                                         </th>
 
                                         <th class="text-white w-5">
@@ -103,6 +107,10 @@
 
                                             <td data-title="Company" style="text-align: center; font-weight: bold">
                                                 {{ $interview->demands_table->overseas_agencies_table->company_name ?? '' }}
+                                            </td>
+
+                                            <td data-title="Job" style="text-align: center; font-weight: bold">
+                                                {{ $interview->demands_table->job ?? '' }}
                                             </td>
 
                                             <td data-title="Male" style="text-align: center; font-weight: bold">
@@ -151,7 +159,11 @@
                                         </th>
 
                                         <th class="text-white w-5">
-                                            Oversea Company
+                                            Company
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Job
                                         </th>
 
                                         <th class="text-white w-5">

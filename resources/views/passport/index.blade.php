@@ -183,8 +183,8 @@
                     },
                     // Interview
                     {
-                        data: 'edit',
-                        name: 'edit',
+                        data: 'interview',
+                        name: 'interview',
                     },
                     // Contract Date	
                     {

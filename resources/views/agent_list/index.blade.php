@@ -36,7 +36,7 @@
                 <div class="box box-success">
                     <div class="box-header">
                         <h3 class="box-title">
-                            Foreign Agent
+                            Agent Lists (Local sub agent)
                         </h3>
                     </div>
                     <div class="box-body">

@@ -19,7 +19,6 @@ class PassportDatatableController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
 
-
             ->editColumn('agent_name', function ($each) {
                 return  $each->agent_list_table ? $each->agent_list_table->name : $each->local_agent_name;
             })
@@ -36,6 +35,11 @@ class PassportDatatableController extends Controller
 
             ->filterColumn('gender', function ($query, $keyword) {
                 $query->where('gender', $keyword);
+            })
+
+
+            ->editColumn('interview', function ($each) {
+                return  $each->agent_list_table ? $each->agent_list_table->name : $each->local_agent_name;
             })
 
             ->addColumn('edit', function ($each) {

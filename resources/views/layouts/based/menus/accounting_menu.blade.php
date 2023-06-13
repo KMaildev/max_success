@@ -103,14 +103,6 @@
                 </a>
             </li>
 
-            <li class="">
-                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
-                    <svg class="svg-icon">
-                        <use href="#icon-plus"></use>
-                    </svg>
-                    General Ledger
-                </a>
-            </li>
 
             <li class="">
                 <a ng-click="BankingDepositModal()" onclick="return false;" href="#">

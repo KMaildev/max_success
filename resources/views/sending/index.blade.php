@@ -39,8 +39,13 @@
                                             Name
                                         </th>
                                         <th class="text-white w-5">
-                                            Oversea Company
+                                            Company
                                         </th>
+
+                                        <th class="text-white w-5">
+                                            Job
+                                        </th>
+
                                         <th class="text-white w-5">
                                             Male
                                         </th>
@@ -80,6 +85,10 @@
 
                                             <td data-title="Company Name">
                                                 {{ $sending->demands_table->overseas_agencies_table->company_name ?? '' }}
+                                            </td>
+
+                                            <td data-title="Job">
+                                                {{ $sending->demands_table->job ?? '' }}
                                             </td>
 
                                             <td data-title="Male" style="text-align: right; font-weight: bold">
