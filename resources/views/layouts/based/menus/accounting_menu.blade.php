@@ -104,6 +104,16 @@
             </li>
 
 
+            <li class="{{ Route::is('company_labour.index') ? 'active' : '' }}">
+                <a href="{{ route('company_labour.index') }}">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    Company & Labour
+                </a>
+            </li>
+
+
             <li class="">
                 <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
                     <svg class="svg-icon">

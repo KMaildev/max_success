@@ -45,4 +45,9 @@ class LabourManagement extends Model
     {
         return $this->belongsTo(Sending::class, 'sending_id', 'id');
     }
+
+    public function passport()
+    {
+        return $this->belongsTo(Passport::class, 'id', 'passport_id');
+    }
 }

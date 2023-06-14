@@ -44,4 +44,10 @@ class Demand extends Model
     {
         return $this->hasMany(DemandInvoice::class, 'demand_id', 'id');
     }
+
+
+    public function labour_management()
+    {
+        return $this->hasMany(LabourManagement::class, 'demand_id', 'id');
+    }
 }
