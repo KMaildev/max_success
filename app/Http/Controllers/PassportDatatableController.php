@@ -100,6 +100,99 @@ class PassportDatatableController extends Controller
     }
 
 
+    public function labourListsByCountry(Request $request)
+    {
+        $country = session('country_title');
+
+        $data = Passport::with('agent_list_table', 'interview_labours_status', 'labour_management_passport_id')
+            ->where('reject_status', NULL)
+            ->where('selected_country', $country)
+            ->orderBy('id', 'DESC');
+
+        return DataTables::of($data)
+            ->addIndexColumn()
+
+            ->editColumn('agent_name', function ($each) {
+                return  $each->agent_list_table ? $each->agent_list_table->name : $each->local_agent_name;
+            })
+
+            ->filterColumn('agent_name', function ($query, $keyword) {
+                $query->whereHas('agent_list_table', function ($q1) use ($keyword) {
+                    $q1->where('name', 'like', '%' . $keyword . '%');
+                });
+            })
+
+            ->editColumn('gender', function ($each) {
+                return  ucfirst($each->gender ?? '');
+            })
+
+            ->filterColumn('gender', function ($query, $keyword) {
+                $query->where('gender', $keyword);
+            })
+
+
+            ->editColumn('interview', function ($each) {
+                if ($each->interview_labours_status) {
+                    return  $each->interview_labours_status->interviews_table ? $each->interview_labours_status->interviews_table->interview_date : '';
+                }
+            })
+
+            ->filterColumn('interview', function ($query, $keyword) {
+                $query->whereHas('interview_labours_status', function ($q1) use ($keyword) {
+                    $q1->whereHas('interviews_table', function ($q1) use ($keyword) {
+                        $q1->where('interview_date', 'like', '%' . $keyword . '%');
+                    });
+                });
+            })
+
+            ->editColumn('contract_date', function ($each) {
+                if ($each->labour_management_passport_id) {
+                    return  $each->labour_management_passport_id->contract_table ? $each->labour_management_passport_id->contract_table->contract_date : '';
+                }
+            })
+
+            ->filterColumn('contract_date', function ($query, $keyword) {
+                $query->whereHas('labour_management_passport_id', function ($q1) use ($keyword) {
+                    $q1->whereHas('contract_table', function ($q1) use ($keyword) {
+                        $q1->where('contract_date', 'like', '%' . $keyword . '%');
+                    });
+                });
+            })
+
+            ->editColumn('sending_date', function ($each) {
+                if ($each->labour_management_passport_id) {
+                    return  $each->labour_management_passport_id->sending_table ? $each->labour_management_passport_id->sending_table->sending_date : '';
+                }
+            })
+
+            ->filterColumn('sending_date', function ($query, $keyword) {
+                $query->whereHas('labour_management_passport_id', function ($q1) use ($keyword) {
+                    $q1->whereHas('sending_table', function ($q1) use ($keyword) {
+                        $q1->where('sending_date', 'like', '%' . $keyword . '%');
+                    });
+                });
+            })
+
+
+            ->addColumn('edit', function ($each) {
+                $edit =
+                    '
+                        <button type="button" class="btn btn-sm btn-block btn-primary"
+                            id="editPassport"
+                            data-id="' . $each->id . '"
+                            >
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </button>
+                    ';
+                return $edit;
+            })
+
+            ->addIndexColumn()
+            ->rawColumns(['edit'])
+            ->make(true);
+    }
+
+
     public function index(Request $request)
     {
         $data = Passport::with('agent_list_table', 'medical_tests_status')

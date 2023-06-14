@@ -90,7 +90,7 @@
                                         </th>
 
                                         <th class="text-white w-5">
-                                            Total profit or loss
+                                            Total Balance Amount
                                         </th>
 
                                         <th class="text-white w-5">
@@ -99,6 +99,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $total_total_payable = [];
+                                        $total_receivable_amount = [];
+                                        $total_total_profit_loss = [];
+                                    @endphp
                                     @foreach ($demands as $key => $demand)
                                         <tr>
                                             <td class="text-center">
@@ -115,6 +120,7 @@
                                                     $total_labour = $demand->demand_invoices->sum('total_labour');
                                                     $total_payable = $amount * $total_labour;
                                                     echo number_format($total_payable, 2);
+                                                    $total_total_payable[] = $total_payable;
                                                 @endphp
                                             </td>
 
@@ -126,6 +132,7 @@
                                                     }
                                                     $receivable_amount = array_sum($receivable_amount);
                                                     echo number_format($receivable_amount, 2);
+                                                    $total_receivable_amount[] = $receivable_amount;
                                                 @endphp
                                             </td>
 
@@ -133,6 +140,7 @@
                                                 @php
                                                     $total_profit_loss = $total_payable - $receivable_amount;
                                                     echo number_format(abs($total_profit_loss), 2);
+                                                    $total_total_profit_loss[] = $total_profit_loss;
                                                 @endphp
                                             </td>
 
@@ -150,6 +158,44 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
+                                <tr>
+                                    <td colspan="2">
+                                        Total
+                                    </td>
+
+                                    <td class="text-center">
+                                        @php
+                                            $total_total_payable = array_sum($total_total_payable);
+                                            echo number_format($total_total_payable, 2);
+                                        @endphp
+                                    </td>
+
+                                    <td class="text-center">
+                                        @php
+                                            $total_receivable_amount = array_sum($total_receivable_amount);
+                                            echo number_format($total_receivable_amount, 2);
+                                        @endphp
+                                    </td>
+
+                                    <td class="text-center">
+                                        @php
+                                            $total_total_profit_loss = array_sum($total_total_profit_loss);
+                                            echo number_format(abs($total_total_profit_loss), 2);
+                                        @endphp
+                                    </td>
+
+                                    <td class="text-center">
+                                        @if ($total_total_profit_loss <= 0)
+                                            <span class="badge rounded-pill bg-green">
+                                                Profit
+                                            </span>
+                                        @else
+                                            <span class="badge rounded-pill bg-red">
+                                                loss
+                                            </span>
+                                        @endif
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>

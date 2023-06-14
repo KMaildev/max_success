@@ -1,4 +1,4 @@
-@extends('layouts.based.base_main')
+@extends('layouts.main')
 @section('content')
     <section class="content-header">
         <h1>
@@ -79,7 +79,7 @@
                 ],
 
                 ajax: {
-                    url: "{{ route('labour_lists_by_country') }}",
+                    url: "{{ route('labour_lists') }}",
                 },
 
                 columns: [{

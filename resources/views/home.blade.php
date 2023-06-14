@@ -237,6 +237,31 @@
                 </script>
             </div>
         </div>
+
+        <hr>
+
+        <div class="row">
+            <h6>
+                Need to update to the next version.
+            </h6>
+            <ul>
+                <li>
+                    All Chart and Report Data
+                </li>
+                <li>
+                    All Reporting System in Accounting
+                </li>
+                <li>
+                    Labour Payment & Cash Book
+                </li>
+                <li>
+                    Printing system
+                </li>
+                <li>
+                    Tax Report
+                </li>
+            </ul>
+        </div>
     </section>
     <!-- Content End -->
 @endsection

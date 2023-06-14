@@ -73,6 +73,13 @@ Route::middleware('auth')->group(function () {
     Route::get('passport_edit_form_ajax/{id}', [PassportController::class, 'passportEditFormAjax'])->name('passport_edit_form_ajax');
     Route::post('/passport_import', [PassportController::class, 'passportImport'])->name('passport_import');
 
+
+
+    Route::get('all_labour_list', [PassportController::class, 'allLabourList'])->name('all_labour_list');
+
+
+
+
     Route::get('/reject_passport/{id}', [PassportController::class, 'rejectPassport'])->name('reject_passport');
     Route::get('/reject_passport_list', [PassportController::class, 'rejectPassportList'])->name('reject_passport_list');
     Route::get('/cancel_reject_passport/{id}', [PassportController::class, 'cancelRejectPassport'])->name('cancel_reject_passport');
@@ -143,6 +150,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('passport_datatable', PassportDatatableController::class);
     Route::get('labour_lists', [PassportDatatableController::class, 'labourLists'])->name('labour_lists');
+    Route::get('labour_lists_by_country', [PassportDatatableController::class, 'labourListsByCountry'])->name('labour_lists_by_country');
+
     Route::get('get_passport_datatable', [PassportDatatableController::class, 'index'])->name('get_passport_datatable');
     Route::get('get_medical_tests_pass_labour', [PassportDatatableController::class, 'medicalTestsPassLabour'])->name('get_medical_tests_pass_labour');
 

@@ -16,11 +16,13 @@ class DemandController extends Controller
 {
     public function index()
     {
+        $country_id = session('country_id');
+
         $overseas_agencies = OverseasAgency::all();
         $offices = Office::all();
         $countryies = Country::all();
 
-        $demands = Demand::where('demand_status', 'new_demand')
+        $demands = Demand::where('countrie_id', $country_id)
             ->paginate(100);
 
         if (request('from_date') && request('to_date')) {

@@ -31,6 +31,19 @@
                 </a>
             </li>
 
+
+            <li class="{{ Route::is('all_labour_list') ? 'active' : '' }}">
+                <a href="{{ route('all_labour_list') }}">
+                    <svg class="svg-icon">
+                        <use href="#icon-dashboard">
+                    </svg>
+                    <span>
+                        Labour Lists
+                    </span>
+                </a>
+            </li>
+
+
             <li class="{{ Route::is('users.index') ? 'active' : '' }}">
                 <a href="{{ route('users.index') }}">
                     <svg class="svg-icon">

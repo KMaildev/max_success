@@ -25,6 +25,16 @@ class PassportController extends Controller
         return view('passport.index', compact('agent_lists', 'countries'));
     }
 
+
+    public function allLabourList(Request $request)
+    {
+        $agent_lists = AgentList::all();
+        $countries = Country::all();
+        return view('passport.all_labour_lists', compact('agent_lists', 'countries'));
+    }
+
+
+
     public function create()
     {
         $agent_lists = AgentList::all();
