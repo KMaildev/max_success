@@ -73,7 +73,14 @@ class Passport extends Model
         'user_id',
         'marital_status',
         'leader',
-
+        'nrc_code',
+        'nrc_name',
+        'nrc_type',
+        'nrc_number',
+        'dob_year',
+        'dob_month',
+        'dob_day',
+        'total_amount_mmk',
     ];
 
     public function agent_list_table()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contract;
 use App\Models\Country;
 use App\Models\Demand;
+use App\Models\OverseasAgency;
 use App\Models\Passport;
 use App\Models\Sending;
 use Illuminate\Http\Request;
@@ -63,7 +64,7 @@ class CountryDashboardController extends Controller
 
         // Chart 
         // Passport Data Chart
-        $months = [date('F', strtotime("-5 month"))];
+        $months = [date('F-Y', strtotime("-5 month"))];
         $yearMonths = [
             [
                 'year' => date('Y'),
@@ -71,7 +72,7 @@ class CountryDashboardController extends Controller
             ]
         ];
         for ($i = -4; $i <= 0; $i++) {
-            $months[] = date('F', strtotime("+$i month"));
+            $months[] = date('F-Y', strtotime("+$i month"));
             $yearMonths[] = [
                 'year' => date('Y', strtotime("+$i month")),
                 'month' => date('m', strtotime("+$i month")),
@@ -94,15 +95,66 @@ class CountryDashboardController extends Controller
         }
 
 
-
-
         // Gender Report 
-        $genders = ['male', 'female'];
+        $genders = ['M', 'F'];
         $maleFemaleReport = [];
         foreach ($genders as $key => $value) {
             $maleFemaleReport[] = Passport::where('gender', $value)->count();
         }
 
+
+        // Contract Data 
+        $contractData = [];
+        foreach ($yearMonths as $key => $ym) {
+            $contractData[] = Contract::selectRaw('SUM(contract_male + contract_female) as total')
+                ->whereYear('created_at', $ym['year'])
+                ->whereMonth('created_at', $ym['month'])
+                ->first()
+                ->total;
+        }
+
+
+        // Sending 
+        $sendingData = [];
+        foreach ($yearMonths as $key => $ym) {
+            $sendingData[] = Sending::selectRaw('SUM(sending_male + sending_female) as total')
+                ->whereYear('created_at', $ym['year'])
+                ->whereMonth('created_at', $ym['month'])
+                ->first()
+                ->total;
+        }
+
+
+        // Demand Company 
+        $overseas_agencies = OverseasAgency::all();
+        $demandData = [];
+        $companyData = [];
+        foreach ($overseas_agencies as $key => $value) {
+            $companyData[] = $value->company_name ?? $value->agent_company_name;
+            $demandData[] = Demand::selectRaw('SUM(male + female) as total')
+                ->where('overseas_agencie_id', $value->id)
+                ->first()
+                ->total;
+        }
+
+        // Demand Job 
+        $job_lists = Demand::groupBy('job')->get();
+        $job = [];
+        $demandJob = [];
+        foreach ($job_lists as $key => $value) {
+            $job[] = $value->job;
+            $demandJob[] = Demand::selectRaw('SUM(male + female) as total')
+                ->where('job', $value->job)
+                ->first()
+                ->total;
+        }
+
+
+        // Country overseas_agencies
+        $OverseasCountryData = [];
+        foreach ($countries as $key => $value) {
+            $OverseasCountryData[] = OverseasAgency::where('countrie_id', $value->id)->count();
+        }
 
         return view('country_dashboard.index', compact(
             'total_passport',
@@ -123,6 +175,13 @@ class CountryDashboardController extends Controller
             'passportCountryData',
             'genders',
             'maleFemaleReport',
+            'contractData',
+            'sendingData',
+            'companyData',
+            'demandData',
+            'job',
+            'demandJob',
+            'OverseasCountryData',
         ));
     }
 }

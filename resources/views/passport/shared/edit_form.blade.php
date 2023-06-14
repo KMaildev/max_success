@@ -38,12 +38,12 @@
         <div class="col-md-8">
             <div class="custom-control custom-radio">
                 <input type="radio" id="male" value="male" name="gender" class="form-check-input"
-                    @if ($passport->gender == 'male') checked @endif>
+                    @if ($passport->gender == 'M') checked @endif>
                 <label class="form-check-label" for="male">Male</label>
             </div>
             <div class="custom-control custom-radio">
                 <input type="radio" id="female" value="female" name="gender" class="form-check-input"
-                    @if ($passport->gender == 'female') checked @endif>
+                    @if ($passport->gender == 'F') checked @endif>
                 <label class="form-check-label" for="female">Female</label>
             </div>
         </div>
