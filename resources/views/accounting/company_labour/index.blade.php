@@ -11,18 +11,6 @@
 
                         <div class="box-tools pull-right">
 
-                            <div class="btn-group" style="max-width: 240px;">
-                                <form action="">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control date_picker" style="width: 100px;">
-                                        <input type="text" class="form-control date_picker" style="width: 100px;">
-                                        <button class="input-group-addon no-print" style="width: 40px; height: 34px;">
-                                            <i class="fa fa-search" id="addIcon" style="font-size: 1.2em;"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-
                             <div class="btn-group">
                                 <button type="button" class="btn btn-info dropdown-toggle btn-lg" data-toggle="dropdown"
                                     aria-expanded="false">
@@ -92,11 +80,21 @@
                                         <th class="text-white w-5">
                                             Company Name
                                         </th>
+
                                         <th class="text-white w-5">
                                             Total Payable Amount
                                         </th>
+
                                         <th class="text-white w-5">
                                             Total Receivable Amount
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Total profit or loss
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Status
                                         </th>
                                     </tr>
                                 </thead>
@@ -122,12 +120,32 @@
 
                                             <td class="text-center">
                                                 @php
-                                                    foreach ($demand->labour_management as $key => $labour_management) {
-                                                        foreach ($labour_management->passport as $key => $value) {
-                                                            echo $value->id;
-                                                        }
+                                                    $receivable_amount = [];
+                                                    foreach ($demand->labour_management as $manage) {
+                                                        $receivable_amount[] = $manage->passport_data->total_amount_mmk;
                                                     }
+                                                    $receivable_amount = array_sum($receivable_amount);
+                                                    echo number_format($receivable_amount, 2);
                                                 @endphp
+                                            </td>
+
+                                            <td class="text-center">
+                                                @php
+                                                    $total_profit_loss = $total_payable - $receivable_amount;
+                                                    echo number_format(abs($total_profit_loss), 2);
+                                                @endphp
+                                            </td>
+
+                                            <td class="text-center">
+                                                @if ($total_profit_loss <= 0)
+                                                    <span class="badge rounded-pill bg-green">
+                                                        Profit
+                                                    </span>
+                                                @else
+                                                    <span class="badge rounded-pill bg-red">
+                                                        loss
+                                                    </span>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
