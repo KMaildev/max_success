@@ -74,10 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/passport_import', [PassportController::class, 'passportImport'])->name('passport_import');
 
 
-
     Route::get('all_labour_list', [PassportController::class, 'allLabourList'])->name('all_labour_list');
-
-
 
 
     Route::get('/reject_passport/{id}', [PassportController::class, 'rejectPassport'])->name('reject_passport');
@@ -125,6 +122,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('labour_payment', LabourPaymentController::class);
     Route::get('labour_payment_show/{id}', [LabourPaymentController::class, 'show'])->name('labour_payment_show');
+    Route::get('payment_history/{id}', [LabourPaymentController::class, 'payment_history'])->name('payment_history');
+
 
     Route::get('labour_payment_files/{id}', [LabourPaymentController::class, 'labourPaymentFiles'])->name('labour_payment_files');
     Route::post('labour_payment_file_upload', [LabourPaymentController::class, 'labourPaymentFileUpload'])->name('labour_payment_file_upload');

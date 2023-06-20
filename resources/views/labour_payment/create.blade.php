@@ -19,16 +19,100 @@
 
     <section class="content">
         <div class="row">
-            <div class="col-xs-12">
-                <div class="box box-success">
-                    <div class="box-body">
-                        <div class="col-md-8">
+            <div class="box box-success">
+                <div class="box-body">
+                    <form action="{{ route('labour_payment.store') }}" method="POST" autocomplete="off" id="create-form"
+                        role="form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group" style="padding: 17px;">
+                                        <label for="html5-text-input" class="col-md-3 control-labe">
+                                            Passport
+                                        </label>
+                                        <div class="col-md-9">
+                                            <select class="form-control form-select select2" name="passport_id"
+                                                id="PassportId">
+                                                <option value="">
+                                                    --Select Labour--
+                                                </option>
+                                                @foreach ($passports as $passport)
+                                                    <option value="{{ $passport->id }}">
+                                                        {{ $passport->name ?? '' }}
+                                                        @
+                                                        {{ $passport->passport ?? '' }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('passport_id')
+                                                <div class="form-control-feedback" style="color: red;">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <form action="{{ route('labour_payment.store') }}" method="POST" autocomplete="off"
-                                id="create-form" role="form" enctype="multipart/form-data">
-                                @csrf
+                                <div class="col-md-12">
+                                    <div class="form-group" style="padding: 17px;">
+                                        <label for="html5-text-input" class="col-md-3 control-labe">
+                                            Name
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" id="Name" readonly>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="col-md-12">
+                                    <div class="form-group" style="padding: 17px;">
+                                        <label for="html5-text-input" class="col-md-3 control-labe">
+                                            NRC
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" id="NRC" readonly>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="col-md-12">
+                                    <div class="form-group" style="padding: 17px;">
+                                        <label for="html5-text-input" class="col-md-3 control-labe">
+                                            Address
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" id="Address" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group" style="padding: 17px;">
+                                        <label for="html5-text-input" class="col-md-3 control-labe">
+                                            Country
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" id="Country" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group" style="padding: 17px;">
+                                        <label for="html5-text-input" class="col-md-3 control-labe">
+                                            MMK Amount
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" id="TotalMMKAmount" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Received Date
@@ -38,59 +122,9 @@
                                             value="{{ old('deposit_date') }}">
                                     </div>
                                 </div>
+                            </div>
 
-
-                                <div class="form-group" style="padding: 17px;">
-                                    <label for="html5-text-input" class="col-md-3 control-labe">
-                                        Passport
-                                    </label>
-                                    <div class="col-md-9">
-                                        <select class="form-control form-select select2" name="passport_id" id="PassportId">
-                                            <option value="">
-                                                --Select Labour--
-                                            </option>
-                                            @foreach ($passports as $passport)
-                                                <option value="{{ $passport->id }}">
-                                                    {{ $passport->passport ?? $passport->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('passport_id')
-                                            <div class="form-control-feedback" style="color: red;">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group" style="padding: 17px;">
-                                    <label for="html5-text-input" class="col-md-3 control-labe">
-                                        Name
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" id="Name" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="form-group" style="padding: 17px;">
-                                    <label for="html5-text-input" class="col-md-3 control-labe">
-                                        NRC
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" id="NRC" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="form-group" style="padding: 17px;">
-                                    <label for="html5-text-input" class="col-md-3 control-labe">
-                                        Address
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" id="Address" readonly>
-                                    </div>
-                                </div>
-
+                            <div class="col-md-12">
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Received Amount
@@ -99,8 +133,9 @@
                                         <input type="text" class="form-control" name="deposit_amount">
                                     </div>
                                 </div>
+                            </div>
 
-
+                            <div class="col-md-12">
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Voucher & Files
@@ -114,7 +149,9 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
 
+                            <div class="col-md-12">
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Payment Reason
@@ -122,11 +159,6 @@
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="payment_reason"
                                             value="{{ old('payment_reason') }}" list="payment_reason_lists">
-
-                                        <small style="font-weight: bold;">
-                                            You can enter custom payment reasont.
-                                        </small>
-
                                         <datalist id="payment_reason_lists">
                                             <option value="Payment for passport">
                                             <option value="First Payment">
@@ -135,8 +167,9 @@
                                         </datalist>
                                     </div>
                                 </div>
+                            </div>
 
-                                <br>
+                            <div class="col-md-12">
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Remark
@@ -146,7 +179,29 @@
                                             value="{{ old('remark') }}">
                                     </div>
                                 </div>
+                            </div>
 
+                            <div class="col-md-12">
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 control-labe">
+                                        Received Person
+                                    </label>
+                                    <div class="col-md-9">
+                                        <select class="form-control form-select select2" name="user_id">
+                                            <option value="">
+                                                --Received Person--
+                                            </option>
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}">
+                                                    {{ $user->name ?? '' }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
                                 <div class="form-group" style="padding: 17px;">
                                     <label class="col-sm-3 control-label"></label>
                                     <div class="col-sm-2">
@@ -157,8 +212,16 @@
                                         </button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+
+
                         </div>
+                    </form>
+
+                    <div class="col-md-12 py-5">
+                        <br>
+                        <h4>Payment History</h4>
+                        <div class="paymentHistory"></div>
                     </div>
                 </div>
             </div>
@@ -171,17 +234,35 @@
         $('select[id="PassportId"]').on("change", function() {
             var passport_id = $(this).val();
             if (passport_id) {
-                $.ajax({
-                    url: `/find_passport_ajax/${passport_id}`,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        document.getElementById("Name").value = data.name;
-                        document.getElementById("NRC").value = data.nrc;
-                        document.getElementById("Address").value = data.address;
-                    },
-                });
+                ajaxCallPassport(passport_id);
             }
         });
+
+        function ajaxCallPassport(passport_id) {
+            $.ajax({
+                url: `/find_passport_ajax/${passport_id}`,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    document.getElementById("Name").value = data.name;
+                    document.getElementById("NRC").value = data.nrc;
+                    document.getElementById("Address").value = data.address;
+                    document.getElementById("Country").value = data.selected_country;
+                    document.getElementById("TotalMMKAmount").value = parseFloat(data
+                        .total_amount_mmk).toLocaleString('en-US');
+                },
+            });
+
+            $.ajax({
+                url: `/payment_history/${passport_id}`,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    $('.paymentHistory').html(data.html);
+                },
+            });
+        }
+
+        ajaxCallPassport({{ Session::has('passport_id') ? Session::get('passport_id') : '' }})
     </script>
 @endsection

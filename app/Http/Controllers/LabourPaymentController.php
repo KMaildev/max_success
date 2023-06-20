@@ -6,6 +6,7 @@ use App\Http\Requests\StoreLabourPayment;
 use App\Models\Passport;
 use App\Models\PassportPayment;
 use App\Models\PassportPaymentFile;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -30,7 +31,8 @@ class LabourPaymentController extends Controller
     public function create()
     {
         $passports = Passport::all();
-        return view('labour_payment.create', compact('passports'));
+        $users = User::all();
+        return view('labour_payment.create', compact('passports', 'users'));
     }
 
     /**
@@ -54,7 +56,7 @@ class LabourPaymentController extends Controller
         $passport_payment->payment_reason = $request->payment_reason;
 
 
-        $passport_payment->user_id = auth()->user()->id;
+        $passport_payment->user_id = $request->user_id ?? auth()->user()->id;
         $passport_payment->save();
         $passport_payment_id = $passport_payment->id;
 
@@ -75,6 +77,7 @@ class LabourPaymentController extends Controller
             PassportPaymentFile::insert($insert);
         }
 
+        session()->flash('passport_id', $passport_id);
         return redirect()->back()->with('success', 'Your processing has been completed.');
     }
 
@@ -216,5 +219,19 @@ class LabourPaymentController extends Controller
     {
         $payments = PassportPayment::where('passport_id', $id)->get();
         return view('labour_payment.show', compact('payments'));
+    }
+
+
+    public function payment_history($id)
+    {
+        $payments = PassportPayment::where('passport_id', $id)
+            ->get();
+
+        $viewRender = view('labour_payment.payment_history', compact('payments'))
+            ->render();
+
+        return response()->json([
+            'html' => $viewRender,
+        ]);
     }
 }
