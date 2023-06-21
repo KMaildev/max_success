@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLabourPayment;
+use App\Models\CashBook;
+use App\Models\ChartofAccount;
 use App\Models\Country;
 use App\Models\Passport;
 use App\Models\PassportPayment;
@@ -33,8 +35,8 @@ class LabourPaymentController extends Controller
     {
         $passports = Passport::all();
         $users = User::all();
-        $countries = Country::all();
-        return view('labour_payment.create', compact('passports', 'users', 'countries'));
+        $chartof_accounts = ChartofAccount::all();
+        return view('labour_payment.create', compact('passports', 'users', 'chartof_accounts'));
     }
 
     /**
@@ -54,9 +56,12 @@ class LabourPaymentController extends Controller
         $passport_payment->deposit_date = $deposit_date;
         $passport_payment->passport_id = $passport_id;
 
+        $passport_payment->received_amount = $request->received_amount ?? 0;
+        $passport_payment->exchange_rate = $request->exchange_rate ?? 0;
+        $passport_payment->currency_format = $request->currencyFormat;
+
         $passport_payment->remark = $request->remark;
         $passport_payment->payment_reason = $request->payment_reason;
-
 
         $passport_payment->user_id = $request->user_id ?? auth()->user()->id;
         $passport_payment->save();
@@ -78,6 +83,26 @@ class LabourPaymentController extends Controller
             }
             PassportPaymentFile::insert($insert);
         }
+
+
+        // For Cashbook 
+        $cash_book = new CashBook();
+        $cash_book->cash_book_date = $deposit_date;
+
+        $arr_date = explode('-', $deposit_date);
+        $cash_book->entry_day = $arr_date[2];
+        $cash_book->entry_month = $arr_date[1];
+        $cash_book->entry_year = $arr_date[0];
+
+        // $cash_book->reference = $request->reference;
+        $cash_book->description = $request->remark;
+        $cash_book->income = $request->deposit_amount;
+        $cash_book->expense = 0;
+        $cash_book->tax = 0;
+        $cash_book->chartof_account_id = $request->chartof_account_id;
+        $cash_book->bank_cash_id = $request->bank_cash_id;
+        $cash_book->demand_invoice_id = NULL;
+        $cash_book->save();
 
         session()->flash('passport_id', $passport_id);
         return redirect()->back()->with('success', 'Your processing has been completed.');

@@ -33,7 +33,6 @@ class CashBookController extends Controller
         $cash_book->tax = $request->tax;
         $cash_book->chartof_account_id = $request->chartof_account_id;
         $cash_book->bank_cash_id = $request->bank_cash_id;
-        $cash_book->bank_cash_id = $request->bank_cash_id;
         $cash_book->demand_invoice_id = $request->demand_invoice_id ?? NULL;
         $cash_book->save();
 

@@ -27,7 +27,19 @@
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="form-group" style="padding: 17px;">
+                                    <div class="form-group" style="padding-top: 17px;">
+                                        <label for="html5-text-input" class="col-md-3 control-labe">
+                                            Received Date
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control date_picker" name="deposit_date"
+                                                value="{{ old('deposit_date') }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group" style="padding-top: 17px;">
                                         <label for="html5-text-input" class="col-md-3 control-labe">
                                             Passport
                                         </label>
@@ -55,7 +67,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="form-group" style="padding: 17px;">
+                                    <div class="form-group" style="padding-top: 17px;">
                                         <label for="html5-text-input" class="col-md-3 control-labe">
                                             Name
                                         </label>
@@ -66,7 +78,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="form-group" style="padding: 17px;">
+                                    <div class="form-group" style="padding-top: 17px;">
                                         <label for="html5-text-input" class="col-md-3 control-labe">
                                             NRC
                                         </label>
@@ -77,7 +89,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="form-group" style="padding: 17px;">
+                                    <div class="form-group" style="padding-top: 17px;">
                                         <label for="html5-text-input" class="col-md-3 control-labe">
                                             Address
                                         </label>
@@ -88,7 +100,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="form-group" style="padding: 17px;">
+                                    <div class="form-group" style="padding-top: 17px;">
                                         <label for="html5-text-input" class="col-md-3 control-labe">
                                             Country
                                         </label>
@@ -99,7 +111,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="form-group" style="padding: 17px;">
+                                    <div class="form-group" style="padding-top: 17px;">
                                         <label for="html5-text-input" class="col-md-3 control-labe">
                                             MMK Amount
                                         </label>
@@ -108,24 +120,39 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <div class="col-md-12">
+                                    <div class="form-group" style="padding-top: 17px;">
+                                        <label for="html5-text-input" class="col-md-3 control-labe">
+                                            Foreign Company
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input type="text" class="form-control" id="ForeignCompany" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" id="OverseasAgent" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group" style="padding-top: 17px;">
+                                        <label for="html5-text-input" class="col-md-3 control-labe">
+                                            Job
+                                        </label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" id="Job" readonly>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="col-md-12">
-                                <div class="form-group" style="padding: 17px;">
-                                    <label for="html5-text-input" class="col-md-3 control-labe">
-                                        Received Date
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control date_picker" name="deposit_date"
-                                            value="{{ old('deposit_date') }}">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="form-group" style="padding: 17px;">
+                                <div class="form-group" style="padding-top: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Received Amount
                                     </label>
@@ -145,9 +172,8 @@
                                 </div>
                             </div>
 
-
                             <div class="col-md-12">
-                                <div class="form-group" style="padding: 17px;">
+                                <div class="form-group" style="padding-top: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-label">
                                         Exchange Rate
                                     </label>
@@ -180,7 +206,7 @@
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group" style="padding: 17px;">
+                                <div class="form-group" style="padding-top: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Voucher & Files
                                     </label>
@@ -196,7 +222,7 @@
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group" style="padding: 17px;">
+                                <div class="form-group" style="padding-top: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Payment Reason
                                     </label>
@@ -214,7 +240,7 @@
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group" style="padding: 17px;">
+                                <div class="form-group" style="padding-top: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Remark
                                     </label>
@@ -226,7 +252,59 @@
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group" style="padding: 17px;">
+                                <div class="form-group" style="padding-top: 17px;">
+
+                                    <label for="html5-text-input" class="col-md-3 control-label">
+                                        Chart of Account
+                                    </label>
+
+                                    <div class="col-md-9">
+                                        <select name="chartof_account_id" class="form-select form-select select2">
+                                            <option value="">
+                                                --Select--
+                                            </option>
+                                            @foreach ($chartof_accounts as $chartof_account)
+                                                <option value="{{ $chartof_account->id }}">
+                                                    {{ $chartof_account->coa_number }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group" style="padding-top: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 control-label">
+                                        Bank & Cash
+                                    </label>
+
+                                    <div class="col-md-9">
+                                        <select name="bank_cash_id" class="form-select form-select select2"
+                                            style="width: 100%;">
+                                            <option value="">
+                                                -- Bank & Cash --
+                                            </option>
+                                            @foreach ($chartof_accounts as $chartof_account)
+                                                @if ($chartof_account->id == 1)
+                                                    <option value="{{ $chartof_account->id }}">
+                                                        {{ $chartof_account->coa_number }}
+                                                    </option>
+                                                @endif
+
+                                                @if ($chartof_account->id == 2)
+                                                    <option value="{{ $chartof_account->id }}">
+                                                        {{ $chartof_account->coa_number }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group" style="padding-top: 17px;">
                                     <label for="html5-text-input" class="col-md-3 control-labe">
                                         Received Person
                                     </label>
@@ -246,7 +324,7 @@
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group" style="padding: 17px;">
+                                <div class="form-group" style="padding-top: 17px;">
                                     <label class="col-sm-3 control-label"></label>
                                     <div class="col-sm-2">
                                         <button class="btn btn-info btn-block" id="create-product-submit" type="submit"
@@ -290,12 +368,25 @@
                 type: "GET",
                 dataType: "json",
                 success: function(data) {
-                    document.getElementById("Name").value = data.name;
-                    document.getElementById("NRC").value = data.nrc;
-                    document.getElementById("Address").value = data.address;
-                    document.getElementById("Country").value = data.selected_country;
-                    document.getElementById("TotalMMKAmount").value = parseFloat(data
-                        .total_amount_mmk).toLocaleString('en-US');
+                    document.getElementById("Name").value = data.passport.name;
+                    document.getElementById("NRC").value = data.passport.nrc;
+                    document.getElementById("Address").value = data.passport.address;
+                    document.getElementById("Country").value = data.passport.selected_country;
+                    document.getElementById("TotalMMKAmount").value = parseFloat(data.passport.total_amount_mmk)
+                        .toLocaleString('en-US');
+                    console.log(data);
+
+                    if (data.interview_labours) {
+                        document.getElementById("ForeignCompany").value = data.interview_labours
+                            .overseas_agency_table.company_name;
+                        document.getElementById("OverseasAgent").value = data.interview_labours
+                            .overseas_agency_table.agent_company_name;
+                        document.getElementById("Job").value = data.interview_labours.demands_table.job;
+                    } else {
+                        document.getElementById("ForeignCompany").value = '';
+                        document.getElementById("OverseasAgent").value = '';
+                        document.getElementById("Job").value = '';
+                    }
                 },
             });
 
@@ -319,7 +410,6 @@
                 "</option>"
             );
         }
-
 
         function calcExchangeRage() {
             const received_amount = document.getElementById("received_amount").value;

@@ -10,6 +10,7 @@ use App\Imports\PassportImport;
 use App\Models\AgentList;
 use App\Models\Contract;
 use App\Models\Country;
+use App\Models\InterviewLabour;
 use App\Models\Passport;
 use App\Models\PassportPayment;
 use App\Models\PassportPaymentFile;
@@ -305,8 +306,18 @@ class PassportController extends Controller
     public function findPassportAjax($id)
     {
         $passport = Passport::findOrFail($id);
-        return json_encode($passport);
+        $interview_labours = InterviewLabour::with('overseas_agency_table', 'demands_table')
+            ->where('passport_id', $id)
+            ->first();
+
+        return json_encode(
+            [
+                'passport' => $passport,
+                'interview_labours' => $interview_labours,
+            ]
+        );
     }
+
 
     public function passportEditFormAjax($id)
     {

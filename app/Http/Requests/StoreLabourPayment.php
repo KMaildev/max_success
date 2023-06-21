@@ -24,9 +24,10 @@ class StoreLabourPayment extends FormRequest
     public function rules()
     {
         return [
-            'passport_id' => 'required',
-            'deposit_date' => 'required',
-            'deposit_amount' => 'required|numeric',
+            // 'passport_id' => 'required',
+            // 'deposit_date' => 'required',
+            // 'deposit_amount' => 'required|numeric',
+            // 'received_amount' => 'required|numeric',
         ];
     }
 }
