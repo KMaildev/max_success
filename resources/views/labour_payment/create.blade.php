@@ -130,7 +130,51 @@
                                         Received Amount
                                     </label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="deposit_amount">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="received_amount"
+                                                value="{{ old('received_amount') }}" oninput="calcExchangeRage()"
+                                                id="received_amount">
+
+                                            <span class="input-group-addon" id="basic-addon2"
+                                                style="padding: 0px 0px !important; border: 0px solid #ccc;">
+                                                <select name="currencyFormat" class="form-control" style="width: 100px;">
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 control-label">
+                                        Exchange Rate
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="exchange_rate"
+                                            value="{{ old('exchange_rate') }}" oninput="calcExchangeRage()"
+                                            id="exchange_rate">
+                                        @error('exchange_rate')
+                                            <div class="form-control-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+
+                                    <label for="html5-text-input" class="col-md-3 control-label"
+                                        style="text-align: right;">
+                                        Total Amount
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="deposit_amount"
+                                            value="{{ old('deposit_amount') }}" id="deposit_amount">
+                                        @error('deposit_amount')
+                                            <div class="form-control-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -230,6 +274,8 @@
 @endsection
 @section('script')
     {!! JsValidator::formRequest('App\Http\Requests\StoreLabourPayment', '#create-form') !!}
+    <script src="{{ asset('data/app/countries.js') }}"></script>
+
     <script>
         $('select[id="PassportId"]').on("change", function() {
             var passport_id = $(this).val();
@@ -264,5 +310,26 @@
         }
 
         ajaxCallPassport({{ Session::has('passport_id') ? Session::get('passport_id') : '' }})
+
+
+        for (var i = 0; i < currencies.length; i++) {
+            $('select[name="currencyFormat"]').append(
+                '<option value="' + currencies[i].currency + '">' +
+                currencies[i].currency +
+                "</option>"
+            );
+        }
+
+
+        function calcExchangeRage() {
+            const received_amount = document.getElementById("received_amount").value;
+            const exchange_rate = document.getElementById("exchange_rate").value;
+            if (exchange_rate === null || exchange_rate === '' || exchange_rate === 0) {
+                document.getElementById("deposit_amount").value = received_amount;
+            } else {
+                const total_amount = received_amount * exchange_rate;
+                document.getElementById("deposit_amount").value = total_amount;
+            }
+        }
     </script>
 @endsection

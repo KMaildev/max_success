@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLabourPayment;
+use App\Models\Country;
 use App\Models\Passport;
 use App\Models\PassportPayment;
 use App\Models\PassportPaymentFile;
@@ -32,7 +33,8 @@ class LabourPaymentController extends Controller
     {
         $passports = Passport::all();
         $users = User::all();
-        return view('labour_payment.create', compact('passports', 'users'));
+        $countries = Country::all();
+        return view('labour_payment.create', compact('passports', 'users', 'countries'));
     }
 
     /**
