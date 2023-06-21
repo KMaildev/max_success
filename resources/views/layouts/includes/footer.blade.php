@@ -25,7 +25,7 @@
 <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 
 @yield('script')
 
@@ -56,6 +56,26 @@
             theme: "classic",
         });
     });
+
+
+    function exportExcel(tableExportId, type, fn, dl) {
+        var today = new Date();
+        var date = today.getFullYear() + '_' + (today.getMonth() + 1) + '_' + today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date + '_' + time;
+
+        var tableId = document.getElementById(tableExportId);
+        var wb = XLSX.utils.table_to_book(tableId, {
+            sheet: "sheet1"
+        });
+        return dl ?
+            XLSX.write(wb, {
+                bookType: type,
+                bookSST: true,
+                type: 'base64'
+            }) :
+            XLSX.writeFile(wb, fn || (`export_excel_${dateTime}.` + (type || 'xlsx')));
+    }
 </script>
 
 </html>

@@ -10,8 +10,16 @@
                         </h3>
 
                         <div class="box-tools pull-right">
+
                             <div class="btn-group">
-                                <a type="button" class="btn btn-primary" href="{{ route('labour_payment.create') }}">
+                                <button onclick="exportExcel('LabourPaymentShow')" class="btn btn-success">
+                                    <i class="text-white fa fa-file-excel"></i> 
+                                    Excel Download
+                                </button>
+                            </div>
+
+                            <div class="btn-group">
+                                <a class="btn btn-primary" href="{{ route('labour_payment.create') }}">
                                     <span class="fa fa-add"></span>
                                     Add New Account
                                 </a>
@@ -21,7 +29,7 @@
 
                     <div class="box-body">
                         <div class="table-responsive text-nowrap">
-                            <table class="table table-bordered table-sm">
+                            <table class="table table-bordered table-sm" id="LabourPaymentShow">
                                 <thead class="tbbg">
                                     <tr class="bg-gray">
                                         <th class="text-center text-white w-5" style="width: 1%;">
@@ -53,9 +61,25 @@
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%">
+                                            Remark
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%">
+                                            Reason
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%">
+                                            Received Amount
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%">
+                                            Exchange Rate
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%">
                                             Total
                                         </th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,6 +116,23 @@
                                                 </a>
                                             </td>
 
+                                            <td class="text-center">
+                                                {{ $payment->remark ?? '' }}
+                                            </td>
+
+                                            <td class="text-center">
+                                                {{ $payment->payment_reason ?? '' }}
+                                            </td>
+
+                                            <td style="text-align: right">
+                                                {{ number_format($payment->received_amount, 2) }}
+                                                {{ $payment->currency_format ?? '' }}
+                                            </td>
+
+                                            <td style="text-align: right">
+                                                {{ number_format($payment->exchange_rate, 2) }}
+                                            </td>
+
                                             <td style="text-align: right">
                                                 {{ number_format($payment->deposit, 2) }}
                                             </td>
@@ -99,7 +140,15 @@
                                     @endforeach
                                 </tbody>
                                 <tr>
-                                    <td colspan="7">Total</td>
+                                    <td colspan="9">Total</td>
+                                    <td style="text-align: right;">
+                                        {{ number_format($payments->sum('received_amount'), 2) }}
+                                    </td>
+
+                                    <td style="text-align: right;">
+                                        {{ number_format($payments->sum('exchange_rate'), 2) }}
+                                    </td>
+
                                     <td style="text-align: right;">
                                         {{ number_format($payments->sum('deposit'), 2) }}
                                     </td>
@@ -111,4 +160,8 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    
 @endsection
