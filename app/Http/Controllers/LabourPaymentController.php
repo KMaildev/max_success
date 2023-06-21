@@ -86,6 +86,9 @@ class LabourPaymentController extends Controller
 
 
         // For Cashbook 
+        $cashBookCOunt = CashBook::count();
+        $reference_no = sprintf('%06d', $cashBookCOunt + 1);
+
         $cash_book = new CashBook();
         $cash_book->cash_book_date = $deposit_date;
 
@@ -94,13 +97,17 @@ class LabourPaymentController extends Controller
         $cash_book->entry_month = $arr_date[1];
         $cash_book->entry_year = $arr_date[0];
 
-        // $cash_book->reference = $request->reference;
+        $cash_book->reference = sprintf('R/' . $reference_no);
         $cash_book->description = $request->remark;
         $cash_book->income = $request->deposit_amount;
         $cash_book->expense = 0;
         $cash_book->tax = 0;
         $cash_book->chartof_account_id = $request->chartof_account_id;
         $cash_book->bank_cash_id = $request->bank_cash_id;
+
+        $cash_book->passport_id = $passport_id;
+        $cash_book->passport_payment_id = $passport_payment_id;
+
         $cash_book->demand_invoice_id = NULL;
         $cash_book->save();
 
