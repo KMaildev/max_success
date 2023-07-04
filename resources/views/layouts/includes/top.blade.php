@@ -3,13 +3,13 @@
     <a href="{{ route('home') }}" class="logo">
         <span class="logo-mini">
             <b title="Store 01">
-                A
+                M
             </b>
-            1
+            S
         </span>
         <span class="logo-lg">
             <b title="Store 01">
-                Agency
+                Max Success
             </b>
         </span>
     </a>
@@ -22,7 +22,7 @@
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="en">
-                    <img src="http://itsolution24.com/posv33/assets/itsolution24/img/flags/en.png" alt="en">
+                    <img src="{{ asset('data/en.png') }}" alt="en">
                 </a>
 
                 <ul class="dropdown-menu">

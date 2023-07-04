@@ -15893,7 +15893,7 @@ a:hover {
 .user-panel .image {
     border: 2px solid #88dab5;
     border-radius: 50%;
-    background: #2c3b41;
+    background: white;
     overflow: hidden;
     width: 43px;
     height: 43px
@@ -16811,11 +16811,11 @@ button.dropdown-toggle {
 }
 
 .form-group.has-success label {
-    color: #00a65a
+    color: #2E3192
 }
 
 .form-group.has-success .form-control {
-    border-color: #00a65a;
+    border-color: #2E3192;
     box-shadow: none
 }
 
@@ -16972,7 +16972,7 @@ button.dropdown-toggle {
 
 .progress-bar-green,
 .progress-bar-success {
-    background-color: #00a65a
+    background-color: #2E3192
 }
 
 .progress-striped .progress-bar-green,
@@ -17133,7 +17133,7 @@ button.dropdown-toggle {
 }
 
 .box.box-success {
-    border-top-color: #00a65a
+    border-top-color: #2E3192
 }
 
 .box.box-default {
@@ -17256,13 +17256,13 @@ button.dropdown-toggle {
 }
 
 .box.box-solid.box-success {
-    border: 1px solid #00a65a
+    border: 1px solid #2E3192
 }
 
 .box.box-solid.box-success>.box-header {
     color: #fff;
-    background: #00a65a;
-    background-color: #00a65a
+    background: #2E3192;
+    background-color: #2E3192
 }
 
 .box.box-solid.box-success>.box-header .btn,
@@ -17592,7 +17592,7 @@ button.dropdown-toggle {
 }
 
 .todo-list .success {
-    border-left-color: #00a65a
+    border-left-color: #2E3192
 }
 
 .todo-list .primary {
@@ -17631,7 +17631,7 @@ button.dropdown-toggle {
 }
 
 .chat .item>.online {
-    border: 2px solid #00a65a
+    border: 2px solid #2E3192
 }
 
 .chat .item>.offline {
@@ -17949,14 +17949,14 @@ button.dropdown-toggle {
 }
 
 .btn-success {
-    background-color: #00a65a;
-    border-color: #008d4c
+    background-color: #2E3192;
+    border-color: #2e3192
 }
 
 .btn-success.hover,
 .btn-success:active,
 .btn-success:hover {
-    background-color: #008d4c
+    background-color: #2e3192
 }
 
 .btn-info {
@@ -18130,7 +18130,7 @@ button.dropdown-toggle {
 }
 
 .alert-success {
-    border-color: #008d4c
+    border-color: #2e3192
 }
 
 .alert-danger,
@@ -18686,14 +18686,14 @@ table.text-center th {
 }
 
 .direct-chat-success .right>.direct-chat-text {
-    background: #00a65a;
-    border-color: #00a65a;
+    background: #2E3192;
+    border-color: #2E3192;
     color: #fff
 }
 
 .direct-chat-success .right>.direct-chat-text:after,
 .direct-chat-success .right>.direct-chat-text:before {
-    border-left-color: #00a65a
+    border-left-color: #2E3192
 }
 
 .users-list>li {
@@ -19018,7 +19018,7 @@ table.text-center th {
 }
 
 .lockscreen-credentials .btn {
-    background-color: #00a65a;
+    background-color: #2E3192;
     border: 0;
     border-radius: 4px;
     color: #fff
@@ -20249,7 +20249,7 @@ table.text-center th {
 .callout.callout-success,
 .label-success,
 .modal-success .modal-body {
-    background-color: #00a65a !important
+    background-color: #2E3192 !important
 }
 
 .bg-navy {
@@ -20324,7 +20324,7 @@ table.text-center th {
 .bg-green-active,
 .modal-success .modal-footer,
 .modal-success .modal-header {
-    background-color: #008d4c !important
+    background-color: #2e3192 !important
 }
 
 .bg-navy-active {
@@ -20388,7 +20388,7 @@ table.text-center th {
 }
 
 .text-green {
-    color: #00a65a !important
+    color: #2E3192 !important
 }
 
 .text-gray {
@@ -20558,11 +20558,11 @@ table.text-center th {
 }
 
 .bg-green-gradient {
-    background: #00a65a !important;
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #00a65a), color-stop(1, #00ca6d)) !important;
-    background: -ms-linear-gradient(bottom, #00a65a, #00ca6d) !important;
-    background: -moz-linear-gradient(center bottom, #00a65a 0, #00ca6d 100%) !important;
-    background: -o-linear-gradient(#00ca6d, #00a65a) !important;
+    background: #2E3192 !important;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #2E3192), color-stop(1, #00ca6d)) !important;
+    background: -ms-linear-gradient(bottom, #2E3192, #00ca6d) !important;
+    background: -moz-linear-gradient(center bottom, #2E3192 0, #00ca6d 100%) !important;
+    background: -o-linear-gradient(#00ca6d, #2E3192) !important;
     color: #fff
 }
 
@@ -21545,7 +21545,7 @@ table.text-center th {
 }
 
 .skin-green .main-header .navbar {
-    background-color: #00a65a
+    background-color: #2E3192
 }
 
 .skin-green .main-header .navbar .nav>li>a {
@@ -21577,7 +21577,7 @@ table.text-center th {
 }
 
 .skin-green .main-header .navbar .sidebar-toggle:hover {
-    background-color: #008d4c
+    background-color: #2e3192
 }
 
 @media (max-width:767px) {
@@ -21590,22 +21590,22 @@ table.text-center th {
     }
 
     .skin-green .main-header .navbar .dropdown-menu li a:hover {
-        background: #008d4c
+        background: #2e3192
     }
 }
 
 .skin-green .main-header .logo {
-    background-color: #008d4c;
+    background-color: #2e3192;
     color: #fff;
     border-bottom: 0 solid transparent
 }
 
 .skin-green .main-header .logo:hover {
-    background-color: #008749
+    background-color: #2E3192
 }
 
 .skin-green .main-header li.user-header {
-    background-color: #00a65a
+    background-color: #2E3192
 }
 
 .skin-green .content-header {
@@ -21636,7 +21636,7 @@ table.text-center th {
 .skin-green .sidebar-menu>li:hover>a {
     color: #fff;
     background: #1e282c;
-    border-left-color: #00a65a
+    border-left-color: #2E3192
 }
 
 .skin-green .sidebar-menu>li>.treeview-menu {
@@ -21705,15 +21705,15 @@ table.text-center th {
 }
 
 .skin-green .user-panel {
-    background-color: #035a32
+    background-color: #4548ad
 }
 
 .skin-green .user-panel>.info>a .fa {
-    color: #00a65a
+    color: #2E3192
 }
 
 .skin-green #info-bar {
-    background-color: #00a65a
+    background-color: #2E3192
 }
 
 .skin-green #info-bar .total_amount_display {
@@ -21727,7 +21727,7 @@ table.text-center th {
 }
 
 .skin-green #save-invoice-btn:hover {
-    background-color: #035a32
+    background-color: #4548ad
 }
 
 .skin-green .meme-customer-info {
@@ -21741,14 +21741,14 @@ table.text-center th {
 .skin-green #toggle_customer {
     background-color: #e2f5ff;
     color: #000;
-    border: 1px solid #00a65a;
+    border: 1px solid #2E3192;
     -webkit-transition: .3s;
     -o-transition: .3s;
     transition: .5s
 }
 
 .skin-green #toggle_customer:hover {
-    color: #00a65a
+    color: #2E3192
 }
 
 .skin-green .modal-header {
@@ -21807,12 +21807,12 @@ table.text-center th {
 
 .skin-green .paynow-btn {
     color: #fff;
-    background-color: #00a65a;
-    border-color: #008d4c
+    background-color: #2E3192;
+    border-color: #2e3192
 }
 
 .skin-green .pay-top td input {
-    background-color: #008d4c;
+    background-color: #2e3192;
     color: #fff
 }
 
@@ -24411,7 +24411,7 @@ img#logo {
 }
 
 .upload-field .message .success {
-    color: #00a65a
+    color: #2E3192
 }
 
 .upload-field .message .invalid {
@@ -25066,7 +25066,7 @@ div.dataTables_wrapper div.dataTables_processing {
 }
 
 .dataTables_wrapper .buttons-excel {
-    color: #00a65a
+    color: #2E3192
 }
 
 .dataTables_wrapper .buttons-csv {
@@ -25087,7 +25087,7 @@ div.dataTables_wrapper div.dataTables_processing {
 }
 
 .dataTables_wrapper .buttons-excel {
-    color: #00a65a
+    color: #2E3192
 }
 
 .dataTables_wrapper .buttons-csv {
@@ -25684,7 +25684,7 @@ table.profit_calc>tbody>tr>td {
     margin-top: -5px;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
-    border-left: 5px solid #00a65a
+    border-left: 5px solid #2E3192
 }
 
 .app-container:before,

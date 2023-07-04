@@ -3,21 +3,20 @@
 
         <div class="user-panel">
             <div class="pull-left image">
-                <svg class="svg-icon">
-                    <use href="#icon-avatar">
-                </svg>
+                <img src="{{ asset('data/logo.png') }}" alt="">
             </div>
+
             <div class="pull-left info">
                 <p class="username" title="{{ auth()->user()->name ?? '' }}">
                     {{ auth()->user()->name ?? '' }}
                 </p>
-                <a href="user_profile.php?id=1">
+                <a href="{{ route('home') }}">
                     <i class="fa fa-circle user-status-dot"></i>
                     Welcome
                 </a>
             </div>
         </div>
-
+        
         <ul class="sidebar-menu">
 
             <li class="{{ Route::is('accounting_dashboard.index') ? 'active' : '' }}">
