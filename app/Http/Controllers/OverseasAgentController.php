@@ -134,7 +134,8 @@ class OverseasAgentController extends Controller
 
     public function dependentAjax($id)
     {
-        $overseas_agencies = OverseasAgency::get()->where('countrie_id', $id);
+        $overseas_agencies = OverseasAgency::get()
+            ->where('countrie_id', $id);
         return json_encode($overseas_agencies);
     }
 

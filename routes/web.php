@@ -194,6 +194,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('demand_invoice', DemandInvoiceController::class);
     Route::get('demand_invoice_datatable', [DemandInvoiceController::class, 'demand_invoice_datatable'])->name('demand_invoice_datatable');
+    Route::get('demand_invoice_ajax/{id}', [DemandInvoiceController::class, 'demandInvoiceAjax'])->name('demand_invoice_ajax');
 
     Route::resource('aged_receivable', AgedReceivableController::class);
     Route::resource('aged_payable', AgedPayableController::class);

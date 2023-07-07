@@ -97,6 +97,10 @@
                                         </th>
 
                                         <th class="text-center text-white w-5" style="width: 10%;">
+                                            Account Header
+                                        </th>
+
+                                        <th class="text-center text-white w-5" style="width: 10%;">
                                             Edit
                                         </th>
 
@@ -232,6 +236,11 @@
                     },
 
                     {
+                        data: 'account_header',
+                        name: 'account_header',
+                    },
+
+                    {
                         data: 'edit',
                         name: 'edit',
                     },
@@ -270,6 +279,41 @@
                 });
             }
         });
+
+
+        $('select[name="bank_cash_id"]').on('change', function() {
+            var chartof_account_id = $(this).val();
+            if (chartof_account_id) {
+                $.ajax({
+                    url: '/chartofaccountdependent/ajax/' + chartof_account_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        document.getElementById("bank_cash_description").value = data.description;
+                    }
+                });
+            }
+        });
+
+
+        $('select[name="demand_invoice_id"]').on('change', function() {
+            var demand_invoice_id = $(this).val();
+            if (demand_invoice_id) {
+                $.ajax({
+                    url: '/demand_invoice_ajax/' + demand_invoice_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        var company_name = data.overseas_agencies.company_name;
+                        var agent_company_name = data.overseas_agencies.agent_company_name;
+                        document.getElementById("agentCompanyName").value = agent_company_name;
+                        document.getElementById("companyName").value = company_name;
+                    }
+                });
+            }
+        });
+
+
 
         function saveCashBook() {
             var cash_book_date = document.getElementsByName("cash_book_date")[0].value;

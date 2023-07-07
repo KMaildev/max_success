@@ -39,9 +39,13 @@
         </select>
     </td>
 
-    <td></td>
+    <td>
+        <input type="text" class="form-control" style="width: 120px" id="companyName" autocomplete="off">
+    </td>
 
-    <td></td>
+    <td>
+        <input type="text" class="form-control" style="width: 120px" id="agentCompanyName" autocomplete="off">
+    </td>
 
 
     <td>
@@ -99,8 +103,20 @@
                         {{ $chartof_account->coa_number }}
                     </option>
                 @endif
+
+
+                @if ($chartof_account->sub_or_main_account == 'sub_account')
+                    <option value="{{ $chartof_account->id }}">
+                        {{ $chartof_account->coa_number }}
+                    </option>
+                @endif
             @endforeach
         </select>
+    </td>
+
+    <td>
+        <input class="form-control" type="text" style="width: 120px" readonly id="bank_cash_description"
+            autocomplete="off" />
     </td>
 
     <td colspan="2">

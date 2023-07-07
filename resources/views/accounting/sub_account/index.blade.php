@@ -11,7 +11,7 @@
 
                         <div class="box-tools pull-right">
                             <div class="btn-group">
-                                <a type="button" class="btn btn-primary" href="{{ route('chartofaccount.create') }}">
+                                <a type="button" class="btn btn-primary" href="{{ route('subaccount.create') }}">
                                     <span class="fa fa-add"></span>
                                     Add New Account
                                 </a>
@@ -27,7 +27,7 @@
                                         <th class="text-white w-5" style="width: 1%;">#</th>
                                         <th class="text-white w-5">Main Account Code</th>
                                         <th class="text-white w-5">Main Account Name</th>
-                                        <th class="text-white w-5">Sub Account</th>
+                                        <th class="text-white w-5">Sub Account Code</th>
                                         <th class="text-white w-5">Description</th>
                                         <th class="text-white w-5">Account Type</th>
                                         <th class="text-white w-5">Actions</th>

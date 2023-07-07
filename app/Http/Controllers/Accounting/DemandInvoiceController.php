@@ -192,4 +192,14 @@ class DemandInvoiceController extends Controller
             ->rawColumns(['agent_company_name', 'company_name', 'demand_number', 'issue_number', 'male', 'female', 'balance', 'status', 'action'])
             ->make(true);
     }
+
+
+
+
+    public function demandInvoiceAjax($id)
+    {
+        $demand = DemandInvoice::with('overseas_agencies')
+            ->findOrFail($id);
+        return json_encode($demand);
+    }
 }
