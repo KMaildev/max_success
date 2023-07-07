@@ -150,6 +150,16 @@
                 </a>
             </li>
 
+
+            <li class="{{ Route::is('subaccount.index') ? 'active' : '' }}">
+                <a href="{{ route('subaccount.index') }}">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    Sub Account (Bank)
+                </a>
+            </li>
+
             <li id="sidebar-bottom"></li>
         </ul>
     </section>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Accounting\ChartofAccountController;
 use App\Http\Controllers\Accounting\CompanyLabourController;
 use App\Http\Controllers\Accounting\DemandInvoiceController;
 use App\Http\Controllers\Accounting\OverseaCompanyReportController;
+use App\Http\Controllers\Accounting\SubAccountController;
 use App\Http\Controllers\AgentListController;
 use App\Http\Controllers\CashBookController;
 use App\Http\Controllers\ContractController;
@@ -181,6 +182,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('chartofaccount', ChartofAccountController::class);
     Route::get('chartofaccountdependent/ajax/{id}', [ChartofAccountController::class, 'dependentAjax']);
+
+    Route::resource('subaccount', SubAccountController::class);
+
 
     Route::resource('cashbook', CashBookController::class);
     Route::get('cashbook_datatable', [CashBookController::class, 'cashbook_datatable'])->name('cashbook_datatable');
