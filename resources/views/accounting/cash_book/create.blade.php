@@ -63,13 +63,13 @@
     </td>
 
     <td>
-        <div class="input-group">
-            <input type="text" class="form-control" style="width: 120px" name="tax" value="0"
-                autocomplete="off">
-            <span class="input-group-addon" id="basic-addon2">
-                %
-            </span>
-        </div>
+        <select name="tax" class="form-select form-select select2" style="width: 100%;" autocomplete="off">
+            @foreach ($taxes as $taxe)
+                <option value="{{ $taxe->id }}">
+                    {{ $taxe->tax_name ?? '' }}
+                </option>
+            @endforeach
+        </select>
     </td>
 
     <td>

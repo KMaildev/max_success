@@ -28,7 +28,7 @@ class StoreCashBook extends FormRequest
             'reference' => 'required',
             'income' => 'numeric',
             'expense' => 'numeric',
-            'tax' => 'numeric',
+            'tax' => 'required',
             'chartof_account_id' => 'required',
             'bank_cash_id' => 'required',
         ];

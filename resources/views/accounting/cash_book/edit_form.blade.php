@@ -142,12 +142,13 @@
             Tax
         </label>
         <div class="col-md-8">
-            <input type="text" class="form-control" name="tax_edit" value="{{ $cash_book->tax ?? 0 }}">
-            @error('tax')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
+            <select name="tax_edit" class="form-select form-control form-select" style="width: 100%;" autocomplete="off">
+                @foreach ($taxes as $taxe)
+                    <option value="{{ $taxe->id }}" @if ($taxe->id == $cash_book->taxe_id) selected @endif>
+                        {{ $taxe->tax_name ?? '' }}
+                    </option>
+                @endforeach
+            </select>
         </div>
     </div>
 

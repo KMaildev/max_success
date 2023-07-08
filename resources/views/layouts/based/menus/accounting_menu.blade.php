@@ -66,14 +66,7 @@
             </li>
 
 
-            <li class="">
-                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
-                    <svg class="svg-icon">
-                        <use href="#icon-plus"></use>
-                    </svg>
-                    Tax Report
-                </a>
-            </li>
+
 
             <li class="{{ Route::is('balace_sheet.index') ? 'active' : '' }}">
                 <a href="{{ route('balace_sheet.index') }}">
@@ -165,6 +158,16 @@
                         <use href="#icon-plus"></use>
                     </svg>
                     Taxes
+                </a>
+            </li>
+
+
+            <li class="{{ Route::is('taxe_report.index') ? 'active' : '' }}">
+                <a href="{{ route('taxe_report.index') }}">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    Tax Report
                 </a>
             </li>
 

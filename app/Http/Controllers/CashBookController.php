@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCashBook;
 use App\Models\CashBook;
 use App\Models\ChartofAccount;
 use App\Models\DemandInvoice;
+use App\Models\Taxes;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -15,7 +16,8 @@ class CashBookController extends Controller
     {
         $chartof_accounts = ChartofAccount::all();
         $demand_invoices = DemandInvoice::all();
-        return view('accounting.cash_book.index', compact('chartof_accounts', 'demand_invoices'));
+        $taxes = Taxes::where('status', 'Active')->get();
+        return view('accounting.cash_book.index', compact('chartof_accounts', 'demand_invoices', 'taxes'));
     }
 
 
@@ -30,10 +32,16 @@ class CashBookController extends Controller
         $cash_book->description = $request->description;
         $cash_book->income = $request->income;
         $cash_book->expense = $request->expense;
-        $cash_book->tax = $request->tax;
         $cash_book->chartof_account_id = $request->chartof_account_id;
         $cash_book->bank_cash_id = $request->bank_cash_id;
         $cash_book->demand_invoice_id = $request->demand_invoice_id ?? NULL;
+
+        $tax_id = $request->tax;
+        $taxe = Taxes::findOrFail($tax_id);
+        $cash_book->tax = $taxe->amount ?? 0;
+        $cash_book->tax_computation = $taxe->tax_computation;
+        $cash_book->taxe_id = $tax_id;
+
         $cash_book->save();
 
         return response()->json(
@@ -77,6 +85,15 @@ class CashBookController extends Controller
                 return  $each->demand_invoice ? $each->demand_invoice->overseas_agencies->company_name : '';
             })
 
+            ->editColumn('tax', function ($each) {
+                if ($each->tax_computation == 'percent') {
+                    $percent_type = '%';
+                } else {
+                    $percent_type = '';
+                }
+                return  $each->tax . $percent_type;
+            })
+
 
             ->addColumn('edit', function ($each) {
                 $edit =
@@ -115,9 +132,10 @@ class CashBookController extends Controller
         $cash_book = CashBook::findOrFail($id);
         $chartof_accounts = ChartofAccount::all();
         $demand_invoices = DemandInvoice::all();
+        $taxes = Taxes::where('status', 'Active')->get();
 
         return response()->json([
-            'html' => view('accounting.cash_book.edit_form', compact('cash_book', 'chartof_accounts', 'demand_invoices'))
+            'html' => view('accounting.cash_book.edit_form', compact('cash_book', 'chartof_accounts', 'demand_invoices', 'taxes'))
                 ->render()
         ]);
     }
@@ -135,11 +153,17 @@ class CashBookController extends Controller
         $cash_book->description = $request->description;
         $cash_book->income = $request->income;
         $cash_book->expense = $request->expense;
-        $cash_book->tax = $request->tax;
         $cash_book->chartof_account_id = $request->chartof_account_id;
         $cash_book->bank_cash_id = $request->bank_cash_id;
         $cash_book->user_id = auth()->user()->id;
         $cash_book->demand_invoice_id = $request->demand_invoice_id ?? NULL;
+
+        $tax_id = $request->tax;
+        $taxe = Taxes::findOrFail($tax_id);
+        $cash_book->tax = $taxe->amount ?? 0;
+        $cash_book->tax_computation = $taxe->tax_computation;
+        $cash_book->taxe_id = $tax_id;
+
         $cash_book->update();
 
         return response()->json(

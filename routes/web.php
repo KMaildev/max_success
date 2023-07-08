@@ -12,6 +12,7 @@ use App\Http\Controllers\Accounting\CompanyLabourController;
 use App\Http\Controllers\Accounting\DemandInvoiceController;
 use App\Http\Controllers\Accounting\OverseaCompanyReportController;
 use App\Http\Controllers\Accounting\SubAccountController;
+use App\Http\Controllers\Accounting\TaxeReportController;
 use App\Http\Controllers\Accounting\TaxesController;
 use App\Http\Controllers\AgentListController;
 use App\Http\Controllers\CashBookController;
@@ -206,6 +207,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('balace_sheet', BalanceSheetController::class);
     Route::resource('company_labour', CompanyLabourController::class);
     Route::resource('bank_report', BankReportController::class);
+
     Route::resource('taxes', TaxesController::class);
     Route::get('taxes_change_status/{id}', [TaxesController::class, 'taxes_change_status'])->name('taxes_change_status');
+
+    Route::resource('taxe_report', TaxeReportController::class);
+
 });

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Taxes extends Model
 {
     use HasFactory;
+
+
+    public function cashbook()
+    {
+        return $this->hasMany(CashBook::class, 'taxe_id', 'id');
+    }
 }
