@@ -66,12 +66,23 @@
                                                 @endif
                                             </td>
 
-                                            <td>
-                                                {{ $taxe->status ?? '' }}
+                                            <td style="text-align: center">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" role="switch"
+                                                        id="flexSwitchCheckChecked_{{ $taxe->id }}"
+                                                        @if ($taxe->status == 'Active') checked @endif
+                                                        onchange="handleChange({{ $taxe->id }})">
+
+                                                    <label class="form-check-label"
+                                                        for="flexSwitchCheckChecked_{{ $taxe->id }}">
+                                                        {{ $taxe->status ?? '' }}
+                                                    </label>
+                                                </div>
                                             </td>
 
                                             <td>
-                                                <a href="{{ route('taxes.edit', $taxe->id) }}" class="btn btn-sm btn-block btn-primary">
+                                                <a href="{{ route('taxes.edit', $taxe->id) }}"
+                                                    class="btn btn-sm btn-block btn-primary">
                                                     <i class="fa fa-fw fa-pencil"></i>
                                                 </a>
                                             </td>
@@ -87,4 +98,11 @@
     </section>
 @endsection
 @section('script')
+    <script>
+        function handleChange(id) {
+            var url = '/taxes_change_status/' + id;
+            location.href = url;
+            // location.reload();
+        }
+    </script>
 @endsection

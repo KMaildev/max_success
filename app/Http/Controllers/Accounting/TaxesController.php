@@ -51,4 +51,16 @@ class TaxesController extends Controller
         $taxes->update();
         return redirect()->back();
     }
+
+    public function taxes_change_status($id)
+    {
+        $taxe = Taxes::findOrFail($id);
+        if ($taxe->status == 'Active') {
+            $taxe->status = 'Inactive';
+        }else{
+            $taxe->status = 'Active';
+        }
+        $taxe->update();
+        return redirect()->back();
+    }
 }

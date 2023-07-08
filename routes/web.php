@@ -207,4 +207,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('company_labour', CompanyLabourController::class);
     Route::resource('bank_report', BankReportController::class);
     Route::resource('taxes', TaxesController::class);
+    Route::get('taxes_change_status/{id}', [TaxesController::class, 'taxes_change_status'])->name('taxes_change_status');
 });
