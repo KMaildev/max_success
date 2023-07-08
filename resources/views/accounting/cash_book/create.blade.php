@@ -63,8 +63,13 @@
     </td>
 
     <td>
-        <input type="text" class="form-control" style="width: 120px" name="tax" value="0"
-            autocomplete="off">
+        <div class="input-group">
+            <input type="text" class="form-control" style="width: 120px" name="tax" value="0"
+                autocomplete="off">
+            <span class="input-group-addon" id="basic-addon2">
+                %
+            </span>
+        </div>
     </td>
 
     <td>

@@ -12,6 +12,7 @@ use App\Http\Controllers\Accounting\CompanyLabourController;
 use App\Http\Controllers\Accounting\DemandInvoiceController;
 use App\Http\Controllers\Accounting\OverseaCompanyReportController;
 use App\Http\Controllers\Accounting\SubAccountController;
+use App\Http\Controllers\Accounting\TaxesController;
 use App\Http\Controllers\AgentListController;
 use App\Http\Controllers\CashBookController;
 use App\Http\Controllers\ContractController;
@@ -205,4 +206,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('balace_sheet', BalanceSheetController::class);
     Route::resource('company_labour', CompanyLabourController::class);
     Route::resource('bank_report', BankReportController::class);
+    Route::resource('taxes', TaxesController::class);
 });

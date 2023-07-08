@@ -159,6 +159,15 @@
                 </a>
             </li>
 
+            <li class="{{ Route::is('taxes.index') ? 'active' : '' }}">
+                <a href="{{ route('taxes.index') }}">
+                    <svg class="svg-icon">
+                        <use href="#icon-plus"></use>
+                    </svg>
+                    Taxes
+                </a>
+            </li>
+
             <li id="sidebar-bottom"></li>
         </ul>
     </section>

@@ -95,7 +95,6 @@
     </div>
 
 
-
     <div class="form-group" style="padding: 15px;">
         <label for="html5-text-input" class="col-md-3 control-label">
             Description
@@ -203,6 +202,12 @@
                     @endif
 
                     @if ($chartof_account->id == 2)
+                        <option value="{{ $chartof_account->id }}" @if ($chartof_account->id == $cash_book->bank_cash_id) selected @endif>
+                            {{ $chartof_account->coa_number }}
+                        </option>
+                    @endif
+
+                    @if ($chartof_account->sub_or_main_account == 'sub_account')
                         <option value="{{ $chartof_account->id }}" @if ($chartof_account->id == $cash_book->bank_cash_id) selected @endif>
                             {{ $chartof_account->coa_number }}
                         </option>
