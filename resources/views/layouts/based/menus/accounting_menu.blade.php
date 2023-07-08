@@ -16,7 +16,7 @@
                 </a>
             </div>
         </div>
-        
+
         <ul class="sidebar-menu">
 
             <li class="{{ Route::is('accounting_dashboard.index') ? 'active' : '' }}">
@@ -113,8 +113,8 @@
             </li>
 
 
-            <li class="">
-                <a ng-click="BankingDepositModal()" onclick="return false;" href="#">
+            <li class="{{ Route::is('bank_report.index') ? 'active' : '' }}">
+                <a href="{{ route('bank_report.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-plus"></use>
                     </svg>
@@ -149,7 +149,6 @@
                     Chart Of Accounts
                 </a>
             </li>
-
 
             <li class="{{ Route::is('subaccount.index') ? 'active' : '' }}">
                 <a href="{{ route('subaccount.index') }}">

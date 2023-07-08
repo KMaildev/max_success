@@ -28,4 +28,10 @@ class ChartofAccount extends Model
     {
         return $this->belongsTo(ChartofAccount::class, 'chartof_account_id', 'id');
     }
+
+
+    public function bank_cash_report()
+    {
+        return $this->hasMany(CashBook::class, 'bank_cash_id', 'id');
+    }
 }

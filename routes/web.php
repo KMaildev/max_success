@@ -6,6 +6,7 @@ use App\Http\Controllers\Accounting\AccountTypeController;
 use App\Http\Controllers\Accounting\AgedPayableController;
 use App\Http\Controllers\Accounting\AgedReceivableController;
 use App\Http\Controllers\Accounting\BalanceSheetController;
+use App\Http\Controllers\Accounting\BankReportController;
 use App\Http\Controllers\Accounting\ChartofAccountController;
 use App\Http\Controllers\Accounting\CompanyLabourController;
 use App\Http\Controllers\Accounting\DemandInvoiceController;
@@ -203,5 +204,5 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('balace_sheet', BalanceSheetController::class);
     Route::resource('company_labour', CompanyLabourController::class);
-
+    Route::resource('bank_report', BankReportController::class);
 });
