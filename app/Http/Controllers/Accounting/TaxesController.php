@@ -12,7 +12,8 @@ class TaxesController extends Controller
 {
     public function index()
     {
-        $taxes = Taxes::all();
+        $taxes = Taxes::orderBy('tax_type', 'DESC')
+            ->get();
         return view('accounting.taxes.index', compact('taxes'));
     }
 
@@ -29,6 +30,7 @@ class TaxesController extends Controller
         $taxes->description = $request->description;
         $taxes->tax_computation = $request->tax_computation;
         $taxes->amount = $request->amount;
+        $taxes->tax_type = $request->tax_type;
         $taxes->status = 'Active';
         $taxes->save();
         return redirect()->back();
@@ -48,6 +50,7 @@ class TaxesController extends Controller
         $taxes->description = $request->description;
         $taxes->tax_computation = $request->tax_computation;
         $taxes->amount = $request->amount;
+        $taxes->tax_type = $request->tax_type;
         $taxes->update();
         return redirect()->back();
     }
@@ -57,7 +60,7 @@ class TaxesController extends Controller
         $taxe = Taxes::findOrFail($id);
         if ($taxe->status == 'Active') {
             $taxe->status = 'Inactive';
-        }else{
+        } else {
             $taxe->status = 'Active';
         }
         $taxe->update();

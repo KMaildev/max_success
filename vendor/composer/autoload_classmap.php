@@ -29,6 +29,7 @@ return array(
     'App\\Http\\Controllers\\Accounting\\DemandInvoiceController' => $baseDir . '/app/Http/Controllers/Accounting/DemandInvoiceController.php',
     'App\\Http\\Controllers\\Accounting\\OverseaCompanyReportController' => $baseDir . '/app/Http/Controllers/Accounting/OverseaCompanyReportController.php',
     'App\\Http\\Controllers\\Accounting\\SubAccountController' => $baseDir . '/app/Http/Controllers/Accounting/SubAccountController.php',
+    'App\\Http\\Controllers\\Accounting\\TaxeReportController' => $baseDir . '/app/Http/Controllers/Accounting/TaxeReportController.php',
     'App\\Http\\Controllers\\Accounting\\TaxesController' => $baseDir . '/app/Http/Controllers/Accounting/TaxesController.php',
     'App\\Http\\Controllers\\AgentListController' => $baseDir . '/app/Http/Controllers/AgentListController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',

@@ -146,6 +146,7 @@
                 @foreach ($taxes as $taxe)
                     <option value="{{ $taxe->id }}" @if ($taxe->id == $cash_book->taxe_id) selected @endif>
                         {{ $taxe->tax_name ?? '' }}
+                        ({{ ucfirst($taxe->tax_type ?? '') }})
                     </option>
                 @endforeach
             </select>

@@ -67,6 +67,7 @@
             @foreach ($taxes as $taxe)
                 <option value="{{ $taxe->id }}">
                     {{ $taxe->tax_name ?? '' }}
+                    ({{ ucfirst($taxe->tax_type ?? '') }})
                 </option>
             @endforeach
         </select>

@@ -34,6 +34,9 @@
                                             Description
                                         </th>
                                         <th class="text-white w-5">
+                                            Tax Type
+                                        </th>
+                                        <th class="text-white w-5">
                                             Amount
                                         </th>
                                         <th class="text-white w-5">
@@ -57,6 +60,10 @@
 
                                             <td style="text-align: center">
                                                 {{ $taxe->description ?? '' }}
+                                            </td>
+
+                                            <td style="text-align: center">
+                                                {{ ucfirst($taxe->tax_type ?? '') }}
                                             </td>
 
                                             <td style="text-align: center">

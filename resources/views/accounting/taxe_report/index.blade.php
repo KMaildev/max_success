@@ -13,57 +13,121 @@
                     <div class="box-body">
                         <div class="table-responsive text-nowrap">
                             <table class="table table-bordered table-sm">
+                                {{-- Sale Tax  --}}
                                 <thead class="tbbg">
                                     <tr class="bg-gray">
                                         <th class="text-white w-5" style="width: 1%;">
                                             #
                                         </th>
+
                                         <th class="text-white w-5">
-                                            Tax Name
+                                            Sales
                                         </th>
+
                                         <th class="text-white w-5">
-                                            Income
+                                            NET
                                         </th>
+
                                         <th class="text-white w-5">
-                                            Tax
-                                        </th>
-                                        <th class="text-white w-5">
-                                            Expenses
-                                        </th>
-                                        <th class="text-white w-5">
-                                            Tax
+                                            TAX
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($taxes as $key => $taxe)
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    @foreach ($taxes->where('tax_type', 'sale') as $key => $taxe)
                                         <tr>
                                             <td>
-                                                {{ $key + 1 }}
+                                                {{ $i++ }}
                                             </td>
 
                                             <td>
                                                 {{ $taxe->tax_name ?? '' }}
+                                                ({{ ucfirst($taxe->tax_type ?? '') }})
                                             </td>
 
                                             <td style="text-align: right">
                                                 @php
                                                     $income = $taxe->cashbook->sum('income');
-                                                    $total_income[] = $income;
                                                     echo number_format($income, 2);
                                                 @endphp
                                             </td>
 
-                                            <td>
+                                            <td style="text-align: right">
+                                                @php
+                                                    $tax_computation = $taxe->tax_computation;
+                                                    if ($tax_computation == 'fixed') {
+                                                        $fixed_tax = $taxe->cashbook->sum('tax');
+                                                        echo number_format($fixed_tax, 2);
+                                                    } elseif ($tax_computation == 'percent') {
+                                                        $percent_tax = $taxe->cashbook->sum('tax');
+                                                        $tax_amount = ($income / 100) * $percent_tax;
+                                                        echo number_format($tax_amount, 2);
+                                                    }
+                                                @endphp
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
 
+
+
+
+                                {{-- Purchase Tax  --}}
+                                <thead class="tbbg">
+                                    <tr class="bg-gray">
+                                        <th class="text-white w-5" style="width: 1%;">
+                                            #
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            Purchases
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            NET
+                                        </th>
+
+                                        <th class="text-white w-5">
+                                            TAX
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $y = 1;
+                                    @endphp
+                                    @foreach ($taxes->where('tax_type', 'purchase') as $key => $taxe)
+                                        <tr>
+                                            <td>
+                                                {{ $y++ }}
                                             </td>
 
+                                            <td>
+                                                {{ $taxe->tax_name ?? '' }}
+                                                ({{ ucfirst($taxe->tax_type ?? '') }})
+                                            </td>
 
                                             <td style="text-align: right">
                                                 @php
                                                     $expense = $taxe->cashbook->sum('expense');
-                                                    $total_expense[] = $expense;
                                                     echo number_format($expense, 2);
+                                                @endphp
+                                            </td>
+
+                                            <td style="text-align: right">
+                                                @php
+                                                    $tax_computation = $taxe->tax_computation;
+                                                    if ($tax_computation == 'fixed') {
+                                                        $fixed_tax = $taxe->cashbook->sum('tax');
+                                                        echo number_format($fixed_tax, 2);
+                                                    } elseif ($tax_computation == 'percent') {
+                                                        $percent_tax = $taxe->cashbook->sum('tax');
+                                                        $tax_amount = ($expense / 100) * $percent_tax;
+                                                        echo number_format($tax_amount, 2);
+                                                    }
                                                 @endphp
                                             </td>
                                         </tr>

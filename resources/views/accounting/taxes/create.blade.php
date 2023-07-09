@@ -57,6 +57,27 @@
                                     </div>
                                 </div>
 
+
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 col-form-label">
+                                        Tax Type
+                                    </label>
+                                    <div class="col-md-9">
+                                        <select name="tax_type" class="select2">
+                                            <option value="sale">
+                                                Sales / Income
+                                            </option>
+                                            <option value="purchase">
+                                                Purchases / Expense
+                                            </option>
+                                        </select>
+                                        @error('tax_type')
+                                            <div class="invalid-feedback"> {{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
                                 <div class="form-group" style="padding: 17px;">
                                     <label for="html5-text-input" class="col-md-3 col-form-label">
                                         Tax Computation
