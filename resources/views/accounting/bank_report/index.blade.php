@@ -8,18 +8,79 @@
                         <h3 class="box-title">
                             Bank & Cash
                         </h3>
+
+
+                        <div class="box-tools pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle btn-lg" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                    <span class="fa fa-fw fa-filter"></span>
+                                    Filters <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu ps ps--theme_default" role="menu">
+
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            This Week
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            Last Week
+                                        </a>
+                                    </li>
+
+                                    <hr class="dropdown-divider">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            This Month
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            Last Month
+                                        </a>
+                                    </li>
+
+                                    <hr class="dropdown-divider">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            Current Year
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            Last Year
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <a href="#" class="btn btn-danger btn-lg">
+                                <i class="fa fa-file-pdf"></i>
+                                PDF
+                            </a>
+
+                            <a href="#" class="btn btn-success btn-lg">
+                                <i class="fa fa-file-excel"></i>
+                                Excel
+                            </a>
+                        </div>
                     </div>
 
                     <div class="box-body">
                         <div class="table-responsive text-nowrap">
                             <table class="table table-bordered table-sm">
                                 <thead class="tbbg">
-                                    <tr>
+                                    <tr class="bg-gray">
                                         <th class="text-white w-5" style="width: 1%;">#</th>
                                         <th class="text-white w-5">Bank</th>
                                         <th class="text-white w-5">Bank In</th>
                                         <th class="text-white w-5">Bank Out</th>
-                                        <th class="text-white w-5">Total Balance	</th>
+                                        <th class="text-white w-5">Total Balance </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,7 +134,7 @@
                                             echo number_format($total_income, 2);
                                         @endphp
                                     </th>
-                                    
+
                                     <th style="text-align: right; font-weight: bold">
                                         @php
                                             $total_expense = array_sum($total_expense);

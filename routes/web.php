@@ -23,6 +23,7 @@ use App\Http\Controllers\DemandController;
 use App\Http\Controllers\FileManagementController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\HospitalFileController;
+use App\Http\Controllers\Hr\HrDashbookController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\InterviewLabourController;
 use App\Http\Controllers\LabourDocsController;
@@ -134,8 +135,7 @@ Route::middleware('auth')->group(function () {
     Route::get('get_labour_payment_datatable', [LabourPaymentController::class, 'labourPaymentDatatable'])->name('get_labour_payment_datatable');
 
 
-    Route::resource('role', RoleController::class);
-    Route::resource('permission', PermissionController::class);
+
     Route::resource('nrc', NrcController::class);
     Route::get('get_nrc_by_code/{id}', [NrcController::class, 'getByNrcCode'])->name('get_nrc_by_code');
     Route::resource('hospital', HospitalController::class);
@@ -213,4 +213,14 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('taxe_report', TaxeReportController::class);
 
+
+
+
+
+
+
+    // HR 
+    Route::resource('hr_dashboard', HrDashbookController::class);
+    Route::resource('role', RoleController::class);
+    Route::resource('permission', PermissionController::class);
 });

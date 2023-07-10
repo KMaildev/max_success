@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.based.hr_main')
 @section('content')
     <section class="content-header">
         <h1>

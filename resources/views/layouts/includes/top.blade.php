@@ -2,13 +2,13 @@
 
     <a href="{{ route('home') }}" class="logo">
         <span class="logo-mini">
-            <b title="Store 01">
+            <b title="Max Success">
                 M
             </b>
             S
         </span>
         <span class="logo-lg">
-            <b title="Store 01">
+            <b title="Max Success">
                 Max Success
             </b>
         </span>

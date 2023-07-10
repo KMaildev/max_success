@@ -19,50 +19,49 @@
 
         <ul class="sidebar-menu">
 
-            <li class="{{ Route::is('home') ? 'active' : '' }}">
-                <a href="{{ route('home') }}">
+            <li class="{{ Route::is('hr_dashboard.index') ? 'active' : '' }}">
+                <a href="{{ route('hr_dashboard.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
                     </svg>
                     <span>
-                        DASHBOARD
+                        Dashboard
                     </span>
                 </a>
             </li>
 
 
-            <li class="{{ Route::is('all_labour_list') ? 'active' : '' }}">
-                <a href="{{ route('all_labour_list') }}">
+            <li class="{{ Route::is('users.index') ? 'active' : '' }}">
+                <a href="{{ route('users.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
                     </svg>
                     <span>
-                        Labour Lists
+                        Users
                     </span>
                 </a>
             </li>
 
 
-            
-
-            <li class="{{ Route::is('hospital.index') ? 'active' : '' }}">
-                <a href="{{ route('hospital.index') }}">
+            <li class="{{ Route::is('role.index') ? 'active' : '' }}">
+                <a href="{{ route('role.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
                     </svg>
                     <span>
-                        Hospital
+                        Role
                     </span>
                 </a>
             </li>
 
-            <li class="{{ Route::is('country.index') ? 'active' : '' }}">
-                <a href="{{ route('country.index') }}">
+
+            <li class="{{ Route::is('permission.index') ? 'active' : '' }}">
+                <a href="{{ route('permission.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">
                     </svg>
                     <span>
-                        Country
+                        Permission
                     </span>
                 </a>
             </li>

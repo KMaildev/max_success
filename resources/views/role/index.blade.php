@@ -1,85 +1,81 @@
-@extends('layouts.main')
+@extends('layouts.based.hr_main')
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-sm-12 col-lg-12">
-            <div class="card">
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            Role
+                        </h3>
 
-                <div class="card-body">
-                    <div class="card-title header-elements">
-                        <h5 class="m-0 me-2">Role</h5>
-                        <div class="card-title-elements ms-auto">
-                            <div class="card-header-elements ms-auto">
-                                <input type="text" class="form-control form-control-sm" placeholder="Search" />
+                        <div class="box-tools pull-right">
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-primary" href="{{ route('role.create') }}">
+                                    <span class="fa fa-add"></span>
+                                    Create
+                                </a>
                             </div>
+                        </div>
+                    </div>
 
-                            <a href="{{ route('role.create') }}" class="dt-button create-new btn btn-primary btn-sm">
-                                <span>
-                                    <i class="bx bx-plus me-sm-2"></i>
-                                    <span class="d-none d-sm-inline-block">Create</span>
-                                </span>
-                            </a>
+                    <div class="box-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered table-sm">
+                                <thead class="tbbg">
+                                    <tr class="bg-gray">
+                                        <th class="text-white w-5" style="width: 1%;">#</th>
+                                        <th class="text-white w-5" style="width: 10%;">Name</th>
+                                        <th class="text-white w-5" style="width: 60%;">Permissions</th>
+                                        <th class="text-white w-5" style="width: 5%;">Edit</th>
+                                        <th class="text-white w-5" style="width: 5%;">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($roles as $key => $value)
+                                        <tr>
+
+                                            <td style="text-align: center;">
+                                                {{ $key + 1 }}
+                                            </td>
+
+                                            <td style="text-align: center;">
+                                                {{ $value->name }}
+                                            </td>
+
+                                            <td style="text-align: center;">
+                                                @foreach ($value->permissions as $permission)
+                                                    <span class="badge bg-primary">
+                                                        {{ $permission->name }}
+                                                    </span>
+                                                @endforeach
+                                            </td>
+
+                                            <td style="text-align: center;">
+                                                <a href="{{ route('role.edit', $value->id) }}"
+                                                    class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-fw fa-pencil"></i>
+                                                </a>
+                                            </td>
+
+                                            <td style="text-align: center;">
+                                                <form action="{{ route('role.destroy', $value->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger del_confirm"
+                                                        id="confirm-text" data-toggle="tooltip">
+                                                        <i class="fa fa-fw fa-x"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-                <div class="table-responsive text-nowrap">
-                    <table class="table table-bordered table-sm" style="margin-bottom: 50px">
-                        <thead class="tbbg">
-                            <tr>
-                                <th style="color: white; text-align: center; width: 1%;">#</th>
-                                <th style="color: white; text-align: center;">Name</th>
-                                <th style="color: white; text-align: center;">Permissions</th>
-                                <th style="color: white; text-align: center;">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                            @foreach ($roles as $key => $value)
-                                <tr>
-                                    <td style="text-align: center;">
-                                        {{ $key + 1 }}
-                                    </td>
-                                    <td style="text-align: center;">
-                                        {{ $value->name }}
-                                    </td>
-                                    <td style="text-align: center;">
-                                        @foreach ($value->permissions as $permission)
-                                            <span class="badge bg-primary">
-                                                {{ $permission->name }}
-                                            </span>
-                                            <br> <br>
-                                        @endforeach
-                                    </td>
-
-                                    <td style="text-align: center;">
-                                        <div class="btn-group">
-                                            <button class="btn btn-info btn-xs dropdown-toggle" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('role.edit', $value->id) }}">Edit</a>
-                                                </li>
-                                                <li>
-                                                    <form action="{{ route('role.destroy', $value->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" class="dropdown-item del_confirm"
-                                                            id="confirm-text" data-toggle="tooltip">Delete</button>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
             </div>
         </div>
-    </div>
+    </section>
 @endsection

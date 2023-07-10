@@ -1,80 +1,105 @@
-@extends('layouts.main')
+@extends('layouts.based.hr_main')
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-xl-12 col-md-12 col-lg-12">
-            <div class="card mb-4">
-                <h5 class="card-header">Role</h5>
-                <div class="card-body">
+    <section class="content-header">
+        <h1>
+            Role
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ route('home') }}">
+                    <i class="fa fa-dashboard"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="active">
+                Permission
+            </li>
+        </ol>
+    </section>
 
-                    <form action="{{ route('role.store') }}" method="POST" autocomplete="off" id="create-form" role="form">
-                        @csrf
-                        <div class="mb-3 row">
-                            <label for="html5-text-input" class="col-md-3 col-form-label">Name</label>
-                            <div class="col-md-9">
-                                <input class="form-control @error('name') is-invalid @enderror" type="text"
-                                    name="name" value="{{ old('name') }}" />
-                                @error('name')
-                                    <div class="invalid-feedback"> {{ $message }} </div>
-                                @enderror
-                            </div>
-                        </div>
-
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="box-body">
                         <div class="col-md-12">
+                            <form action="{{ route('role.store') }}" method="POST" autocomplete="off" id="create-form"
+                                role="form">
+                                @csrf
 
-                            <div class="mb-3 row">
-                                <small class="text-black fw-semibold d-block" style="font-size: 16px;">
-                                    Permission -> Moudle
-                                </small>
-                                @foreach ($permissions as $permission)
-                                    @if ($permission->status == 'module')
-                                        <div class="col-md-4 col-3">
-                                            <div class="form-check form-check-primary mt-3">
-                                                <input class="form-check-input" type="checkbox"
-                                                    value="{{ $permission->name }}" id="checkbox_{{ $permission->id }}"
-                                                    name="permissions[]" />
-                                                <label class="form-check-label"
-                                                    for="checkbox_{{ $permission->id }}">{{ $permission->name }}</label>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            </div>
-                            <hr>
-
-                            <div class="col-md-9">
-                                <div class="mb-3 row">
-                                    <small class="text-black fw-semibold d-block" style="font-size: 16px;">
-                                        Permission -> Function
-                                    </small>
-                                    @foreach ($permissions as $permission)
-                                        @if ($permission->status == 'function')
-                                            <div class="col-md-4 col-3">
-                                                <div class="form-check form-check-primary mt-3">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        value="{{ $permission->name }}" id="checkbox_{{ $permission->id }}"
-                                                        name="permissions[]" />
-                                                    <label class="form-check-label"
-                                                        for="checkbox_{{ $permission->id }}">{{ $permission->name }}</label>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    @endforeach
+                                <div class="form-group" style="padding: 17px;">
+                                    <label for="html5-text-input" class="col-md-3 col-form-label">Name</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control @error('name') is-invalid @enderror" type="text"
+                                            name="name" value="{{ old('name') }}" />
+                                        @error('name')
+                                            <div class="invalid-feedback"> {{ $message }} </div>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="mb-3 row">
-                            <label for="html5-search-input" class="col-md-3 col-form-label"></label>
-                            <div class="col-md-9">
-                                <button type="submit" class="btn btn-secondary">Save</button>
-                            </div>
-                        </div>
-                    </form>
+                                <div class="col-md-12">
 
+                                    <div class="form-group" style="padding: 17px;">
+                                        <small class="text-black fw-semibold d-block" style="font-size: 16px;">
+                                            Permission -> Moudle 
+                                        </small>
+                                        <br>
+                                        @foreach ($permissions as $permission)
+                                            @if ($permission->status == 'module')
+                                                <div class="col-md-4 col-3">
+                                                    <div class="form-check form-check-primary mt-3">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="{{ $permission->name }}"
+                                                            id="checkbox_{{ $permission->id }}" name="permissions[]" />
+                                                        <label class="form-check-label"
+                                                            for="checkbox_{{ $permission->id }}">{{ $permission->name }}</label>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <hr>
+
+                                    <div class="col-md-9">
+                                        <div class="form-group" style="padding: 17px;">
+                                            <small class="text-black fw-semibold d-block" style="font-size: 16px;">
+                                                Permission -> Function
+                                            </small>
+                                            <br>
+                                            @foreach ($permissions as $permission)
+                                                @if ($permission->status == 'function')
+                                                    <div class="col-md-4 col-3">
+                                                        <div class="form-check form-check-primary mt-3">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="{{ $permission->name }}"
+                                                                id="checkbox_{{ $permission->id }}" name="permissions[]" />
+                                                            <label class="form-check-label"
+                                                                for="checkbox_{{ $permission->id }}">{{ $permission->name }}</label>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="padding: 17px;">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-info btn-block" id="create-product-submit" type="submit"
+                                            name="create-product-submit">
+                                            <span class="fa fa-fw fa-save"></span>
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
 
 @section('script')

@@ -50,6 +50,26 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" id="button_pos">
+                    <div class="panel panel-app">
+                        <div class="panel-body">
+                            <a class="panel-app-link" href="{{ route('hr_dashboard.index') }}">
+                                <h2>
+                                    <span class="icon">
+                                        <img src="{{ asset('data/icons/hr.png') }}" alt=""
+                                            style="width: 30px; height: 30px; background-position: center; background-size: contain, cover;">
+                                    </span>
+                                </h2>
+                                <div class="small small2">
+                                    HR
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

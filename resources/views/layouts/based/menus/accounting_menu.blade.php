@@ -66,8 +66,6 @@
             </li>
 
 
-
-
             <li class="{{ Route::is('balace_sheet.index') ? 'active' : '' }}">
                 <a href="{{ route('balace_sheet.index') }}">
                     <svg class="svg-icon">
