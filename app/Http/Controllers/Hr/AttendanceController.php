@@ -8,13 +8,21 @@ use App\Imports\AttendanceImport;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 
 class AttendanceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $att  = Attendance::all();
-        return view('hr.attendance.index');
+        $month = $request->month;
+        $year = $request->year;
+        $startOfMonth = $year . '-' . $month . '-01';
+        $endOfMonth = Carbon::parse($startOfMonth)->endOfMonth()->format('Y-m-d');
+
+
+        $attendances  = Attendance::all();
+        return view('hr.attendance.index', compact('attendances'));
     }
 
 
@@ -23,15 +31,13 @@ class AttendanceController extends Controller
         return view('hr.attendance.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreAttendance $request)
     {
-        return $request->all();
-        // Excel::import(new AttendanceImport, request()->file('attendance_files'));
-
-        // if ($request->hasFile('attendance_files')) {
-        //     foreach ($request->file('attendance_files') as $key => $file) {
-        //         Excel::import(new AttendanceImport, $file);
-        //     }
-        // }
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $key => $file) {
+                Excel::import(new AttendanceImport, $file);
+            }
+        }
+        return redirect()->back()->with('success', 'Files imported successfully.');
     }
 }

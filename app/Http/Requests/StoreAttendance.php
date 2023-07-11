@@ -24,7 +24,7 @@ class StoreAttendance extends FormRequest
     public function rules()
     {
         return [
-            'attendance_files' => 'required',
+            '*attendance_files' => 'required',
         ];
     }
 }

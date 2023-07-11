@@ -14,8 +14,26 @@ class AttendanceImport implements ToCollection, WithHeadingRow
 {
     public function collection(Collection $rows)
     {
-        Attendance::create([
-            'name'  => strval($row['name'] ?? null),
-        ]);
+
+        Validator::make($rows->toArray(), [
+            '*.name' => 'required',
+        ])->validate();
+
+        foreach ($rows as $row) {
+            Attendance::create([
+                'name'  => strval($row['name'] ?? null),
+                'attendance_date'  => strval($row['date'] ?? null),
+                'on_duty'  => strval($row['on_duty'] ?? null),
+                'off_duty'  => strval($row['off_duty'] ?? null),
+                'clock_in'  => strval($row['clock_in'] ?? null),
+                'clock_out'  => strval($row['clock_out'] ?? null),
+                'late'  => strval($row['late'] ?? null),
+                'early'  => strval($row['early'] ?? null),
+                'absent'  => strval($row['absent'] ?? null),
+                'ot_time'  => strval($row['ot_time'] ?? null),
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ]);
+        }
     }
 }

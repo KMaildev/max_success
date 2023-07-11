@@ -32,8 +32,8 @@
                                         Import Excel
                                     </label>
                                     <div class="col-md-9">
-                                        <input class="form-control @error('attendance_files') is-invalid @enderror"
-                                            type="file" name="attendance_files" />
+                                        <input class="form-control @error('files') is-invalid @enderror" type="file"
+                                            name="files[]" multiple value="{{ old('files') }}" required />
                                         @error('attendance_files')
                                             <div class="invalid-feedback"> {{ $message }} </div>
                                         @enderror
