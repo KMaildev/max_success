@@ -23,6 +23,7 @@ use App\Http\Controllers\DemandController;
 use App\Http\Controllers\FileManagementController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\HospitalFileController;
+use App\Http\Controllers\Hr\AttendanceController;
 use App\Http\Controllers\Hr\HrDashbookController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\InterviewLabourController;
@@ -223,4 +224,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('hr_dashboard', HrDashbookController::class);
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
+    Route::resource('attendance', AttendanceController::class);
 });

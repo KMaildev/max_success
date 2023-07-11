@@ -42,6 +42,17 @@
                 </a>
             </li>
 
+            <li class="{{ Route::is('attendance.index') ? 'active' : '' }}">
+                <a href="{{ route('attendance.index') }}">
+                    <svg class="svg-icon">
+                        <use href="#icon-dashboard">
+                    </svg>
+                    <span>
+                        Attendance
+                    </span>
+                </a>
+            </li>
+
 
             <li class="{{ Route::is('role.index') ? 'active' : '' }}">
                 <a href="{{ route('role.index') }}">

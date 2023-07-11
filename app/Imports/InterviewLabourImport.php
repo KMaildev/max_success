@@ -25,7 +25,6 @@ class InterviewLabourImport implements ToCollection, WithHeadingRow
         Validator::make($rows->toArray(), [
             '*.passport' => 'required',
         ])->validate();
-
    
         foreach ($rows as $row) {
             $passport = Passport::where('passport', $row['passport'])->first();
