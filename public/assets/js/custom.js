@@ -10,3 +10,11 @@ $(".dob").datetimepicker({
     value: '1994-04-15',
     format: "Y-m-d",
 });
+
+
+
+let nowDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+$(".search").datetimepicker({
+    value: nowDate,
+    format: "m/d/Y",
+});

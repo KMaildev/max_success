@@ -219,10 +219,10 @@ Route::middleware('auth')->group(function () {
 
 
 
-
     // HR 
     Route::resource('hr_dashboard', HrDashbookController::class);
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
     Route::resource('attendance', AttendanceController::class);
+    Route::get('attendance_export_excel', [AttendanceController::class, 'attendance_export_excel'])->name('attendance_export_excel');
 });

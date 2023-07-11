@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Hr;
 
+use App\Exports\AttendanceExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAttendance;
 use App\Imports\AttendanceImport;
@@ -15,14 +16,23 @@ class AttendanceController extends Controller
 {
     public function index(Request $request)
     {
-        $month = $request->month;
-        $year = $request->year;
-        $startOfMonth = $year . '-' . $month . '-01';
-        $endOfMonth = Carbon::parse($startOfMonth)->endOfMonth()->format('Y-m-d');
+        $employee_name = $request->employee_name;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
 
+        $search_start_date = date("n/j/Y", strtotime($start_date));
+        $search_end_date = date("n/j/Y", strtotime($end_date));
 
-        $attendances  = Attendance::all();
-        return view('hr.attendance.index', compact('attendances'));
+        if ($employee_name) {
+            $attendances  = Attendance::whereBetween('attendance_date', [$search_start_date, $search_end_date])
+                ->where('name', $employee_name)
+                ->get();
+        } else {
+            $attendances  = Attendance::whereBetween('attendance_date', [$search_start_date, $search_end_date])
+                ->get();
+        }
+
+        return view('hr.attendance.index', compact('attendances', 'employee_name', 'start_date', 'end_date'));
     }
 
 
@@ -39,5 +49,26 @@ class AttendanceController extends Controller
             }
         }
         return redirect()->back()->with('success', 'Files imported successfully.');
+    }
+
+    public function attendance_export_excel(Request $request)
+    {
+        $employee_name = $request->employee_name;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+
+        $search_start_date = date("n/j/Y", strtotime($start_date));
+        $search_end_date = date("n/j/Y", strtotime($end_date));
+
+        if ($employee_name) {
+            $attendances  = Attendance::whereBetween('attendance_date', [$search_start_date, $search_end_date])
+                ->where('name', $employee_name)
+                ->get();
+        } else {
+            $attendances  = Attendance::whereBetween('attendance_date', [$search_start_date, $search_end_date])
+                ->get();
+        }
+
+        return Excel::download(new AttendanceExport($attendances), 'attendances_' . date("Y-m-d H:i:s") . '.xlsx');
     }
 }

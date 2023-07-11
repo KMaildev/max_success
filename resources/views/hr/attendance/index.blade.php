@@ -10,6 +10,12 @@
                         </h3>
 
                         <div class="box-tools pull-right">
+
+                            <a href="{{ route('attendance_export_excel') }}?employee_name={{ $employee_name }}&start_date={{ $start_date }}&end_date={{ $end_date }}" class="btn btn-success">
+                                <i class="fa fa-file-excel"></i>
+                                Excel
+                            </a>
+
                             <div class="btn-group">
                                 <a type="button" class="btn btn-primary" href="{{ route('attendance.create') }}">
                                     <span class="fa fa-add"></span>
@@ -23,8 +29,7 @@
                         <div class="table-responsive text-nowrap">
 
                             @include('hr.attendance.search_form')
-
-
+                            <br>
                             <table class="table table-bordered table-sm">
                                 <thead class="tbbg">
                                     <tr class="bg-gray">
