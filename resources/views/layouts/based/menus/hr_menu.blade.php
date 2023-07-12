@@ -19,7 +19,7 @@
 
         <ul class="sidebar-menu">
 
-            <li class="{{ Route::is('hr_dashboard.index') ? 'active' : '' }}">
+            <li class="{{ Route::is('hr_dashboard.index') ? 'active' : '' }}" hidden>
                 <a href="{{ route('hr_dashboard.index') }}">
                     <svg class="svg-icon">
                         <use href="#icon-dashboard">

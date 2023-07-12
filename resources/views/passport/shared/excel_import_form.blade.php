@@ -14,6 +14,9 @@
                     {{ $message }}
                 </div>
             @enderror
+            <a href="{{ asset('data/passport_import.xlsx') }}">
+                Simple
+            </a>
         </div>
     </div>
 

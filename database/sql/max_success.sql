@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 30, 2023 at 10:09 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- Host: localhost
+-- Generation Time: Jul 12, 2023 at 04:56 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,90 @@ SET time_zone = "+00:00";
 --
 -- Database: `max_success`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_classifications`
+--
+
+CREATE TABLE `account_classifications` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `ac_code` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `account_classifications`
+--
+
+INSERT INTO `account_classifications` (`id`, `name`, `ac_code`, `created_at`, `updated_at`) VALUES
+(1, 'Assets', '1-000', '2022-02-10 18:16:11', '2022-02-10 18:16:11'),
+(2, 'Equity', '3-000', '2022-02-10 18:16:39', '2022-02-10 18:16:39'),
+(3, 'Revenue', '4-000', '2022-02-10 18:16:52', '2022-02-10 18:16:52'),
+(4, 'COGS', '5-000', '2022-02-10 18:17:03', '2022-02-10 18:17:03'),
+(5, 'Other Income', '4-100', '2022-02-10 18:17:15', '2022-02-10 18:17:15'),
+(6, 'Operation Expenses', '5-100', '2022-02-10 18:17:26', '2022-02-10 18:17:26'),
+(7, 'Administration Expenses', '6-100', '2022-02-10 18:17:37', '2022-02-10 18:17:37'),
+(8, 'Marketing Expenses', '6-200', '2022-02-10 18:17:47', '2022-04-14 23:40:51'),
+(9, 'Finance Costs', '6-300', '2022-02-10 18:17:56', '2022-02-10 18:17:56'),
+(10, 'Other Expenses', '6-400', '2022-02-10 18:18:06', '2023-05-05 00:38:33'),
+(11, 'Liabilities', '2-000', '2022-02-10 18:16:25', '2022-02-10 18:16:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account_types`
+--
+
+CREATE TABLE `account_types` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `number` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `account_classification_id` varchar(255) NOT NULL,
+  `financial_statement` enum('BalanceSheet','IncomeStatement') NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `account_types`
+--
+
+INSERT INTO `account_types` (`id`, `number`, `description`, `account_classification_id`, `financial_statement`, `created_at`, `updated_at`) VALUES
+(1, '1-010', 'Cash', '1', 'BalanceSheet', '2022-02-13 15:05:53', '2022-02-13 15:05:53'),
+(2, '1-100', 'Bank', '1', 'BalanceSheet', '2022-02-13 15:06:16', '2022-02-13 15:06:16'),
+(3, '1-200', 'Account Receivable', '1', 'BalanceSheet', '2022-02-13 15:06:32', '2022-02-13 15:06:32'),
+(4, '1-300', 'Prepaid Expenses', '1', 'BalanceSheet', '2022-02-13 15:06:51', '2022-02-13 15:06:51'),
+(5, '1-400', 'Inventory', '1', 'BalanceSheet', '2022-02-13 15:07:40', '2022-02-13 15:07:40'),
+(6, '1-500', 'Non Current Assets', '1', 'BalanceSheet', '2022-02-13 15:07:51', '2022-02-13 15:07:51'),
+(7, '1-600', 'Accumulated Depreciation', '1', 'BalanceSheet', '2022-02-13 15:08:07', '2022-02-13 15:08:07'),
+(8, '1-700', 'Other Assets', '1', 'BalanceSheet', '2022-03-25 17:32:21', '2022-03-25 17:32:21'),
+(9, '1-800', 'Advance Tax', '1', 'BalanceSheet', '2022-03-25 17:34:01', '2022-03-25 17:34:01'),
+(10, '1-900', 'Advance Custom Duty', '1', 'BalanceSheet', '2022-03-25 17:35:12', '2022-03-25 17:35:12'),
+(11, '2-100', 'Account Payable', '11', 'BalanceSheet', '2022-03-25 17:36:39', '2022-03-25 17:36:39'),
+(12, '2-200', 'Accrued Liabilities', '11', 'BalanceSheet', '2022-03-25 17:37:29', '2022-03-25 17:37:29'),
+(13, '2-300', 'Tax Payable', '11', 'BalanceSheet', '2022-03-25 17:39:51', '2022-03-25 17:39:51'),
+(14, '2-400', 'Payroll Payable', '11', 'BalanceSheet', '2022-03-25 17:40:59', '2022-03-25 17:40:59'),
+(15, '2-500', 'Other Payable', '11', 'BalanceSheet', '2022-03-25 17:41:46', '2022-03-25 17:41:46'),
+(16, '2-600', 'Suspense Account', '11', 'BalanceSheet', '2022-03-25 17:42:52', '2022-03-25 17:42:52'),
+(17, '2-700', 'Payable Custom Duty', '11', 'BalanceSheet', '2022-03-25 17:43:32', '2022-03-25 17:43:32'),
+(18, '2-800', 'Long Term Loan', '11', 'BalanceSheet', '2022-03-25 17:44:32', '2022-03-25 17:44:32'),
+(19, '3-100', 'Capital ( Common Stock )', '2', 'BalanceSheet', '2022-03-25 17:47:43', '2022-03-25 17:47:43'),
+(20, '3-200', 'Additional Paid in Capital', '2', 'BalanceSheet', '2022-03-25 17:51:55', '2022-03-25 17:51:55'),
+(21, '3-300', 'Dividend', '2', 'BalanceSheet', '2022-03-25 17:52:36', '2022-03-25 17:52:36'),
+(22, '3-400', 'Retained Earning', '2', 'BalanceSheet', '2022-03-25 17:53:38', '2022-03-25 17:53:38'),
+(23, '4-000', 'Revenue', '3', 'IncomeStatement', '2022-03-25 17:54:09', '2022-03-25 17:54:09'),
+(24, '4-010', 'Sales Return and Allowance', '3', 'IncomeStatement', '2022-03-25 17:55:07', '2022-03-25 17:55:07'),
+(25, '4-100', 'Other Income', '3', 'IncomeStatement', '2022-03-25 17:57:47', '2022-03-25 17:57:47'),
+(26, '5-000', 'Cost of Good Sold', '4', 'IncomeStatement', '2022-03-25 18:18:10', '2022-03-25 18:18:10'),
+(27, '5-100', 'Operation Expenses', '6', 'IncomeStatement', '2022-03-25 18:19:11', '2022-03-25 18:19:11'),
+(28, '6-100', 'Administration Expenses', '7', 'IncomeStatement', '2022-03-25 18:20:06', '2022-03-25 18:20:06'),
+(29, '6-200', 'Marketing Expenses', '8', 'IncomeStatement', '2022-03-25 18:21:21', '2022-04-14 23:41:46'),
+(30, '6-300', 'Finance Costs', '9', 'IncomeStatement', '2022-03-25 18:21:57', '2022-03-25 18:21:57'),
+(31, '6-400', 'Other Expenses', '10', 'IncomeStatement', '2022-03-25 18:22:56', '2022-03-25 18:22:56');
 
 -- --------------------------------------------------------
 
@@ -51,13 +135,27 @@ CREATE TABLE `agent_lists` (
   `nrc_number` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `agent_lists`
+-- Table structure for table `attendances`
 --
 
-INSERT INTO `agent_lists` (`id`, `name`, `email`, `phone`, `address`, `created_at`, `updated_at`, `agent_code`, `nrc`, `nrc_front`, `nrc_back`, `region_id`, `township_id`, `remark`, `add_user_id`, `join_date`, `photo`, `nrc_code`, `nrc_name`, `nrc_type`, `nrc_number`) VALUES
-(1, 'Ko Kaung Htet San', 'phesin@gmail.com', '+959962205555', 'Yangon', '2023-04-03 22:44:00', '2023-04-25 23:50:16', 'NGW-SA-0001', '14/PaTaNa(N)214259', 'public/agents/kL4qxFhJVXt7bsssMc8P16Qngsf80fCNZzD8KJeZ.jpg', 'public/agents/Z3q6Wg7PR93ffHtUkt4Nqdd6cwlu44HpfYDvcyL9.jpg', '2', '47', 'Yangon', '1', '20.09.2022', '', '14', 'PaTaNa', '(N)', '214259'),
-(2, 'Mg Mg', 'mgmg@gmail.com', '09555161776', 'Yangon', '2023-04-25 22:51:45', '2023-04-25 22:51:45', 'NGW-SA-0002', '1/KhaPhaNa(N)332334', '', '', '1', '3', 'Yangon Remark Test', '1', '1.1.2023', '', '1', 'KhaPhaNa', '(N)', '332334');
+CREATE TABLE `attendances` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` text DEFAULT NULL,
+  `attendance_date` text DEFAULT NULL,
+  `on_duty` text DEFAULT NULL,
+  `off_duty` text DEFAULT NULL,
+  `clock_in` text DEFAULT NULL,
+  `clock_out` text DEFAULT NULL,
+  `late` text DEFAULT NULL,
+  `early` text DEFAULT NULL,
+  `absent` text DEFAULT NULL,
+  `ot_time` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -78,71 +176,108 @@ CREATE TABLE `authentication_log` (
   `location` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `authentication_log`
+-- Table structure for table `cash_books`
 --
 
-INSERT INTO `authentication_log` (`id`, `authenticatable_type`, `authenticatable_id`, `ip_address`, `user_agent`, `login_at`, `login_successful`, `logout_at`, `cleared_by_user`, `location`) VALUES
-(1, 'App\\Models\\User', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', '2023-03-13 22:47:46', 1, '2023-03-13 22:48:26', 0, '{\"ip\":\"127.0.0.0\",\"iso_code\":\"US\",\"country\":\"United States\",\"city\":\"New Haven\",\"state\":\"CT\",\"state_name\":\"Connecticut\",\"postal_code\":\"06510\",\"lat\":41.31,\"lon\":-72.92,\"timezone\":\"America\\/New_York\",\"continent\":\"NA\",\"currency\":\"USD\",\"default\":true,\"cached\":false}'),
-(2, 'App\\Models\\User', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', '2023-03-13 22:48:30', 1, NULL, 0, '{\"ip\":\"127.0.0.0\",\"iso_code\":\"US\",\"country\":\"United States\",\"city\":\"New Haven\",\"state\":\"CT\",\"state_name\":\"Connecticut\",\"postal_code\":\"06510\",\"lat\":41.31,\"lon\":-72.92,\"timezone\":\"America\\/New_York\",\"continent\":\"NA\",\"currency\":\"USD\",\"default\":true,\"cached\":false}'),
-(3, 'App\\Models\\User', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 00:17:54', 1, '2023-03-14 00:20:46', 0, '{\"ip\":\"127.0.0.0\",\"iso_code\":\"US\",\"country\":\"United States\",\"city\":\"New Haven\",\"state\":\"CT\",\"state_name\":\"Connecticut\",\"postal_code\":\"06510\",\"lat\":41.31,\"lon\":-72.92,\"timezone\":\"America\\/New_York\",\"continent\":\"NA\",\"currency\":\"USD\",\"default\":true,\"cached\":false}'),
-(4, 'App\\Models\\User', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 00:20:51', 1, '2023-03-14 00:21:20', 0, '{\"ip\":\"127.0.0.0\",\"iso_code\":\"US\",\"country\":\"United States\",\"city\":\"New Haven\",\"state\":\"CT\",\"state_name\":\"Connecticut\",\"postal_code\":\"06510\",\"lat\":41.31,\"lon\":-72.92,\"timezone\":\"America\\/New_York\",\"continent\":\"NA\",\"currency\":\"USD\",\"default\":true,\"cached\":false}'),
-(5, 'App\\Models\\User', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 00:21:25', 1, NULL, 0, '{\"ip\":\"127.0.0.0\",\"iso_code\":\"US\",\"country\":\"United States\",\"city\":\"New Haven\",\"state\":\"CT\",\"state_name\":\"Connecticut\",\"postal_code\":\"06510\",\"lat\":41.31,\"lon\":-72.92,\"timezone\":\"America\\/New_York\",\"continent\":\"NA\",\"currency\":\"USD\",\"default\":true,\"cached\":false}'),
-(6, 'App\\Models\\User', 1, '69.160.27.186', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', NULL, 0, '2023-03-14 00:30:47', 0, NULL),
-(7, 'App\\Models\\User', 1, '69.160.27.186', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 00:30:53', 1, '2023-03-14 00:32:16', 0, '{\"ip\":\"69.160.27.186\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(8, 'App\\Models\\User', 1, '69.160.27.186', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 00:32:28', 1, '2023-03-14 00:34:11', 0, '{\"ip\":\"69.160.27.186\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(9, 'App\\Models\\User', 1, '69.160.27.186', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 00:34:30', 1, NULL, 0, '{\"ip\":\"69.160.27.186\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(10, 'App\\Models\\User', 1, '69.160.27.186', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 02:53:28', 1, NULL, 0, '{\"ip\":\"69.160.27.186\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(11, 'App\\Models\\User', 1, '103.61.8.40', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', NULL, 0, '2023-03-14 03:14:05', 0, NULL),
-(12, 'App\\Models\\User', 1, '103.61.8.40', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 03:14:18', 1, NULL, 0, '{\"ip\":\"103.61.8.40\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(13, 'App\\Models\\User', 1, '69.160.27.186', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', '2023-03-14 03:14:51', 1, NULL, 0, '{\"ip\":\"69.160.27.186\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(14, 'App\\Models\\User', 1, '103.61.8.40', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.41', '2023-03-14 03:14:55', 1, NULL, 0, '{\"ip\":\"103.61.8.40\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(15, 'App\\Models\\User', 1, '103.61.8.40', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 03:15:30', 1, NULL, 0, '{\"ip\":\"103.61.8.40\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(16, 'App\\Models\\User', 1, '103.61.8.40', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', '2023-03-14 03:15:34', 1, NULL, 0, '{\"ip\":\"103.61.8.40\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(17, 'App\\Models\\User', 1, '104.28.219.156', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 03:16:06', 1, NULL, 0, '{\"ip\":\"104.28.219.156\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(18, 'App\\Models\\User', 1, '104.28.251.156', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 03:16:30', 1, NULL, 0, '{\"ip\":\"104.28.251.156\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(19, 'App\\Models\\User', 1, '104.28.251.154', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 03:17:10', 1, NULL, 0, '{\"ip\":\"104.28.251.154\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(20, 'App\\Models\\User', 1, '103.61.8.40', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.41', '2023-03-14 03:17:22', 1, NULL, 0, '{\"ip\":\"103.61.8.40\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(21, 'App\\Models\\User', 1, '69.160.27.186', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-14 03:17:37', 1, NULL, 0, '{\"ip\":\"69.160.27.186\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(22, 'App\\Models\\User', 1, '103.231.95.13', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15', '2023-03-14 04:45:03', 1, NULL, 0, '{\"ip\":\"103.231.95.13\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(23, 'App\\Models\\User', 1, '103.231.95.13', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36', '2023-03-14 04:55:06', 1, NULL, 0, '{\"ip\":\"103.231.95.13\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(24, 'App\\Models\\User', 1, '45.125.5.103', 'Mozilla/5.0 (Linux; Android 11; Mi A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', '2023-03-14 06:59:27', 0, NULL, 0, '{\"ip\":\"45.125.5.103\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(25, 'App\\Models\\User', 1, '185.177.126.144', 'Mozilla/5.0 (Linux; Android 11; Mi A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', '2023-03-14 06:59:58', 1, NULL, 0, '{\"ip\":\"185.177.126.144\",\"iso_code\":\"NL\",\"country\":\"Netherlands\",\"city\":\"Naaldwijk\",\"state\":\"ZH\",\"state_name\":\"South Holland\",\"postal_code\":\"2671\",\"lat\":51.99810000000000087538865045644342899322509765625,\"lon\":4.19800000000000039790393202565610408782958984375,\"timezone\":\"Europe\\/Amsterdam\",\"continent\":\"Unknown\",\"currency\":\"EUR\",\"default\":false}'),
-(26, 'App\\Models\\User', 1, '45.125.5.103', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/110.0.5481.114 Mobile/15E148 Safari/604.1', '2023-03-14 07:00:29', 1, NULL, 0, '{\"ip\":\"45.125.5.103\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(27, 'App\\Models\\User', 1, '45.125.5.103', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/110.0.5481.114 Mobile/15E148 Safari/604.1', '2023-03-14 07:01:05', 0, NULL, 0, '{\"ip\":\"45.125.5.103\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(28, 'App\\Models\\User', 1, '45.125.5.103', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/110.0.5481.114 Mobile/15E148 Safari/604.1', '2023-03-14 07:01:12', 1, '2023-03-14 07:01:29', 0, '{\"ip\":\"45.125.5.103\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(29, 'App\\Models\\User', 1, '185.177.126.144', 'Mozilla/5.0 (Linux; Android 11; Mi A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', '2023-03-14 07:01:31', 1, NULL, 0, '{\"ip\":\"185.177.126.144\",\"iso_code\":\"NL\",\"country\":\"Netherlands\",\"city\":\"Naaldwijk\",\"state\":\"ZH\",\"state_name\":\"South Holland\",\"postal_code\":\"2671\",\"lat\":51.99810000000000087538865045644342899322509765625,\"lon\":4.19800000000000039790393202565610408782958984375,\"timezone\":\"Europe\\/Amsterdam\",\"continent\":\"Unknown\",\"currency\":\"EUR\",\"default\":false}'),
-(30, 'App\\Models\\User', 1, '45.125.5.103', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/110.0.5481.114 Mobile/15E148 Safari/604.1', '2023-03-14 07:01:38', 1, '2023-03-14 07:01:45', 0, '{\"ip\":\"45.125.5.103\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(31, 'App\\Models\\User', 1, '45.125.5.103', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/110.0.5481.114 Mobile/15E148 Safari/604.1', '2023-03-14 07:02:08', 1, '2023-03-14 07:02:15', 0, '{\"ip\":\"45.125.5.103\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(32, 'App\\Models\\User', 1, '116.202.97.186', 'Mozilla/5.0 (Linux; Android 10; Redmi Note 9 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Mobile Safari/537.36', '2023-03-14 07:07:04', 1, NULL, 0, '{\"ip\":\"116.202.97.186\",\"iso_code\":\"DE\",\"country\":\"Germany\",\"city\":\"Falkenstein\",\"state\":\"SN\",\"state_name\":\"Saxony\",\"postal_code\":\"08223\",\"lat\":50.47500000000000142108547152020037174224853515625,\"lon\":12.3650000000000002131628207280300557613372802734375,\"timezone\":\"Europe\\/Berlin\",\"continent\":\"Unknown\",\"currency\":\"EUR\",\"default\":false}'),
-(33, 'App\\Models\\User', 1, '103.231.95.13', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15', '2023-03-14 07:26:21', 1, NULL, 0, '{\"ip\":\"103.231.95.13\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(34, 'App\\Models\\User', 1, '45.125.5.180', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-15 19:44:50', 1, NULL, 0, '{\"ip\":\"45.125.5.180\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(35, 'App\\Models\\User', 1, '45.125.5.180', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-15 22:31:47', 1, NULL, 0, '{\"ip\":\"45.125.5.180\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(36, 'App\\Models\\User', 1, '103.231.95.11', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15', '2023-03-17 07:49:37', 1, NULL, 0, '{\"ip\":\"103.231.95.11\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(37, 'App\\Models\\User', 1, '104.28.251.156', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.44', '2023-03-20 00:41:11', 1, NULL, 0, '{\"ip\":\"104.28.251.156\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(38, 'App\\Models\\User', 1, '45.125.5.208', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-23 22:27:11', 1, NULL, 0, '{\"ip\":\"45.125.5.208\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(39, 'App\\Models\\User', 1, '45.125.5.208', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-23 22:27:32', 1, NULL, 0, '{\"ip\":\"45.125.5.208\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(40, 'App\\Models\\User', 1, '45.125.5.208', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-23 22:39:26', 1, NULL, 0, '{\"ip\":\"45.125.5.208\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(41, 'App\\Models\\User', 1, '136.228.172.190', 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/111.0.5563.72 Mobile/15E148 Safari/604.1', '2023-03-24 04:36:44', 1, NULL, 0, '{\"ip\":\"136.228.172.190\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(42, 'App\\Models\\User', 1, '104.28.219.154', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.51', '2023-03-24 21:33:13', 1, NULL, 0, '{\"ip\":\"104.28.219.154\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(43, 'App\\Models\\User', 1, '45.125.4.131', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-26 05:45:57', 1, NULL, 0, '{\"ip\":\"45.125.4.131\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(44, 'App\\Models\\User', 1, '104.28.251.156', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.54', '2023-03-26 20:37:38', 1, NULL, 0, '{\"ip\":\"104.28.251.156\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(45, 'App\\Models\\User', 1, '103.61.8.43', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.54', '2023-03-27 06:02:51', 1, NULL, 0, '{\"ip\":\"103.61.8.43\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(46, 'App\\Models\\User', 1, '103.61.8.43', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.54', '2023-03-27 07:57:10', 1, NULL, 0, '{\"ip\":\"103.61.8.43\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(47, 'App\\Models\\User', 1, '104.28.219.149', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-27 08:01:22', 1, NULL, 0, '{\"ip\":\"104.28.219.149\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(48, 'App\\Models\\User', 1, '69.160.27.221', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-27 21:49:49', 1, NULL, 0, '{\"ip\":\"69.160.27.221\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(49, 'App\\Models\\User', 1, '74.50.211.248', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15', '2023-03-29 03:42:17', 1, NULL, 0, '{\"ip\":\"74.50.211.248\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(50, 'App\\Models\\User', 1, '136.228.172.95', 'Mozilla/5.0 (Linux; Android 11; Mi A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', '2023-03-29 04:05:30', 1, NULL, 0, '{\"ip\":\"136.228.172.95\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(51, 'App\\Models\\User', 1, '136.228.172.95', 'Mozilla/5.0 (Linux; Android 11; Mi A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', '2023-03-29 04:06:07', 0, NULL, 0, '{\"ip\":\"136.228.172.95\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(52, 'App\\Models\\User', 1, '136.228.172.95', 'Mozilla/5.0 (Linux; Android 11; Mi A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', '2023-03-29 04:06:13', 1, NULL, 0, '{\"ip\":\"136.228.172.95\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(53, 'App\\Models\\User', 1, '103.231.95.26', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-29 06:48:19', 1, NULL, 0, '{\"ip\":\"103.231.95.26\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(54, 'App\\Models\\User', 1, '103.231.95.26', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15', '2023-03-29 06:49:32', 1, NULL, 0, '{\"ip\":\"103.231.95.26\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Mandalay\",\"state\":\"04\",\"state_name\":\"Mandalay Region\",\"postal_code\":\"\",\"lat\":21.9746999999999985675458447076380252838134765625,\"lon\":96.0836000000000041154635255225002765655517578125,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(55, 'App\\Models\\User', 1, '103.176.152.43', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko)', '2023-03-29 07:00:21', 1, NULL, 0, '{\"ip\":\"103.176.152.43\",\"iso_code\":\"TH\",\"country\":\"Thailand\",\"city\":\"Bangkok\",\"state\":\"10\",\"state_name\":\"Bangkok\",\"postal_code\":\"\",\"lat\":13.756299999999999528199623455293476581573486328125,\"lon\":100.501699999999999590727384202182292938232421875,\"timezone\":\"Asia\\/Bangkok\",\"continent\":\"Unknown\",\"currency\":\"THB\",\"default\":false}'),
-(56, 'App\\Models\\User', 1, '136.228.172.14', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Mobile/15E148 Safari/604.1', '2023-03-29 07:01:54', 1, NULL, 0, '{\"ip\":\"136.228.172.14\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(57, 'App\\Models\\User', 1, '169.150.218.36', 'Mozilla/5.0 (Linux; Android 11; Mi A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', '2023-03-29 09:06:47', 1, NULL, 0, '{\"ip\":\"169.150.218.36\",\"iso_code\":\"NL\",\"country\":\"Netherlands\",\"city\":\"Amsterdam\",\"state\":\"NH\",\"state_name\":\"North Holland\",\"postal_code\":\"1012\",\"lat\":52.3759000000000014551915228366851806640625,\"lon\":4.89749999999999996447286321199499070644378662109375,\"timezone\":\"Europe\\/Amsterdam\",\"continent\":\"Unknown\",\"currency\":\"EUR\",\"default\":false}'),
-(58, 'App\\Models\\User', 1, '45.125.5.187', 'Mozilla/5.0 (Linux; Android 11; Mi A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', '2023-03-29 09:07:56', 0, NULL, 0, '{\"ip\":\"45.125.5.187\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(59, 'App\\Models\\User', 1, '45.125.5.187', 'Mozilla/5.0 (Linux; Android 11; Mi A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Mobile Safari/537.36', '2023-03-29 09:08:06', 1, NULL, 0, '{\"ip\":\"45.125.5.187\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}'),
-(60, 'App\\Models\\User', 1, '69.160.14.164', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36', '2023-03-29 21:42:23', 1, NULL, 0, '{\"ip\":\"69.160.14.164\",\"iso_code\":\"MM\",\"country\":\"Myanmar\",\"city\":\"Yangon\",\"state\":\"06\",\"state_name\":\"Yangon\",\"postal_code\":\"\",\"lat\":16.79639999999999844249032321386039257049560546875,\"lon\":96.1667000000000058435034588910639286041259765625,\"timezone\":\"Asia\\/Yangon\",\"continent\":\"Unknown\",\"currency\":\"MMK\",\"default\":false}');
+CREATE TABLE `cash_books` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `cash_book_date` text DEFAULT NULL,
+  `entry_day` text DEFAULT NULL,
+  `entry_month` text DEFAULT NULL,
+  `entry_year` text DEFAULT NULL,
+  `reference` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `income` text DEFAULT NULL,
+  `expense` text DEFAULT NULL,
+  `tax` text DEFAULT NULL,
+  `chartof_account_id` text DEFAULT NULL,
+  `bank_cash_id` text DEFAULT NULL,
+  `user_id` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `demand_invoice_id` int(11) DEFAULT NULL,
+  `passport_id` text DEFAULT NULL,
+  `passport_payment_id` text DEFAULT NULL,
+  `taxe_id` int(11) DEFAULT NULL,
+  `tax_computation` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chartof_accounts`
+--
+
+CREATE TABLE `chartof_accounts` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `coa_number` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `account_type_id` int(11) DEFAULT NULL,
+  `account_classification_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `sub_or_main_account` text DEFAULT NULL,
+  `chartof_account_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chartof_accounts`
+--
+
+INSERT INTO `chartof_accounts` (`id`, `coa_number`, `description`, `account_type_id`, `account_classification_id`, `created_at`, `updated_at`, `sub_or_main_account`, `chartof_account_id`) VALUES
+(1, '1-010', 'Cash', 1, 1, '2022-03-28 01:59:51', '2022-03-28 01:59:51', 'main_account', NULL),
+(2, '1-100', 'Bank', 2, 1, '2022-03-28 02:00:59', '2022-03-28 02:00:59', 'main_account', NULL),
+(3, '1-200', 'Account Receivable', 3, 1, '2022-03-28 02:01:42', '2022-03-28 02:01:42', 'main_account', NULL),
+(4, '1-202', 'Trade Receivable', 3, 1, '2022-03-28 02:02:41', '2023-06-13 23:43:25', 'main_account', NULL),
+(13, '1-304', 'Other Receivable', 4, 1, '2022-03-28 02:09:52', '2022-03-28 02:09:52', 'main_account', NULL),
+(29, '1-500', 'Non Current Assets', 6, 1, '2022-03-28 02:23:46', '2022-03-28 02:23:46', 'main_account', NULL),
+(30, '1-501', 'Computer & Accessories', 6, 1, '2022-03-28 02:24:26', '2022-03-28 02:24:26', 'main_account', NULL),
+(31, '1-502', 'Furniture', 6, 1, '2022-03-28 02:24:51', '2022-03-28 02:24:51', 'main_account', NULL),
+(32, '1-503', 'Office Equipment', 6, 1, '2022-03-28 02:25:31', '2022-03-28 02:25:31', 'main_account', NULL),
+(34, '1-600', 'Accumulated Depreciation', 7, 1, '2022-03-28 02:27:02', '2022-03-28 02:27:02', 'main_account', NULL),
+(35, '1-601', 'Accumulated Depreciation of Computer & Accessories', 7, 1, '2022-03-28 02:27:51', '2022-03-28 02:27:51', 'main_account', NULL),
+(36, '1-602', 'Accumulated Depreciation of Furniture', 7, 1, '2022-03-28 02:28:49', '2022-03-28 02:28:49', 'main_account', NULL),
+(37, '1-603', 'Accumulated Depreciation of Office Equipment', 7, 1, '2022-03-28 02:29:50', '2022-03-28 02:29:50', 'main_account', NULL),
+(38, '1-604', 'Accumulated Depreciation', 7, 1, '2022-03-28 02:30:34', '2023-06-13 23:50:05', 'main_account', NULL),
+(39, '1-700', 'Other Assets', 8, 1, '2022-03-28 02:31:07', '2022-03-28 02:31:07', 'main_account', NULL),
+(40, '1-800', 'Advance Tax', 9, 1, '2022-03-28 02:31:33', '2022-03-28 02:31:33', 'main_account', NULL),
+(46, '2-100', 'Account Payable', 11, 11, '2022-03-28 15:08:26', '2022-03-28 15:08:26', 'main_account', NULL),
+(50, '2-104', 'Trade Payable', 11, 11, '2022-03-28 15:10:48', '2022-03-28 15:10:48', 'main_account', NULL),
+(58, '2-203', 'Advanced Received', 12, 11, '2022-03-28 15:17:32', '2022-03-28 15:17:32', 'main_account', NULL),
+(59, '2-300', 'Tax Payable', 13, 11, '2022-03-28 15:17:59', '2022-03-28 15:17:59', 'main_account', NULL),
+(61, '2-500', 'Other Payable', 15, 11, '2022-03-28 15:19:00', '2022-03-28 15:19:00', 'main_account', NULL),
+(68, '3-100', 'Capital ( Common Stock )', 19, 2, '2022-03-28 15:23:22', '2022-03-28 15:23:22', 'main_account', NULL),
+(70, '3-300', 'Dividend', 21, 2, '2022-03-28 15:25:20', '2022-03-28 15:25:20', 'main_account', NULL),
+(71, '3-400', 'Retained Earning', 22, 2, '2022-03-28 15:26:04', '2022-03-28 15:26:04', 'main_account', NULL),
+(72, '4-000', 'Revenue', 23, 3, '2022-03-28 15:26:32', '2022-03-28 15:26:32', 'main_account', NULL),
+(86, '4-100', 'Other Income', 25, 3, '2022-03-28 15:38:30', '2022-03-28 15:38:30', 'main_account', NULL),
+(103, '5-004', 'Purchase', 26, 4, '2022-03-28 15:48:22', '2023-06-13 23:50:22', 'main_account', NULL),
+(118, '5-019', 'Oversea Charges', 26, 4, '2022-03-28 15:58:57', '2022-03-28 15:58:57', 'main_account', NULL),
+(155, '6-100', 'Administration Expenses', 28, 7, '2022-03-28 17:20:48', '2022-03-28 17:20:48', 'main_account', NULL),
+(156, '6-101', 'Company Registration', 28, 7, '2022-03-28 17:21:46', '2022-03-28 17:21:46', 'main_account', NULL),
+(158, '6-103', 'Decoration &  Renovation  Expenses', 28, 7, '2022-03-28 17:25:07', '2022-03-28 17:25:07', 'main_account', NULL),
+(159, '6-104', 'Depreciation for Computer & Accessories', 28, 7, '2022-03-28 17:25:56', '2022-03-28 17:25:56', 'main_account', NULL),
+(160, '6-105', 'Depreciation for Furniture', 28, 7, '2022-03-28 17:26:24', '2022-03-28 17:26:24', 'main_account', NULL),
+(161, '6-106', 'Depreciation for Motor Vehicle', 28, 7, '2022-03-28 17:27:12', '2022-03-28 17:27:12', 'main_account', NULL),
+(162, '6-107', 'Depreciation for Office Equipment', 28, 7, '2022-03-28 17:27:45', '2022-03-28 17:27:45', 'main_account', NULL),
+(163, '6-108', 'Director Expense', 28, 7, '2022-03-28 17:31:25', '2022-03-28 17:31:25', 'main_account', NULL),
+(167, '6-112', 'General Expenses', 28, 7, '2022-03-28 17:34:07', '2022-03-28 17:34:07', 'main_account', NULL),
+(169, '6-114', 'Internet Charges', 28, 7, '2022-03-28 17:35:29', '2022-03-28 17:35:29', 'main_account', NULL),
+(173, '6-118', 'Medical Allowance', 28, 7, '2022-03-28 17:37:41', '2022-03-28 17:37:41', 'main_account', NULL),
+(174, '6-119', 'Office Expenses', 28, 7, '2022-03-28 17:38:04', '2022-03-28 17:38:04', 'main_account', NULL),
+(175, '6-120', 'Overtime', 28, 7, '2022-03-28 17:38:31', '2022-03-28 17:38:31', 'main_account', NULL),
+(176, '6-121', 'Phone Bill', 28, 7, '2022-03-28 17:38:52', '2022-03-28 17:38:52', 'main_account', NULL),
+(179, '6-124', 'Printing and Stationary', 28, 7, '2022-03-28 17:40:17', '2022-03-28 17:40:17', 'main_account', NULL),
+(186, '6-131', 'Staff Uniform', 28, 7, '2022-03-28 17:43:51', '2022-03-28 17:43:51', 'main_account', NULL),
+(188, '6-133', 'Travelling Expenses', 28, 7, '2022-03-28 17:44:43', '2022-03-28 17:44:43', 'main_account', NULL),
+(190, '6-135', 'Wages', 28, 7, '2022-03-28 17:45:21', '2022-03-28 17:45:21', 'main_account', NULL),
+(200, '6-400', 'Other Expenses', 31, 10, '2022-03-28 17:50:10', '2022-03-28 17:50:10', 'main_account', NULL),
+(201, '1-100-1', 'AYA Saving MMK-0092202010055139/20021829943', 2, 1, '2023-07-06 20:50:42', '2023-07-06 21:05:26', 'sub_account', 2),
+(202, '1-100-2', 'AYA Current MMK-0092102010003865/10003821978', 2, 1, '2023-07-06 21:09:18', '2023-07-06 21:09:46', 'sub_account', 2),
+(203, '1-100-3', 'AYA USD-10004060570', 2, 1, '2023-07-06 21:09:31', '2023-07-06 21:09:31', 'sub_account', 2);
 
 -- --------------------------------------------------------
 
@@ -161,13 +296,6 @@ CREATE TABLE `contracts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `contracts`
---
-
-INSERT INTO `contracts` (`id`, `contract_date`, `contract_male`, `contract_female`, `remark`, `demand_id`, `created_at`, `updated_at`) VALUES
-(1, '100-01-01', 100, 0, 'Remark Testing', 2, '2023-04-30 15:04:21', '2023-04-30 15:04:21');
-
 -- --------------------------------------------------------
 
 --
@@ -180,18 +308,23 @@ CREATE TABLE `countries` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `image` text DEFAULT NULL,
-  `currency_format` text DEFAULT NULL
+  `currency_format` text DEFAULT NULL,
+  `standard_cost` text DEFAULT NULL,
+  `standard_cost_mmk` text DEFAULT NULL,
+  `exchange_rate` text DEFAULT NULL,
+  `total_amount_mmk` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `countries`
 --
 
-INSERT INTO `countries` (`id`, `title`, `created_at`, `updated_at`, `image`, `currency_format`) VALUES
-(1, 'Thailand', '2023-01-30 10:38:22', '2023-04-29 03:32:14', 'public/images/SrZnG8BeXf5NocabbYs2G4qDXyESv2THaX0kTmyU.png', 'Thai Baht'),
-(2, 'Malaysia', '2023-02-06 11:41:27', '2023-04-29 03:32:25', 'public/images/hRUWIpFkxojT4wvA3Cw4JsoLtYS2mXXeJ4R3gwka.png', 'Ringgit'),
-(3, 'Japan', '2023-02-06 11:41:32', '2023-04-29 03:32:32', 'public/images/rqZOBlQ5mJC5eaH9pSRvnnYN0y8P9rvao4807ZCk.png', 'Yen'),
-(4, 'Singapore', '2023-04-23 01:41:08', '2023-04-29 03:32:36', 'public/images/ziHjqC5FBoRMzHX4AmETAXXyTeIEX7urWOobgEks.png', 'SGD');
+INSERT INTO `countries` (`id`, `title`, `created_at`, `updated_at`, `image`, `currency_format`, `standard_cost`, `standard_cost_mmk`, `exchange_rate`, `total_amount_mmk`) VALUES
+(1, 'Thailand', '2023-01-30 10:38:22', '2023-05-29 05:26:50', 'public/images/SrZnG8BeXf5NocabbYs2G4qDXyESv2THaX0kTmyU.png', 'Thai Baht', '3000', '0', '60.43', '181290'),
+(2, 'Malaysia', '2023-02-06 11:41:27', '2023-06-06 11:09:26', 'public/images/hRUWIpFkxojT4wvA3Cw4JsoLtYS2mXXeJ4R3gwka.png', 'Ringgit', '5000', '0', '456.11', '2280550'),
+(3, 'Japan', '2023-02-06 11:41:32', '2023-04-29 03:32:32', 'public/images/rqZOBlQ5mJC5eaH9pSRvnnYN0y8P9rvao4807ZCk.png', 'Yen', NULL, NULL, NULL, NULL),
+(4, 'Singapore', '2023-04-23 01:41:08', '2023-04-29 03:32:36', 'public/images/ziHjqC5FBoRMzHX4AmETAXXyTeIEX7urWOobgEks.png', 'SGD', NULL, NULL, NULL, NULL),
+(5, 'UAE', '2023-05-29 04:55:52', '2023-05-29 05:25:24', 'public/images/1ykKL6oIVESEYJvqehTu67n1Kdzl8kFa13J2zl5Y.png', 'AED', '6000', '0', '600', '3600000');
 
 -- --------------------------------------------------------
 
@@ -219,13 +352,25 @@ CREATE TABLE `demands` (
   `salary` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `demands`
+-- Table structure for table `demand_invoices`
 --
 
-INSERT INTO `demands` (`id`, `company_name`, `countrie_id`, `overseas_agencie_id`, `male`, `female`, `demand_date`, `cabinet_date`, `issue_date`, `issue_number`, `created_at`, `updated_at`, `demand_status`, `demand_id`, `demand_number`, `job`, `salary`) VALUES
-(1, '1', '1', '3', '100', '0', '2023-04-29', NULL, NULL, NULL, '2023-04-29 03:48:01', '2023-04-30 20:58:07', 'new_demand', NULL, NULL, 'Construction', '1800'),
-(2, '1', '2', '1', '100', '100', '2023-04-30', '2023-04-30', '2023-04-30', '2023-04-30', '2023-04-30 19:57:24', '2023-04-30 21:00:40', 'new_demand', NULL, 'DOE-00003', 'Construction Construction', '1900');
+CREATE TABLE `demand_invoices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `submit_date` text DEFAULT NULL,
+  `overseas_agencie_id` text DEFAULT NULL,
+  `demand_id` text DEFAULT NULL,
+  `amount` text DEFAULT NULL,
+  `total_labour` text DEFAULT NULL,
+  `remark` text DEFAULT NULL,
+  `user_id` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `invoice_no` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -338,7 +483,9 @@ CREATE TABLE `interview_labours` (
   `agent_list_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `passport` text DEFAULT NULL,
+  `overseas_agencie_id` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -517,7 +664,25 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (57, '2023_03_24_013938_add_dob_fields_to_passports_table', 47),
 (58, '2023_04_23_055007_add_countrie_id_to_users_table', 48),
 (59, '2023_04_23_080920_add_image_to_countries_table', 49),
-(60, '2023_04_29_095918_add_currency_format_to_countries_table', 50);
+(60, '2023_04_29_095918_add_currency_format_to_countries_table', 50),
+(61, '2023_05_01_072001_add_fields_v1_to_interview_labours_table', 51),
+(62, '2023_05_04_153954_add_agent_fields_to_overseas_agencies_table', 52),
+(63, '2023_05_05_064853_create_account_classifications_table', 53),
+(64, '2023_05_05_072427_create_account_types_table', 54),
+(65, '2023_05_25_172244_create_chartof_accounts_table', 55),
+(66, '2023_05_29_112043_add_standard_cost_to_countries_table', 56),
+(67, '2023_05_29_144706_create_cash_books_table', 57),
+(68, '2023_06_02_105559_create_demand_invoices_table', 58),
+(69, '2023_06_06_091715_add_invoice_no_to_demand_invoices_table', 59),
+(70, '2023_06_06_093208_add_labour_cust_to_passports_table', 60),
+(71, '2023_06_06_155949_add_demand_invoice_id_to_cash_books_table', 61),
+(72, '2023_06_21_071154_add_received_amount_exchange_to__table', 62),
+(73, '2023_06_21_101821_add_passport_id_passport_payment_id_to_cash_books_table', 63),
+(74, '2023_07_07_030643_add_sub_or_main_account_to_chartof_accounts_table', 64),
+(75, '2023_07_08_192853_create_taxes_table', 65),
+(76, '2023_07_08_203113_add_taxi_id_to_cash_books_table', 66),
+(77, '2023_07_09_080131_add_tax_type_to_taxes_table', 67),
+(78, '2023_07_11_031051_create_attendances_table', 68);
 
 -- --------------------------------------------------------
 
@@ -542,6 +707,15 @@ CREATE TABLE `model_has_roles` (
   `model_type` varchar(255) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(4, 'App\\Models\\User', 1),
+(5, 'App\\Models\\User', 6),
+(6, 'App\\Models\\User', 7);
 
 -- --------------------------------------------------------
 
@@ -1027,17 +1201,13 @@ CREATE TABLE `overseas_agencies` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `contact` text DEFAULT NULL,
-  `remark` text DEFAULT NULL
+  `remark` text DEFAULT NULL,
+  `agent_company_name` text DEFAULT NULL,
+  `agent_contact_person` text DEFAULT NULL,
+  `agent_phone` text DEFAULT NULL,
+  `agent_email` text DEFAULT NULL,
+  `agent_address` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `overseas_agencies`
---
-
-INSERT INTO `overseas_agencies` (`id`, `company_name`, `type_of_company`, `company_phone`, `company_email`, `company_address`, `countrie_id`, `created_at`, `updated_at`, `contact`, `remark`) VALUES
-(1, 'SMC AUTOMATION Sdn Bhd', 'Electrical Accessories', '+60 3-56350590', 'sales@smcmy.com.my', 'Lot 36~37, Jalan Delima 1/1, Subang Hi-Tech Industrial Park,47500 Subang Jaya,Selangor,Malaysia.', '2', '2023-04-03 22:17:26', '2023-04-23 03:48:37', 'Mgsw', 'Test'),
-(2, 'ABC Co.,Ltd', 'Construction Company', '09555161776', 'abc@gmail.com', 'Malaysia', '2', '2023-04-23 03:19:44', '2023-04-23 03:48:20', 'U Dawsia', 'Construction Company'),
-(3, 'Thailand Company', NULL, NULL, NULL, 'Thailand Company', '1', '2023-04-23 03:20:37', '2023-04-30 20:35:24', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1114,61 +1284,9 @@ CREATE TABLE `passports` (
   `nrc_number` text DEFAULT NULL,
   `dob_year` text DEFAULT NULL,
   `dob_month` text DEFAULT NULL,
-  `dob_day` text DEFAULT NULL
+  `dob_day` text DEFAULT NULL,
+  `total_amount_mmk` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `passports`
---
-
-INSERT INTO `passports` (`id`, `name`, `father_name`, `nrc`, `date_of_birth`, `passport`, `passport_date`, `local_agent_name`, `phone`, `address`, `gender`, `remark`, `created_at`, `updated_at`, `join_date`, `owic`, `owic_date`, `reject_status`, `reject_date`, `reject_reason`, `place_of_passport`, `agent_list_id`, `mother_name`, `go_date`, `go_reason`, `entry_date`, `nation_religion`, `region_state`, `labour_code`, `age`, `photo`, `nrc_front`, `nrc_back`, `passport_expiry_date`, `qualification`, `weight`, `height`, `tatto`, `smoking`, `alcohol`, `prominent_sign`, `working_experience`, `selected_country`, `labour_card_no`, `issue_of_labour_date`, `identification_card`, `issue_date_of_id_card`, `son`, `son_age`, `daughter`, `daughter_age`, `address_line_one`, `phone_family`, `name_of_heir`, `relative`, `nrc_of_heir`, `passport_cost`, `car_charges`, `passport_register_status`, `user_id`, `marital_status`, `leader`, `nrc_code`, `nrc_name`, `nrc_type`, `nrc_number`, `dob_year`, `dob_month`, `dob_day`) VALUES
-(1, 'NYEIN NYEIN EI SOE', 'U HLA THAUNG', '2/KhaMaNa(A)109103', '2011.4.3', 'MG454177', '10.09.2022', '', '09666096045', 'ဆင်မတောင်ရွာ၊ဆင်ပေါက်ဝဲမြို့', 'male', 'Remark Test', '2023-04-03 23:20:15', '2023-04-18 20:09:51', '2023-04-19', '', '', NULL, NULL, NULL, 'Yangon', 1, 'Daw Tin Hla', NULL, 'အလုပ်လုပ်ကိုင်ရန်', NULL, 'BURMESE,BUDDHA', NULL, 'NGW-LB-000001', '27yrs', '', '', '', '09.09.2027', NULL, '(lb)(lb)(lb)(lb)(lb)(lb)(lb)(lb)(lb)(lb)', '(kg)(kg)(kg)(kg)(kg)(kg)(kg)(kg)(kg)(kg)', 'No', 'No', 'No', NULL, NULL, '2', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', NULL, '1', 'Single', NULL, '2', 'KhaMaNa', '(A)', '109103', '2011', '4', '3'),
-(2, 'AYE YU NAING Soe', 'U THAN NAING', '8/AhLaNa(N)262310', '1931.2.3', 'MG552674', '27.09.2022', '', '890924213', 'မောင်းမလှုပ်ရွာ၊အောင်လံမြို့။', 'female', NULL, '2023-04-04 06:50:02', '2023-04-18 20:10:20', '2023-04-19', '', '', NULL, NULL, NULL, 'YANGON', 1, NULL, NULL, 'အလုပ်လုပ်ရန်', '15.10.2021', 'BURMESE,BUDDHA', NULL, 'NGW-LB-000002', '18yrs', '', '', '', '26.09.2027', NULL, '(lb)(lb)(lb)(lb)(lb)(lb)(lb)(lb)(lb)(lb)(lb)(lb)(lb)', '5\'2\"(kg)(kg)(kg)(kg)(kg)(kg)(kg)(kg)(kg)(kg)(kg)(kg)(kg)', 'No', 'No', 'No', 'လည်ပင်းမှည့်ရှိ', NULL, '2', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', NULL, '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '262310', '1931', '2', '3'),
-(3, 'MAY THUZAR HTUN', 'U THAN HTAY', '12/AhSaNa(N)241211', '2000.3.16', 'MG097147', '30.06.2022', '', '943933321', 'မာဃလုလင်လမ်း၊စော်ဘွားကြီးကုန်းရပ်ကွက်၊အင်းစိန်၊ရန်ကုန်။', 'female', NULL, '2023-04-04 07:00:44', '2023-04-04 07:00:44', '2023-04-04', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW SAN SAN KYU', NULL, 'အလုပ်လုပ်ရန်', '17.10.2022', 'BURMESE,BUDDHA', NULL, 'NGW-LB-000003', '22Yrs', '', '', '', '29.06.2027', NULL, '(lb)', '5\'2\"(kg)', 'No', 'No', 'No', 'လည်ပင်းမှည့်ရှိ', NULL, '2', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 'Single', NULL, '12', 'AhSaNa', '(N)', '241211', '2000', '3', '16'),
-(4, 'WAI WAI LWIN', 'U AUNG PITE', '8/AhLaNa(N)252009', '2002.11.8', 'MF770139', '02.04.2022', '', '680373220', 'လက်ပန်တုန်းကျေးရွာ၊ကျောက်ပန်းတောင်းကျေးရွာအုပ်စု၊အောင်လံမြို့နယ်၊မကွေးတိုင်း။', 'female', NULL, '2023-04-04 07:10:09', '2023-04-04 07:10:09', '2023-04-04', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW KYI THAN', NULL, 'အလုပ်လုပ်ရန်', '15.10.2022', 'BURMESE,BUDDHA', NULL, 'NGW-LB-000004', '20Yrs', '', '', '', '01.04.2027', NULL, '(lb)', '5\'2\"(kg)', 'No', 'No', 'No', 'အောက်နှုတ်ခမ်းမှဲ့ရှိ', NULL, '2', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '252009', '2002', '11', '8'),
-(5, 'SWE MOE OO', 'U THAN NAING', '8/AhLaNa(N)261942', '2004.5.9', 'MG552872', '27.09.2022', '', '890924213', 'မောင်းမလှုပ်ကျေးရွာ၊သမ္ဘလကျေးရွာအုပ်စု၊အောင်လံမြို့၊မကွေးတိုင်း။', 'female', NULL, '2023-04-04 07:17:44', '2023-04-04 07:17:44', '2023-04-04', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW YI YI NAING', NULL, 'အလုပ်လုပ်ရန်', '15.10.2022', 'BURMESE,BUDDHA', NULL, 'NGW-LB-000005', '18Yrs', '', '', '', '26.09.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'ဝဲပါးအမှတ်ရှိ', NULL, '3', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '261942', '2004', '5', '9'),
-(6, 'HNIN HNIN KHAING', 'U THAN HTWE', '8/AhLaNa(N)140349', '1989.3.30', 'MF770140', '02.04.2022', '', '685453215', 'လက်ပံတုန်းကျေးရွာ၊ကျောက်ပန်းတောင်းကျေးရွာအုပ်စု၊အောင်လံမြို့၊အကွေးတိုင်း။', 'female', NULL, '2023-04-04 07:36:17', '2023-04-04 07:36:17', '2023-04-04', '', '', NULL, NULL, NULL, 'YANGON', 1, NULL, NULL, 'အလုပ်လုပ်ရန်', '15.10.2022', 'BURMESE,BUDDHA', NULL, 'NGW-LB-000006', '33Yrs', '', '', '', '01.04.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'ဝဲပါးမှဲ့ရှိ', NULL, '3', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '140349', '1989', '3', '30'),
-(7, 'OHNMAR SHWE', 'U AUNG PITE', '8/AhLaNa(N)136461', '1990.8.21', 'MF983571', '03.06.2022', '', '671801315', 'လက်ပံတုန်းကျေးရွာ၊ကျောက်ပန်းတောင်းကျေးရွာအုပ်စု၊အောင်လံမြို့နယ်၊မကွေးတိုင်း။', 'female', NULL, '2023-04-04 08:14:16', '2023-04-04 08:14:16', '2023-04-04', '', '', NULL, NULL, NULL, 'YANGON', 1, NULL, NULL, 'အလုပ်လုပ်ရန်', '15.10.2022', 'BURMESE,BUDDHA', NULL, 'NGW-LB-000007', '32Yrs', '', '', '', '02.06.2027', NULL, '(lb)', '5\'2\"(kg)', 'No', 'No', 'No', 'မေးစေ့မှည့်ရှိ', NULL, '2', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '136461', '1990', '8', '21'),
-(8, 'HLA MYO KHAING', 'U SOE MYINT', '8/AhLaNa(N)136393', '1991.4.17', 'MG566029', '30.09.2022', '', '450965494', 'လက်ပန်တုန်းရွာ၊အောင်လံမြို့၊မကွေးတိုင်း။', 'female', NULL, '2023-04-05 00:01:28', '2023-04-06 00:09:55', '2023-04-05', NULL, NULL, NULL, NULL, NULL, 'YANGON', 1, 'DAW TIN HLA', NULL, 'အလုပ်လုပ်ကိုင်ရန်', NULL, 'BURMESE,BUDDHA', NULL, 'NGW-LB-000008', '31Yrs', '', '', '', '29.09.2027', NULL, '(lb)', '5\'2\"(kg)', 'No', 'No', 'No', 'နှာခေါင်းထိပ်မှဲ့ရှိ', NULL, '3', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '136393', '1991', '4', '17'),
-(9, 'WIA WIA LWIN', 'U HLA WAI', '8/AhLaNa(N)198924', '1995.4.12', 'MG 439491', '07.09.2022', '', '953809586', NULL, 'female', NULL, '2023-04-06 00:50:12', '2023-04-06 00:50:12', '2023-04-06', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW MYA KYI', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '15.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000009', '27Yar', '', '', '', '06.09.2027', NULL, '(lb)', '4\'11\"(kg)', 'No', 'No', 'No', 'လည်ပင်းအမှတ်ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'တပုလိုင်းကျေးရွာ၊အောင်လံမြို့၊မကွေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '198924', '1995', '4', '12'),
-(11, 'SHWE AU', 'U MAR DIN', '8/AhLaNa(N)198194', '1999.7.9', 'MG 932444', '18.05.2022', '', '687204915', NULL, 'female', NULL, '2023-04-06 01:04:35', '2023-04-06 01:04:35', '2023-04-06', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW OHMMAR', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '15.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000010', '23Yar', '', '', '', '17.05.2027', NULL, '(lb)', '4\'9\"(kg)', 'No', 'No', 'No', 'ယာနားထင်မှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'လက်ပန်းတုန်းရွာ၊ အောင်လံမြို့၊ မကွေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '198194', '1999', '7', '9'),
-(12, 'MAY THU TUN', 'U KYI HLAING', '8/AhLaNa(N)237285', '2000.5.15', 'MG 451169', '09.09.2022', '', '457116804', NULL, 'female', NULL, '2023-04-06 01:17:16', '2023-04-06 01:17:16', '2023-04-06', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW AYE NAING', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '15.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000011', '22Yar', '', '', '', '08.09.2027', NULL, '(lb)', '5\'1\"(kg)', 'No', 'No', 'No', 'မေးမှဲရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'မောင်းမလှုပ်ရွာ၊အောင်လံမြို့၊မကွေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '237285', '2000', '5', '15'),
-(13, 'THEINT THEINT NYEIN', 'U THAN HTAY', '9/PaBaNa(N)190447', '1990.4.28', 'MG 974980', '01.06.2022', '', '694653197', NULL, 'female', NULL, '2023-04-06 01:32:58', '2023-04-06 01:32:58', '2023-04-06', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW MYINT SEIN', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '15.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000012', '32', '', '', '', '31.05.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'နဖူးအမာရွာတ်ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ရန်အောင်ကျေးရွာ၊ ပျော်ဘွယ်မြို့၊ မန္တလေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '9', 'PaBaNa', '(N)', '190447', '1990', '4', '28'),
-(14, 'NAW THAY EH PHAW', 'U SAW AUNG TUN', '7/KaTaKha(N)208889', '1999.6.1', 'MG 498306', '14.09.2022', '', '954756971', NULL, 'female', NULL, '2023-04-06 01:44:55', '2023-04-06 01:44:55', '2023-04-06', '', '', NULL, NULL, NULL, NULL, 1, 'DAW NAW AE MAY', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '15.10.2022', 'KAYIN', NULL, 'NGW-LB-000013', NULL, '', '', '', '13.09.2027', NULL, '(lb)', '(kg)', 'No', 'No', 'No', 'ယာမျက်ခုံးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'အထက်ဘုန်းမဲဇာကျေးရွာ၊ ကျောက်တံခါးမြို့၊ ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'KaTaKha', '(N)', '208889', '1999', '6', '1'),
-(15, 'ZON LAY PHYU', 'U THAN AUNG', '8/SaPaWa(N)099721', '1992.1.12', 'MG 600935', '08.10.2022', '', '400729248အပ်', NULL, 'female', NULL, '2023-04-07 21:02:16', '2023-04-07 21:02:16', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW KYU KYU WIN', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '18.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000014', '30Yar', '', '', '', '07.10.2022', NULL, '(lb)', '4\'10\"(kg)', 'No', 'No', 'No', 'မေးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ကျောက်ချက်ရွာ၊ဆင်ပေါင်ဝဲမြို့၊မကွေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '8', 'SaPaWa', '(N)', '099721', '1992', '1', '12'),
-(16, 'ZIN MAR THET', 'U TIN TUN', '9/PaBaTha(N)018504', '2003.9.1', 'MG115268', '05.07.2022', '', '695165574', 'ကျောင်းစုညောင်လူးအုပ်စု၊ပုဗ္ဗသီရိမြို့', 'female', NULL, '2023-04-07 21:11:07', '2023-04-07 21:21:36', '2023-04-08', NULL, NULL, NULL, NULL, NULL, 'YANGON', 1, 'DAW HLA PU', NULL, 'အလုပ်လုပ်ကိုင်ရန်', NULL, 'BURMESE,BUDDHA', 'နေပြည်တော်', 'NGW-LB-000015', '19Yrs', '', '', '', '04.07.2027', NULL, '(lb)', '5\'1\"(kg)', 'No', 'No', 'No', 'BURMESE,BUDDHA', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '9', 'PaBaTha', '(N)', '018504', '2003', '9', '1'),
-(17, 'HNIN NU HTWE', 'U NYUNT KHIN', '9/KaSaNa(N)211154', 'year.month.day', 'MG339885', '22.08.2022', '', '791329920', NULL, 'female', NULL, '2023-04-07 21:18:48', '2023-04-07 21:18:48', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, NULL, NULL, 'အလုပ်လုပ်ကိုင်ရန်', '03.09.2022', 'BUMESE,BUDDHA', NULL, 'NGW-LB-000016', '24Yrs', '', '', '', '21.08.2027', NULL, '(lb)', '5\'2\"(kg)', 'No', 'No', 'No', 'ဝဲပါးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ရဲဘော်ကြီးရွာ၊ကျောက်ဆည်မြို့၊မန္တလေးတိုင်း။', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '9', 'KaSaNa', '(N)', '211154', 'year', 'month', 'day'),
-(18, 'SU SU MAR', 'U AUNG YI', '9/KaSaNa(N)194120', '1986.7.18', 'MG340254', '22.08.2022', '', '784190812', NULL, 'female', NULL, '2023-04-07 21:29:05', '2023-04-07 21:29:05', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, NULL, NULL, 'အလုပ်လုပ်ကိုင်ရန်', '03.09.2022', 'BURMESE.BUDDHA', NULL, 'NGW-LB-000017', '37Yrs', '', '', '', '21.08.2027', NULL, '(lb)', '5\'3\"(kg)', 'No', 'No', 'No', 'ယာပါ့းမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ရဲဘော်ကြီးကျေးရွာ၊ကျောက်ဆည်မြို့၊မန္တလေးတိုင်း။', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '9', 'KaSaNa', '(N)', '194120', '1986', '7', '18'),
-(19, 'THAN THAN SINT', 'U TIN SAUNG', '9/KaSaNa(N)148809', '1987.6.30', 'MG340248', '22.08.2022', '', '784085927', NULL, 'female', NULL, '2023-04-07 21:38:45', '2023-04-07 21:38:45', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, NULL, NULL, 'အလုပ်လုပ်ကိုင်ရန်', '03.09.2022', 'BURMESE,BUDDHA', NULL, 'NGW-LB-000018', '36Yrs', '', '', '', '21.08.2027', NULL, '(lb)', '5\'3\"(kg)', 'No', 'No', 'No', 'လည်ပင်းမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'မြင်စိုင်း(အလယ်ရပ်)၊ကျောက်ဆည်။', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '9', 'KaSaNa', '(N)', '148809', '1987', '6', '30'),
-(20, 'MYO MYO SAN', 'U MYA YAN', '9/KaSaNa(N)211507', '1995.4.21', 'MG339894', '22.08.2022', '', '789709051', NULL, 'female', NULL, '2023-04-07 21:45:15', '2023-04-07 21:45:15', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, NULL, NULL, 'အလုပ်လုပ်ကိုင်ရန်', '03.09.2022', 'BURMESE,BUDDHA', NULL, 'NGW-LB-000019', '28Yrs', '', '', '', '21.08.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'နှာတံဝဲဘေးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'သပြေဝန်းရွာ၊ကျောက်ဆည်', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '9', 'KaSaNa', '(N)', '211507', '1995', '4', '21'),
-(21, 'KYI KYI THIN', 'U KYAW SINT', '9/KaSaNa(N)211207', '1999.2.15', 'MG 340266', '22.08.2022', '', '740996056', NULL, 'female', NULL, '2023-04-07 21:56:49', '2023-04-07 21:56:49', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, NULL, NULL, 'အလုပ်လုပ်ကိုင်ရန်', '03.09.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000020', '24Yar', '', '', '', '21.08.2027', NULL, '(lb)', '5\'3\"(kg)', 'No', 'No', 'No', 'ယာပါးမှဲရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'သပြေဝန်းရွာ၊ကျော်ဆည်မြို့၊စစ်ကိုင်းတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '9', 'KaSaNa', '(N)', '211207', '1999', '2', '15'),
-(22, 'THIRI WAI', 'U MAUNG MYINT', '8/AhLaNa(N)226244', '2001.2.15', 'MG 571778', '01.10.2022', '', '892175366', NULL, 'female', NULL, '2023-04-07 22:07:45', '2023-04-07 22:07:45', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW SAN SAN WAI', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '26.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000021', '21Yar', '', '', '', '30.09.2027', NULL, '(lb)', '5\'1\"(kg)', 'No', 'No', 'No', 'ယာမေးရိုးမှဲရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'သိုက်ရုံကျေးရွာ၊ အောင်လံမြို့၊မကွေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '226244', '2001', '2', '15'),
-(23, 'NAN EI EI MOE', 'U AUNG THEIN', '7/DaOuNa(N)147145', '1995.5.8', 'MG 370017', '29.08.2022', '', '688023929', NULL, 'female', NULL, '2023-04-07 22:22:09', '2023-04-07 22:22:09', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW THEIN YI', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '28.10.2022', 'PAOHH/BUDDHA', NULL, 'NGW-LB-000022', '27Yar', '', '', '', '28.08.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'မေးစေ့အမာရွတ်ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ရွာဝိုက်ကြီးကျေးရွာ၊ဒိုက်ဦးမြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'DaOuNa', '(N)', '147145', '1995', '5', '8'),
-(24, 'KHAING SHWE OO', 'U SAN MYINT', '7/PaKhaNa(N)320492', '1991.9.23', 'MG 757513', '29.03.2022', '', '975424780', NULL, 'female', NULL, '2023-04-07 23:01:43', '2023-04-07 23:01:43', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW SAN AYE', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '28.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000023', '31Yar', '', '', '', '28.03.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'နှာဖူးအမှတ်ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ကလိကျေးရွာ၊ပဲခူးမြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'PaKhaNa', '(N)', '320492', '1991', '9', '23'),
-(25, 'NAN SAM SAM MON', 'U AUNG KHIN', '7/DaOuNa(N)111256', '1988.8.28', 'MG 055502', '20.06.2022', '', '402333693', NULL, 'female', NULL, '2023-04-07 23:09:58', '2023-04-07 23:09:58', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW PAN KYI', NULL, NULL, '28.10.2022', 'PAOHH/ BUDDHA', NULL, 'NGW-LB-000024', '34Yar', '', '', '', '19.06.2027', NULL, '(lb)', '5\'4\"(kg)', 'No', 'No', 'No', 'မေးစေ့မှဲရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ရွာဝိုင်းကြီးကျေးရွာ၊ဒိုက်ဦးမြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'DaOuNa', '(N)', '111256', '1988', '8', '28'),
-(26, 'THET PHOO WAI', 'U MAUNG MYINT', '8/AhLaNa(N)233719', '2004.3.4', 'MG 571779', '01.10.2022', '', '458175922', NULL, 'female', NULL, '2023-04-07 23:18:18', '2023-04-07 23:18:18', '2023-04-08', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW SAN SAN WAI', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '26.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000025', '18Yar', '', '', '', '30.09.2027', NULL, '(lb)', '5\'4\"(kg)', 'No', 'No', 'No', 'ယာမေးရိုးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'သိုက်ရုံကျေးရွာ၊အောင်လံမြို့၊မကွေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '233719', '2004', '3', '4'),
-(27, 'KYAWT KYAWT THEIN', 'U TIN THEIN', '12/DaGaTa(N)065864', '1988.2.5', 'MG 865218', '29.04.2022', '', '981887588', NULL, 'female', NULL, '2023-04-09 08:04:18', '2023-04-09 08:04:18', '2023-04-09', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW YE YE PYON', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '31.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000026', '34Yar', '', '', '', '28.04.2027', NULL, '(lb)', '5\'1\"(kg)', 'No', 'No', 'No', 'ယာနှုတ်ခမ်းပေါ်မှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, '၁၆၄၉/သီတာလမ်း၊(၁၈)ရပ်ကွက်၊ဒဂုံမြို့သစ်တောင်ပိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '12', 'DaGaTa', '(N)', '065864', '1988', '2', '5'),
-(28, 'LWIN LWIN AYE', 'U MYINT LWIN', '7/PaKhaNa(N)381628', '1995.1.4', 'MG757514', '29.03.2022', '', '754724780', NULL, 'female', NULL, '2023-04-09 08:27:35', '2023-04-09 08:27:35', '2023-04-09', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW NAN', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '11.11.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000027', '27Yar', '', '', '', '28.03.2027', NULL, '(lb)', '5\'1\"(kg)', 'No', 'No', 'No', 'ယာလက်မောင်းအမှတ်ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ကတိကျေးရွာ၊ပဲခူးမြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'PaKhaNa', '(N)', '381628', '1995', '1', '4'),
-(29, 'THWET THWET SAN', 'U SAN MAUNG', '12/TaMaNa(N)107990', '1992.6.26', 'MG 386365', '30.08.2022', '', '774934078', NULL, 'female', NULL, '2023-04-09 08:38:30', '2023-04-09 08:38:30', '2023-04-09', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW AYE AYE MAO', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '09.11.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000028', '30Yar', '', '', '', '29.08.2027', NULL, '(lb)', '5\'2\"(kg)', 'No', 'No', 'No', 'လည်ပင်းမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, '၁၁၃၇၊မာလာနွယ်လမ်း၊တာမွေမြို့၊ရန်ကုန်တိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '12', 'TaMaNa', '(N)', '107990', '1992', '6', '26'),
-(30, 'EI THIDAR WIN TUN', 'U KYAW WIN', '7/PaTaTa(N)108876', '1990.4.15', 'MG 780237', '04.11.2022', '', '781994410', NULL, 'female', NULL, '2023-04-09 08:51:46', '2023-04-09 08:51:46', '2023-04-09', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW KYU KYU', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '09.11.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000029', '32Yar', '', '', '', '03.11.2027', NULL, '(lb)', '5\'1\"(kg)', 'No', 'No', 'No', 'ယာပါးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'အုတ်ရှစ်ကုန်းကျေးရွာ၊ပေါင်းတည်မြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'PaTaTa', '(N)', '108876', '1990', '4', '15'),
-(31, 'EI THU', 'U NYO LAY', '7/HtaTaPa(N)140289', '2004.1.13', 'MG 704724', '04.03.2022', '', '671676839', NULL, 'female', NULL, '2023-04-09 08:59:48', '2023-04-09 08:59:48', '2023-04-09', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW KYU KYU', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '15.08.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000030', '18Yar', '', '', '', '03.03.2027', NULL, '(lb)', '5\'1\"(kg)', 'No', 'No', 'No', 'လည်ပင်းမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'သပြေကုန်းကျေးရွာ၊ထန်းတပင်မြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'HtaTaPa', '(N)', '140289', '2004', '1', '13'),
-(32, 'NAN SEIN', 'U MYO MYINT', '7/HtaTaPa(N)110451', '1999.3.1', 'MF 707183', '04.03.2022', '', '662236911', 'သပြေကုန်းရွာ၊ထန်းတပင်မြို့', 'female', NULL, '2023-04-09 12:59:15', '2023-04-10 07:54:34', '2023-04-09', NULL, NULL, NULL, NULL, NULL, 'YANGON', 1, NULL, NULL, 'အလုပ်လုပ်ကိုင်ရန်', '2022-08-15', 'BURMESE/BUDDHA', 'ပဲခူးတိုင်း', 'NGW-LB-000031', '23Yar', '', '', '', '03.03.2027', NULL, '(lb)', '5\'4\"(kg)', 'No', 'No', 'No', 'ယာပါးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'သပြေကုန်းရွာ၊ထန်းတပင်မြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'HtaTaPa', '(N)', '110451', '1999', '3', '1'),
-(33, 'KHIN HNIN WAI', 'U CHIT TUN', '10/ThaHtaNa(N)215098', '1992.8.19', 'MG 553969', '27.09.2022', '', '767153957', NULL, 'female', NULL, '2023-04-09 13:12:27', '2023-04-09 13:12:27', '2023-04-09', '', '', NULL, NULL, NULL, 'YANGON', 1, NULL, NULL, 'အလုပ်လုပ်ကိုင်ရန်', '28.10.2022', 'KAYIN/BUDDHA', NULL, 'NGW-LB-000032', '30Yar', '', '', '', '26.09.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'ဝဲပါးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'အင်းနီကျေးရွာ၊သထုံမြို့၊မွန်တိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '10', 'ThaHtaNa', '(N)', '215098', '1992', '8', '19'),
-(34, 'WIN WIN KYAW', 'U KYAW THU', '12/LaMaNa(N)175907', '2001.8.1', 'MG 346895', '24.08.2022', '', '975648254', NULL, 'female', NULL, '2023-04-09 13:22:11', '2023-04-09 13:22:11', '2023-04-09', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW SAN MYINT', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '24.10.2022', 'BURMESE/ BUDDHA', NULL, 'NGW-LB-000033', '21Yar', '', '', '', '23.08.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'ယာပါးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, '၇၈၉၊သမိန်ဗရမ်းလမ်း၊၅၅ ရပ်ကွက်၊ ဒဂုံမြို့သစ်တောင်ပိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '12', 'LaMaNa', '(N)', '175907', '2001', '8', '1'),
-(35, 'MYAT NO THU', 'U AUNG KHET LWIN', '7/HtaTaPa(N)090315', '1989.10.7', 'MF 688494', '25.02.2022', '', '264948287', 'တင်ပွန်းချုံကျေးရွာ၊ထန်းတပင်မြို့၊', 'female', NULL, '2023-04-10 07:29:40', '2023-04-10 07:51:52', '2023-04-10', NULL, NULL, NULL, NULL, NULL, 'YANGON', 1, 'DAW SAN SAN WIN', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '2022-10-24', 'MON/BUDDHA', 'ပဲခူးတိုင်း', 'NGW-LB-000034', '33Yar', '', '', '', '24.02.2027', NULL, '(lb)', '5\'3\"(kg)', 'No', 'No', 'No', 'ယာပါးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ကင်ပွန်းချုံကျေးရွာ၊ထန်းတပင်မြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'HtaTaPa', '(N)', '090315', '1989', '10', '7'),
-(36, 'NI NI NAING MOE', 'U KYI SEIN', '7/YaTaYa(N)147844', '1988.9.17', 'MG 496870', '14.09.2022', '', '770895797', NULL, 'female', NULL, '2023-04-10 07:46:26', '2023-04-10 07:46:26', '2023-04-10', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAE THAN THAN', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '03.10.2022', 'BURMESE/ BUDDHA', NULL, 'NGW-LB-000035', '34Yar', '', '', '', '13.09.2027', NULL, '(lb)', '5\'2\"(kg)', 'No', 'No', 'No', 'ယာပါးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ဇလုပ်ကြီးကျေးရွာ၊ ရေတာရှည်မြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'YaTaYa', '(N)', '147844', '1988', '9', '17'),
-(37, 'MAY ZULY MOY NWE', 'UT TIN MYO', '9/PaBaTha(N)037376', '1996.7.11', 'MG 692020', '26.10.2022', '', '963963208', NULL, 'female', NULL, '2023-04-10 08:07:52', '2023-04-10 08:07:52', '2023-04-10', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW YE', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '02.11.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000036', '26Yar', '', '', '', '25.10.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'လည်ပင်းမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, '၃၃-၄၀/၅၉(ဆ)၊ပြည်ကြီးတံခွန်မြို့၊မန္တလေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '9', 'PaBaTha', '(N)', '037376', '1996', '7', '11'),
-(38, 'THAZIN HTAY', 'U THEIN HTAY', '9/MaKhaNa(N)191797', '1986.4.3', 'MG 508047', '16.09.2022', '', '260335891', NULL, 'female', NULL, '2023-04-10 08:27:08', '2023-04-10 08:27:08', '2023-04-10', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW SWAR KYI', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '04.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000037', '36Yar', '', '', '', '15.09.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'ဝဲပါးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ကနောက်တိုင်ကျေးရွာ၊မြင်းခြံမြို့၊မန္တလေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '9', 'MaKhaNa', '(N)', '191797', '1986', '4', '3'),
-(39, 'LWIN LWIN AUNG', 'U TIN AUNG', '12/MaYaKa(N)178550', '1994.7.10', 'MG 426638', '05.09.2022', '', '770895797', NULL, 'female', NULL, '2023-04-11 21:03:35', '2023-04-11 21:03:35', '2023-04-12', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW AYE SAN', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '03.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000038', '28Yar', '', '', '', '04.09.2027', NULL, '(lb)', '5\'3\"(kg)', 'No', 'No', 'No', 'နဖူးအမာရွတ်ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ဥပုသ်တော်ရပ်ကွက်၊ ပြည့်မြို့၊မန္တလေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '12', 'MaYaKa', '(N)', '178550', '1994', '7', '10'),
-(40, 'WAR WAR TUN', 'U KYAW OO SWE', '12/DaGaTa(N)096010', '1997.12.3', 'MF 713756', '09.03.2022', '', '773795022', NULL, 'female', NULL, '2023-04-11 21:19:06', '2023-04-11 21:19:06', '2023-04-12', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW WIN WIN MAW', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '22.10.2022', 'BURMESE/ BUDDHA', NULL, 'NGW-LB-000039', '24Yar', '', '', '', '08.03.2027', NULL, '(lb)', '5\'3\"(kg)', 'No', 'No', 'No', 'လည်ပင်းမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'တိုက် ၂၄/၃၀၁.ဗန္ဓုလအိမ်ယာ၊ ၁၇ရပ်ကွက်၊ဒဂုံတောင် ၊ ရန်ကုန်တိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '12', 'DaGaTa', '(N)', '096010', '1997', '12', '3'),
-(41, 'TIN ZAR LWIN', 'U THAUNG LWIN', '7/LaPATa(N)162442', '1994.5.7', 'MF 044898', '12.02.2020', '', '888357459', NULL, 'female', NULL, '2023-04-11 21:31:43', '2023-04-11 21:31:43', '2023-04-12', '', '', NULL, NULL, NULL, 'LETPANDAN', 1, 'DAW KHIN SAN WIN', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '22.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000040', '28Yar', '', '', '', '11.02.2025', NULL, '(lb)', '4\'11\"(kg)', 'No', 'No', 'No', 'မျက်ခုံးနှစ်ခုကြားမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ဇိးဖြူကုန်းကျေးရွာ၊လက်ပဲတန်းမြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'LaPATa', '(N)', '162442', '1994', '5', '7'),
-(42, 'THU ZAR KHAING', 'U AYE THAN', '7/LaPATa(N)180407', '1993.12.3', 'MG 363843', '27.08.2022', '', '964829137', NULL, 'female', NULL, '2023-04-11 21:41:14', '2023-04-11 21:41:14', '2023-04-12', '', '', NULL, NULL, NULL, 'LETPANDAN', 1, NULL, NULL, 'အလုပ်လုပ်ကိုင်ရန်', '22.10.2022', 'BURMESE/BUDDHA', NULL, 'NGW-LB-000041', '28Yar', '', '', '', '26.08.2027', NULL, '(lb)', '5\'1\"(kg)', 'No', 'No', 'No', 'နှုတ်ခမ်းထောင့်စွန်းမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ဇီးဖြူကုန်းကျေးရွာ၊လက်ပံတန်းမြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'LaPATa', '(N)', '180407', '1993', '12', '3'),
-(43, 'HNIN THANDAR', 'U THAN AYE', '12/DaSaKa(N)032200', '1993.4.13', 'MG 035022', '14.06.2022', '', '962959626', NULL, 'female', NULL, '2023-04-11 21:54:43', '2023-04-11 21:54:43', '2023-04-12', '', '', NULL, NULL, NULL, 'YANGON', 1, 'DAW KYIN AYE', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '22.10.2022', 'BURMESE/ BUDDHA', NULL, 'NGW-LB-000042', '29Yar', '', '', '', '13.06.2027', NULL, '(lb)', '5\'3\"(kg)', 'No', 'No', 'No', 'နှာတံမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ညောင်ပင်ကျေးရွာ၊ ဒဂုံ ဆိပ်ကမ်း မြို့၊ ရန်ကုန်တိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '12', 'DaSaKa', '(N)', '032200', '1993', '4', '13'),
-(44, 'AYE AYE AUNG', 'U MIN ZAW', '9/KaPaTa(N)320436', '1998.7.1', 'MF 713757', '09.03.2022', '', '251807225', NULL, 'female', NULL, '2023-04-11 22:03:21', '2023-04-11 22:03:21', '2023-04-12', '', '', NULL, NULL, NULL, 'KYAUKPADAUNG', 1, NULL, NULL, 'အလုပ်လုပ်ကို်ရန်', '22.10.2022', 'BURMESE/ BUDDHA', NULL, 'NGW-LB-000043', '24Yar', '', '', '', '08.03.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'နဖူးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ခင်မွန်ကျေးရွာ၊ ကျောက်ပန်းတောင်းမြို့၊ မန္တလေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '9', 'KaPaTa', '(N)', '320436', '1998', '7', '1'),
-(45, 'KHAING KHAING AYE', 'U MYO WIN', '7/LaPATa(N)157403', '1990.7.31', 'MG 347410', '24.08.2022', '', '894535326', NULL, 'female', NULL, '2023-04-11 22:09:47', '2023-04-11 22:09:47', '2023-04-12', '', '', NULL, NULL, NULL, 'LETPANDAN', 1, NULL, NULL, 'အလုပ်လုပ်ကိုင်ရန်', '22.10.2022', 'BURMESE/ BUDDHA', NULL, 'NGW-LB-000044', '32Yar', '', '', '', '23.08.2027', NULL, '(lb)', '5\'(kg)', 'No', 'No', 'No', 'ပါးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'ဇီးဖြူကုန်းကျေးရွာ၊လက်ပံတန်းမြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'LaPATa', '(N)', '157403', '1990', '7', '31'),
-(46, 'ZIN MAR HLAING', 'U AUNG PITE', '8/AhLaNa(N)241781', '2001.12.21', 'MF 771391', '02.04.2022', '', '895995925', NULL, 'female', NULL, '2023-04-11 22:27:59', '2023-04-11 22:27:59', '2023-04-12', '', '', NULL, NULL, NULL, 'AUNGLAN', 1, 'DAW KYI THEN', NULL, 'အလုပ်လုပ်ကိုင်ရန်', '15.10.2022', 'BURMESE/ BUDDHA', NULL, 'NGW-LB-000045', '20Yar', '', '', '', '01.04.2027', NULL, '(lb)', '5\'1\"(kg)', 'No', 'No', 'No', 'အောက်နှုတ်ခမ်းမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'လက်ပန်ကုန်းကျေးရွာ၊ ကျောက်ပန်းတောင်းမြို့၊မကွေးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '8', 'AhLaNa', '(N)', '241781', '2001', '12', '21'),
-(47, 'NAN SEIN', 'U MYO MYINT', '7/HtaTaPa(N)110451', '1999.3.1', 'MF 707183', '04.03.2022', '', '662236911', NULL, 'female', NULL, '2023-04-11 22:37:16', '2023-04-11 22:37:16', '2023-04-12', '', '', NULL, NULL, NULL, 'HTANTAPIN', 1, NULL, NULL, 'အလုပ်လုပ်ကိုင်ရန်', '15.08.2022', 'BURMESE/ BUDDHA', NULL, 'NGW-LB-000046', '23Yar', '', '', '', '03.03.2027', NULL, '(lb)', '5\'4\"(kg)', 'No', 'No', 'No', 'ယာပါးမှဲ့ရှိ', NULL, '1', NULL, NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'သပြေကုန်းရွာ၊ ထန်းတပင်မြို့၊ပဲခူးတိုင်း', NULL, NULL, NULL, NULL, NULL, NULL, 'အပ်', '1', 'Single', NULL, '7', 'HtaTaPa', '(N)', '110451', '1999', '3', '1'),
-(49, 'Daw Soe', 'U Mg Mg', '1/BaMaNa(N)223445', '1994-04-15', 'ME00092', '2023-04-27', '', '777161554', 'Yangon', 'female', 'Remark Testing', '2023-04-26 21:30:02', '2023-04-28 21:10:58', '2023-04-29', '', '', NULL, NULL, NULL, '2027-04-27', 2, 'Daw Aye', '-', 'အလုပ်လုပ်ကိုင်ရန်', '2023-04-27', 'Burmese / Buddhism', NULL, 'MS-LB-000047', '28', '', '', '', '2027-04-27', '10', '100(lb)', '100(cm)', 'No', 'No', 'No', 'No', '5', '1', '-', NULL, NULL, NULL, 'No', NULL, 'No', NULL, 'Yangon, Myanmar', '777181776', 'no', 'no', 'no', NULL, NULL, 'Yes', '1', 'Single', NULL, '1', 'AhGaYa', '(N)', '223445', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1185,61 +1303,11 @@ CREATE TABLE `passport_payments` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `remark` text DEFAULT NULL,
-  `payment_reason` text DEFAULT NULL
+  `payment_reason` text DEFAULT NULL,
+  `received_amount` text DEFAULT NULL,
+  `exchange_rate` text DEFAULT NULL,
+  `currency_format` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `passport_payments`
---
-
-INSERT INTO `passport_payments` (`id`, `deposit`, `deposit_date`, `passport_id`, `user_id`, `created_at`, `updated_at`, `remark`, `payment_reason`) VALUES
-(1, '0', '2023-04-04', 1, 1, '2023-04-03 23:20:15', '2023-04-03 23:20:15', NULL, NULL),
-(2, '0', '2023-04-04', 2, 1, '2023-04-04 06:50:02', '2023-04-04 06:50:02', NULL, NULL),
-(3, '0', '2023-04-04', 3, 1, '2023-04-04 07:00:44', '2023-04-04 07:00:44', NULL, NULL),
-(4, '0', '2023-04-04', 4, 1, '2023-04-04 07:10:09', '2023-04-04 07:10:09', NULL, NULL),
-(5, '0', '2023-04-04', 5, 1, '2023-04-04 07:17:44', '2023-04-04 07:17:44', NULL, NULL),
-(6, '0', '2023-04-04', 6, 1, '2023-04-04 07:36:17', '2023-04-04 07:36:17', NULL, NULL),
-(7, '0', '2023-04-04', 7, 1, '2023-04-04 08:14:16', '2023-04-04 08:14:16', NULL, NULL),
-(8, '0', '2023-04-05', 8, 1, '2023-04-05 00:01:28', '2023-04-05 00:01:28', NULL, NULL),
-(9, '0', '2023-04-06', 9, 1, '2023-04-06 00:50:12', '2023-04-06 00:50:12', NULL, NULL),
-(10, '0', '2023-04-06', 10, 1, '2023-04-06 00:50:12', '2023-04-06 00:50:12', NULL, NULL),
-(11, '0', '2023-04-06', 11, 1, '2023-04-06 01:04:35', '2023-04-06 01:04:35', NULL, NULL),
-(12, '0', '2023-04-06', 12, 1, '2023-04-06 01:17:16', '2023-04-06 01:17:16', NULL, NULL),
-(13, '0', '2023-04-06', 13, 1, '2023-04-06 01:32:58', '2023-04-06 01:32:58', NULL, NULL),
-(14, '0', '2023-04-06', 14, 1, '2023-04-06 01:44:55', '2023-04-06 01:44:55', NULL, NULL),
-(15, '0', '2023-04-08', 15, 1, '2023-04-07 21:02:16', '2023-04-07 21:02:16', NULL, NULL),
-(16, '0', '2023-04-08', 16, 1, '2023-04-07 21:11:07', '2023-04-07 21:11:07', NULL, NULL),
-(17, '0', '2023-04-08', 17, 1, '2023-04-07 21:18:48', '2023-04-07 21:18:48', NULL, NULL),
-(18, '0', '2023-04-08', 18, 1, '2023-04-07 21:29:05', '2023-04-07 21:29:05', NULL, NULL),
-(19, '0', '2023-04-08', 19, 1, '2023-04-07 21:38:45', '2023-04-07 21:38:45', NULL, NULL),
-(20, '0', '2023-04-08', 20, 1, '2023-04-07 21:45:15', '2023-04-07 21:45:15', NULL, NULL),
-(21, '0', '2023-04-08', 21, 1, '2023-04-07 21:56:49', '2023-04-07 21:56:49', NULL, NULL),
-(22, '0', '2023-04-08', 22, 1, '2023-04-07 22:07:45', '2023-04-07 22:07:45', NULL, NULL),
-(23, '0', '2023-04-08', 23, 1, '2023-04-07 22:22:09', '2023-04-07 22:22:09', NULL, NULL),
-(24, '0', '2023-04-08', 24, 1, '2023-04-07 23:01:43', '2023-04-07 23:01:43', NULL, NULL),
-(25, '0', '2023-04-08', 25, 1, '2023-04-07 23:09:58', '2023-04-07 23:09:58', NULL, NULL),
-(26, '0', '2023-04-08', 26, 1, '2023-04-07 23:18:18', '2023-04-07 23:18:18', NULL, NULL),
-(27, '0', '2023-04-09', 27, 1, '2023-04-09 08:04:18', '2023-04-09 08:04:18', NULL, NULL),
-(28, '0', '2023-04-09', 28, 1, '2023-04-09 08:27:35', '2023-04-09 08:27:35', NULL, NULL),
-(29, '0', '2023-04-09', 29, 1, '2023-04-09 08:38:30', '2023-04-09 08:38:30', NULL, NULL),
-(30, '0', '2023-04-09', 30, 1, '2023-04-09 08:51:46', '2023-04-09 08:51:46', NULL, NULL),
-(31, '0', '2023-04-09', 31, 1, '2023-04-09 08:59:48', '2023-04-09 08:59:48', NULL, NULL),
-(32, '0', '2023-04-09', 32, 1, '2023-04-09 12:59:15', '2023-04-09 12:59:15', NULL, NULL),
-(33, '0', '2023-04-09', 33, 1, '2023-04-09 13:12:27', '2023-04-09 13:12:27', NULL, NULL),
-(34, '0', '2023-04-09', 34, 1, '2023-04-09 13:22:11', '2023-04-09 13:22:11', NULL, NULL),
-(35, '0', '2023-04-10', 35, 1, '2023-04-10 07:29:40', '2023-04-10 07:29:40', NULL, NULL),
-(36, '0', '2023-04-10', 36, 1, '2023-04-10 07:46:26', '2023-04-10 07:46:26', NULL, NULL),
-(37, '0', '2023-04-10', 37, 1, '2023-04-10 08:07:52', '2023-04-10 08:07:52', NULL, NULL),
-(38, '0', '2023-04-10', 38, 1, '2023-04-10 08:27:08', '2023-04-10 08:27:08', NULL, NULL),
-(39, '0', '2023-04-12', 39, 1, '2023-04-11 21:03:35', '2023-04-11 21:03:35', NULL, NULL),
-(40, '0', '2023-04-12', 40, 1, '2023-04-11 21:19:06', '2023-04-11 21:19:06', NULL, NULL),
-(41, '0', '2023-04-12', 41, 1, '2023-04-11 21:31:43', '2023-04-11 21:31:43', NULL, NULL),
-(42, '0', '2023-04-12', 42, 1, '2023-04-11 21:41:14', '2023-04-11 21:41:14', NULL, NULL),
-(43, '0', '2023-04-12', 43, 1, '2023-04-11 21:54:43', '2023-04-11 21:54:43', NULL, NULL),
-(44, '0', '2023-04-12', 44, 1, '2023-04-11 22:03:21', '2023-04-11 22:03:21', NULL, NULL),
-(45, '0', '2023-04-12', 45, 1, '2023-04-11 22:09:47', '2023-04-11 22:09:47', NULL, NULL),
-(46, '0', '2023-04-12', 46, 1, '2023-04-11 22:27:59', '2023-04-11 22:27:59', NULL, NULL),
-(47, '0', '2023-04-12', 47, 1, '2023-04-11 22:37:16', '2023-04-11 22:37:16', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1290,14 +1358,13 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'agent_lists', 'web', '2023-03-06 23:41:34', '2023-03-06 23:42:11', 'module'),
-(2, 'labour_manage', 'web', '2023-03-07 00:38:00', '2023-03-07 00:38:00', 'module'),
-(3, 'labour_payment', 'web', '2023-03-07 00:38:08', '2023-03-07 00:38:08', 'module'),
-(4, 'demand', 'web', '2023-03-07 00:38:13', '2023-03-07 00:38:13', 'module'),
-(5, 'contract', 'web', '2023-03-07 00:38:17', '2023-03-07 00:38:17', 'module'),
-(6, 'sending', 'web', '2023-03-07 00:38:21', '2023-03-07 00:38:21', 'module'),
-(7, 'file_manager', 'web', '2023-03-07 00:54:20', '2023-03-07 00:54:20', 'module'),
-(8, 'overseas_agent', 'web', '2023-03-07 00:56:50', '2023-03-07 00:56:50', 'module');
+(10, 'Thailand', 'web', '2023-07-11 19:23:59', '2023-07-11 19:30:49', 'module'),
+(11, 'Malaysia', 'web', '2023-07-11 19:24:06', '2023-07-11 19:30:56', 'module'),
+(12, 'Japan', 'web', '2023-07-11 19:24:11', '2023-07-11 19:31:02', 'module'),
+(13, 'Singapore', 'web', '2023-07-11 19:24:14', '2023-07-11 19:31:09', 'module'),
+(14, 'uae', 'web', '2023-07-11 19:24:18', '2023-07-11 19:24:18', 'module'),
+(15, 'accounting', 'web', '2023-07-11 19:24:21', '2023-07-11 19:24:21', 'module'),
+(16, 'hr', 'web', '2023-07-11 19:24:23', '2023-07-11 19:24:23', 'module');
 
 -- --------------------------------------------------------
 
@@ -1372,8 +1439,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'web', '2023-03-07 00:41:00', '2023-03-07 00:42:03'),
-(2, 'Labour Entry', 'web', '2023-03-07 00:42:30', '2023-03-07 00:42:30');
+(4, 'Admin', 'web', '2023-07-11 19:24:37', '2023-07-11 19:24:37'),
+(5, 'Accounting', 'web', '2023-07-11 19:24:43', '2023-07-11 19:24:43'),
+(6, 'Operation', 'web', '2023-07-11 19:25:00', '2023-07-11 19:25:00');
 
 -- --------------------------------------------------------
 
@@ -1391,17 +1459,19 @@ CREATE TABLE `role_has_permissions` (
 --
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
-(1, 1),
-(1, 2),
-(2, 1),
-(2, 2),
-(3, 1),
-(3, 2),
-(4, 1),
-(5, 1),
-(6, 1),
-(7, 1),
-(8, 1);
+(10, 4),
+(10, 6),
+(11, 4),
+(11, 6),
+(12, 4),
+(12, 6),
+(13, 4),
+(13, 6),
+(14, 4),
+(14, 6),
+(15, 4),
+(15, 5),
+(16, 4);
 
 -- --------------------------------------------------------
 
@@ -1420,6 +1490,33 @@ CREATE TABLE `sendings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `taxes`
+--
+
+CREATE TABLE `taxes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tax_name` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `tax_computation` text DEFAULT NULL,
+  `amount` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `tax_type` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `taxes`
+--
+
+INSERT INTO `taxes` (`id`, `tax_name`, `description`, `tax_computation`, `amount`, `status`, `created_at`, `updated_at`, `tax_type`) VALUES
+(1, '1000', '1000', 'fixed', '1000', 'Active', '2023-07-08 13:04:47', '2023-07-09 02:12:21', 'sale'),
+(2, '5 %', '5 %', 'percent', '5', 'Active', '2023-07-08 13:22:34', '2023-07-09 01:36:21', 'purchase'),
+(3, '10 %', '10 %', 'percent', '10', 'Active', '2023-07-08 13:22:47', '2023-07-09 01:34:28', 'sale');
 
 -- --------------------------------------------------------
 
@@ -1799,14 +1896,26 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `phone`, `address`, `join_date`, `remember_token`, `created_at`, `updated_at`, `employee_id`, `nrc_number`, `gender`, `passport_photo`, `countrie_id`) VALUES
 (1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$Le4a7vAtroc7NGRRAbESu.Tpuz2KF4e.CjYDmU3wiRNOtpCj/WiAG', '09444161997', 'Yangon', '2023-03-07 01:51 PM', NULL, '2023-01-29 22:34:39', '2023-04-22 23:25:04', 'EMP-00001', '1/abc(N)009221', 'male', NULL, 3),
-(2, 'User', 'user@gmail.com', NULL, '$2y$10$.vQP72TfB9e6QdPF9e8ZruQ0S/QeFwRfiSEixisaYjQlRP1mK2R0u', '09123123123', 'Yangon', '2023-03-07 01:55 PM', NULL, '2023-01-30 10:16:30', '2023-04-22 23:26:34', 'EMP-00002', '1/abc(N)009112', 'male', 'public/images/DV75BxaQGxgaOpguuFdVlP7P7PBcOL4waEn3Vr2R.jpg', 1),
-(3, 'Mg Mg', 'mgmg@gmail.com', NULL, '$2y$10$WsBifexGEuyuZiVkjAAKFet3bK261AM3h/azLzy34cRgOk/srYcbq', '0912312313', 'Yangon', '1.1.2022', NULL, '2023-01-30 10:19:28', '2023-04-22 23:26:37', 'EMP-00003', '1/abc(N)009112', 'male', 'public/images/XUOPxomMX70QtUoGfAEx8j2EyznKFYTqfWTUrLzr.jpg', 1),
-(4, 'Mg Mg Soe', 'mgmgsoe@gmail.com', NULL, '$2y$10$c/mvJDBrG5tJ4cZ6l0plk.PULk9VW69iitQ11ncx5dgANFoIb2Ch2', '09123123122', '11223344', '2023-03-07 01:49 PM', NULL, '2023-03-07 00:50:16', '2023-04-22 23:26:41', 'U-000004', '1/abc(N)009221', 'male', '', 2),
-(5, 'Mg Mg Soe', 'mgmgsoetoe@gmail.com', NULL, '$2y$10$Hx/EudpSzcS55YkEf60Bru1mcMTQwiUWMA4caWpfjeLZcj0bbLbRq', '09555161776', 'Yangon', '1.1.2023', NULL, '2023-04-22 22:38:36', '2023-04-22 23:26:47', 'U-000005', '3/abc(N)009221', 'female', 'public/images/K1oR5Zxwtbr9Gn8TY8C0RGBupK3Yhek36qXiUVMC.jpg', 3);
+(6, 'Accounting', 'account@gmail.com', NULL, '$2y$10$YCbx9r9cNepWywWHj1tfGORMcisQlXAIaPIBGJcx4EMBQAzRmEraa', '000000', 'YGN', '2023-07-12', NULL, '2023-07-11 19:26:49', '2023-07-11 19:26:49', 'EMP-00002', '-', 'male', '', 1),
+(7, 'Operation', 'operation@gmail.com', NULL, '$2y$10$ZK9HV9dTd6u1Y14oRvKwveC2qKcwRV/ZWZ86qHNqffKBvwetO34U2', '000001', 'YGN', '2023-07-12', NULL, '2023-07-11 19:27:30', '2023-07-11 19:27:30', 'EMP-00003', '-', 'male', '', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `account_classifications`
+--
+ALTER TABLE `account_classifications`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `account_classifications_ac_code_unique` (`ac_code`);
+
+--
+-- Indexes for table `account_types`
+--
+ALTER TABLE `account_types`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `account_types_number_unique` (`number`);
 
 --
 -- Indexes for table `agent_lists`
@@ -1815,11 +1924,30 @@ ALTER TABLE `agent_lists`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `attendances`
+--
+ALTER TABLE `attendances`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `authentication_log`
 --
 ALTER TABLE `authentication_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `authentication_log_authenticatable_type_authenticatable_id_index` (`authenticatable_type`,`authenticatable_id`);
+
+--
+-- Indexes for table `cash_books`
+--
+ALTER TABLE `cash_books`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `chartof_accounts`
+--
+ALTER TABLE `chartof_accounts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `chartof_accounts_coa_number_unique` (`coa_number`);
 
 --
 -- Indexes for table `contracts`
@@ -1837,6 +1965,12 @@ ALTER TABLE `countries`
 -- Indexes for table `demands`
 --
 ALTER TABLE `demands`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `demand_invoices`
+--
+ALTER TABLE `demand_invoices`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2010,6 +2144,12 @@ ALTER TABLE `sendings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `taxes`
+--
+ALTER TABLE `taxes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `townships`
 --
 ALTER TABLE `townships`
@@ -2027,34 +2167,70 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `account_classifications`
+--
+ALTER TABLE `account_classifications`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `account_types`
+--
+ALTER TABLE `account_types`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
 -- AUTO_INCREMENT for table `agent_lists`
 --
 ALTER TABLE `agent_lists`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `attendances`
+--
+ALTER TABLE `attendances`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `authentication_log`
 --
 ALTER TABLE `authentication_log`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cash_books`
+--
+ALTER TABLE `cash_books`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `chartof_accounts`
+--
+ALTER TABLE `chartof_accounts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
 
 --
 -- AUTO_INCREMENT for table `contracts`
 --
 ALTER TABLE `contracts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `demands`
 --
 ALTER TABLE `demands`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `demand_invoices`
+--
+ALTER TABLE `demand_invoices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -2066,7 +2242,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `file_management`
 --
 ALTER TABLE `file_management`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `hospitals`
@@ -2126,7 +2302,7 @@ ALTER TABLE `members_lists`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `nrcs`
@@ -2144,19 +2320,19 @@ ALTER TABLE `offices`
 -- AUTO_INCREMENT for table `overseas_agencies`
 --
 ALTER TABLE `overseas_agencies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `passports`
 --
 ALTER TABLE `passports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `passport_payments`
 --
 ALTER TABLE `passport_payments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `passport_payment_files`
@@ -2168,7 +2344,7 @@ ALTER TABLE `passport_payment_files`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -2186,13 +2362,19 @@ ALTER TABLE `regions`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sendings`
 --
 ALTER TABLE `sendings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `taxes`
+--
+ALTER TABLE `taxes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `townships`
@@ -2204,7 +2386,7 @@ ALTER TABLE `townships`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

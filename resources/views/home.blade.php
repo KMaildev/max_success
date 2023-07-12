@@ -59,7 +59,7 @@
                     <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2" id="button_pos">
                         <div class="panel panel-app">
                             <div class="panel-body">
-                                <a class="panel-app-link" href="{{ route('hr_dashboard.index') }}">
+                                <a class="panel-app-link" href="{{ route('users.index') }}">
                                     <h2>
                                         <span class="icon">
                                             <img src="{{ asset('data/icons/hr.png') }}" alt=""
@@ -87,6 +87,19 @@
             </div>
         </div>
 
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li>
+                        Software အသုံးပြုရာတွင် လွယ်ကူစေရန် Table Width, Height များ၊  mouse scrollများ အချောသတ်ရန်
+                    </li>
+                    <li>
+                        လိုအပ်သော Data နှင့် Requirement များ ယူပြီး Upgrade လုပ်ရန်
+                    </li>
+                </ul>
+            </div>
+        </div>
     </section>
 @endsection
 @section('script')
