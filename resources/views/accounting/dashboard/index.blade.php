@@ -7,86 +7,134 @@
     </section>
 
     <section class="content">
-        <!-- Small Boxes Start -->
+        @include('accounting.dashboard.counter')
+
         <div class="row">
-            <div class="col-md-3 col-xs-6">
-                <div id="invoice-count" class="small-box bg-green">
-                    <div class="inner">
-                        <h4>
-                            <i>TOTAL INVOICE</i> <span class="total-invoice">0</span>
-                        </h4>
-                        <h4>
-                            <i>TOTAL INVOICE TODAY</i> <span class="total-invoice">0</span>
-                        </h4>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-pencil"></i>
-                    </div>
-                    <a href="invoice.php" class="small-box-footer">
-                        Details
-                        <i class="fa fa-arrow-circle-right"></i>
-                    </a>
+            <div class="col-md-6 col-xs-6">
+                <div class="small-box bg-white" style="background-color: white;">
+                    <canvas style="height: 90vh; width: 100vw" id="incomeData"></canvas>
                 </div>
             </div>
 
-            <div class="col-md-3 col-xs-6">
-                <div id="customer-count" class="small-box bg-red">
-                    <div class="inner">
-                        <h4>
-                            <i>TOTAL CUSTOMER</i> <span class="total-customer">2</span>
-                        </h4>
-                        <h4>
-                            <i>TOTAL CUSTOMER TODAY</i> <span class="total-customer">0</span>
-                        </h4>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-users"></i>
-                    </div>
-                    <a href="customer.php" class="small-box-footer">
-                        Details
-                        <i class="fa fa-arrow-circle-right"></i>
-                    </a>
+            <div class="col-md-6 col-xs-6">
+                <div class="small-box bg-white" style="background-color: white;">
+                    <canvas style="height: 90vh; width: 100vw" id="expenseData"></canvas>
                 </div>
             </div>
-            <div class="col-md-3 col-xs-6">
-                <div id="supplier-count" class="small-box bg-purple">
-                    <div class="inner">
-                        <h4>
-                            <i>TOTAL SUPPLIER</i> <span class="total-suppier">1</span>
-                        </h4>
-                        <h4>
-                            <i>TOTAL SUPPLIER TODAY</i> <span class="total-suppier">0</span>
-                        </h4>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-fw fa-shopping-cart"></i>
-                    </div>
-                    <a href="supplier.php" class="small-box-footer">
-                        Details
-                        <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3 col-xs-6">
-                <div id="product-count" class="small-box bg-yellow">
-                    <div class="inner">
-                        <h4>
-                            <i>TOTAL PRODUCT</i> <span class="total-product">2</span>
-                        </h4>
-                        <h4>
-                            <i>TOTAL PRODUCT TODAY</i> <span class="total-product">0</span>
-                        </h4>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <a href="product.php" class="small-box-footer">
-                        Details
-                        <i class="fa fa-arrow-circle-right"></i>
-                    </a>
+
+
+
+            <div class="col-md-12 col-xs-12">
+                <div class="small-box bg-white" style="background-color: white;">
+                    <canvas style="height: 90vh; width: 100vw" id="weekly-chart"></canvas>
                 </div>
             </div>
         </div>
-        <!--Small Box End -->
     </section>
+@endsection
+@section('script')
+    <script>
+        const ctx = document.getElementById('incomeData');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @json($months),
+                datasets: [{
+                    label: '# Total Income',
+                    data: @json($incomeData),
+                    borderWidth: 1,
+                    backgroundColor: [
+                        'rgba(201, 203, 207, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                    ],
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        });
+
+
+        const expense = document.getElementById('expenseData');
+        new Chart(expense, {
+            type: 'bar',
+            data: {
+                labels: @json($months),
+                datasets: [{
+                    label: '# Total Expense',
+                    data: @json($expenseData),
+                    borderWidth: 1,
+                    backgroundColor: [
+                        'rgba(202, 203, 207, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                    ],
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        });
+
+
+
+
+
+        // Get the data from the server-side
+        var chartIncomeData = {!! json_encode($chartIncomeData) !!};
+        var chartExpenseData = {!! json_encode($chartExpenseData) !!};
+        var chartLabels = {!! json_encode($chartLabels) !!};
+
+        // Create the chart
+        var weeklyChart = document.getElementById('weekly-chart').getContext('2d');
+        new Chart(weeklyChart, {
+            type: 'bar',
+            data: {
+                labels: chartLabels,
+                datasets: [{
+                    label: 'Income',
+                    data: chartIncomeData,
+                    backgroundColor: 'green',
+                    borderColor: 'green',
+                    borderWidth: 1,
+                    fill: false
+                }, {
+                    label: 'Expense',
+                    data: chartExpenseData,
+                    backgroundColor: 'red',
+                    borderColor: 'red',
+                    borderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

@@ -228,7 +228,6 @@ class LabourPaymentController extends Controller
                 });
             })
 
-
             ->editColumn('total_deposit', function ($each) {
                 return  number_format($each->total_deposit, 2);
             })
