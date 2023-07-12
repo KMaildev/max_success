@@ -61,7 +61,6 @@ class CountryDashboardController extends Controller
         })->sum('sending_female');
 
 
-
         // Chart 
         // Passport Data Chart
         $months = [date('F-Y', strtotime("-5 month"))];

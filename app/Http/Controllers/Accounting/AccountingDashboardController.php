@@ -81,8 +81,8 @@ class AccountingDashboardController extends Controller
 
 
         // Get the start and end dates for the week
-        $startDate = Carbon::now()->startOfWeek();
-        $endDate = Carbon::now()->endOfWeek();
+        $startDate = Carbon::now()->startOfMonth();
+        $endDate = Carbon::now()->endOfMonth();
         // Query your income and expense data for the weekly report (modify according to your needs)
         $incomeWeeklyData = CashBook::whereBetween('created_at', [$startDate, $endDate])
             ->orderBy('created_at')

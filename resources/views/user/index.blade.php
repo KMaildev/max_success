@@ -113,13 +113,12 @@
                                             </td>
 
                                             <td class="text-center" data-title="Edit">
-                                                <button type="button" class="btn btn-sm btn-block btn-primary"
-                                                    data-toggle="modal" data-target="#editModal_{{ $value->id }}">
+                                                <a href="{{ route('users.edit', $value->id) }}"
+                                                    class="btn btn-sm btn-block btn-primary">
                                                     <i class="fa fa-fw fa-pencil"></i>
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
-                                        @include('user.edit')
                                     @endforeach
                                 </tbody>
                                 <tfoot>

@@ -91,11 +91,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $employee = User::findOrFail($id);
-        $old_roles = $employee->roles->pluck('id')->toArray();
+        $value = User::findOrFail($id);
+        $old_roles = $value->roles->pluck('id')->toArray();
         $roles = Role::all();
-
-        return view('user.edit', compact('employee', 'old_roles', 'roles'));
+        $countries = Country::all();
+        return view('user.edit_form', compact('value', 'old_roles', 'roles', 'countries'));
     }
 
     /**

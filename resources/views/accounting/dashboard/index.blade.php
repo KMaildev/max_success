@@ -105,7 +105,7 @@
         // Create the chart
         var weeklyChart = document.getElementById('weekly-chart').getContext('2d');
         new Chart(weeklyChart, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: chartLabels,
                 datasets: [{
